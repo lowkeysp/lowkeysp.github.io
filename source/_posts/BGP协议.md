@@ -298,3 +298,8 @@ Cluster_List由一系列的Cluster_ID组成，描述了一条路由所经过的�
 ![分级反射器](http://ww1.sinaimg.cn/large/006eDJDNly1g39xlfbfwwj308m08j0sp.jpg)
 
 窍门：反射器场景下，如果BGP的优选路由不需要指导转发，通过配置BGP-RIB-ONLY特性，使所有BGP的优选路由都不加入IP路由表，也不进入转发层，从而提高转发效率和提升系统容量。
+
+
+# 参考
+
+[参考文献](http://support.huawei.com/enterprise/docinforeader!loadDocument1.action?contentId=DOC0000645515&partNo=10022)
