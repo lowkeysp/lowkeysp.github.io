@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
 <meta property="og:description" content="在通信线路中保持一定量的光功率值是系统设计的主要部分。分贝（dB）是表示通信系统系统中相对功率电平的一个十分方便的量。如果系统中某一点的功率是P1瓦，线路中更远点出的功率是P2瓦，则P2/P1是这两个位置处传输功率的比值。换句话说，P2/P1是这两点间的传输效率。将这个比率用分贝表示，即 $$ P_1 $$">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-10T06:54:38.258Z">
+<meta property="og:updated_time" content="2019-07-10T07:20:12.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分贝单位">
 <meta name="twitter:description" content="在通信线路中保持一定量的光功率值是系统设计的主要部分。分贝（dB）是表示通信系统系统中相对功率电平的一个十分方便的量。如果系统中某一点的功率是P1瓦，线路中更远点出的功率是P2瓦，则P2/P1是这两个位置处传输功率的比值。换句话说，P2/P1是这两点间的传输效率。将这个比率用分贝表示，即 $$ P_1 $$">
@@ -371,7 +371,7 @@
                 
               
 
-              <time title="创建时间：2019-07-10 13:56:46 / 修改时间：14:54:38" itemprop="dateCreated datePublished" datetime="2019-07-10T13:56:46+08:00">2019-07-10</time>
+              <time title="创建时间：2019-07-10 13:56:46 / 修改时间：15:20:12" itemprop="dateCreated datePublished" datetime="2019-07-10T13:56:46+08:00">2019-07-10</time>
             
 
             
@@ -870,6 +870,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
