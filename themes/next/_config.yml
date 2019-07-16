@@ -495,7 +495,7 @@ font:
 
 # Math Equations Render Support
 math:
-  enable: false
+  enable: true
 
   # Default (true) will load mathjax / katex script on demand.
   # That is it only render those page which has `mathjax: true` in Front-matter.
@@ -507,6 +507,7 @@ math:
 
   # hexo-renderer-pandoc (or hexo-renderer-kramed) needed to full MathJax support.
   mathjax:
+    
     cdn: //cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     #cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
 
