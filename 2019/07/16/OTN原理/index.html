@@ -96,22 +96,22 @@
 
 
 
-  <meta name="description" content="色散在光纤中传输的光信号（脉冲）的不同频率成份或不同的模式分量以不同的速度传播，到达一定距离后必然产生信号失真（脉冲展宽），这种现象称为光纤的色散 常见的色散有色度色散（CD）和偏振模色散（PMD） 色度色散包括：  材料色散 波导色散  材料色散波速v和折射率n的关系为$v=c/n$ 对于光线中用到的二氧化硅，其折射率是随波长变化的，于是，波的速度也随波长变化。如果速度的变化是由材料的某些性质引">
-<meta name="keywords" content="光纤,色散">
+  <meta name="description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护">
+<meta name="keywords" content="光纤,OTN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="光纤色散">
-<meta property="og:url" content="http://yoursite.com/2019/07/10/光纤色散/index.html">
+<meta property="og:title" content="OTN原理">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/OTN原理/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="色散在光纤中传输的光信号（脉冲）的不同频率成份或不同的模式分量以不同的速度传播，到达一定距离后必然产生信号失真（脉冲展宽），这种现象称为光纤的色散 常见的色散有色度色散（CD）和偏振模色散（PMD） 色度色散包括：  材料色散 波导色散  材料色散波速v和折射率n的关系为$v=c/n$ 对于光线中用到的二氧化硅，其折射率是随波长变化的，于是，波的速度也随波长变化。如果速度的变化是由材料的某些性质引">
+<meta property="og:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vma6ct97j30ke0i23zo.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vmfzqj05j30g40c7t9o.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vp1uqx0cj30na0cbgm3.jpg">
-<meta property="og:updated_time" content="2019-07-11T03:07:20.744Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52u08t67xj30r70jdtgr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g53pfg8gg6j30ny0gaqcc.jpg">
+<meta property="og:updated_time" content="2019-07-18T01:03:45.207Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="光纤色散">
-<meta name="twitter:description" content="色散在光纤中传输的光信号（脉冲）的不同频率成份或不同的模式分量以不同的速度传播，到达一定距离后必然产生信号失真（脉冲展宽），这种现象称为光纤的色散 常见的色散有色度色散（CD）和偏振模色散（PMD） 色度色散包括：  材料色散 波导色散  材料色散波速v和折射率n的关系为$v=c/n$ 对于光线中用到的二氧化硅，其折射率是随波长变化的，于是，波的速度也随波长变化。如果速度的变化是由材料的某些性质引">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vma6ct97j30ke0i23zo.jpg">
+<meta name="twitter:title" content="OTN原理">
+<meta name="twitter:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg">
 
 
 
@@ -119,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/07/10/光纤色散/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/OTN原理/">
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title>光纤色散 | lowkeysp' Blog</title>
+  <title>OTN原理 | lowkeysp' Blog</title>
   
 
 
@@ -332,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/光纤色散/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/OTN原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lowkeysp">
@@ -349,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">光纤色散
+          <h1 class="post-title" itemprop="name headline">OTN原理
 
               
             
@@ -375,7 +375,7 @@
                 
               
 
-              <time title="创建时间：2019-07-10 17:06:00" itemprop="dateCreated datePublished" datetime="2019-07-10T17:06:00+08:00">2019-07-10</time>
+              <time title="创建时间：2019-07-16 09:25:49" itemprop="dateCreated datePublished" datetime="2019-07-16T09:25:49+08:00">2019-07-16</time>
             
 
             
@@ -392,7 +392,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-11 11:07:20" itemprop="dateModified" datetime="2019-07-11T11:07:20+08:00">2019-07-11</time>
+                <time title="修改时间：2019-07-18 09:03:45" itemprop="dateModified" datetime="2019-07-18T09:03:45+08:00">2019-07-18</time>
               
             
           </span>
@@ -424,7 +424,7 @@
 
           
           
-            <span id="/2019/07/10/光纤色散/" class="leancloud_visitors" data-flag-title="光纤色散">
+            <span id="/2019/07/16/OTN原理/" class="leancloud_visitors" data-flag-title="OTN原理">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -455,61 +455,38 @@
       
 
       
-        <h1 id="色散"><a href="#色散" class="headerlink" title="色散"></a>色散</h1><p>在光纤中传输的光信号（脉冲）的不同频率成份或不同的模式分量以不同的速度传播，到达一定距离后必然产生信号失真（脉冲展宽），这种现象称为光纤的色散</p>
-<p>常见的色散有色度色散（CD）和偏振模色散（PMD）</p>
-<p>色度色散包括：</p>
-<ul>
-<li>材料色散</li>
-<li>波导色散</li>
+        <h2 id="OTN产生的背景"><a href="#OTN产生的背景" class="headerlink" title="OTN产生的背景"></a>OTN产生的背景</h2><p>OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护。</p>
+<h2 id="OTN的技术特点"><a href="#OTN的技术特点" class="headerlink" title="OTN的技术特点"></a>OTN的技术特点</h2><ul>
+<li><p>OTN从其功能上看，在子网内以全光形式传输，而在子网的边界处采用光-电-光转换，各个子网可以通过3R再生器联接，从而构成一个大的光网络。</p>
+</li>
+<li><p>光信号的处理可以基于单个波长，或基于一个波分复用组。在光域内可以实现业务信号的传递、复用、路由选择，支持多种上层业务或协议。</p>
+</li>
+<li><p>在OTN网络的边缘，不同体制的信号被统一封装进入开销丰富的OTN的帧结构中去，并以此为基础，实现基于OTN体制的全网统一运营、管理、维护，便于故障定位，能够提供很好的网络生存性。</p>
+</li>
+<li><p>OTN可以解决传统WDM网络波长/子波长业务调度能力弱、组网能力弱（以点到点连接为主的组网方式）、保护能力弱等问题。</p>
+</li>
+<li><p>OTN解决了SDH基于VC-12/VC4的交叉颗粒偏小、调度较复杂、不适应大颗粒业务传送需求的问题。</p>
+</li>
 </ul>
-<h2 id="材料色散"><a href="#材料色散" class="headerlink" title="材料色散"></a>材料色散</h2><p>波速v和折射率n的关系为$v=c/n$</p>
-<p>对于光线中用到的二氧化硅，其折射率是随波长变化的，于是，波的速度也随波长变化。如果速度的变化是由材料的某些性质引起的，则称之为材料色散，如果由其自身的结果引起的，称之为波导色散。</p>
-<p>单一频率的光在现实中是不现实的，实际的光源在一个特定的波长范围内发光。这个范围称为光源的线宽，或者谱宽。光源的线宽越窄，其相干性就越好。理想的相干光源发射单波长的光，其线宽为0，因而是理想单色的。下表给出了常用光源的典型线宽值。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">光源</th>
-<th style="text-align:center">线宽(nm)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">发光二极管</td>
-<td style="text-align:center">20~100</td>
-</tr>
-<tr>
-<td style="text-align:center">半导体激光器</td>
-<td style="text-align:center">1~5</td>
-</tr>
-<tr>
-<td style="text-align:center">Nd:YAG激光器</td>
-<td style="text-align:center">0.1</td>
-</tr>
-<tr>
-<td style="text-align:center">氦氖激光器</td>
-<td style="text-align:center">0.002</td>
-</tr>
-</tbody>
-</table>
-<p>用波长$\Delta\lambda$表示的谱宽与由频率$\Delta{f}$表示的带宽之间满足以下关系</p>
-<p>$$ \frac{\Delta{f}}{f} = \frac{\Delta\lambda}{\lambda} $$</p>
-<p>式中，$f$是中心频率，$\lambda$是中心波长，这个goon故事说明无论以波长还是频率为基础，对光源辐射谱宽的相对值都是相同的。</p>
-<p>从表格中可以看出，半导体激光器（LD）比LED具有更好的相干性。</p>
-<p>考虑一个具有非零谱宽的实际光源发出一个光脉冲到色散的玻璃光纤时的情形。原始脉冲由形状完全相同但波长不同的脉冲组成，这些脉冲以不同的速度传输，到达光纤末端的时间会有细微的差别。在输出端再将其叠加起来，形成输出脉冲，相对于输入信号，输出信号被展宽了。这解释了色散如何导致脉冲畸变。脉冲传输的越远，其展宽就越严重。下图是一个示意图</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vma6ct97j30ke0i23zo.jpg" alt></p>
-<p>上面解释了脉冲畸变，除此之外，色散同样会使模拟信号产生失真。下图给出了由三个不同波长组成的一个模拟波形的传播。在输入端，三个波长在相位上变化相同，叠加在一起产生一个更大的信号变化。在色散介质中传播一段距离后，这些不同波长的信号相位不再相同。当叠加在一起后，所形成信号的幅度变得低于输入信号的幅度。色散并没有改变平均功率或调制功率，但的确减小了信号的幅度变化。我们可以将这种结果看做是信号峰值的扩展（降低其幅度）和波谷的填充（抬高其幅度）。过度的展宽将造成信号变化的损耗。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vmfzqj05j30g40c7t9o.jpg" alt></p>
-<p>由材料色散（或波导色散）引起的信号畸变可以通过使用窄线宽光源来降低，也就是使用相干性更好的发光器件。因此，半导体激光器比发光二极管有优势。</p>
-<h2 id="波导色散"><a href="#波导色散" class="headerlink" title="波导色散"></a>波导色散</h2><p>光纤的第三类色散是波导色散。光纤的纤芯与包层的折射率大于一定程度，波导色散占主导，在交界面产生全反射时，有一部分平行于界面的光进入包层之内。这部分光在包层内传输一定距离后，又可能回到纤芯中继续传输。进入包层内的这部分光强的大小与光波长有关，这就相当于光传输路径长度随光波波长的不同而异。把有一定波谱宽度的光源发出的光脉冲射入光纤后，由于不同波长的光传输路径不完全相同，所以到达终点的时间也不相同，从而出现脉冲展宽。具体来说，入射光的波长越长，全反射角越大，进入包层中的光强比例就越大，这部分光走过的距离就越长。这种色散是由光纤中的光波导引起的，由此产生的脉冲展宽现象叫做波导色散。</p>
-<p>波导色散是模式本身的色散，是指光纤中某一种波导模式在不同的频率下，相位常数不同、群速度不同而引起的色散。形象地说，就是理想状态下光线中的波导只在纤芯中传输，但由于光纤的几何结构、形状等方面的不完善，使得光波一部分在纤芯中传输，而另一部分在包层中传输，由于纤芯和包层的折射率不同，这样造成脉冲展宽的现象，就是波导色散，或称结构色散。这种色散主要是由光波导的结构参数而决定的。</p>
-<h2 id="啁啾效应"><a href="#啁啾效应" class="headerlink" title="啁啾效应"></a>啁啾效应</h2><p>光脉冲瞬时频率随时间的变化而变化</p>
-<p>啁啾产生的原因主要是由于介质的折射率由于动态电信号调制的影响产生动态变化，从而引起在介质中传播的光信号的相位也产生动态变化，这种相位的变化，直接就体现为光信号频率的动态变化。</p>
-<p>一个光脉冲的啁啾即为其瞬时频率随时间的变化而变化的特性。具体的来说，如果一个光脉冲的瞬时频率在时域上升高（或降低），即称该脉冲具有上啁啾（或下啁啾）。 </p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vp1uqx0cj30na0cbgm3.jpg" alt="一个具有强上啁啾的脉冲，其瞬时频率随时间的推移而上升"></p>
-<p>脉冲在透明介质中传播后，由于色散和非线性效应（如由克尔效应引起的自相位调制）的影响，会具有啁啾。在半导体激光器和放大器中，由于载流子浓度变化导致的折射率变化也会导致脉冲具有啁啾。一个脉冲的啁啾可以将脉冲通过一些具有适当色散的元件后而被消除或者反转。</p>
-<p>啁啾效应将使光纤划分为正常色散光纤和反常色散光纤。正常色散光纤中，脉冲的高频成分位于脉冲后沿，低频成分位于脉冲前沿；反常色散光纤中，脉冲的低频成分位于脉冲后沿，高频成分位于脉冲前沿。在传输线路中，合理使用两种光纤，可以抵消啁啾效应，消除脉冲的色散展宽</p>
-<h2 id="偏振模色散（Polarization-Mode-Dispersion）"><a href="#偏振模色散（Polarization-Mode-Dispersion）" class="headerlink" title="偏振模色散（Polarization Mode Dispersion）"></a>偏振模色散（Polarization Mode Dispersion）</h2><p>一个信号脉冲沿着理想的对称圆形单模光纤在不受外界干扰情况下传输时,光纤输入端的光脉冲可分裂成两个垂直的偏振输出脉冲,以相同的的传播速度进行传输,并同时到达光纤输出端,这两个脉冲叠加在一起会重现出它们在光纤输入端时的偏振状态,实际上光纤由于种种原因,会引起双折射,即x轴方向和y轴方向上的折射率是不一样的,这将引起偏振模色散。</p>
-<p>形成偏振模色散的原因有光纤的内在原因和外在原因。通常,表现出来的只是内在原因和外在原因的综合结果。在理想情况下,光纤是圆对称的,不存在模式的极化取向问题,两个相互垂直的本征偏振模沿光纤以相同的速度传输,同时到达接收器。但是,在制造光纤的过程中,光纤芯不可避免地产生一定的椭圆度;在拉制光纤时,总是要在光纤中遗留下残存的内部应力,从而,实际的光纤总是表现出双折射性。这些不对称性使光纤的折射率分布与方向有关,这时,基模的两个相互垂直的本征偏振态不再简并,它们沿光纤以不相同的速度传输,引起脉冲展宽。光纤芯的椭圆度可以很简单地解释两个相互垂直的偏振态有不同的群速度。由于在水平方向有效群指数较大,因此水平方向偏振的模传输较慢,而在垂直方向有较小的有效群指数,因此在垂直方向偏振的模传输较快。在传输一段距离后,两个偏振模之间产生时延差。不管怎样降低这些内在原因,并不可能完全消除偏振模现象。这是因为成缆和光缆敷设时产生的应力、光缆熔接或连接器等外在因素都要影响偏振模色散</p>
+<h2 id="OTN网络结构"><a href="#OTN网络结构" class="headerlink" title="OTN网络结构"></a>OTN网络结构</h2><p>OTN的网络分成可以分为光通道层（OCh，Optical Channel ），光复用段层（OMS，Optical Multiplex Section）和光传送段层（OTS，Optical Transmission Section）三个层面。另外，为了解决客户信号的数字监视问题，光通道层又分为光通路净荷单元（OPU），光通道数据单元（ODUk）和光通道传送单元（OTUk）三个子层，类似于SDH技术的段层和通道层。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg" alt></p>
+<p>OTN层次结构和信息流之间的关系如下图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g52u08t67xj30r70jdtgr.jpg" alt></p>
+<p>其中，client是光层。OH是overhead 开销的意思。</p>
+<ul>
+<li>OPU（Optical Channel Payload Unit）：光通道净荷单元，提供客户信号的映射功能；</li>
+<li>ODU（Optical Channel Data Unit）：光通道数据单元，提供客户信号的数字包封、OTN的保护倒换、提供踪迹监测、通用通信处理等功能；</li>
+<li>OTU（Optical Channel Transport Unit）：光通道传输单元、提供OTN成帧、FEC处理、通信处理等功能。波分设备中的发送OTU单板完成了信号从客户接口到OCC的变化；波分设备中的接收OTU单板完成了信号从OCC到客户接口的变化。 </li>
+<li>OCC（Optical Channel Carrier）：光通路载波  </li>
+<li>OSC（Optical Supervisory Channel）：光监控信道</li>
+<li>OPS（Optical Physical Section）：光物理段</li>
+<li>OOS（OTM Overhead Signal）：OTM开销信号</li>
+<li>OTM-n.m：n代表系统波长数目，m代表速率级别，m可以是1，2，3，12，23，123。比如23代表一个合路信号当中有10G和40G混和传输的情况。</li>
+<li>OTM-nr.m：中的r代表简化功能。这一接口一般用于没有光监控的系统</li>
+<li>OTM-0.m：代表的是黑白光口，即1310nm或者1550nm的单路光信号。这种接口代表客户侧支持OTN帧结构的信号。</li>
+</ul>
+<h2 id="OTN的映射和复用关系"><a href="#OTN的映射和复用关系" class="headerlink" title="OTN的映射和复用关系"></a>OTN的映射和复用关系</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53pfg8gg6j30ny0gaqcc.jpg" alt></p>
+<p>同SDH类似，用户信号映射到OPUk，一般采用异步映射方法，需要进行速率调整，包括正速率调整和负速率调整。对于复用，OTN采用字节间插式时分复用与波分复用相结合的方法，通过多次时分复用形成OCh，再通过波分复用形成OTM。</p>
 
       
     </div>
@@ -535,7 +512,7 @@
           
             <a href="/tags/光纤/" rel="tag"># 光纤</a>
           
-            <a href="/tags/色散/" rel="tag"># 色散</a>
+            <a href="/tags/OTN/" rel="tag"># OTN</a>
           
         </div>
       
@@ -548,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/10/分贝单位/" rel="next" title="分贝单位">
-                <i class="fa fa-chevron-left"></i> 分贝单位
+              <a href="/2019/07/15/WDM原理/" rel="next" title="WDM原理">
+                <i class="fa fa-chevron-left"></i> WDM原理
               </a>
             
           </div>
@@ -557,10 +534,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/11/非线性效应/" rel="prev" title="非线性效应">
-                非线性效应 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -741,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#色散"><span class="nav-number">1.</span> <span class="nav-text">色散</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#材料色散"><span class="nav-number">1.1.</span> <span class="nav-text">材料色散</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#波导色散"><span class="nav-number">1.2.</span> <span class="nav-text">波导色散</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#啁啾效应"><span class="nav-number">1.3.</span> <span class="nav-text">啁啾效应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#偏振模色散（Polarization-Mode-Dispersion）"><span class="nav-number">1.4.</span> <span class="nav-text">偏振模色散（Polarization Mode Dispersion）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN产生的背景"><span class="nav-number">1.</span> <span class="nav-text">OTN产生的背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN的技术特点"><span class="nav-number">2.</span> <span class="nav-text">OTN的技术特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN网络结构"><span class="nav-number">3.</span> <span class="nav-text">OTN网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN的映射和复用关系"><span class="nav-number">4.</span> <span class="nav-text">OTN的映射和复用关系</span></a></li></ol></div>
             
 
           </div>
