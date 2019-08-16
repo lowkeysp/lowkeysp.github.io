@@ -328,6 +328,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/OTN之支路板-线路板/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/15/OTN之支路板-线路板/" class="post-title-link" itemprop="url">OTN之支路板&线路板</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-15 16:12:55 / 修改时间：16:49:06" itemprop="dateCreated datePublished" datetime="2019-08-15T16:12:55+08:00">2019-08-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OTN/" itemprop="url" rel="index"><span itemprop="name">OTN</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/15/OTN之支路板-线路板/" class="leancloud_visitors" data-flag-title="OTN之支路板&线路板">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>华为OTN产品系列支持 支路板、线路板分离架构 。支路/线路板和集中交叉单板配合使用，除了可以完成OTU单板功能外，还可通过集中交叉单板进行各级别ODUk颗粒业务调度， 实现更加灵活的电层信号调度及更高的带宽利用率。</p>
+<h1 id="支路板"><a href="#支路板" class="headerlink" title="支路板"></a>支路板</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>实现客户侧业务在本站上/下波分侧。</p>
+<h2 id="在系统中的位置"><a href="#在系统中的位置" class="headerlink" title="在系统中的位置"></a>在系统中的位置</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60fyh0b5pj30mg0d8tas.jpg" alt></p>
+<h1 id="线路板"><a href="#线路板" class="headerlink" title="线路板"></a>线路板</h1><h2 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h2><ul>
+<li><p>配合支路板完成本站客户侧业务上/下波分侧</p>
+<ul>
+<li>OTN支路板：接入本站的客户侧业务，完成O/E转换后，将客户侧业务映射为ODUk信号，并将ODUk信号发送到交叉板进行调度。</li>
+<li>OTN线路板：将调度过来的ODUk信号进行复用和映射，完成E/O转换后， 转换为符合WDM系统要求的标准波长的OTUk信号。同时实现上述过程的逆过程。</li>
+</ul>
+</li>
+<li><p>配合OTN线路板完成波分侧业务的本站穿通</p>
+<ul>
+<li>OTN支路板：接收西向的波分侧业务，完成光/电转换后，将波分侧业务映射和 解复用为ODUk信号，并将ODUk信号发送到交叉板进行调度。 </li>
+<li>OTN线路板：将调度过来的ODUk信号进行复用和映射，完成电/光转换后， 转换为符合WDM系统要求的标准波长的OTUk信号，传输到东向。 同时实现上述过程的逆过程。</li>
+</ul>
+</li>
+</ul>
+<h2 id="在系统中的位置-1"><a href="#在系统中的位置-1" class="headerlink" title="在系统中的位置"></a>在系统中的位置</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60gjt0gljj30lh0d8go0.jpg" alt></p>
+<h1 id="为什么需要采用支线路分离架构？"><a href="#为什么需要采用支线路分离架构？" class="headerlink" title="为什么需要采用支线路分离架构？"></a>为什么需要采用支线路分离架构？</h1><p>利用OTU单板即可以完成客户侧业务上波分侧，为什么还需要采用支线路分离的架构？</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60gljxh8hj312d0bajtq.jpg" alt></p>
+<p>可以看到，支线路分离架构与OTU架构的主要区别在于引入了集中交叉板。客户侧业务不是直接通过一块单板封装为波分侧业务（OTUk)上线路侧，而是通过集中交叉板进行 各级别的ODUk颗粒的调度。即增加了电层调度的灵活性，提高了带宽的利用率。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/波分系统之实践/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2467,193 +2659,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/分贝单位/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/10/分贝单位/" class="post-title-link" itemprop="url">分贝单位</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-10 13:56:46 / 修改时间：15:54:21" itemprop="dateCreated datePublished" datetime="2019-07-10T13:56:46+08:00">2019-07-10</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/光纤/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/07/10/分贝单位/" class="leancloud_visitors" data-flag-title="分贝单位">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在通信线路中保持一定量的光功率值是系统设计的主要部分。分贝（dB）是表示通信系统系统中相对功率电平的一个十分方便的量。如果系统中某一点的功率是P<sub>1</sub>瓦，线路中更远点出的功率是P<sub>2</sub>瓦，则P<sub>2</sub>/P<sub>1</sub>是这两个位置处传输功率的比值。换句话说，P<sub>2</sub>/P<sub>1</sub>是这两点间的传输效率。将这个比率用分贝表示，即</p>
-<p>$$ dB = 10lg\frac{P_2}{P_1}$$</p>
-<p>$P_2$和$P_1$的单位必须相同，例如都是瓦特或者都是毫瓦。小于1的数字的对数值都是负数，所以如果$P_2$小于$P_1$，分贝值就是负的，当系统中存在损耗时会发生这种情况。如果$P_2$大于$P_1$（如果在两点之间放置放大器，就可能发生这种情况），分贝值就是正的。</p>
-<p>一些元件级联时，使用对数计算是很方便的，因为这样很容易算出功率电平的整体变化。考虑下图所示的由三个单元构成的系统框图，这三个单元可以分别代表光源到光纤的耦合器，光纤本身和连接器。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4usget5i7j30be01vmx1.jpg" alt></p>
-<p>其输出功率可以通过连乘每个单元的效率得到，其表达式为</p>
-<p>$$ \frac{P_4}{P_1} = \frac{P_4}{P_3} \times \frac{P_3}{P_2} \times \frac{P_2}{P_1} $$</p>
-<p>用分贝表示的相应损耗为：</p>
-<p>$$ dB = 10lg\frac{P_4}{P_1} = 10lg(\frac{P_4}{P_3} \times \frac{P_3}{P_2} \times \frac{P_2}{P_1})$$</p>
-<p>利用对数的运算性质，即各项乘积的对数等于各项对数之和，就可以得到</p>
-<p>$$ dB = 10lg\frac{P_4}{P_3} + 10lg\frac{P_3}{P_2} + 10lg\frac{P_2}{P_1}$$</p>
-<p>也就是说，总的效率（以分贝为单位）是单个级联部分的效率之和</p>
-<p>我们可以用分贝来表示绝对功率。为此，我们将功率与一个固定的参考值相比较。在光纤通信系统中最方便的参考电平是1毫瓦。相对于1毫瓦用分贝表示的功率值用dBm表示。则</p>
-<p>$$ dBm = 10lgP_2 $$</p>
-<p>发射功率$dBm_t$，系统损耗$dB_s$和接受功率电平$dBm_r$之间的关系为</p>
-<p>$$ dBm_r = dBm_t + dB_s $$</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2700,7 +2705,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2725,7 +2730,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2792,7 +2799,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -3055,9 +3066,9 @@
       
     
       
-        
-      
     
+      
+        
       
     
       
