@@ -328,6 +328,551 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/python的self学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/24/python的self学习/" class="post-title-link" itemprop="url">python的self学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-24 14:10:50 / 修改时间：14:34:02" itemprop="dateCreated datePublished" datetime="2019-10-24T14:10:50+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/10/24/python的self学习/" class="leancloud_visitors" data-flag-title="python的self学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>先贴出一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def song(one):</span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line">    def sing(self,one):</span><br><span class="line">        print(one)</span><br></pre></td></tr></table></figure></p>
+<p>首先要搞清楚的一个问题 <code>a=A()</code>与<code>a=A</code>，这两个赋值之间的区别</p>
+<p>对于<code>a=A()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=A()</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line"></span><br><span class="line">&lt;__main__.A object at 0x000001B19F046DD8&gt;</span><br></pre></td></tr></table></figure></p>
+<p>对于<code>a=A</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = A</span><br><span class="line">print(a)</span><br><span class="line">print(A)</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line"></span><br><span class="line">&lt;class &apos;__main__.A&apos;&gt;</span><br><span class="line">&lt;class &apos;__main__.A&apos;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>从上面可以看到，<code>a=A()</code>是一个实例，是有地址的。而<code>a=A</code>则只是一个类，是没有地址的</p>
+<p>那么<code>self</code>到底指代的是谁？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def song(one):</span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line">    def sing(self,one):</span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">A.sing(a,&apos;hello&apos;)</span><br><span class="line">a.sing(&apos;hello&apos;)</span><br><span class="line"></span><br><span class="line">结果是：</span><br><span class="line">hello</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></p>
+<p>从这个例子中你就可以发现，实际上 <code>a.sing(“hello”)</code> 等价于<code>A.sing(a,“hello”)</code>，而self就是实例a自己,而且<strong>self也可以用别的单词代替</strong>,只不过大家都约定俗成使用self</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A.sing(&apos;hello&apos;)</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line"></span><br><span class="line">TypeError: sing() missing 1 required positional argument: &apos;one&apos;</span><br></pre></td></tr></table></figure>
+<p>可以看到，少给了一个参数，没有给‘one’赋值，‘hello’被赋给了self，这也很好理解，下面就有点意思了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a.song(&apos;hello&apos;)</span><br><span class="line"></span><br><span class="line">结果:</span><br><span class="line"></span><br><span class="line">TypeError: song() takes 1 positional argument but 2 were given</span><br></pre></td></tr></table></figure>
+<p>可以看到提示，<code>song()</code>只接收一个参数，但是却给了2个参数。但是我们只传了一个参数啊，这是因为，python会把实例a当成第一个参数，‘hello’才是第二个参数，类似于<code>A.song(a,&#39;hello&#39;)</code>。不信？不信我们再写一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def song(one,two):</span><br><span class="line"></span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.song(&apos;hello&apos;)</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">结果:</span><br><span class="line"></span><br><span class="line">&lt;__main__.A object at 0x000001C72D8AB160&gt;</span><br><span class="line">&lt;__main__.A object at 0x000001C72D8AB160&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，函数song是打印one这个参数，而one是实例a，因此打印出来了这个实例a的地址</p>
+<p>通过这段分析，我们简单的知道了，类中的方法第一个参数必须是 self ，不然实例无法正确调用类中的方法，也就是说，如果方法中第一个参数不是 self(广义的)，那么这个方法是没有任何价值的，因为实例无法调用它，一个无法被调用的方法真不知道有什么用。</p>
+<p>参数前面的self呢?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">x=6</span><br><span class="line"></span><br><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def sing(self):</span><br><span class="line">        self.x=10</span><br><span class="line"></span><br><span class="line">    def mutl(self):</span><br><span class="line">        y=10*x</span><br><span class="line">        print(y)</span><br><span class="line"></span><br><span class="line">a=A()  </span><br><span class="line">a.mutl()</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">60</span><br></pre></td></tr></table></figure></p>
+<p>结果是60，而不是100，为什么不调用类内部的 x 参数而跑去调用类外的 x 呢？还是那个问题，self 到底指代的是谁，self 就是 a 本身，那么问题就很明显了，mutl() 方法中的 x 前面没有加 self 所以他调用的不是实例(注意这里说的是实例，而不是类)自身的参数</p>
+<p>到这里我想你大概明白了，参数前面有self和没self的区别了，简单说，带self的参数是人家实例自身的，不带self的，爱谁谁，实例不管。</p>
+<p>参考：<a href="https://m.py.cn/faq/python/11804.html" target="_blank" rel="noopener">https://m.py.cn/faq/python/11804.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/http学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/24/http学习/" class="post-title-link" itemprop="url">http学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-24 08:48:43 / 修改时间：09:01:36" itemprop="dateCreated datePublished" datetime="2019-10-24T08:48:43+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络编程/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/10/24/http学习/" class="leancloud_visitors" data-flag-title="http学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTTP-是不保存状态的协议"><a href="#HTTP-是不保存状态的协议" class="headerlink" title="HTTP 是不保存状态的协议"></a>HTTP 是不保存状态的协议</h1><p>HTTP 是一种不保存状态，即无状态（stateless）协议。HTTP 协议自身不对请求和响应之间的通信状态进行保存。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。</p>
+<p>使用HTTP协议，每当有新的请求发送时，就会有对应的新响应产生。协议本身并不保留之前一切的请求或响应报文的信息。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把HTTP协议设计成如此简单的</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/双系统安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/10/双系统安装/" class="post-title-link" itemprop="url">双系统安装</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 09:19:58 / 修改时间：09:37:32" itemprop="dateCreated datePublished" datetime="2019-10-10T09:19:58+08:00">2019-10-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ubuntu/" itemprop="url" rel="index"><span itemprop="name">ubuntu</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/10/10/双系统安装/" class="leancloud_visitors" data-flag-title="双系统安装">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考文献：<a href="https://blog.csdn.net/u014422976/article/details/80393841" target="_blank" rel="noopener">https://blog.csdn.net/u014422976/article/details/80393841</a></p>
+<h1 id="正式安装教程"><a href="#正式安装教程" class="headerlink" title="正式安装教程"></a>正式安装教程</h1><blockquote>
+<p>首先下载ubuntu，当前时间选择的是ubuntu 18.04.3，也就是目前的最稳定的最新版本，下载地址 <a href="https://ubuntu.com/download/desktop" target="_blank" rel="noopener">https://ubuntu.com/download/desktop</a></p>
+</blockquote>
+<blockquote>
+<p>然后制作u盘启动盘，在制作过程中，本来想使用UltraISO制作，后来上网发现UltraISO制作ubuntu 18.04.3会出现问题，建议使用Universal USB Installer。这里的下载连接：<a href="https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/" target="_blank" rel="noopener">https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/</a></p>
+</blockquote>
+<blockquote>
+<p>给安装ubuntu分配一个空间，好像是需要安装在windows的所在盘中，我也就是在C盘进行空间分配。具体：快捷键“win+X”-&gt;“磁盘管理”-&gt;“压缩卷”</p>
+</blockquote>
+<blockquote>
+<p>正式安装ubuntu。关闭计算机，插入已经做成启动盘的U盘，进入Boot menu选择界面，选择“Istall Ubuntu”，图形化的安装界面，软件暂时不要安装，继续，当出现要手动分盘符的时候，请选择“其它选项”</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -445,6 +990,234 @@
           
             <p>看到一个比较好的网站，记录一下</p>
 <p><a href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md" target="_blank" rel="noopener">https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/爬虫基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/16/爬虫基础/" class="post-title-link" itemprop="url">爬虫基础</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 20:26:00" itemprop="dateCreated datePublished" datetime="2019-09-16T20:26:00+08:00">2019-09-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-24 08:48:13" itemprop="dateModified" datetime="2019-10-24T08:48:13+08:00">2019-10-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/爬虫/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/09/16/爬虫基础/" class="leancloud_visitors" data-flag-title="爬虫基础">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="scrapy安装"><a href="#scrapy安装" class="headerlink" title="scrapy安装"></a>scrapy安装</h1><p>Scrapy是一个基于Twisted框架的使用python的开源网络爬虫框架</p>
+<p>使用pip安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure></p>
+<p>确认是否安装成功,在pyhton环境中，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line">&gt;&gt;&gt; scrapy.version_info</span><br></pre></td></tr></table></figure></p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>使用<code>scrapy startproject</code>命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject example</span><br></pre></td></tr></table></figure></p>
+<h1 id="scrapy框架"><a href="#scrapy框架" class="headerlink" title="scrapy框架"></a>scrapy框架</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g78imf5vi7j31550pwq53.jpg" alt="捕获.PNG"></p>
+<p>首先，了解一下Scrapy框架的各个组件</p>
+<ul>
+<li>ENGINE：引擎，框架的核心，其他所有组件在其控制下协同工作，是内部组件</li>
+<li>SCHEDULER：调度器，负责对SPIDER提交的下载请求进行调度，是内部组件</li>
+<li>DOWNLOADER：下载器，负责下载页面（发送HTTP请求/接收HTTP请求），是内部组件</li>
+<li>SPIDER：爬虫，负责提取页面中的数据，并产生对新页面的下载请求，需要用户实现</li>
+<li>MIDDLEWARE：中间件，负责对Request对象和Response对象进行处理，是可选组件</li>
+<li>ITEM PIPELINE：数据管道，负责对爬取到的数据进行处理，是可选组件</li>
+</ul>
+<p>我们来说明一下流程：</p>
+<blockquote>
+<ol>
+<li>ENGINE从SPIDER拿到需要爬虫的Requests</li>
+<li>ENGINE会在SCHEDULER里面对Requests进行调度，然后还会向SCHEDULER请求下一个要爬虫的Requests（也就是即将要爬虫的Requests）</li>
+<li>SCHEDULER会将下一个要爬虫的Requests返回给ENGINE</li>
+<li>ENGINE会将这个Requests传递给DOWNLOADER，其中需要经过DOWNLOADER的MIDDLEWARE（在process_request()中）</li>
+<li>一旦DOWNLOADER下载好了页面，DOWNLOADER会把相应的Response返回给ENGINE，同样需要经过中间件（在process_response()中）</li>
+<li>ENGINE接收到从DOWNLOADER发过来的Response后，会发送给Spider用于处理，中间会经过Spider Middleware (在process_spider_input()中).</li>
+<li>Spider会处理从ENGINE返回回来的Response，然后将爬下来的数据和新的Requests再次发送给ENGINE。中间会经过Spider Middleware (在process_spider_output()中).</li>
+<li>ENGINE会将处理好的Items发送给Item PIPELINE，然后将新的Requests发送给SCHEDULER，并向SCHEDULER请求下一个要爬虫的Request</li>
+<li>一直这么重复，直到SCHEDULER中没有剩余的Requests</li>
+</ol>
+</blockquote>
+<h1 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h1><p>当你在爬网页的时候，会经常需要从HTML中提取数据，也有一些现成的python库完成这些，比如BeautifulSoup和lxml。</p>
+<p>Scrapy有自己的一套机制来提取数据，叫做Selector，通过<code>Xpath</code>或者<code>CSS</code>来选择数据</p>
+<p>Xpath是一种在XML中选择nodes的语言，而CSS是将style应用到HTML文本的语言。</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>Response对象通过<code>.selector</code>属性可以返回一个Selector对象<br>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.selector.xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
+<p>由于我们会大量的使用<code>Xpath</code>和<code>CSS</code>，因此可以简化成<code>response.xpath()</code>和<code>response.css()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br><span class="line">&gt;&gt;&gt; response.css(&apos;span::text&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
+<p>通常我们都是使用上面的两种情况，如果要直接创建Selector的话，可以使用下面：</p>
+<p>使用text创建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from scrapy.selector import Selector</span><br><span class="line">&gt;&gt;&gt; body = &apos;&lt;html&gt;&lt;body&gt;&lt;span&gt;good&lt;/span&gt;&lt;/body&gt;&lt;/html&gt;&apos;</span><br><span class="line">&gt;&gt;&gt; Selector(text=body).xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
+<p>使用response创建：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from scrapy.selector import Selector</span><br><span class="line">&gt;&gt;&gt; from scrapy.http import HtmlResponse</span><br><span class="line">&gt;&gt;&gt; response = HtmlResponse(url=&apos;http://example.com&apos;, body=body)</span><br><span class="line">&gt;&gt;&gt; Selector(response=response).xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用Selector"><a href="#使用Selector" class="headerlink" title="使用Selector"></a>使用Selector</h2><p>我们先贴出整个HTML代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"> &lt;head&gt;</span><br><span class="line">  &lt;base href=&apos;http://example.com/&apos; /&gt;</span><br><span class="line">  &lt;title&gt;Example website&lt;/title&gt;</span><br><span class="line"> &lt;/head&gt;</span><br><span class="line"> &lt;body&gt;</span><br><span class="line">  &lt;div id=&apos;images&apos;&gt;</span><br><span class="line">   &lt;a href=&apos;image1.html&apos;&gt;Name: My image 1 &lt;br /&gt;&lt;img src=&apos;image1_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image2.html&apos;&gt;Name: My image 2 &lt;br /&gt;&lt;img src=&apos;image2_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image3.html&apos;&gt;Name: My image 3 &lt;br /&gt;&lt;img src=&apos;image3_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image4.html&apos;&gt;Name: My image 4 &lt;br /&gt;&lt;img src=&apos;image4_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image5.html&apos;&gt;Name: My image 5 &lt;br /&gt;&lt;img src=&apos;image5_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"> &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>让我们来学习selector</p>
+<p>选择title标签里面的text<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> response.xpath(&apos;//title/text()&apos;)</span><br><span class="line">[&lt;Selector xpath=&apos;//title/text()&apos; data=&apos;Example website&apos;&gt;]</span><br></pre></td></tr></table></figure></p>
+<p>为了能够得到文本数据，必须使用selector的<code>.get()</code>或者<code>.getall()</code>方法，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//title/text()&apos;).getall()</span><br><span class="line">[&apos;Example website&apos;]</span><br><span class="line">&gt;&gt;&gt; response.xpath(&apos;//title/text()&apos;).get()</span><br><span class="line">&apos;Example website&apos;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，<code>.get()</code>只会返回一个结果，如果有好几个结果的话，则会返回第一个；而<code>.getall()</code>会返回一个结果的list。</p>
+<p>通常，使用CSS3 pseudo-elements，CSS Selector可以选择text或者attribute的node<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;title::text&apos;).get()</span><br><span class="line">&apos;Example website&apos;</span><br></pre></td></tr></table></figure></p>
+<p>从上面可以看出，<code>.xpath()</code>和<code>.css()</code>方法会返回一个SelectorList，里面包括了一些新的Selector，因此，我们可以连着使用，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;img&apos;).xpath(&apos;@src&apos;).getall()</span><br><span class="line">[&apos;image1_thumb.jpg&apos;,</span><br><span class="line"> &apos;image2_thumb.jpg&apos;,</span><br><span class="line"> &apos;image3_thumb.jpg&apos;,</span><br><span class="line"> &apos;image4_thumb.jpg&apos;,</span><br><span class="line"> &apos;image5_thumb.jpg&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>如果你只是想获取匹配到的元素中的第一个的话，可以使用selector的<code>.get()</code>（或者<code>.extract_first()</code>）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//div[@id=&quot;images&quot;]/a/text()&apos;).get()</span><br><span class="line">&apos;Name: My image 1</span><br></pre></td></tr></table></figure></p>
+<p>如果没有匹配的话，则会返回<code>None</code>。我们还可以使用其他的来代替这个返回的None值，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//div[@id=&quot;not-exists&quot;]/text()&apos;).get(default=&apos;not-found&apos;)</span><br><span class="line">&apos;not-found&apos;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1688,775 +2461,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/彩光和黑白光/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/16/彩光和黑白光/" class="post-title-link" itemprop="url">彩光和黑白光</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-16 09:04:03 / 修改时间：09:19:32" itemprop="dateCreated datePublished" datetime="2019-08-16T09:04:03+08:00">2019-08-16</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/波分系统/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/08/16/彩光和黑白光/" class="leancloud_visitors" data-flag-title="彩光和黑白光">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="认识光"><a href="#认识光" class="headerlink" title="认识光"></a>认识光</h1><p>WDM系统使用的光属于不可见光，位于近红外区域，波长范围：1260 ~ 1611 nm </p>
-<p>禁止用眼直接观察光口，避免激光伤害眼睛。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g618vtkbj6j30kq09r756.jpg" alt></p>
-<h1 id="彩光与黑白光"><a href="#彩光与黑白光" class="headerlink" title="彩光与黑白光"></a>彩光与黑白光</h1><p>WDM系统采用的光都具有标准波长。</p>
-<p>为了区别于SDH等系统的光，我们把WDM系统的光称为“彩光” (Colored)，而称普通光系统的光为“黑白光”或“灰光”（Grey）。</p>
-<h2 id="波长差异"><a href="#波长差异" class="headerlink" title="波长差异"></a>波长差异</h2><ul>
-<li><p>黑白光的波长是在某个范围内波动的，没有特定的标准波长。如波分设备的客户侧光口。</p>
-</li>
-<li><p>彩光指波分系统中OTN/线路单板波分侧光信号，可直接上合波设备，具有标准波长。根据波长划分标准不同，分为CWDM和DWDM。</p>
-</li>
-</ul>
-<h2 id="遵循标准"><a href="#遵循标准" class="headerlink" title="遵循标准"></a>遵循标准</h2><ul>
-<li>彩光：ITU-T G.694.1（DWDM）和 ITU-T G694.2 （CWDM）</li>
-<li>黑白光：ITU-T G.957，ITU-T G.959.1，IEEE 802.3</li>
-</ul>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h2 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h2><p>客户侧光模块是黑白光接口；波分侧光模块是彩光接口。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6191kqjmmj30kx078t9m.jpg" alt></p>
-<h2 id="客户侧光模块为彩光模块"><a href="#客户侧光模块为彩光模块" class="headerlink" title="客户侧光模块为彩光模块"></a>客户侧光模块为彩光模块</h2><p>支路单板的客户侧彩光口，可直接接入合波单板。主要有如下两种场景：</p>
-<ul>
-<li>与WDM设备对接的客户侧设备是彩光接口。</li>
-<li>分组单板的10GE接口为彩光接口，可直接接入合波单板。这种情况下，就免去了统一线路单板处理的步骤。如下图所示。</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6196kaoe4j30f309qgml.jpg" alt></p>
-<h2 id="波分侧光模块为黑白光模块"><a href="#波分侧光模块为黑白光模块" class="headerlink" title="波分侧光模块为黑白光模块"></a>波分侧光模块为黑白光模块</h2><p>华为的WDM设备与第三方WDM设备对接。因第三方设备不支持支线路分离模式，业务若需进行调度，可由华为设备的线路板（波分侧灰光）进行业务接入，由华为WDM设备完成业务上下或调度。</p>
-<h1 id="如何判断彩光与黑白光模块？"><a href="#如何判断彩光与黑白光模块？" class="headerlink" title="如何判断彩光与黑白光模块？"></a>如何判断彩光与黑白光模块？</h1><p>可通过指标中是否有中心波长来判断：</p>
-<ul>
-<li>彩光模块指标中收发波长都会有标称中心频率/中心波长。</li>
-<li>灰光模块的的收发波长是一个较宽的范围，无中心波长。</li>
-</ul>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html" target="_blank" rel="noopener">http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/OTN之支路板-线路板/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/15/OTN之支路板-线路板/" class="post-title-link" itemprop="url">OTN之支路板&线路板</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-15 16:12:55" itemprop="dateCreated datePublished" datetime="2019-08-15T16:12:55+08:00">2019-08-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-16 08:43:15" itemprop="dateModified" datetime="2019-08-16T08:43:15+08:00">2019-08-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OTN/" itemprop="url" rel="index"><span itemprop="name">OTN</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/08/15/OTN之支路板-线路板/" class="leancloud_visitors" data-flag-title="OTN之支路板&线路板">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>华为OTN产品系列支持 支路板、线路板分离架构 。支路/线路板和集中交叉单板配合使用，除了可以完成OTU单板功能外，还可通过集中交叉单板进行各级别ODUk颗粒业务调度， 实现更加灵活的电层信号调度及更高的带宽利用率。</p>
-<h1 id="支路板"><a href="#支路板" class="headerlink" title="支路板"></a>支路板</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>实现客户侧业务在本站上/下波分侧。</p>
-<h2 id="在系统中的位置"><a href="#在系统中的位置" class="headerlink" title="在系统中的位置"></a>在系统中的位置</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60fyh0b5pj30mg0d8tas.jpg" alt></p>
-<h1 id="线路板"><a href="#线路板" class="headerlink" title="线路板"></a>线路板</h1><h2 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h2><ul>
-<li><p>配合支路板完成本站客户侧业务上/下波分侧</p>
-<ul>
-<li>OTN支路板：接入本站的客户侧业务，完成O/E转换后，将客户侧业务映射为ODUk信号，并将ODUk信号发送到交叉板进行调度。</li>
-<li>OTN线路板：将调度过来的ODUk信号进行复用和映射，完成E/O转换后， 转换为符合WDM系统要求的标准波长的OTUk信号。同时实现上述过程的逆过程。</li>
-</ul>
-</li>
-<li><p>配合OTN线路板完成波分侧业务的本站穿通</p>
-<ul>
-<li>OTN支路板：接收西向的波分侧业务，完成光/电转换后，将波分侧业务映射和 解复用为ODUk信号，并将ODUk信号发送到交叉板进行调度。 </li>
-<li>OTN线路板：将调度过来的ODUk信号进行复用和映射，完成电/光转换后， 转换为符合WDM系统要求的标准波长的OTUk信号，传输到东向。 同时实现上述过程的逆过程。</li>
-</ul>
-</li>
-</ul>
-<h2 id="在系统中的位置-1"><a href="#在系统中的位置-1" class="headerlink" title="在系统中的位置"></a>在系统中的位置</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60gjt0gljj30lh0d8go0.jpg" alt></p>
-<h1 id="为什么需要采用支线路分离架构？"><a href="#为什么需要采用支线路分离架构？" class="headerlink" title="为什么需要采用支线路分离架构？"></a>为什么需要采用支线路分离架构？</h1><p>利用OTU单板即可以完成客户侧业务上波分侧，为什么还需要采用支线路分离的架构？</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60gljxh8hj312d0bajtq.jpg" alt></p>
-<p>可以看到，支线路分离架构与OTU架构的主要区别在于引入了集中交叉板。客户侧业务不是直接通过一块单板封装为波分侧业务（OTUk)上线路侧，而是通过集中交叉板进行 各级别的ODUk颗粒的调度。即增加了电层调度的灵活性，提高了带宽的利用率。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/25_zhiluban.html" target="_blank" rel="noopener">http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/25_zhiluban.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/波分系统之实践/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/13/波分系统之实践/" class="post-title-link" itemprop="url">波分系统之实践</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-13 09:59:32 / 修改时间：10:48:45" itemprop="dateCreated datePublished" datetime="2019-08-13T09:59:32+08:00">2019-08-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/波分系统/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/08/13/波分系统之实践/" class="leancloud_visitors" data-flag-title="波分系统之实践">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="波分站点-OTM"><a href="#波分站点-OTM" class="headerlink" title="波分站点 OTM"></a>波分站点 OTM</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xtq33zmuj30fw0dpmy3.jpg" alt></p>
-<h2 id="OTU"><a href="#OTU" class="headerlink" title="OTU"></a>OTU</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xty5nr31j30m10cw128.jpg" alt></p>
-<h3 id="OTU功能之一：波长转换"><a href="#OTU功能之一：波长转换" class="headerlink" title="OTU功能之一：波长转换"></a>OTU功能之一：波长转换</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu0jqzzfj30nb0detkh.jpg" alt></p>
-<h3 id="OTU功能之二：3R"><a href="#OTU功能之二：3R" class="headerlink" title="OTU功能之二：3R"></a>OTU功能之二：3R</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu1cw838j30p30ddwpw.jpg" alt></p>
-<h3 id="OTU功能之三：故障定界"><a href="#OTU功能之三：故障定界" class="headerlink" title="OTU功能之三：故障定界"></a>OTU功能之三：故障定界</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu5hxvqbj30mw0drwrk.jpg" alt></p>
-<h3 id="OTU的分类"><a href="#OTU的分类" class="headerlink" title="OTU的分类"></a>OTU的分类</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu7zb6ljj30o00dw7g0.jpg" alt></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/E1接口/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/02/E1接口/" class="post-title-link" itemprop="url">E1接口</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-02 14:42:17 / 修改时间：15:19:37" itemprop="dateCreated datePublished" datetime="2019-08-02T14:42:17+08:00">2019-08-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/光纤/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/08/02/E1接口/" class="leancloud_visitors" data-flag-title="E1接口">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>欧洲的30路脉码调制PCM简称E1，速率是2.048Mbit/s 。 我国采用的是欧洲的E1标准。 E1的一个时分复用帧（其长度T=125us 即取样周期125微秒）共划分为32相等的时隙，时隙的编号为CH0~CH31。其中时隙CH0用作帧同步用，时隙CH16用来传送信令，剩下CH1~CH15和CH17~CH31 共30个时隙用作30个话路。每个时隙传送8bit，因此共用256bit。每秒传送8000个帧，因此PCM一次群E1的数据率就是 2.048Mbit/s。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
-<li>一条E1是2.048Mbps的链路，用PCM编码。</li>
-<li>一个E1的帧长为256个bit，分为32个时隙，一个时隙为8个bit。</li>
-<li>每秒有8000个E1的帧通过接口，即8K*256=2048kbps。</li>
-<li>每个时隙在E1帧中占8bit，8*8k=64k，即一条E1中含有32个64K。</li>
-</ul>
-<h2 id="帧结构"><a href="#帧结构" class="headerlink" title="帧结构"></a>帧结构</h2><p>E1有成帧，成复帧与不成帧三种方式。</p>
-<ul>
-<li>成帧：在成帧的E1中第0时隙用于传输帧同步数据，其余31个时隙可以用于传输有效数据；</li>
-<li>成复帧：在成复帧的E1中，除了第0时隙外，第16时隙是用于传输信令的，只有第1到15，第17到第31共30个时隙可用于传输有效数据；</li>
-<li>不成帧：在不成帧的E1中，所有32个时隙都可用于传输有效数据。</li>
-</ul>
-<p>在E1信道中，8bit组成一个时隙（TS），由 32个时隙组成了一个帧（F），16个帧组成一个复帧（MF）。在一个帧中，TS0主要用于传送帧定位信号（FAS）、CRC-4（循环冗余校验）和对端告警指示，TS16主要传送随路信令（CAS）、复帧定 位信号和复帧对端告警指示，TS1至TS15和TS17至TS31共30个时隙传送话音或数据等信息。我们称TS1至TS15和TS17至TS31为“净荷”，TS0和TS16为“开销”。如果采用带外公共信道信令（CCS），TS16就失去了传送信令的用途，该时隙也可用来传送信息信号，这时帧结构的净荷为TS1至TS31，开销只有 TS0了。</p>
-<p>这个E1又叫PCM基群，也叫一次群。 四个一次群复用为一个二次群，当然一个二次群的速率比四个一次群的速率总和还要多一些，用于同步的码元。四个二次群复用为一个三次群，依次类推。 E1=2.048、E2=8.448、E3=34.368Mbps ……</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2503,7 +2507,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2536,7 +2540,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2631,7 +2643,21 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
