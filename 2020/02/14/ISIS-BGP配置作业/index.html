@@ -96,25 +96,20 @@
 
 
 
-  <meta name="description" content="波分站点 OTM OTU OTU功能之一：波长转换 OTU功能之二：3R OTU功能之三：故障定界 OTU的分类">
-<meta name="keywords" content="波分系统,光纤">
+  <meta name="description" content="网络拓扑图 配置分配地址在打开路由器的时候，默认的是用户视图，也就是命令行前面是&amp;lt;&amp;gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]1&amp;lt;Huawei&amp;gt; system-view 进入到每个端口：1[Huawei]interface GigabitEthernet 0/0/0 为每个端口配置ip地址12ip a">
+<meta name="keywords" content="BGP,ISIS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="波分系统之实践">
-<meta property="og:url" content="http://yoursite.com/2019/08/13/波分系统之实践/index.html">
+<meta property="og:title" content="ISIS-BGP配置作业">
+<meta property="og:url" content="http://yoursite.com/2020/02/14/ISIS-BGP配置作业/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="波分站点 OTM OTU OTU功能之一：波长转换 OTU功能之二：3R OTU功能之三：故障定界 OTU的分类">
+<meta property="og:description" content="网络拓扑图 配置分配地址在打开路由器的时候，默认的是用户视图，也就是命令行前面是&amp;lt;&amp;gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]1&amp;lt;Huawei&amp;gt; system-view 进入到每个端口：1[Huawei]interface GigabitEthernet 0/0/0 为每个端口配置ip地址12ip a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xtq33zmuj30fw0dpmy3.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xty5nr31j30m10cw128.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu0jqzzfj30nb0detkh.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu1cw838j30p30ddwpw.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu5hxvqbj30mw0drwrk.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu7zb6ljj30o00dw7g0.jpg">
-<meta property="og:updated_time" content="2019-08-13T02:48:45.281Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg">
+<meta property="og:updated_time" content="2020-02-14T04:27:53.415Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="波分系统之实践">
-<meta name="twitter:description" content="波分站点 OTM OTU OTU功能之一：波长转换 OTU功能之二：3R OTU功能之三：故障定界 OTU的分类">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g5xtq33zmuj30fw0dpmy3.jpg">
+<meta name="twitter:title" content="ISIS-BGP配置作业">
+<meta name="twitter:description" content="网络拓扑图 配置分配地址在打开路由器的时候，默认的是用户视图，也就是命令行前面是&amp;lt;&amp;gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]1&amp;lt;Huawei&amp;gt; system-view 进入到每个端口：1[Huawei]interface GigabitEthernet 0/0/0 为每个端口配置ip地址12ip a">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg">
 
 
 
@@ -122,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/08/13/波分系统之实践/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/14/ISIS-BGP配置作业/">
 
 
 
@@ -132,7 +127,7 @@
   };
 </script>
 
-  <title>波分系统之实践 | lowkeysp' Blog</title>
+  <title>ISIS-BGP配置作业 | lowkeysp' Blog</title>
   
 
 
@@ -335,7 +330,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/波分系统之实践/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/ISIS-BGP配置作业/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lowkeysp">
@@ -352,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">波分系统之实践
+          <h1 class="post-title" itemprop="name headline">ISIS-BGP配置作业
 
               
             
@@ -378,7 +373,7 @@
                 
               
 
-              <time title="创建时间：2019-08-13 09:59:32 / 修改时间：10:48:45" itemprop="dateCreated datePublished" datetime="2019-08-13T09:59:32+08:00">2019-08-13</time>
+              <time title="创建时间：2020-02-14 11:15:03 / 修改时间：12:27:53" itemprop="dateCreated datePublished" datetime="2020-02-14T11:15:03+08:00">2020-02-14</time>
             
 
             
@@ -400,7 +395,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/波分系统/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
@@ -415,7 +410,7 @@
 
           
           
-            <span id="/2019/08/13/波分系统之实践/" class="leancloud_visitors" data-flag-title="波分系统之实践">
+            <span id="/2020/02/14/ISIS-BGP配置作业/" class="leancloud_visitors" data-flag-title="ISIS-BGP配置作业">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -446,12 +441,20 @@
       
 
       
-        <h1 id="波分站点-OTM"><a href="#波分站点-OTM" class="headerlink" title="波分站点 OTM"></a>波分站点 OTM</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xtq33zmuj30fw0dpmy3.jpg" alt></p>
-<h2 id="OTU"><a href="#OTU" class="headerlink" title="OTU"></a>OTU</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xty5nr31j30m10cw128.jpg" alt></p>
-<h3 id="OTU功能之一：波长转换"><a href="#OTU功能之一：波长转换" class="headerlink" title="OTU功能之一：波长转换"></a>OTU功能之一：波长转换</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu0jqzzfj30nb0detkh.jpg" alt></p>
-<h3 id="OTU功能之二：3R"><a href="#OTU功能之二：3R" class="headerlink" title="OTU功能之二：3R"></a>OTU功能之二：3R</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu1cw838j30p30ddwpw.jpg" alt></p>
-<h3 id="OTU功能之三：故障定界"><a href="#OTU功能之三：故障定界" class="headerlink" title="OTU功能之三：故障定界"></a>OTU功能之三：故障定界</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu5hxvqbj30mw0drwrk.jpg" alt></p>
-<h3 id="OTU的分类"><a href="#OTU的分类" class="headerlink" title="OTU的分类"></a>OTU的分类</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu7zb6ljj30o00dw7g0.jpg" alt></p>
+        <h1 id="网络拓扑图"><a href="#网络拓扑图" class="headerlink" title="网络拓扑图"></a>网络拓扑图</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg" alt="捕获.PNG"></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="分配地址"><a href="#分配地址" class="headerlink" title="分配地址"></a>分配地址</h2><p>在打开路由器的时候，默认的是用户视图，也就是命令行前面是&lt;&gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br></pre></td></tr></table></figure></p>
+<p>进入到每个端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface GigabitEthernet 0/0/0</span><br></pre></td></tr></table></figure></p>
+<p>为每个端口配置ip地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip address + IP地址 + 子网掩码</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]ip address 192.168.1.100 255.255.255.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置ISIS"><a href="#配置ISIS" class="headerlink" title="配置ISIS"></a>配置ISIS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">isis 1 # 配置ISIS进程，进程使用数字1</span><br><span class="line">is-level level-2  #配置系统所属的区域为Level-2</span><br><span class="line">cost-style wide   #配置ISIS开销值的类型为wide格式</span><br><span class="line">network-entity 86.4134.0100.0000.0001.00 # 配置ISIS的NET值：86.AS号.loopback地址翻译.00</span><br><span class="line">circuit-cost 100000 level-2  #配置ISIS路由的接口缺省开销值为100000</span><br><span class="line">is-name PE1 #本地路由器上ISIS系统配置动态主机名</span><br><span class="line">maximum load-balancing 32  #配置ISIS负载分担路径最大条数为32条</span><br><span class="line"></span><br><span class="line">然后在端口下配置：</span><br><span class="line">进入端口</span><br><span class="line">interface + 接口号</span><br><span class="line">isis enable 1 #开启isis进程</span><br><span class="line">isis circuit-type p2p # 配置为p2p模式</span><br><span class="line">isis circuit-level level-2</span><br><span class="line">isis cost 1000 level-2</span><br></pre></td></tr></table></figure>
+<h2 id="配置BGP"><a href="#配置BGP" class="headerlink" title="配置BGP"></a>配置BGP</h2><p>CE1&amp;CE2的AS号为65530</p>
+<p>PE1~PE4的AS号为4809</p>
+<p>CE3&amp;CE4的AS号为65531</p>
+<p>因为是通过loopback地址建立邻居，因此首先需要loopback地址可以ping通，使用isis协议建立loopback地址之间的连接即可</p>
+<p>IBGP配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure></p>
+<p>EBGP配置</p>
+<p>首先EBGP路由器之间需要使用静态路由建立连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 对端的loopback地址 mask掩码 出去的端口  出去端口的对端ip地址</span><br><span class="line">比如：</span><br><span class="line">ip route-static 115.168.1.1 255.255.255.255 Ethernet 0/0/0 192.168.1.1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure>
+<p>最后要注意，要比IBGP多一个修改跳数，因此IBGP默认跳数是255，但是EBGP默认跳数是1，需要改成大于1的数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer 对端的loopback地址 ebgp-max-hop 2</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -475,9 +478,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/波分系统/" rel="tag"># 波分系统</a>
+            <a href="/tags/BGP/" rel="tag"># BGP</a>
           
-            <a href="/tags/光纤/" rel="tag"># 光纤</a>
+            <a href="/tags/ISIS/" rel="tag"># ISIS</a>
           
         </div>
       
@@ -490,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/02/E1接口/" rel="next" title="E1接口">
-                <i class="fa fa-chevron-left"></i> E1接口
+              <a href="/2020/02/10/BGP学习/" rel="next" title="BGP学习">
+                <i class="fa fa-chevron-left"></i> BGP学习
               </a>
             
           </div>
@@ -499,10 +502,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/15/OTN之支路板-线路板/" rel="prev" title="OTN之支路板&线路板">
-                OTN之支路板&线路板 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -779,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#波分站点-OTM"><span class="nav-number">1.</span> <span class="nav-text">波分站点 OTM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OTU"><span class="nav-number">1.1.</span> <span class="nav-text">OTU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OTU功能之一：波长转换"><span class="nav-number">1.1.1.</span> <span class="nav-text">OTU功能之一：波长转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTU功能之二：3R"><span class="nav-number">1.1.2.</span> <span class="nav-text">OTU功能之二：3R</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTU功能之三：故障定界"><span class="nav-number">1.1.3.</span> <span class="nav-text">OTU功能之三：故障定界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTU的分类"><span class="nav-number">1.1.4.</span> <span class="nav-text">OTU的分类</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络拓扑图"><span class="nav-number">1.</span> <span class="nav-text">网络拓扑图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分配地址"><span class="nav-number">2.1.</span> <span class="nav-text">分配地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置ISIS"><span class="nav-number">2.2.</span> <span class="nav-text">配置ISIS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置BGP"><span class="nav-number">2.3.</span> <span class="nav-text">配置BGP</span></a></li></ol></li></ol></div>
             
 
           </div>

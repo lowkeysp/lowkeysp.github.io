@@ -328,6 +328,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/ISIS-BGP配置作业/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/14/ISIS-BGP配置作业/" class="post-title-link" itemprop="url">ISIS-BGP配置作业</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-14 11:15:03 / 修改时间：12:27:53" itemprop="dateCreated datePublished" datetime="2020-02-14T11:15:03+08:00">2020-02-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/14/ISIS-BGP配置作业/" class="leancloud_visitors" data-flag-title="ISIS-BGP配置作业">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="网络拓扑图"><a href="#网络拓扑图" class="headerlink" title="网络拓扑图"></a>网络拓扑图</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg" alt="捕获.PNG"></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="分配地址"><a href="#分配地址" class="headerlink" title="分配地址"></a>分配地址</h2><p>在打开路由器的时候，默认的是用户视图，也就是命令行前面是&lt;&gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br></pre></td></tr></table></figure></p>
+<p>进入到每个端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface GigabitEthernet 0/0/0</span><br></pre></td></tr></table></figure></p>
+<p>为每个端口配置ip地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip address + IP地址 + 子网掩码</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]ip address 192.168.1.100 255.255.255.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置ISIS"><a href="#配置ISIS" class="headerlink" title="配置ISIS"></a>配置ISIS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">isis 1 # 配置ISIS进程，进程使用数字1</span><br><span class="line">is-level level-2  #配置系统所属的区域为Level-2</span><br><span class="line">cost-style wide   #配置ISIS开销值的类型为wide格式</span><br><span class="line">network-entity 86.4134.0100.0000.0001.00 # 配置ISIS的NET值：86.AS号.loopback地址翻译.00</span><br><span class="line">circuit-cost 100000 level-2  #配置ISIS路由的接口缺省开销值为100000</span><br><span class="line">is-name PE1 #本地路由器上ISIS系统配置动态主机名</span><br><span class="line">maximum load-balancing 32  #配置ISIS负载分担路径最大条数为32条</span><br><span class="line"></span><br><span class="line">然后在端口下配置：</span><br><span class="line">进入端口</span><br><span class="line">interface + 接口号</span><br><span class="line">isis enable 1 #开启isis进程</span><br><span class="line">isis circuit-type p2p # 配置为p2p模式</span><br><span class="line">isis circuit-level level-2</span><br><span class="line">isis cost 1000 level-2</span><br></pre></td></tr></table></figure>
+<h2 id="配置BGP"><a href="#配置BGP" class="headerlink" title="配置BGP"></a>配置BGP</h2><p>CE1&amp;CE2的AS号为65530</p>
+<p>PE1~PE4的AS号为4809</p>
+<p>CE3&amp;CE4的AS号为65531</p>
+<p>因为是通过loopback地址建立邻居，因此首先需要loopback地址可以ping通，使用isis协议建立loopback地址之间的连接即可</p>
+<p>IBGP配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure></p>
+<p>EBGP配置</p>
+<p>首先EBGP路由器之间需要使用静态路由建立连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 对端的loopback地址 mask掩码 出去的端口  出去端口的对端ip地址</span><br><span class="line">比如：</span><br><span class="line">ip route-static 115.168.1.1 255.255.255.255 Ethernet 0/0/0 192.168.1.1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure>
+<p>最后要注意，要比IBGP多一个修改跳数，因此IBGP默认跳数是255，但是EBGP默认跳数是1，需要改成大于1的数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer 对端的loopback地址 ebgp-max-hop 2</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/BGP学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2016,240 +2201,6 @@ tensor([-0.2879])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/爬虫基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/09/16/爬虫基础/" class="post-title-link" itemprop="url">爬虫基础</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-16 20:26:00" itemprop="dateCreated datePublished" datetime="2019-09-16T20:26:00+08:00">2019-09-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-10 22:06:53" itemprop="dateModified" datetime="2020-02-10T22:06:53+08:00">2020-02-10</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/爬虫/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/09/16/爬虫基础/" class="leancloud_visitors" data-flag-title="爬虫基础">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="scrapy安装"><a href="#scrapy安装" class="headerlink" title="scrapy安装"></a>scrapy安装</h1><p>Scrapy是一个基于Twisted框架的使用python的开源网络爬虫框架</p>
-<p>使用pip安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure></p>
-<p>确认是否安装成功,在pyhton环境中，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line">&gt;&gt;&gt; scrapy.version_info</span><br></pre></td></tr></table></figure></p>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>使用<code>scrapy startproject</code>命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject example</span><br></pre></td></tr></table></figure></p>
-<h1 id="scrapy框架"><a href="#scrapy框架" class="headerlink" title="scrapy框架"></a>scrapy框架</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g78imf5vi7j31550pwq53.jpg" alt="捕获.PNG"></p>
-<p>首先，了解一下Scrapy框架的各个组件</p>
-<ul>
-<li>ENGINE：引擎，框架的核心，其他所有组件在其控制下协同工作，是内部组件</li>
-<li>SCHEDULER：调度器，负责对SPIDER提交的下载请求进行调度，是内部组件</li>
-<li>DOWNLOADER：下载器，负责下载页面（发送HTTP请求/接收HTTP请求），是内部组件</li>
-<li>SPIDER：爬虫，负责提取页面中的数据，并产生对新页面的下载请求，需要用户实现</li>
-<li>MIDDLEWARE：中间件，负责对Request对象和Response对象进行处理，是可选组件</li>
-<li>ITEM PIPELINE：数据管道，负责对爬取到的数据进行处理，是可选组件</li>
-</ul>
-<p>我们来说明一下流程：</p>
-<blockquote>
-<ol>
-<li>ENGINE从SPIDER拿到需要爬虫的Requests</li>
-<li>ENGINE会在SCHEDULER里面对Requests进行调度，然后还会向SCHEDULER请求下一个要爬虫的Requests（也就是即将要爬虫的Requests）</li>
-<li>SCHEDULER会将下一个要爬虫的Requests返回给ENGINE</li>
-<li>ENGINE会将这个Requests传递给DOWNLOADER，其中需要经过DOWNLOADER的MIDDLEWARE（在process_request()中）</li>
-<li>一旦DOWNLOADER下载好了页面，DOWNLOADER会把相应的Response返回给ENGINE，同样需要经过中间件（在process_response()中）</li>
-<li>ENGINE接收到从DOWNLOADER发过来的Response后，会发送给Spider用于处理，中间会经过Spider Middleware (在process_spider_input()中).</li>
-<li>Spider会处理从ENGINE返回回来的Response，然后将爬下来的数据和新的Requests再次发送给ENGINE。中间会经过Spider Middleware (在process_spider_output()中).</li>
-<li>ENGINE会将处理好的Items发送给Item PIPELINE，然后将新的Requests发送给SCHEDULER，并向SCHEDULER请求下一个要爬虫的Request</li>
-<li>一直这么重复，直到SCHEDULER中没有剩余的Requests</li>
-</ol>
-</blockquote>
-<h1 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h1><p>当你在爬网页的时候，会经常需要从HTML中提取数据，也有一些现成的python库完成这些，比如BeautifulSoup和lxml。</p>
-<p>Scrapy有自己的一套机制来提取数据，叫做Selector，通过<code>Xpath</code>或者<code>CSS</code>来选择数据</p>
-<p>Xpath是一种在XML中选择nodes的语言，而CSS是将style应用到HTML文本的语言。</p>
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>Response对象通过<code>.selector</code>属性可以返回一个Selector对象<br>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.selector.xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
-<p>由于我们会大量的使用<code>Xpath</code>和<code>CSS</code>，因此可以简化成<code>response.xpath()</code>和<code>response.css()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br><span class="line">&gt;&gt;&gt; response.css(&apos;span::text&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
-<p>通常我们都是使用上面的两种情况，如果要直接创建Selector的话，可以使用下面：</p>
-<p>使用text创建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from scrapy.selector import Selector</span><br><span class="line">&gt;&gt;&gt; body = &apos;&lt;html&gt;&lt;body&gt;&lt;span&gt;good&lt;/span&gt;&lt;/body&gt;&lt;/html&gt;&apos;</span><br><span class="line">&gt;&gt;&gt; Selector(text=body).xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
-<p>使用response创建：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from scrapy.selector import Selector</span><br><span class="line">&gt;&gt;&gt; from scrapy.http import HtmlResponse</span><br><span class="line">&gt;&gt;&gt; response = HtmlResponse(url=&apos;http://example.com&apos;, body=body)</span><br><span class="line">&gt;&gt;&gt; Selector(response=response).xpath(&apos;//span/text()&apos;).get()</span><br><span class="line">&apos;good&apos;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用Selector"><a href="#使用Selector" class="headerlink" title="使用Selector"></a>使用Selector</h2><p>我们先贴出整个HTML代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"> &lt;head&gt;</span><br><span class="line">  &lt;base href=&apos;http://example.com/&apos; /&gt;</span><br><span class="line">  &lt;title&gt;Example website&lt;/title&gt;</span><br><span class="line"> &lt;/head&gt;</span><br><span class="line"> &lt;body&gt;</span><br><span class="line">  &lt;div id=&apos;images&apos;&gt;</span><br><span class="line">   &lt;a href=&apos;image1.html&apos;&gt;Name: My image 1 &lt;br /&gt;&lt;img src=&apos;image1_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image2.html&apos;&gt;Name: My image 2 &lt;br /&gt;&lt;img src=&apos;image2_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image3.html&apos;&gt;Name: My image 3 &lt;br /&gt;&lt;img src=&apos;image3_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image4.html&apos;&gt;Name: My image 4 &lt;br /&gt;&lt;img src=&apos;image4_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&apos;image5.html&apos;&gt;Name: My image 5 &lt;br /&gt;&lt;img src=&apos;image5_thumb.jpg&apos; /&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"> &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>让我们来学习selector</p>
-<p>选择title标签里面的text<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> response.xpath(&apos;//title/text()&apos;)</span><br><span class="line">[&lt;Selector xpath=&apos;//title/text()&apos; data=&apos;Example website&apos;&gt;]</span><br></pre></td></tr></table></figure></p>
-<p>为了能够得到文本数据，必须使用selector的<code>.get()</code>或者<code>.getall()</code>方法，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//title/text()&apos;).getall()</span><br><span class="line">[&apos;Example website&apos;]</span><br><span class="line">&gt;&gt;&gt; response.xpath(&apos;//title/text()&apos;).get()</span><br><span class="line">&apos;Example website&apos;</span><br></pre></td></tr></table></figure></p>
-<p>可以看出，<code>.get()</code>只会返回一个结果，如果有好几个结果的话，则会返回第一个；而<code>.getall()</code>会返回一个结果的list。</p>
-<p>通常，使用CSS3 pseudo-elements，CSS Selector可以选择text或者attribute的node<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;title::text&apos;).get()</span><br><span class="line">&apos;Example website&apos;</span><br></pre></td></tr></table></figure></p>
-<p>从上面可以看出，<code>.xpath()</code>和<code>.css()</code>方法会返回一个SelectorList，里面包括了一些新的Selector，因此，我们可以连着使用，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;img&apos;).xpath(&apos;@src&apos;).getall()</span><br><span class="line">[&apos;image1_thumb.jpg&apos;,</span><br><span class="line"> &apos;image2_thumb.jpg&apos;,</span><br><span class="line"> &apos;image3_thumb.jpg&apos;,</span><br><span class="line"> &apos;image4_thumb.jpg&apos;,</span><br><span class="line"> &apos;image5_thumb.jpg&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>如果你只是想获取匹配到的元素中的第一个的话，可以使用selector的<code>.get()</code>（或者<code>.extract_first()</code>）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//div[@id=&quot;images&quot;]/a/text()&apos;).get()</span><br><span class="line">&apos;Name: My image 1</span><br></pre></td></tr></table></figure></p>
-<p>如果没有匹配的话，则会返回<code>None</code>。我们还可以使用其他的来代替这个返回的None值，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//div[@id=&quot;not-exists&quot;]/text()&apos;).get(default=&apos;not-found&apos;)</span><br><span class="line">&apos;not-found&apos;</span><br></pre></td></tr></table></figure></p>
-<p>除了上面使用xpath的<code>@src</code>来获得属性之外，还可以使用<code>Selector</code>的<code>.attrib</code>，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [img.attrib[&apos;src&apos;] for img in response.css(&apos;img&apos;)]</span><br><span class="line">[&apos;image1_thumb.jpg&apos;,</span><br><span class="line"> &apos;image2_thumb.jpg&apos;,</span><br><span class="line"> &apos;image3_thumb.jpg&apos;,</span><br><span class="line"> &apos;image4_thumb.jpg&apos;,</span><br><span class="line"> &apos;image5_thumb.jpg&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>SelectorList还可以直接使用<code>.attrib</code>，不过只是返回第一个匹配的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;img&apos;).attrib[&apos;src&apos;]</span><br><span class="line">&apos;image1_thumb.jpg&apos;</span><br></pre></td></tr></table></figure></p>
-<p>当只有一个结果的时候，这种还是比较实用的，比如：，这时候只有一个结果与之匹配<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;base&apos;).attrib[&apos;href&apos;]</span><br><span class="line">&apos;http://example.com/&apos;</span><br></pre></td></tr></table></figure></p>
-<p>现在，我们想获得一些base URL和一些图片的链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&apos;//base/@href&apos;).get()</span><br><span class="line">&apos;http://example.com/&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&apos;base::attr(href)&apos;).get()</span><br><span class="line">&apos;http://example.com/&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&apos;base&apos;).attrib[&apos;href&apos;]</span><br><span class="line">&apos;http://example.com/&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.xpath(&apos;//a[contains(@href, &quot;image&quot;)]/@href&apos;).getall()</span><br><span class="line">[&apos;image1.html&apos;,</span><br><span class="line"> &apos;image2.html&apos;,</span><br><span class="line"> &apos;image3.html&apos;,</span><br><span class="line"> &apos;image4.html&apos;,</span><br><span class="line"> &apos;image5.html&apos;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&apos;a[href*=image]::attr(href)&apos;).getall()</span><br><span class="line">[&apos;image1.html&apos;,</span><br><span class="line"> &apos;image2.html&apos;,</span><br><span class="line"> &apos;image3.html&apos;,</span><br><span class="line"> &apos;image4.html&apos;,</span><br><span class="line"> &apos;image5.html&apos;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.xpath(&apos;//a[contains(@href, &quot;image&quot;)]/img/@src&apos;).getall()</span><br><span class="line">[&apos;image1_thumb.jpg&apos;,</span><br><span class="line"> &apos;image2_thumb.jpg&apos;,</span><br><span class="line"> &apos;image3_thumb.jpg&apos;,</span><br><span class="line"> &apos;image4_thumb.jpg&apos;,</span><br><span class="line"> &apos;image5_thumb.jpg&apos;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&apos;a[href*=image] img::attr(src)&apos;).getall()</span><br><span class="line">[&apos;image1_thumb.jpg&apos;,</span><br><span class="line"> &apos;image2_thumb.jpg&apos;,</span><br><span class="line"> &apos;image3_thumb.jpg&apos;,</span><br><span class="line"> &apos;image4_thumb.jpg&apos;,</span><br><span class="line"> &apos;image5_thumb.jpg&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>对于CSS Selectors，如果要选择text node的话，使用<code>::text</code>；如果要选择属性值的话，使用<code>::attr(name)</code>,其中name是你想获得的值的属性名</p>
-<p>选择<code>&lt;title&gt;</code>元素下的text node<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&apos;title::text&apos;).get()</span><br><span class="line">&apos;Example website&apos;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2296,7 +2247,7 @@ tensor([-0.2879])
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2464,7 +2415,9 @@ tensor([-0.2879])
                     
                       
                     
-                    <span class="site-state-item-count">53</span>
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
