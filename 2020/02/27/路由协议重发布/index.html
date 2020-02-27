@@ -96,23 +96,24 @@
 
 
 
-  <meta name="description" content="1+1保护每一条主通道都有一条专有的备通道为其提供保护。发送端在主备通道上同时发送数据，正常情况下，接收端选收主用通道上的业务。  在主通道异常时，接收端根据通道状态及外部命令选择备通道的数据，使得业务得以恢复。  1：1保护主备通道一一对应，相互保护。但是，业务并不是在主备通道同时传输。发端在主通道上发主用业务，在备通道上发额外业务（低级别业务）。收端从主通道收主用业务，从备通道收额外业务。">
-<meta name="keywords" content="波分系统,1+1保护,1:1保护">
+  <meta name="description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由信息">
+<meta name="keywords" content="数据,重发布">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1+1保护与1:1保护">
-<meta property="og:url" content="http://yoursite.com/2019/08/16/1-1保护与1-1保护/index.html">
+<meta property="og:title" content="路由协议重发布">
+<meta property="og:url" content="http://yoursite.com/2020/02/27/路由协议重发布/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="1+1保护每一条主通道都有一条专有的备通道为其提供保护。发送端在主备通道上同时发送数据，正常情况下，接收端选收主用通道上的业务。  在主通道异常时，接收端根据通道状态及外部命令选择备通道的数据，使得业务得以恢复。  1：1保护主备通道一一对应，相互保护。但是，业务并不是在主备通道同时传输。发端在主通道上发主用业务，在备通道上发额外业务（低级别业务）。收端从主通道收主用业务，从备通道收额外业务。">
+<meta property="og:description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由信息">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g61a5do9mnj30iy07k0tg.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g61a7xn6pbj30is08vwf9.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g61a77t7y6j30id0800tf.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g61a8jequ0j30i7089my0.jpg">
-<meta property="og:updated_time" content="2019-08-16T01:54:27.826Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb0mdni7rj30a80a442b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb10mntjtj30au08gt9n.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb1jzm0s2j30i507rgol.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2f0462xj30hs0a7n2l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2g33yz3j30gx0ccwkd.jpg">
+<meta property="og:updated_time" content="2020-02-27T09:10:49.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1+1保护与1:1保护">
-<meta name="twitter:description" content="1+1保护每一条主通道都有一条专有的备通道为其提供保护。发送端在主备通道上同时发送数据，正常情况下，接收端选收主用通道上的业务。  在主通道异常时，接收端根据通道状态及外部命令选择备通道的数据，使得业务得以恢复。  1：1保护主备通道一一对应，相互保护。但是，业务并不是在主备通道同时传输。发端在主通道上发主用业务，在备通道上发额外业务（低级别业务）。收端从主通道收主用业务，从备通道收额外业务。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g61a5do9mnj30iy07k0tg.jpg">
+<meta name="twitter:title" content="路由协议重发布">
+<meta name="twitter:description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由信息">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb0mdni7rj30a80a442b.jpg">
 
 
 
@@ -120,7 +121,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/08/16/1-1保护与1-1保护/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/27/路由协议重发布/">
 
 
 
@@ -130,7 +131,7 @@
   };
 </script>
 
-  <title>1+1保护与1:1保护 | lowkeysp' Blog</title>
+  <title>路由协议重发布 | lowkeysp' Blog</title>
   
 
 
@@ -333,7 +334,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/1-1保护与1-1保护/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/路由协议重发布/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lowkeysp">
@@ -350,7 +351,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1+1保护与1:1保护
+          <h1 class="post-title" itemprop="name headline">路由协议重发布
 
               
             
@@ -376,7 +377,7 @@
                 
               
 
-              <time title="创建时间：2019-08-16 09:47:09 / 修改时间：09:54:27" itemprop="dateCreated datePublished" datetime="2019-08-16T09:47:09+08:00">2019-08-16</time>
+              <time title="创建时间：2020-02-27 15:34:31 / 修改时间：17:10:49" itemprop="dateCreated datePublished" datetime="2020-02-27T15:34:31+08:00">2020-02-27</time>
             
 
             
@@ -398,7 +399,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/波分系统/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/重发布/" itemprop="url" rel="index"><span itemprop="name">重发布</span></a></span>
 
                 
                 
@@ -413,7 +414,7 @@
 
           
           
-            <span id="/2019/08/16/1-1保护与1-1保护/" class="leancloud_visitors" data-flag-title="1+1保护与1:1保护">
+            <span id="/2020/02/27/路由协议重发布/" class="leancloud_visitors" data-flag-title="路由协议重发布">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -444,14 +445,42 @@
       
 
       
-        <h1 id="1-1保护"><a href="#1-1保护" class="headerlink" title="1+1保护"></a>1+1保护</h1><p>每一条主通道都有一条专有的备通道为其提供保护。<br>发送端在主备通道上同时发送数据，正常情况下，接收端选收主用通道上的业务。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a5do9mnj30iy07k0tg.jpg" alt></p>
-<p>在主通道异常时，接收端根据通道状态及外部命令选择备通道的数据，使得业务得以恢复。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a7xn6pbj30is08vwf9.jpg" alt></p>
-<h1 id="1：1保护"><a href="#1：1保护" class="headerlink" title="1：1保护"></a>1：1保护</h1><p>主备通道一一对应，相互保护。但是，业务并不是在主备通道同时传输。<br>发端在主通道上发主用业务，在备通道上发额外业务（低级别业务）。收端从主通道收主用业务，从备通道收额外业务。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a77t7y6j30id0800tf.jpg" alt></p>
-<p>当主通道出现故障，发端将主用业务发到备通道上，收端将从备通道选收主用业务。此时，额外业务被终结，主用业务传输得到恢复。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a8jequ0j30i7089my0.jpg" alt></p>
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程</p>
+<p>路由重发布（路由引入）是有方向性的</p>
+<p>只有存在于路由表中的路由才能够被执行路由重发布。</p>
+<h2 id="路由重发布需要注意的点："><a href="#路由重发布需要注意的点：" class="headerlink" title="路由重发布需要注意的点："></a>路由重发布需要注意的点：</h2><ul>
+<li>路由优先级</li>
+<li>路由倒灌问题</li>
+<li>路由信息不兼容(度量值信息不一致)</li>
+<li>收敛时间不一致（不同路由协议的收敛速度不同）</li>
+<li>度量值</li>
+</ul>
+<h2 id="路由优先级"><a href="#路由优先级" class="headerlink" title="路由优先级"></a>路由优先级</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb0mdni7rj30a80a442b.jpg" alt="捕获.PNG"></p>
+<p>R2和R3接收到了R1的路由信息，然后R2进行一个路由重发布，把BGP路由引入到OSPF协议当中去，那么传给了R4，R4通过OSPF协议又转发给了R3。<br>那么R3接收到了两条相同的路由，只不过一个是BGP，一个是OSPF，那么R3如何做出选择？这就涉及到了路由优先级。</p>
+<p>比如OSPF路由优先级高于IBGP，那么R3产生次优路径，去往1.1.1.1/32数据流走R4-R2-R1，绕远路了（可以通过修改优先级解决）</p>
+<p>华为定义的优先级（每个厂家不一样）<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb10mntjtj30au08gt9n.jpg" alt="捕获.PNG"></p>
+<h2 id="路由倒灌问题"><a href="#路由倒灌问题" class="headerlink" title="路由倒灌问题"></a>路由倒灌问题</h2><p>上图，如果R3部署了双向路由重发布，则将导致路由1.1.1.1/32倒灌会BGP</p>
+<p>解决：</p>
+<blockquote>
+<p>1）修改优先级</p>
+</blockquote>
+<blockquote>
+<p>2）在R2上进行BGP到OSPF的路由重发布时，将发布进OSPF的路由设置相应的tag值，随后在R3上针对该tag值进一步部署路由过滤，调整优先级，基于重路由的路由策略等。</p>
+</blockquote>
+<h2 id="Metric问题"><a href="#Metric问题" class="headerlink" title="Metric问题"></a>Metric问题</h2><p>OSPF的路由metric是基于接口开销，与接口的带宽有关</p>
+<p>RIP路由的metric值是基于跳数</p>
+<p>那么在不同协议之间进行import-route的话，就需要关注metric的问题</p>
+<p>解决：</p>
+<ul>
+<li>在特定协议中使用相关命令修改种子度量值（在向路由协议重发布路由时，使用的初始度量值叫种子度量值）。例如在ospf和rip中使用default-cost命令</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import-route 命令</span><br></pre></td></tr></table></figure>
+<h2 id="OSPF与RIP的互重发布"><a href="#OSPF与RIP的互重发布" class="headerlink" title="OSPF与RIP的互重发布"></a>OSPF与RIP的互重发布</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb1jzm0s2j30i507rgol.jpg" alt="捕获.PNG"></p>
+<p>RIP和OSPF假设都配置好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">R2</span><br><span class="line"></span><br><span class="line">进入到RIP进程</span><br><span class="line">import-route ospf 1 cost 8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">进入到ospf进程</span><br><span class="line">import-route rip cost 1</span><br></pre></td></tr></table></figure>
+<h2 id="OSPF-import-直连路由"><a href="#OSPF-import-直连路由" class="headerlink" title="OSPF import 直连路由"></a>OSPF import 直连路由</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2f0462xj30hs0a7n2l.jpg" alt="捕获.PNG"></p>
+<p>注意，R3的直连接口并没有运行ospf</p>
+<h2 id="OSPF-import-静态路由"><a href="#OSPF-import-静态路由" class="headerlink" title="OSPF import 静态路由"></a>OSPF import 静态路由</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2g33yz3j30gx0ccwkd.jpg" alt="捕获.PNG"></p>
 
       
     </div>
@@ -475,11 +504,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/波分系统/" rel="tag"># 波分系统</a>
+            <a href="/tags/数据/" rel="tag"># 数据</a>
           
-            <a href="/tags/1-1保护/" rel="tag"># 1+1保护</a>
-          
-            <a href="/tags/1-1保护/" rel="tag"># 1:1保护</a>
+            <a href="/tags/重发布/" rel="tag"># 重发布</a>
           
         </div>
       
@@ -492,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/16/光交叉与电交叉/" rel="next" title="光交叉与电交叉">
-                <i class="fa fa-chevron-left"></i> 光交叉与电交叉
+              <a href="/2020/02/26/VLAN间路由互通/" rel="next" title="VLAN间路由互通">
+                <i class="fa fa-chevron-left"></i> VLAN间路由互通
               </a>
             
           </div>
@@ -501,10 +528,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/16/单端倒换与双端倒换/" rel="prev" title="单端倒换与双端倒换">
-                单端倒换与双端倒换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -791,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1保护"><span class="nav-number">1.</span> <span class="nav-text">1+1保护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1：1保护"><span class="nav-number">2.</span> <span class="nav-text">1：1保护</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由重发布需要注意的点："><span class="nav-number">1.1.</span> <span class="nav-text">路由重发布需要注意的点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由优先级"><span class="nav-number">1.2.</span> <span class="nav-text">路由优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由倒灌问题"><span class="nav-number">1.3.</span> <span class="nav-text">路由倒灌问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metric问题"><span class="nav-number">1.4.</span> <span class="nav-text">Metric问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSPF与RIP的互重发布"><span class="nav-number">2.1.</span> <span class="nav-text">OSPF与RIP的互重发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSPF-import-直连路由"><span class="nav-number">2.2.</span> <span class="nav-text">OSPF import 直连路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSPF-import-静态路由"><span class="nav-number">2.3.</span> <span class="nav-text">OSPF import 静态路由</span></a></li></ol></li></ol></div>
             
 
           </div>
