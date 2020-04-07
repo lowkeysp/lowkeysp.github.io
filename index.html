@@ -373,7 +373,7 @@
                 
               
 
-              <time title="创建时间：2020-04-07 16:30:47 / 修改时间：17:49:47" itemprop="dateCreated datePublished" datetime="2020-04-07T16:30:47+08:00">2020-04-07</time>
+              <time title="创建时间：2020-04-07 16:30:47 / 修改时间：18:28:13" itemprop="dateCreated datePublished" datetime="2020-04-07T16:30:47+08:00">2020-04-07</time>
             
 
             
@@ -464,6 +464,22 @@
 </blockquote>
 </li>
 </ul>
+<h2 id="在报文转发过程中"><a href="#在报文转发过程中" class="headerlink" title="在报文转发过程中"></a>在报文转发过程中</h2><p>在Ingress LSR，通过查询FIB表和NHLFE表指导报文的转发</p>
+<ul>
+<li>当IP报文进入MPLS域时，首先查看FIB表，检查目的IP地址对应的Tunnel ID值是否为0x0.<blockquote>
+<ul>
+<li>如果Tunnel ID值为0x0，则进入正常的IP转发流程。</li>
+<li>如果Tunnel ID值不为0x0，则进入MPLS转发流程</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>在Transit LSR，通过查询ILM表和NHLFE表指导MPLS报文的换法。</p>
+<p>在Egress LSR,通过查询ILM表指导MPLS报文的转发或查询路由表指导IP报文转发</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdldk42f64j30o40cl0wr.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdldm58w87j30nm0codkt.jpg" alt="捕获.PNG"></p>
+<p>R2是怎么知道这是一个标签报文呢？在L2数据链路层的报文头里面会有标识，表明后面跟的是标签还是IP报文头</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdldomw3kej30on0ckdkg.jpg" alt="捕获.PNG"></p>
 
           
         
