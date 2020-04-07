@@ -1,7 +1,7 @@
 ---
 title: LDP标签分发协议
 date: 2020-04-01 16:52:03
-tags: ['MPLS'，'数据','LDP']
+tags: ['MPLS','数据','LDP']
 categories: 数据
 ---
 
