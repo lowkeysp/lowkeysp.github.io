@@ -328,6 +328,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/VLAN间路由互通/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/26/VLAN间路由互通/" class="post-title-link" itemprop="url">VLAN间路由互通</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-26 17:46:27" itemprop="dateCreated datePublished" datetime="2020-02-26T17:46:27+08:00">2020-02-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-27 12:03:17" itemprop="dateModified" datetime="2020-02-27T12:03:17+08:00">2020-02-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/26/VLAN间路由互通/" class="leancloud_visitors" data-flag-title="VLAN间路由互通">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><p>VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。</p>
+<p>因此，提出了子接口的概念</p>
+<h2 id="通过子接口实现VLAN间路由"><a href="#通过子接口实现VLAN间路由" class="headerlink" title="通过子接口实现VLAN间路由"></a>通过子接口实现VLAN间路由</h2><p>在路由器以太网接口上进行“子接口”的划分，与交换机的Trunk链路对接</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcard6588tj30gc07hq5e.jpg" alt="捕获.PNG"></p>
+<p>子接口是在物理接口之上创建的，而且是逻辑接口，且可以配置IP地址，需要指定接口对应的VLAN ID。如图中的GE0/0/0.1和GE0/0/0.2等</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcarimck47j30i00aw42a.jpg" alt="捕获.PNG"></p>
+<p><code>arp broadcast enable</code>可配可不配</p>
+<p>这些配置需要在逻辑接口下完成配置 </p>
+<p>路由器还可以由防火墙代替</p>
+<p>问题：</p>
+<ul>
+<li>交换机和路由器之间的链路的拥塞可能会比较严重</li>
+</ul>
+<h2 id="通过vlanif接口实现VLAN间路由"><a href="#通过vlanif接口实现VLAN间路由" class="headerlink" title="通过vlanif接口实现VLAN间路由"></a>通过vlanif接口实现VLAN间路由</h2><h3 id="什么是VLAN-IF接口"><a href="#什么是VLAN-IF接口" class="headerlink" title="什么是VLAN IF接口"></a>什么是VLAN IF接口</h3><p>VLAN IF是Vlan interface的简称。是一个三层交换机的概念，该交换机是有路由模块的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcas1353v4j30g50ahq6n.jpg" alt="捕获.PNG"></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcasm5nz0oj307c09g3zo.jpg" alt="捕获.PNG"></p>
+<p>在交换机上，除了需要在和PC连接的两个物理接口上进行配置之外，不需要配置另一个接口了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vlan batch 10 20</span><br><span class="line"># int g0/0/1 </span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 10</span><br><span class="line">  int g 0/0/2</span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 20</span><br></pre></td></tr></table></figure></p>
+<p>还需要配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface   vlanif 10</span><br><span class="line">    ip address 192.168.10.254 24</span><br><span class="line">interface vlanif 20</span><br><span class="line">    ip address 192.168.20.254 24</span><br></pre></td></tr></table></figure>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcataaaljfj30f108ndhq.jpg" alt="捕获.PNG"></p>
+<p>接入层交换机配置(没有路由模块)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vlan batch 10 20</span><br><span class="line"># int g0/0/1 </span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 10</span><br><span class="line">  int g 0/0/2</span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 20  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  int g0/0/22</span><br><span class="line">    port link-type trunk</span><br><span class="line">    prot allow-pass vlan 10 20</span><br></pre></td></tr></table></figure></p>
+<p>核心交换机配置（有路由模块）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  int g0/0/22</span><br><span class="line">    port link-type trunk</span><br><span class="line">    prot allow-pass vlan 10 20</span><br><span class="line"></span><br><span class="line">  interface   vlanif 10</span><br><span class="line">    ip address 192.168.10.254 24</span><br><span class="line">  interface vlanif 20</span><br><span class="line">    ip address 192.168.20.254 24</span><br><span class="line"></span><br><span class="line"># 核心交换机要和路由器通信，那么可以把路由器当作一个终端，配置成vlan id为99的</span><br><span class="line"></span><br><span class="line">vlan 99</span><br><span class="line"> int g0/0/24</span><br><span class="line"> port link-type access</span><br><span class="line"> port default vlan 99</span><br><span class="line"></span><br><span class="line">interface   vlanif 99</span><br><span class="line">  ip address 192.168.99.1 24</span><br></pre></td></tr></table></figure></p>
+<p>路由器配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int g 0/0/0</span><br><span class="line">  ip address 192.168.99.2 24</span><br><span class="line"></span><br><span class="line">ip route-static 192.168.10.0 24 192.168.99.1</span><br><span class="line">ip route-static 192.168.200.0 24 192.168.99.1</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcats0fb0qj30fu0aowhb.jpg" alt="捕获.PNG"></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://www.bilibili.com/video/av37573316/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">https://www.bilibili.com/video/av37573316/?spm_id_from=333.788.videocard.0</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/二层交换原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2309,190 +2518,6 @@ tensor([-0.2879])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/双系统安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/10/10/双系统安装/" class="post-title-link" itemprop="url">双系统安装</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-10 09:19:58 / 修改时间：09:37:32" itemprop="dateCreated datePublished" datetime="2019-10-10T09:19:58+08:00">2019-10-10</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ubuntu/" itemprop="url" rel="index"><span itemprop="name">ubuntu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/10/10/双系统安装/" class="leancloud_visitors" data-flag-title="双系统安装">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考文献：<a href="https://blog.csdn.net/u014422976/article/details/80393841" target="_blank" rel="noopener">https://blog.csdn.net/u014422976/article/details/80393841</a></p>
-<h1 id="正式安装教程"><a href="#正式安装教程" class="headerlink" title="正式安装教程"></a>正式安装教程</h1><blockquote>
-<p>首先下载ubuntu，当前时间选择的是ubuntu 18.04.3，也就是目前的最稳定的最新版本，下载地址 <a href="https://ubuntu.com/download/desktop" target="_blank" rel="noopener">https://ubuntu.com/download/desktop</a></p>
-</blockquote>
-<blockquote>
-<p>然后制作u盘启动盘，在制作过程中，本来想使用UltraISO制作，后来上网发现UltraISO制作ubuntu 18.04.3会出现问题，建议使用Universal USB Installer。这里的下载连接：<a href="https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/" target="_blank" rel="noopener">https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/</a></p>
-</blockquote>
-<blockquote>
-<p>给安装ubuntu分配一个空间，好像是需要安装在windows的所在盘中，我也就是在C盘进行空间分配。具体：快捷键“win+X”-&gt;“磁盘管理”-&gt;“压缩卷”</p>
-</blockquote>
-<blockquote>
-<p>正式安装ubuntu。关闭计算机，插入已经做成启动盘的U盘，进入Boot menu选择界面，选择“Istall Ubuntu”，图形化的安装界面，软件暂时不要安装，继续，当出现要手动分盘符的时候，请选择“其它选项”</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2539,7 +2564,7 @@ tensor([-0.2879])
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
