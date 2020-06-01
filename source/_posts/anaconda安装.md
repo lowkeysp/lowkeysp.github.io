@@ -26,3 +26,9 @@ conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anacon
 
 conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 ```
+
+根据Python和CUDA选择对应的版本，然后官方给出提示可通过运行：
+
+conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
+
+但是这里一定要注意，去掉-c pytorch，安装的时候才会默认从清华源下载相应的包，
