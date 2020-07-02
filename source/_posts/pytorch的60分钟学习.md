@@ -1,6 +1,6 @@
 ---
 title: pytorch的60分钟学习
-date: 2019-12-12 21:37:05
+date: 2020-6-29 21:37:05
 tags: ['pytorch','Tensors']
 categories: pytorch
 mathjax: true
