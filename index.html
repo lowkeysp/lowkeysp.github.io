@@ -373,7 +373,7 @@
                 
               
 
-              <time title="创建时间：2020-07-03 00:58:32 / 修改时间：01:27:53" itemprop="dateCreated datePublished" datetime="2020-07-03T00:58:32+08:00">2020-07-03</time>
+              <time title="创建时间：2020-07-03 00:58:32 / 修改时间：01:32:30" itemprop="dateCreated datePublished" datetime="2020-07-03T00:58:32+08:00">2020-07-03</time>
             
 
             
@@ -502,6 +502,31 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(x.grad)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">tensor([[4.5000, 4.5000],</span><br><span class="line">        [4.5000, 4.5000]])</span><br></pre></td></tr></table></figure>
 <p>这个4.5的值是怎么得到的呢？</p>
 <p>Tensor <code>out</code> 表示成$o$,我们有$o = \frac{1}{4}\sum_i z_i$,$z_i = 3(x_i+2)^2$,和$z_i\bigr\rvert_{x_i=1} = 27$。因此，有$\frac{\partial o}{\partial x_i} = \frac{3}{2}(x_i+2)$,所以，$\frac{\partial o}{\partial x_i}\bigr\rvert_{x_i=1} = \frac{9}{2} = 4.5$</p>
+<p>在数学上，如果你有一个关于向量的函数，$\vec{y}=f(\vec{x})$,那么关于$\vec{x}$的$\vec{y}$的梯度是一个Jacobian矩阵:</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gg8xlresm2j307f04gmx1.jpg" alt="捕获.PNG"></p>
+<p>因此，可以说<code>torch.autograd</code>是用来计算vector-Jacobian product。也就是，给任意一个向量，$v=\left(\begin{array}{cccc} v_{1} &amp; v_{2} &amp; \cdots &amp; v_{m}\end{array}\right)^{T}$,计算$v^{T}\cdot J$. 如果$v$刚好是函数$l=g\left(\vec{y}\right)$的梯度，也就是$v=\left(\begin{array}{ccc}\frac{\partial l}{\partial y_{1}} &amp; \cdots &amp; \frac{\partial l}{\partial y_{m}}\end{array}\right)^{T}$,那么根据chain rule，$v^{T}\cdot J$就是我们要求的$l$关于$\vec{x}$的梯度。（总结一下，就是如果要求梯度的话，如果我们有了Jacobian矩阵和向量$v$，那么我们就可以求出这个梯度）</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gg8xuj85rjj30bl04v3yi.jpg" alt="捕获.PNG"></p>
+<p>我们来看一个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(3, requires_grad=True)</span><br><span class="line"></span><br><span class="line">y = x * 2</span><br><span class="line">while y.data.norm() &lt; 1000:</span><br><span class="line">    y = y * 2</span><br><span class="line"></span><br><span class="line">print(y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">tensor([-970.9141,  465.0858, 1599.4425], grad_fn=&lt;MulBackward0&gt;)</span><br></pre></td></tr></table></figure>
+<p>在这个例子里，$y$不是一个scalar，<code>torch.autograd</code>无法直接计算整个Jocobian，但是，如果我们只想要vector-Jacobian product的话，只需要把一个向量传给<code>backward</code>即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float)</span><br><span class="line">y.backward(v)</span><br><span class="line"></span><br><span class="line">print(x.grad)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">tensor([1.0240e+02, 1.0240e+03, 1.0240e-01])</span><br></pre></td></tr></table></figure>
+<p>当想要停止追踪计算时，如果Tensor的<code>requires_grad</code>属性是True时，可以使用<code>with torch.no_grad():</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print(x.requires_grad)</span><br><span class="line">print((x ** 2).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** 2).requires_grad)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+<p>还可以使用<code>.detach()</code>得到一个新的Tensor，这个Tensor和之前的Tensor是一样的，只是没有了<code>requires_grad=True</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print(x.requires_grad)</span><br><span class="line">y = x.detach()</span><br><span class="line">print(y.requires_grad)</span><br><span class="line">print(x.eq(y).all())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">True</span><br><span class="line">False</span><br><span class="line">tensor(True)</span><br></pre></td></tr></table></figure>
+<p>参考一篇知乎讲解：<a href="https://zhuanlan.zhihu.com/p/65609544" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/65609544</a></p>
+<h1 id="NEURAL-NETWORKS"><a href="#NEURAL-NETWORKS" class="headerlink" title="NEURAL NETWORKS"></a>NEURAL NETWORKS</h1><p>神经网络的搭建可以使用<code>torch.nn</code>包</p>
+<p>一个<code>nn.Module</code>包括layers，一个<code>forward(input)</code>方法和一个<code>output</code></p>
+<p>一个神经网络的训练过程如下：</p>
+<ul>
+<li>Define the neural network that has some learnable parameters (or weights)</li>
+<li>Iterate over a dataset of inputs</li>
+<li>Process input through the network</li>
+<li>Compute the loss (how far is the output from being correct)</li>
+<li>Propagate gradients back into the network’s parameters</li>
+<li>Update the weights of the network, typically using a simple update rule: <code>weight = weight - learning_rate * gradient</code></li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gg8ztjlr3pj315f0cn77x.jpg" alt="捕获.PNG"></p>
 
           
         
