@@ -1,6 +1,6 @@
 ---
-title: pytorch的60分钟学习
-date: 2020-6-29 21:37:05
+title: pytorch官方60min
+date: 2020-07-03 00:58:32
 tags: ['pytorch','Tensors']
 categories: pytorch
 mathjax: true
@@ -29,6 +29,7 @@ tensor([[-1.2141e-25,  4.5783e-41, -1.2141e-25],
 ```
 
 构造一个随机初始化的矩阵：
+
 ```
 >>> torch.rand(5,3)
 tensor([[0.0276, 0.6181, 0.1152],
@@ -36,8 +37,11 @@ tensor([[0.0276, 0.6181, 0.1152],
         [0.9311, 0.2453, 0.3041],
         [0.6361, 0.8637, 0.1596],
         [0.7435, 0.8903, 0.9017]])
+
 ```
+
 构造一个矩阵为全0，而且数据类型是long
+
 ```
 >>> torch.zeros(5,3,dtype=torch.long)
 tensor([[0, 0, 0],
@@ -45,14 +49,21 @@ tensor([[0, 0, 0],
         [0, 0, 0],
         [0, 0, 0],
         [0, 0, 0]])
+
 ```
+
 构造一个张量，直接使用数据：
+
 ```
 >>> torch.tensor([5.5,3])
 tensor([5.5000, 3.0000])
+
 ```
+
 创建一个**基于一个已知的tensor**的tensor
+
 ```
+
 >>> x = x.new_ones(5,3,dtype = torch.double)
 >>> x
 tensor([[1., 1., 1.],
@@ -69,40 +80,57 @@ tensor([[ 0.0115,  0.2386,  0.6542],
         [ 1.2823, -0.1774,  0.1024],
         [-0.0743,  0.7157, -1.0440],
         [-0.7562, -0.6935, -0.0515]])
+
 ```
 
 获得tensor的维度信息
+
 ```
 >>> x.size()
 torch.Size([5, 3])
+
 ```
 
 加法操作
 
 第一种：
+
 ```
 x+y
+
 ```
 第二种
+
 ```
+
 torch.add(x,y)
 
 #使用下面方法，可以将结果付给result
 torch.add(x,y,out=result) 
+
 ```
+
 第三种
+
 ```
 y.add_(x)
 
 # 解释： 把x加到y上去，类似于 y = x + y
+
 ```
 
 可以使用标准的Numpy类似的索引操作
+
 ```
+
 x[:,1]
+
 ```
+
 如果你想改变一个tensor的大小或者形状，可以使用torch.view
+
 ```
+
 >>> x = torch.randn(4,4)
 >>> y = x.view(16)
 >>> z = x.view(-1,8) #-1表示是另一个维度，即列向量
@@ -112,19 +140,21 @@ torch.Size([4, 4])
 torch.Size([16])
 >>> z.size()
 torch.Size([2, 8])
+
 ```
 
 如果你有一个元素tensor，可以使用.item()来获得这个value
 
 
-```
+```bash
+
 >>> x = torch.randn(1)
 >>> x
 tensor([-0.2879])
 >>> x.item()
 -0.28786054253578186
 
-``` 
+```
 
 Torch Tensor 和 Numpy Array 是使用的同样的内存位置（前提是Torch Tensor 是在CPU上运行的），更改其中的一个也会影响到另一个
 
@@ -198,22 +228,26 @@ tensor([0.6469], dtype=torch.float64)
 
 
 
+
+
+
 # AUTOGRAD: AUTOMATIC DIFFERENTIATION
 
 `autograd`这个包可以提供自动梯度。
 
-'torch.Tensor'是这个包的核心类，如果你设置Tensor的'.requires_grad'为'True'的话，那么它会开始追踪你的所有的运算，进而可以算梯度。当你完成计算时，只需要调用'.backward()',就可以自动地计算出所有的梯度。这个tensor的梯度会被累加在这个'.grad'属性值里
+`torch.Tensor`是这个包的核心类，如果你设置Tensor的`.requires_grad`为`True`的话，那么它会开始追踪你的所有的运算，进而可以算梯度。当你完成计算时，只需要调用`.backward()`,就可以自动地计算出所有的梯度。这个tensor的梯度会被累加在这个`.grad`属性值里
 
-使用'.detach()'可以停止追踪计算
+使用`.detach()`可以停止追踪计算
 
-还可以使用代码块'with torch.no_grad()'来停止追踪计算。这在评估模型的时候会非常有用，因为评估模型的时候，模型可能会含有可训练的参数，且'.requires_grad = True'，但是在评估模型的时候，并不需要梯度，因此可以使用这个代码块关闭追踪计算
+还可以使用代码块`with torch.no_grad()`来停止追踪计算。这在评估模型的时候会非常有用，因为评估模型的时候，模型可能会含有可训练的参数，且`.requires_grad = True`，但是在评估模型的时候，并不需要梯度，因此可以使用这个代码块关闭追踪计算
 
-'Function'这个类在计算梯度的时候也是非常重要的。
+`Function`这个类在计算梯度的时候也是非常重要的。
 
-每一个Tensor都有一个'.grad_fn'属性，用来指向创建这个Tensor的'Function'，除非这个Tensor在创建的时候，人为的设置'grad_fn'属性为'None'（下面的例子有解释）
+每一个Tensor都有一个`.grad_fn`属性，用来指向创建这个Tensor的`Function`，除非这个Tensor在创建的时候，人为的设置`grad_fn`属性为`None`（下面的例子有解释）
 
 
 举例子：
+
 ```
 import torch
 
@@ -224,9 +258,11 @@ print(x)
 out:
 tensor([[1., 1.],
         [1., 1.]], requires_grad=True)
+
 ```
 
 对这个x进行一次加法操作
+
 ```
 y = x + 2
 print(y)
@@ -236,18 +272,22 @@ out:
 
 tensor([[3., 3.],
         [3., 3.]], grad_fn=<AddBackward0>)
+
 ```
 
 
-这个y是通过加法运算得来的，因此他会有'grad_fn'属性
+这个y是通过加法运算得来的，因此他会有`grad_fn`属性
+
 ```
 print(y.grad_fn)
 
 out:
 <AddBackward0 object at 0x7f191afd60f0>
+
 ```
 
 对y再进行运算
+
 ```
 z = y * y * 3
 out = z.mean()
@@ -258,6 +298,7 @@ print(z, out)
 out:
 tensor([[27., 27.],
         [27., 27.]], grad_fn=<MulBackward0>) tensor(27., grad_fn=<MeanBackward0>)
+
 ```
 
 `.requires_grad_( ... )`可以改变Tensor的`requires_grad`属性。如果不指定的话，默认是False的。下面这个例子，刚开始a的`requires_grad`属性默认是False的，后来通过这个函数，可以改成True。
@@ -277,26 +318,35 @@ out：
 False
 True
 <SumBackward0 object at 0x7f191afd6be0>
+
 ```
+
+
+
 
 现在来计算Backprop,因为out是一个标量，所以`out.backward()`相当于是`out.backward(torch.tensor(1.))`
 
 ```
 out.backward()
+
 ```
 
 打印d(out)/dx 的梯度
+
 ```
 print(x.grad)
 
 out:
 tensor([[4.5000, 4.5000],
         [4.5000, 4.5000]])
+
 ```
 
 这个4.5的值是怎么得到的呢？
 
 Tensor `out` 表示成$o$,我们有$o = \frac{1}{4}\sum_i z_i$,$z_i = 3(x_i+2)^2$,和$z_i\bigr\rvert_{x_i=1} = 27$。因此，有$\frac{\partial o}{\partial x_i} = \frac{3}{2}(x_i+2)$,所以，$\frac{\partial o}{\partial x_i}\bigr\rvert_{x_i=1} = \frac{9}{2} = 4.5$
+
+
 
 在数学上，如果你有一个关于向量的函数，$\vec{y}=f(\vec{x})$,那么关于$\vec{x}$的$\vec{y}$的梯度是一个Jacobian矩阵:
 
@@ -308,6 +358,7 @@ Tensor `out` 表示成$o$,我们有$o = \frac{1}{4}\sum_i z_i$,$z_i = 3(x_i+2)^2
 
 
 我们来看一个例子
+
 ```
 x = torch.randn(3, requires_grad=True)
 
@@ -320,9 +371,10 @@ print(y)
 
 out:
 tensor([-970.9141,  465.0858, 1599.4425], grad_fn=<MulBackward0>)
+
 ```
 
-在这个例子里，$y$不是一个scalar，'torch.autograd'无法直接计算整个Jocobian，但是，如果我们只想要vector-Jacobian product的话，只需要把一个向量传给`backward`即可
+在这个例子里，$y$不是一个scalar，`torch.autograd`无法直接计算整个Jocobian，但是，如果我们只想要vector-Jacobian product的话，只需要把一个向量传给`backward`即可
 
 ```
 v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float)
@@ -334,11 +386,14 @@ print(x.grad)
 
 out:
 tensor([1.0240e+02, 1.0240e+03, 1.0240e-01])
+
 ```
 
 
 当想要停止追踪计算时，如果Tensor的`requires_grad`属性是True时，可以使用`with torch.no_grad():`
+
 ```
+
 print(x.requires_grad)
 print((x ** 2).requires_grad)
 
@@ -350,10 +405,13 @@ out:
 True
 True
 False
+
 ```
 
 还可以使用`.detach()`得到一个新的Tensor，这个Tensor和之前的Tensor是一样的，只是没有了`requires_grad=True`
+
 ```
+
 print(x.requires_grad)
 y = x.detach()
 print(y.requires_grad)
@@ -364,6 +422,7 @@ out:
 True
 False
 tensor(True)
+
 ```
 
 参考一篇知乎讲解：https://zhuanlan.zhihu.com/p/65609544
@@ -373,7 +432,7 @@ tensor(True)
 
 神经网络的搭建可以使用`torch.nn`包
 
-一个'nn.Module'包括layers，一个`forward(input)`方法和一个`output`
+一个`nn.Module`包括layers，一个`forward(input)`方法和一个`output`
 
 
 一个神经网络的训练过程如下：
@@ -387,6 +446,8 @@ tensor(True)
 
 
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gg8ztjlr3pj315f0cn77x.jpg)
+
+
 
 让我们定义这个神经网络：
 
@@ -446,6 +507,7 @@ Net(
   (fc2): Linear(in_features=120, out_features=84, bias=True)
   (fc3): Linear(in_features=84, out_features=10, bias=True)
 )
+
 ```
 
 
@@ -453,6 +515,7 @@ Net(
 
 
 模型里面的可学习的参数可以通过`net.parameters()`学到
+
 ```
 params = list(net.parameters())
 print(len(params))
@@ -462,9 +525,11 @@ print(params[0].size())  # conv1's .weight
 out:
 10
 torch.Size([6, 1, 3, 3])
+
 ```
 
 让我们试一下32*32的input。
+
 ```
 input = torch.randn(1, 1, 32, 32)
 out = net(input)
@@ -474,12 +539,15 @@ print(out)
 out:
 tensor([[ 0.1242,  0.1194, -0.0584, -0.1140,  0.0661,  0.0191, -0.0966,  0.0480,
           0.0775, -0.0451]], grad_fn=<AddmmBackward>)
+
 ```
 
 之后清零 所有参数的梯度缓存 然后 使用backprops
+
 ```
 net.zero_grad()
 out.backward(torch.randn(1, 10))
+
 ```
 
 * NOTE:
@@ -512,9 +580,11 @@ print(loss)
 
 out:
 tensor(1.1562, grad_fn=<MseLossBackward>)
+
 ```
 
-这时候，使用'.grad_fn'，可以看到一个计算的流程图：
+这时候，使用`.grad_fn`，可以看到一个计算的流程图：
+
 ```
 input -> conv2d -> relu -> maxpool2d -> conv2d -> relu -> maxpool2d
       -> view -> linear -> relu -> linear -> relu -> linear
@@ -525,6 +595,7 @@ input -> conv2d -> relu -> maxpool2d -> conv2d -> relu -> maxpool2d
 因此，当我们调用`loss.backward()`时，则会计算梯度
 
 为了说明backward流程，看下面的例子：
+
 ```
 print(loss.grad_fn)  # MSELoss
 print(loss.grad_fn.next_functions[0][0])  # Linear
@@ -535,11 +606,13 @@ out:
 <MseLossBackward object at 0x7fdba3216da0>
 <AddmmBackward object at 0x7fdba3216f28>
 <AccumulateGrad object at 0x7fdba3216f28>
+
 ```
 
 Backprop:
 
-反向传播使用`loss.backward()`即可，在这之前，需要清除之前存在的梯度，否则现有的梯度计算会累加到之前的梯度种
+反向传播使用`loss.backward()`即可，在这之前，需要清除之前存在的梯度，否则现有的梯度计算会累加到之前的梯度中
+
 ```
 net.zero_grad()     # zeroes the gradient buffers of all parameters
 
@@ -557,11 +630,13 @@ conv1.bias.grad before backward
 tensor([0., 0., 0., 0., 0., 0.])
 conv1.bias.grad after backward
 tensor([-0.0002,  0.0045,  0.0017, -0.0099,  0.0092, -0.0044])
+
 ```
 
 更新weight：
 
 pytorch提供了各种更新规则（比如：SGD，Nesterov—SGD，Adam，RMSProp，等）的包`torch.optim`。使用起来也非常建单：
+
 ```
 
 # create your optimizer
@@ -573,6 +648,7 @@ output = net(input)
 loss = criterion(output, target)
 loss.backward()
 optimizer.step()    # Does the update
+
 ```
 
 
@@ -586,7 +662,7 @@ optimizer.step()    # Does the update
 
 特别是对于vision，pytorch有一个包叫`torchvision`，可以便捷地加载通用的数据集，比如 Imagenet, CIFAR10, MNIST，
 
-我们将使用CIFAR10的数据集，有‘airplane’, ‘automobile’, ‘bird’, ‘cat’, ‘deer’, ‘dog’, ‘frog’, ‘horse’, ‘ship’, ‘truck’. 这几类，图片的大小是3*32*32，其中3-channel color image of 32*32 pixels in size
+我们将使用CIFAR10的数据集，有airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck. 这几类，图片的大小是3*32*32，其中3-channel color image of 32*32 pixels in size
 
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gg9bpvyihwj30rj0jl4qp.jpg)
 
@@ -606,6 +682,7 @@ The output of torchvision datasets are PILImage images of range [0, 1]. We trans
 
 
 ```
+
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -635,9 +712,11 @@ classes = ('plane', 'car', 'bird', 'cat',
 out：
 Extracting ./data/cifar-10-python.tar.gz to ./data
 Files already downloaded and verified
+
 ```
 
 下面的代表可以用来展示训练的图片
+
 ```
 import matplotlib.pyplot as plt
 import numpy as np
@@ -660,6 +739,7 @@ images, labels = dataiter.next()
 imshow(torchvision.utils.make_grid(images))
 # print labels
 print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
+
 ```
 
 
@@ -692,9 +772,11 @@ class Net(nn.Module):
 
 
 net = Net()
+
 ```
 
 ## Define a Loss function and optimizer
+
 使用的是 Cross-Entropy loss 和 SGD with momentum
 
 ```
@@ -712,6 +794,7 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 我们只需要循环我们的 data iterator，然后把input喂给网络即可
 
 ```
+
 for epoch in range(2):  # loop over the dataset multiple times
 
     running_loss = 0.0
@@ -754,18 +837,22 @@ out:
 [2, 10000] loss: 1.331
 [2, 12000] loss: 1.291
 Finished Training
+
 ```
 
 保存我们的模型：
+
 ```
 PATH = './cifar_net.pth'
 torch.save(net.state_dict(), PATH)
+
 ```
 
 ## Test the network on the test data
 
 
 我们可以先拿出几个测试集的样本 看看预测的怎么样
+
 ```
 dataiter = iter(testloader)
 images, labels = dataiter.next()
@@ -791,6 +878,7 @@ print('Predicted: ', ' '.join('%5s' % classes[predicted[j]]
 ```
 
 我们可以看看在整个测试集上面训练的结果如何
+
 ```
 correct = 0
 total = 0
@@ -804,9 +892,11 @@ with torch.no_grad():
 
 print('Accuracy of the network on the 10000 test images: %d %%' % (
     100 * correct / total))
+
 ```
 
 我们还可以看看哪些类模型识别的比较好，哪些类模型识别的比较差
+
 ```
 class_correct = list(0. for i in range(10))
 class_total = list(0. for i in range(10))
@@ -825,6 +915,7 @@ with torch.no_grad():
 for i in range(10):
     print('Accuracy of %5s : %2d %%' % (
         classes[i], 100 * class_correct[i] / class_total[i]))
+
 ```
 
 # Training on GPU
@@ -832,6 +923,7 @@ for i in range(10):
 Just like how you transfer a Tensor onto the GPU, you transfer the neural net onto the GPU
 
 ```
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # Assuming that we are on a CUDA machine, this should print a CUDA device:
@@ -841,20 +933,28 @@ print(device)
 
 out:
 cuda:0
+
 ```
 说明是在gpu设备上的
 
 
 下面这些方法会遍历所有的模块，把参数和缓存都变成CUDA Tensor
+
 ```
+
 net.to(device)
+
 ```
 
 记住你必须每一步都把input和label都变成GPU支持的
+
 ```
+
 inputs, labels = data[0].to(device), data[1].to(device)
+
 ```
 
 
 后面还有一些好的例子，可以看官网：
 https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+
