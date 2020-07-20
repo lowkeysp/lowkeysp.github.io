@@ -165,3 +165,11 @@ CE3建立BGP邻居的命令和普通建立是一样的，PE2有些不同
 ```
 
 
+
+
+
+
+# VRF MODEL
+
+![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1ggkzk3a036j311l0k4k29.jpg)
+
