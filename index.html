@@ -328,6 +328,233 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/QoS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/08/04/QoS/" class="post-title-link" itemprop="url">QoS</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-04 09:20:54 / 修改时间：15:32:13" itemprop="dateCreated datePublished" datetime="2020-08-04T09:20:54+08:00">2020-08-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数通/" itemprop="url" rel="index"><span itemprop="name">数通</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/08/04/QoS/" class="leancloud_visitors" data-flag-title="QoS">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="IP-QoS三种模型"><a href="#IP-QoS三种模型" class="headerlink" title="IP QoS三种模型"></a>IP QoS三种模型</h1><ul>
+<li>Best-Effort模型：目前Internet的缺省服务模型，主要实现技术是先进先出队列（FIFO）</li>
+<li>IntServ模型: 业务通过信令向网络申请特定的QoS服务，网络在流量参数描述的范围内，预留资源以承诺满足该需求</li>
+<li>DiffServ模型：当网络出现拥塞时，根据业务的不同服务等级约定，有差别地进行流量控制和转发来解决拥塞问题</li>
+</ul>
+<h1 id="FIFO模型"><a href="#FIFO模型" class="headerlink" title="FIFO模型"></a>FIFO模型</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghej7q1xlkj315c0llwtp.jpg" alt="捕获.PNG"></p>
+<h1 id="MQC配置模式"><a href="#MQC配置模式" class="headerlink" title="MQC配置模式"></a>MQC配置模式</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghejgv4ao9j30zz0lpne1.jpg" alt="捕获.PNG"></p>
+<p>配置流程为：先配置class-map,再配置policy-map，再配置到service-map，然后再应用到端口即可</p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#先是分类，分等级</span><br><span class="line"></span><br><span class="line">class-map match-all ipp7</span><br><span class="line">   description for Diamond</span><br><span class="line">   match precedence 7</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 然后对于每一个等级，进行带宽的分配，限速等配置</span><br><span class="line">policy-map pm5-8000K-in</span><br><span class="line">    class ipp7</span><br><span class="line">      police rate 1200000 bps burst 150000 bytes peak-burst 150000 bytes</span><br><span class="line">    </span><br><span class="line">      conform-action set mpls experimental imposition7</span><br><span class="line">      exceed-action drop</span><br><span class="line">   ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#对于总的带宽，进行一个配置</span><br><span class="line"></span><br><span class="line">policy-map pm5-8000K-in.p</span><br><span class="line">  class class-default</span><br><span class="line">    service-policy pm5-8000K-in</span><br><span class="line">    police rate 8000000 bps burst 1000000 bytes peak-burst 1000000 bytes</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#把该policy应用到端口中去</span><br><span class="line"></span><br><span class="line">interface GigabitEthernet0/0/0/3.142</span><br><span class="line">  description For ...</span><br><span class="line">  service-policy input pm5-8000K-in.p</span><br><span class="line">  service-policy output pm5-8000K-out.p</span><br><span class="line">  vrf VPN12432</span><br><span class="line">  ipv4 address 10.122.122.122 255.255.255.252</span><br><span class="line">  encapsulation dot1q 111</span><br></pre></td></tr></table></figure></p>
+<h1 id="VPN业务等级"><a href="#VPN业务等级" class="headerlink" title="VPN业务等级"></a>VPN业务等级</h1><ul>
+<li>IPP7 = 钻石</li>
+<li>IPP5 = 白金</li>
+<li>IPP3+6 = 金</li>
+<li>IPP2 = 银</li>
+<li>IPP1 = 铜</li>
+<li>IPP0 = 其他</li>
+</ul>
+<h1 id="分类和标记（Classification-and-Marking）"><a href="#分类和标记（Classification-and-Marking）" class="headerlink" title="分类和标记（Classification and Marking）"></a>分类和标记（Classification and Marking）</h1><p>对不同的包进行分类，如果没有分类的，则视为是一样的</p>
+<p>分类完成后，需要对不同的包进行标记，通常使用IP包的IP precedence ，MPLS的EXP标记位进行分类</p>
+<h2 id="分类的配置"><a href="#分类的配置" class="headerlink" title="分类的配置"></a>分类的配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class-map match-all ipp7</span><br><span class="line">   description for Diamond</span><br><span class="line">   match precedence 7  # 匹配的是IP包的procedence标志位，也就是根据用户的IP包进行分类</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class-map match-all ipp5</span><br><span class="line">   description for Premium</span><br><span class="line">   match precedence 5</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class-map match-all ipp3</span><br><span class="line">   description for Gold</span><br><span class="line">   match precedence 3</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class-map match-all ipp2</span><br><span class="line">   description for Silver</span><br><span class="line">   match precedence 2</span><br><span class="line">end-class-map</span><br></pre></td></tr></table></figure>
+<h2 id="标记配置"><a href="#标记配置" class="headerlink" title="标记配置"></a>标记配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-in</span><br><span class="line">  class ipp7</span><br><span class="line">    police rate 1200000 bps burst 150000 bytes peak-burst 150000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 7  #在MPLS的EXP上进行标记，逻辑上也就是从客户收过来IP包，通过IP Precedence进行分类，分类位ipp7的，在MPLS包上进行打标，设置为7</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp5</span><br><span class="line">     police rate 1600000 bps burst 200000 bytes peak-burst 200000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 5</span><br><span class="line">    exceed-action drop  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp3</span><br><span class="line">    set mpls experimental importion 3 </span><br><span class="line"></span><br><span class="line">  class ipp2</span><br><span class="line">    set mpls experimental importion 2</span><br><span class="line"></span><br><span class="line">  class class-default</span><br><span class="line">    set mpls experimental importion 1</span><br><span class="line"></span><br><span class="line">end-policy-map</span><br></pre></td></tr></table></figure>
+<h1 id="流量监管和整形"><a href="#流量监管和整形" class="headerlink" title="流量监管和整形"></a>流量监管和整形</h1><p>对于Policing，对于限制外的，就直接丢弃了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghels3mlqpj30jl0lsqd4.jpg" alt="捕获.PNG"></p>
+<p>对于shaping，会进行一个平滑，对于超限的，会有一个缓存区先缓存着，缓存区满了才会进行丢弃</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghelurqctsj30jq0mvn6p.jpg" alt="捕获.PNG"></p>
+<h2 id="Police限速"><a href="#Police限速" class="headerlink" title="Police限速"></a>Police限速</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-in</span><br><span class="line">  class ipp7</span><br><span class="line">    #使用的是police配置</span><br><span class="line">    #burst 允许突发一点，</span><br><span class="line">    police rate 1200000 bps burst 150000 bytes peak-burst 150000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 7 </span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp5</span><br><span class="line">     police rate 1600000 bps burst 200000 bytes peak-burst 200000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 5</span><br><span class="line">    exceed-action drop</span><br></pre></td></tr></table></figure>
+<h2 id="Shape限速"><a href="#Shape限速" class="headerlink" title="Shape限速"></a>Shape限速</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-out.p</span><br><span class="line"></span><br><span class="line">  class class-default</span><br><span class="line">  service-policy pm5-8000K-out</span><br><span class="line">  shape average 8000000bps #shape限速</span><br><span class="line"></span><br><span class="line">end-policy-map</span><br></pre></td></tr></table></figure>
+<h1 id="拥塞管理及避免"><a href="#拥塞管理及避免" class="headerlink" title="拥塞管理及避免"></a>拥塞管理及避免</h1><ul>
+<li>网络拥塞时，保证不同的优先级的报文得到不同的QoS待遇</li>
+<li>将不同优先级的报文入不同的队列，不同队列将得到不同的调度优先级，概率或带宽保证</li>
+</ul>
+<h2 id="PQ-Priority-Queuing"><a href="#PQ-Priority-Queuing" class="headerlink" title="PQ: Priority Queuing"></a>PQ: Priority Queuing</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghem6esxtjj311z0mc7hk.jpg" alt="捕获.PNG"></p>
+<p>问题：如果Queue 1一直不空的话，那么Queue 2 和Queue 3就饿死了 根本转发不了，因此这种策略往往只用在最重要的业务才会设置这个，优先转发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-out</span><br><span class="line">  class ipp7</span><br><span class="line">    #配置一个PQ,</span><br><span class="line">    priority level 1</span><br><span class="line">    police rate percent 15</span><br><span class="line">    conform-action transmit </span><br><span class="line">    exceed-action drop</span><br></pre></td></tr></table></figure>
+<h2 id="CBWFQ配置"><a href="#CBWFQ配置" class="headerlink" title="CBWFQ配置"></a>CBWFQ配置</h2><ul>
+<li>Priority：优先转发</li>
+<li>Bandwidth：带宽报障 在拥塞时发生作用，具体的就是，即使发生了拥塞，仍有这些带宽报障，当然，最高也不能超过Police</li>
+<li>Police：带宽限速</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-out</span><br><span class="line">  class ipp7 </span><br><span class="line">    priority level 1</span><br><span class="line">    police rate percent 15</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp5 </span><br><span class="line">    bandwidth percent 5</span><br><span class="line">    police rate percent 25</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line">    queue-limit 32 packets</span><br><span class="line"></span><br><span class="line">  class ipp3 </span><br><span class="line">    bandwidth percent 30</span><br><span class="line">    police rate percent 50</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line">    queue-limit 384 packetsmit</span><br><span class="line">    random-detect precedence 3 100 packets 280 packets</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp2 </span><br><span class="line">    bandwidth percent 25</span><br><span class="line">    police rate percent 75</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line">    queue-limit 384 packetsmit</span><br><span class="line">    random-detect precedence 2 80 packets 225 packets</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class class-default </span><br><span class="line">    bandwidth percent 25</span><br><span class="line">    queue-limit 384 packetsmit</span><br><span class="line">    random-detect precedence 6,4,1,0,73 packets 150 packets</span><br><span class="line"></span><br><span class="line">end-policy-map</span><br></pre></td></tr></table></figure>
+<h2 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h2><p>在网络没有发生拥塞以前根据队列状态进行有选择性的丢包</p>
+<p>算法：</p>
+<ul>
+<li>RED  ： Random Early Detection</li>
+<li>WRED ： Weighted Random Early Detection</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghen0jj02xj31400nk12r.jpg" alt="捕获.PNG"></p>
+<p>横坐标时队列的大小，在0-32的时候，是不丢包的，在32-40的时候，是随机丢，40之后，就全部丢，tail drop == full drop</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghenccq7rxj311q0g77gf.jpg" alt="捕获.PNG"></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 针对优先级为3的流量使用WRED策略</span><br><span class="line"># 100以内，不丢，100-280 随机丢 </span><br><span class="line">random-detect precedence 3 100 packets 280 packets</span><br></pre></td></tr></table></figure>
+<h1 id="QoS相关命令"><a href="#QoS相关命令" class="headerlink" title="QoS相关命令"></a>QoS相关命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">show running class-maps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show running policy-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show running-config interface </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show policy-map interface  &lt;interface&gt; &lt;input|output&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show qos interface &lt;interface&gt; &lt;input|output&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>policed and dropped ：如果超过限速的值，那么就丢弃了</li>
+<li>RED random drops: 随机丢弃</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gher5eljt9j319h0olqju.jpg" alt="tempsnip.png"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/09/MPLSVPN-红茶/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2717,285 +2944,6 @@ for i, data in enumerate(trainloader, 0):
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/BGP的选路规则/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/03/14/BGP的选路规则/" class="post-title-link" itemprop="url">BGP的选路规则</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-14 19:49:03" itemprop="dateCreated datePublished" datetime="2020-03-14T19:49:03+08:00">2020-03-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-30 18:19:42" itemprop="dateModified" datetime="2020-03-30T18:19:42+08:00">2020-03-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/03/14/BGP的选路规则/" class="leancloud_visitors" data-flag-title="BGP的选路规则">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>BGP的选路规则与BGP路径属性及路由策略息息相关，它们使得BGP拥有了强大的路由操控能力。</p>
-<p>在BGP路由表中的路由必须首先是可用的（Valid），可盈的路由表项行首存在“*”号，可用意味着该BGP路由的Next_Hop是路由可达的。如果BGP路由不可用，则不会被优选</p>
-<h1 id="优选规则概览"><a href="#优选规则概览" class="headerlink" title="优选规则概览"></a>优选规则概览</h1><p>不同的厂商在优选规则上存在细微差异</p>
-<ol>
-<li>优先具有最大Preferred-Value的路由</li>
-<li>优选具有最大Local-Preference的路由</li>
-<li>优选起源于本地的路由</li>
-<li>优选AS_PATH最短的路由</li>
-<li>Origin（IGP &gt; EGP &gt; Incomplete）</li>
-<li>优选MED最小的路由</li>
-<li>优选EBGP对等体所通告的路由</li>
-<li>优选到Next_Hop的IGP度量值最小的路由</li>
-<li>BGP路由分载分担</li>
-<li>优选Cluster_List最短的路由</li>
-<li>优选Router-ID最小的BGP对等体发来的路由</li>
-<li>优选Peer-IP地址最小的对等体发来的路由</li>
-</ol>
-<h1 id="优先具有最大Preferred-Value的路由"><a href="#优先具有最大Preferred-Value的路由" class="headerlink" title="优先具有最大Preferred-Value的路由"></a>优先具有最大Preferred-Value的路由</h1><ul>
-<li>华为私有的路径属性，相当于路由的权重值，取值范围：0~65535；该值越大，则路由越优先。</li>
-<li>Preferred-Value只能在路由器本地配置，而且只影响本设备的路由优选。该属性不会传播给任何BGP对等体。</li>
-<li>路由器本地始发的BGO路由默认的Preferred-Value未0，从其他BGP对等体学习到的路由默认Preferred-Value也为0</li>
-</ul>
-<h2 id="修改从特定对等体收到的“所有路由”的Preferred-Value"><a href="#修改从特定对等体收到的“所有路由”的Preferred-Value" class="headerlink" title="修改从特定对等体收到的“所有路由”的Preferred-Value"></a>修改从特定对等体收到的“所有路由”的Preferred-Value</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzey8xj2j30lb0d043f.jpg" alt="捕获.PNG"></p>
-<h2 id="使用route-policy修改Preferred-Value"><a href="#使用route-policy修改Preferred-Value" class="headerlink" title="使用route-policy修改Preferred-Value"></a>使用route-policy修改Preferred-Value</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzgn89abj30mh0ctteh.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzl8tvmlj30nk0bfwiq.jpg" alt="捕获.PNG"></p>
-<h1 id="优选具有最大Local-Preference的路由"><a href="#优选具有最大Local-Preference的路由" class="headerlink" title="优选具有最大Local-Preference的路由"></a>优选具有最大Local-Preference的路由</h1><h2 id="通过route-policy修改Local-Preference"><a href="#通过route-policy修改Local-Preference" class="headerlink" title="通过route-policy修改Local-Preference"></a>通过route-policy修改Local-Preference</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzt045mbj30mf0ccgr0.jpg" alt="捕获.PNG"></p>
-<h1 id="优选起源于本地的路由"><a href="#优选起源于本地的路由" class="headerlink" title="优选起源于本地的路由"></a>优选起源于本地的路由</h1><ul>
-<li>在其他条件相同的情况，优先本地生成的路由（本地生成的路由优先级高于从邻居学来的路由）</li>
-<li>本地生成的路由包括通过network或import-route命令引入的路由，手工汇总路由和自动汇总路由。这些本地生成的路由之间的优选如下：<blockquote>
-<ol>
-<li>优先汇总路由（汇总路由优先级高于非汇总路由）</li>
-<li>通过aggregate命令生成的手动汇总路由的优先级高于通过summary automatic命令生成的自动汇总路由</li>
-<li>通过network命令引入的路由优先级高于import-route命令引入的路由</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<h1 id="优选AS-PATH最短的路由"><a href="#优选AS-PATH最短的路由" class="headerlink" title="优选AS_PATH最短的路由"></a>优选AS_PATH最短的路由</h1><h2 id="通过route-policy修改AS-PATH属性"><a href="#通过route-policy修改AS-PATH属性" class="headerlink" title="通过route-policy修改AS_PATH属性"></a>通过route-policy修改AS_PATH属性</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc07n8d36j30n20cqwk9.jpg" alt="捕获.PNG"></p>
-<p>由于AS_PATH属性对于防环有着重要的作用，因此AS_PATH这个属性尽量不要多修改</p>
-<ul>
-<li><p>使用route-policy修改BGP路由的AS_PATH:</p>
-<blockquote>
-<ul>
-<li>apply as-path XXX additive   在已有AS_PATH基础上追加XXX</li>
-<li>apply as-path XXX overwrite   将已有AS_PATH值替换（覆盖）成XXX</li>
-<li>apply as-path none overwrite   清空路由的AS_PATH属性</li>
-</ul>
-</blockquote>
-</li>
-<li><p>使用route-policy修改BGP路由的AS_PATH时，可以在EBGP对等体之间改变EBGP路由的AS_PATH属性，从而影响BGP路由的优选，在华为路由器上，在IBGP对等体之间，也可以使用route-policy修改BGP路由的AS_PATH。无论哪种场景，改变BGP路由的AS_PATH都必须十分谨慎。</p>
-</li>
-<li>Bestroute as-path-ignore命令用来配置BGP在选择最优路径时忽略AS路径属性。配置该命令后，BGP将不比较AS_PATH路径的长度。缺省情况下，长度更小者优</li>
-</ul>
-<h2 id="AS-PATH选路规则扩展1"><a href="#AS-PATH选路规则扩展1" class="headerlink" title="AS_PATH选路规则扩展1"></a>AS_PATH选路规则扩展1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0lktnzjj30ov0brdln.jpg" alt="捕获.PNG"></p>
-<p>其中，{100，200}是一个AS_SET，长度为1.</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0o1tu89j30nl0bx0xl.jpg" alt="捕获.PNG"></p>
-<h2 id="AS-PATH选路规则扩展2"><a href="#AS-PATH选路规则扩展2" class="headerlink" title="AS_PATH选路规则扩展2"></a>AS_PATH选路规则扩展2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0omz13vj30nt0cwn0z.jpg" alt="捕获.PNG"></p>
-<h1 id="Origin（IGP-gt-EGP-gt-Incomplete）"><a href="#Origin（IGP-gt-EGP-gt-Incomplete）" class="headerlink" title="Origin（IGP &gt; EGP &gt; Incomplete）"></a>Origin（IGP &gt; EGP &gt; Incomplete）</h1><ul>
-<li>igp：通过BGP network的路由，也就是起源于IGP的路由，Origin为igp。因为BGP network必须保证该网络在路由表中</li>
-<li>egp：如果BGP路由是由EGP这种早期的协议重发布来的，那么origin是egp</li>
-<li>incomplete：通过import命令，从其他协议引入到BGP的路由，其origin为incomplete（确定该路由来源的信息不完全）</li>
-</ul>
-<h2 id="使用route-policy修改路由Origin属性值"><a href="#使用route-policy修改路由Origin属性值" class="headerlink" title="使用route-policy修改路由Origin属性值"></a>使用route-policy修改路由Origin属性值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0wq2s0aj30gp09bdje.jpg" alt="捕获.PNG"></p>
-<h1 id="优选MED最小的路由"><a href="#优选MED最小的路由" class="headerlink" title="优选MED最小的路由"></a>优选MED最小的路由</h1><ul>
-<li>MED（Multi Exit Discriminator）是可选非传递属性，是一种度量值，用于向外部对等体指出进入本AS的首选路径，即当进入本AS的入口有多个时，AS可以使用MED动态地影响其他AS选择进入地路径</li>
-<li>MED属性值越小则BGP路径越优</li>
-<li>MED主要用于在AS之间影响BGP的选路。MED被传递给EBGP对等体后，对等体在其AS内传递路由时，携带该MED值，但将路由传递给其EBGP对等体时，缺省不会携带MED属性</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc11bpkmnj30nc06kjv0.jpg" alt="捕获.PNG"></p>
-<h2 id="使用route-policy修改路由的MED值"><a href="#使用route-policy修改路由的MED值" class="headerlink" title="使用route-policy修改路由的MED值"></a>使用route-policy修改路由的MED值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1byqrwsj30lz0cbag0.jpg" alt="捕获.PNG"></p>
-<p><strong>（上图其实有一个问题，就是MED值通常只比较来自同一AS的情况）</strong></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1d7sfhjj30nz0b2grk.jpg" alt="捕获.PNG"></p>
-<h1 id="优选EBGP对等体所通告的路由（相对于IBGP对等体）"><a href="#优选EBGP对等体所通告的路由（相对于IBGP对等体）" class="headerlink" title="优选EBGP对等体所通告的路由（相对于IBGP对等体）"></a>优选EBGP对等体所通告的路由（相对于IBGP对等体）</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1gr50hhj30oe0bsdkr.jpg" alt="捕获.PNG"></p>
-<h1 id="优选到Next-Hop的IGP度量值最小的路由"><a href="#优选到Next-Hop的IGP度量值最小的路由" class="headerlink" title="优选到Next_Hop的IGP度量值最小的路由"></a>优选到Next_Hop的IGP度量值最小的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1mzq100j30ov0bntde.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1rfpdl4j30oe0byn1t.jpg" alt="捕获.PNG"></p>
-<p>R5学到的这两条BGP路由的next-hop都是3.3.3.3,因此比较next-hop的IGP cost值是没有意义的，是无法做出比较的，只能根据后面的选路规则来比较</p>
-<h1 id="BGP路由分载分担"><a href="#BGP路由分载分担" class="headerlink" title="BGP路由分载分担"></a>BGP路由分载分担</h1><h2 id="没有配置-BGP路由负载分担时"><a href="#没有配置-BGP路由负载分担时" class="headerlink" title="没有配置 BGP路由负载分担时"></a>没有配置 BGP路由负载分担时</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc2z0k9dfj30nt0cjq7s.jpg" alt="捕获.PNG"></p>
-<ul>
-<li>在大型网络中，到达同一目的地通常会存在多条有效BGP路由，设备只会优选一条最优的BGP路由，将改路由加载到路由表中使用，并且只将最优路由发布给对等体，这一特点往往会造成很多流量负载不均衡的情况。通过配置BGP负载分担，可以使得设备同时将多条等代价的BGP路由加载到路由表，实现流量负载均衡，减少网络拥塞。</li>
-<li>值得注意的是，尽管配置了BGP负载分担，设备依然只会在多条到达同一目的地的BGP路由中优选一条路由，并只将这条路由通告给其他对等体</li>
-<li>形成BGP等价负载分担的条件是“BGP路由优选规则”的1至8条规则中需要比较的属性完全相同，例如相同的Preferred_Value，Local_Preference,AS_PATH,MED,Origin,到达Next_Hop的IGP度量值，路由类型（IBGP，EBGP）等</li>
-<li>如果实现了BGP负载分担，则不论是否配置了peer next-hop-local命令，本地设备向IBGP对等体组发布路由时都先将下一跳地址改变为自身地址。</li>
-<li>在公网中到达同一目的地的路由形成负载分担时，系统会首先判断最佳路由的类型。若最优路由为IBGP路由则只是IBGP路由参与负载分担，若最优路由为EBGP路由则只是EBGP路由参加负载分担。即公网中到达同一目的地的IBGP和EBGP路由不能形成负载分担</li>
-<li>如果到达目的地址存在多条路由，但是这些路由分别经过了不同的AS缺省情况下，这些路由不能形成负载分担，如果用户需要这些路由参与负载分担，就可以执行load-balancing as-path-ignore命令。配置load-balancing as-path-ignore命令后会改变路由参与负载分担的条件，路由形成负载分担时不再比较AS_PATH属性，配置时需要慎重考虑</li>
-<li>load-balancing as-path-ignore命令和bestroute as-path-ignore命令互斥，不能同时使能</li>
-</ul>
-<h2 id="配置了BGP路由负载分担之后1"><a href="#配置了BGP路由负载分担之后1" class="headerlink" title="配置了BGP路由负载分担之后1"></a>配置了BGP路由负载分担之后1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3jlw20sj30oa0cmtg2.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3me9uozj30nq0cm0xi.jpg" alt="捕获.PNG"></p>
-<h2 id="配置了BGP路由负载分担之后2"><a href="#配置了BGP路由负载分担之后2" class="headerlink" title="配置了BGP路由负载分担之后2"></a>配置了BGP路由负载分担之后2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3n6dq3hj30nb0cbgqk.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3nyz4alj30n10ctaet.jpg" alt="捕获.PNG"></p>
-<h1 id="优选Cluster-List最短的路由"><a href="#优选Cluster-List最短的路由" class="headerlink" title="优选Cluster_List最短的路由"></a>优选Cluster_List最短的路由</h1><h2 id="优选Cluster-List最短的路由-案例1"><a href="#优选Cluster-List最短的路由-案例1" class="headerlink" title="优选Cluster_List最短的路由 案例1"></a>优选Cluster_List最短的路由 案例1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3qfwy3kj30nz0cnaeq.jpg" alt="捕获.PNG"></p>
-<h2 id="优选Cluster-List最短的路由-案例2"><a href="#优选Cluster-List最短的路由-案例2" class="headerlink" title="优选Cluster_List最短的路由 案例2"></a>优选Cluster_List最短的路由 案例2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3zpkcstj30p90b7n15.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc40xoj22j30jz0cf0wa.jpg" alt="捕获.PNG"></p>
-<h1 id="优选Router-ID最小的BGP对等体发来的路由"><a href="#优选Router-ID最小的BGP对等体发来的路由" class="headerlink" title="优选Router-ID最小的BGP对等体发来的路由"></a>优选Router-ID最小的BGP对等体发来的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc42eica2j30lt0ckq6l.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc45ka84lj30oe0bxjwp.jpg" alt="捕获.PNG"></p>
-<h1 id="优选Peer-IP地址最小的对等体发来的路由"><a href="#优选Peer-IP地址最小的对等体发来的路由" class="headerlink" title="优选Peer-IP地址最小的对等体发来的路由"></a>优选Peer-IP地址最小的对等体发来的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc4fsbfq4j30o60cojy9.jpg" alt="捕获.PNG"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3042,7 +2990,7 @@ for i, data in enumerate(trainloader, 0):
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3093,7 +3041,9 @@ for i, data in enumerate(trainloader, 0):
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -3236,7 +3186,11 @@ for i, data in enumerate(trainloader, 0):
                     
                       
                     
-                    <span class="site-state-item-count">63</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -3499,9 +3453,9 @@ for i, data in enumerate(trainloader, 0):
       
     
       
-        
-      
     
+      
+        
       
     
       

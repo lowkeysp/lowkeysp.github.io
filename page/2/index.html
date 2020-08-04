@@ -328,6 +328,285 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/BGP的选路规则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/03/14/BGP的选路规则/" class="post-title-link" itemprop="url">BGP的选路规则</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-14 19:49:03" itemprop="dateCreated datePublished" datetime="2020-03-14T19:49:03+08:00">2020-03-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-30 18:19:42" itemprop="dateModified" datetime="2020-03-30T18:19:42+08:00">2020-03-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/03/14/BGP的选路规则/" class="leancloud_visitors" data-flag-title="BGP的选路规则">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>BGP的选路规则与BGP路径属性及路由策略息息相关，它们使得BGP拥有了强大的路由操控能力。</p>
+<p>在BGP路由表中的路由必须首先是可用的（Valid），可盈的路由表项行首存在“*”号，可用意味着该BGP路由的Next_Hop是路由可达的。如果BGP路由不可用，则不会被优选</p>
+<h1 id="优选规则概览"><a href="#优选规则概览" class="headerlink" title="优选规则概览"></a>优选规则概览</h1><p>不同的厂商在优选规则上存在细微差异</p>
+<ol>
+<li>优先具有最大Preferred-Value的路由</li>
+<li>优选具有最大Local-Preference的路由</li>
+<li>优选起源于本地的路由</li>
+<li>优选AS_PATH最短的路由</li>
+<li>Origin（IGP &gt; EGP &gt; Incomplete）</li>
+<li>优选MED最小的路由</li>
+<li>优选EBGP对等体所通告的路由</li>
+<li>优选到Next_Hop的IGP度量值最小的路由</li>
+<li>BGP路由分载分担</li>
+<li>优选Cluster_List最短的路由</li>
+<li>优选Router-ID最小的BGP对等体发来的路由</li>
+<li>优选Peer-IP地址最小的对等体发来的路由</li>
+</ol>
+<h1 id="优先具有最大Preferred-Value的路由"><a href="#优先具有最大Preferred-Value的路由" class="headerlink" title="优先具有最大Preferred-Value的路由"></a>优先具有最大Preferred-Value的路由</h1><ul>
+<li>华为私有的路径属性，相当于路由的权重值，取值范围：0~65535；该值越大，则路由越优先。</li>
+<li>Preferred-Value只能在路由器本地配置，而且只影响本设备的路由优选。该属性不会传播给任何BGP对等体。</li>
+<li>路由器本地始发的BGO路由默认的Preferred-Value未0，从其他BGP对等体学习到的路由默认Preferred-Value也为0</li>
+</ul>
+<h2 id="修改从特定对等体收到的“所有路由”的Preferred-Value"><a href="#修改从特定对等体收到的“所有路由”的Preferred-Value" class="headerlink" title="修改从特定对等体收到的“所有路由”的Preferred-Value"></a>修改从特定对等体收到的“所有路由”的Preferred-Value</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzey8xj2j30lb0d043f.jpg" alt="捕获.PNG"></p>
+<h2 id="使用route-policy修改Preferred-Value"><a href="#使用route-policy修改Preferred-Value" class="headerlink" title="使用route-policy修改Preferred-Value"></a>使用route-policy修改Preferred-Value</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzgn89abj30mh0ctteh.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzl8tvmlj30nk0bfwiq.jpg" alt="捕获.PNG"></p>
+<h1 id="优选具有最大Local-Preference的路由"><a href="#优选具有最大Local-Preference的路由" class="headerlink" title="优选具有最大Local-Preference的路由"></a>优选具有最大Local-Preference的路由</h1><h2 id="通过route-policy修改Local-Preference"><a href="#通过route-policy修改Local-Preference" class="headerlink" title="通过route-policy修改Local-Preference"></a>通过route-policy修改Local-Preference</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzt045mbj30mf0ccgr0.jpg" alt="捕获.PNG"></p>
+<h1 id="优选起源于本地的路由"><a href="#优选起源于本地的路由" class="headerlink" title="优选起源于本地的路由"></a>优选起源于本地的路由</h1><ul>
+<li>在其他条件相同的情况，优先本地生成的路由（本地生成的路由优先级高于从邻居学来的路由）</li>
+<li>本地生成的路由包括通过network或import-route命令引入的路由，手工汇总路由和自动汇总路由。这些本地生成的路由之间的优选如下：<blockquote>
+<ol>
+<li>优先汇总路由（汇总路由优先级高于非汇总路由）</li>
+<li>通过aggregate命令生成的手动汇总路由的优先级高于通过summary automatic命令生成的自动汇总路由</li>
+<li>通过network命令引入的路由优先级高于import-route命令引入的路由</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h1 id="优选AS-PATH最短的路由"><a href="#优选AS-PATH最短的路由" class="headerlink" title="优选AS_PATH最短的路由"></a>优选AS_PATH最短的路由</h1><h2 id="通过route-policy修改AS-PATH属性"><a href="#通过route-policy修改AS-PATH属性" class="headerlink" title="通过route-policy修改AS_PATH属性"></a>通过route-policy修改AS_PATH属性</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc07n8d36j30n20cqwk9.jpg" alt="捕获.PNG"></p>
+<p>由于AS_PATH属性对于防环有着重要的作用，因此AS_PATH这个属性尽量不要多修改</p>
+<ul>
+<li><p>使用route-policy修改BGP路由的AS_PATH:</p>
+<blockquote>
+<ul>
+<li>apply as-path XXX additive   在已有AS_PATH基础上追加XXX</li>
+<li>apply as-path XXX overwrite   将已有AS_PATH值替换（覆盖）成XXX</li>
+<li>apply as-path none overwrite   清空路由的AS_PATH属性</li>
+</ul>
+</blockquote>
+</li>
+<li><p>使用route-policy修改BGP路由的AS_PATH时，可以在EBGP对等体之间改变EBGP路由的AS_PATH属性，从而影响BGP路由的优选，在华为路由器上，在IBGP对等体之间，也可以使用route-policy修改BGP路由的AS_PATH。无论哪种场景，改变BGP路由的AS_PATH都必须十分谨慎。</p>
+</li>
+<li>Bestroute as-path-ignore命令用来配置BGP在选择最优路径时忽略AS路径属性。配置该命令后，BGP将不比较AS_PATH路径的长度。缺省情况下，长度更小者优</li>
+</ul>
+<h2 id="AS-PATH选路规则扩展1"><a href="#AS-PATH选路规则扩展1" class="headerlink" title="AS_PATH选路规则扩展1"></a>AS_PATH选路规则扩展1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0lktnzjj30ov0brdln.jpg" alt="捕获.PNG"></p>
+<p>其中，{100，200}是一个AS_SET，长度为1.</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0o1tu89j30nl0bx0xl.jpg" alt="捕获.PNG"></p>
+<h2 id="AS-PATH选路规则扩展2"><a href="#AS-PATH选路规则扩展2" class="headerlink" title="AS_PATH选路规则扩展2"></a>AS_PATH选路规则扩展2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0omz13vj30nt0cwn0z.jpg" alt="捕获.PNG"></p>
+<h1 id="Origin（IGP-gt-EGP-gt-Incomplete）"><a href="#Origin（IGP-gt-EGP-gt-Incomplete）" class="headerlink" title="Origin（IGP &gt; EGP &gt; Incomplete）"></a>Origin（IGP &gt; EGP &gt; Incomplete）</h1><ul>
+<li>igp：通过BGP network的路由，也就是起源于IGP的路由，Origin为igp。因为BGP network必须保证该网络在路由表中</li>
+<li>egp：如果BGP路由是由EGP这种早期的协议重发布来的，那么origin是egp</li>
+<li>incomplete：通过import命令，从其他协议引入到BGP的路由，其origin为incomplete（确定该路由来源的信息不完全）</li>
+</ul>
+<h2 id="使用route-policy修改路由Origin属性值"><a href="#使用route-policy修改路由Origin属性值" class="headerlink" title="使用route-policy修改路由Origin属性值"></a>使用route-policy修改路由Origin属性值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0wq2s0aj30gp09bdje.jpg" alt="捕获.PNG"></p>
+<h1 id="优选MED最小的路由"><a href="#优选MED最小的路由" class="headerlink" title="优选MED最小的路由"></a>优选MED最小的路由</h1><ul>
+<li>MED（Multi Exit Discriminator）是可选非传递属性，是一种度量值，用于向外部对等体指出进入本AS的首选路径，即当进入本AS的入口有多个时，AS可以使用MED动态地影响其他AS选择进入地路径</li>
+<li>MED属性值越小则BGP路径越优</li>
+<li>MED主要用于在AS之间影响BGP的选路。MED被传递给EBGP对等体后，对等体在其AS内传递路由时，携带该MED值，但将路由传递给其EBGP对等体时，缺省不会携带MED属性</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc11bpkmnj30nc06kjv0.jpg" alt="捕获.PNG"></p>
+<h2 id="使用route-policy修改路由的MED值"><a href="#使用route-policy修改路由的MED值" class="headerlink" title="使用route-policy修改路由的MED值"></a>使用route-policy修改路由的MED值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1byqrwsj30lz0cbag0.jpg" alt="捕获.PNG"></p>
+<p><strong>（上图其实有一个问题，就是MED值通常只比较来自同一AS的情况）</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1d7sfhjj30nz0b2grk.jpg" alt="捕获.PNG"></p>
+<h1 id="优选EBGP对等体所通告的路由（相对于IBGP对等体）"><a href="#优选EBGP对等体所通告的路由（相对于IBGP对等体）" class="headerlink" title="优选EBGP对等体所通告的路由（相对于IBGP对等体）"></a>优选EBGP对等体所通告的路由（相对于IBGP对等体）</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1gr50hhj30oe0bsdkr.jpg" alt="捕获.PNG"></p>
+<h1 id="优选到Next-Hop的IGP度量值最小的路由"><a href="#优选到Next-Hop的IGP度量值最小的路由" class="headerlink" title="优选到Next_Hop的IGP度量值最小的路由"></a>优选到Next_Hop的IGP度量值最小的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1mzq100j30ov0bntde.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1rfpdl4j30oe0byn1t.jpg" alt="捕获.PNG"></p>
+<p>R5学到的这两条BGP路由的next-hop都是3.3.3.3,因此比较next-hop的IGP cost值是没有意义的，是无法做出比较的，只能根据后面的选路规则来比较</p>
+<h1 id="BGP路由分载分担"><a href="#BGP路由分载分担" class="headerlink" title="BGP路由分载分担"></a>BGP路由分载分担</h1><h2 id="没有配置-BGP路由负载分担时"><a href="#没有配置-BGP路由负载分担时" class="headerlink" title="没有配置 BGP路由负载分担时"></a>没有配置 BGP路由负载分担时</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc2z0k9dfj30nt0cjq7s.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>在大型网络中，到达同一目的地通常会存在多条有效BGP路由，设备只会优选一条最优的BGP路由，将改路由加载到路由表中使用，并且只将最优路由发布给对等体，这一特点往往会造成很多流量负载不均衡的情况。通过配置BGP负载分担，可以使得设备同时将多条等代价的BGP路由加载到路由表，实现流量负载均衡，减少网络拥塞。</li>
+<li>值得注意的是，尽管配置了BGP负载分担，设备依然只会在多条到达同一目的地的BGP路由中优选一条路由，并只将这条路由通告给其他对等体</li>
+<li>形成BGP等价负载分担的条件是“BGP路由优选规则”的1至8条规则中需要比较的属性完全相同，例如相同的Preferred_Value，Local_Preference,AS_PATH,MED,Origin,到达Next_Hop的IGP度量值，路由类型（IBGP，EBGP）等</li>
+<li>如果实现了BGP负载分担，则不论是否配置了peer next-hop-local命令，本地设备向IBGP对等体组发布路由时都先将下一跳地址改变为自身地址。</li>
+<li>在公网中到达同一目的地的路由形成负载分担时，系统会首先判断最佳路由的类型。若最优路由为IBGP路由则只是IBGP路由参与负载分担，若最优路由为EBGP路由则只是EBGP路由参加负载分担。即公网中到达同一目的地的IBGP和EBGP路由不能形成负载分担</li>
+<li>如果到达目的地址存在多条路由，但是这些路由分别经过了不同的AS缺省情况下，这些路由不能形成负载分担，如果用户需要这些路由参与负载分担，就可以执行load-balancing as-path-ignore命令。配置load-balancing as-path-ignore命令后会改变路由参与负载分担的条件，路由形成负载分担时不再比较AS_PATH属性，配置时需要慎重考虑</li>
+<li>load-balancing as-path-ignore命令和bestroute as-path-ignore命令互斥，不能同时使能</li>
+</ul>
+<h2 id="配置了BGP路由负载分担之后1"><a href="#配置了BGP路由负载分担之后1" class="headerlink" title="配置了BGP路由负载分担之后1"></a>配置了BGP路由负载分担之后1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3jlw20sj30oa0cmtg2.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3me9uozj30nq0cm0xi.jpg" alt="捕获.PNG"></p>
+<h2 id="配置了BGP路由负载分担之后2"><a href="#配置了BGP路由负载分担之后2" class="headerlink" title="配置了BGP路由负载分担之后2"></a>配置了BGP路由负载分担之后2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3n6dq3hj30nb0cbgqk.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3nyz4alj30n10ctaet.jpg" alt="捕获.PNG"></p>
+<h1 id="优选Cluster-List最短的路由"><a href="#优选Cluster-List最短的路由" class="headerlink" title="优选Cluster_List最短的路由"></a>优选Cluster_List最短的路由</h1><h2 id="优选Cluster-List最短的路由-案例1"><a href="#优选Cluster-List最短的路由-案例1" class="headerlink" title="优选Cluster_List最短的路由 案例1"></a>优选Cluster_List最短的路由 案例1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3qfwy3kj30nz0cnaeq.jpg" alt="捕获.PNG"></p>
+<h2 id="优选Cluster-List最短的路由-案例2"><a href="#优选Cluster-List最短的路由-案例2" class="headerlink" title="优选Cluster_List最短的路由 案例2"></a>优选Cluster_List最短的路由 案例2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3zpkcstj30p90b7n15.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc40xoj22j30jz0cf0wa.jpg" alt="捕获.PNG"></p>
+<h1 id="优选Router-ID最小的BGP对等体发来的路由"><a href="#优选Router-ID最小的BGP对等体发来的路由" class="headerlink" title="优选Router-ID最小的BGP对等体发来的路由"></a>优选Router-ID最小的BGP对等体发来的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc42eica2j30lt0ckq6l.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc45ka84lj30oe0bxjwp.jpg" alt="捕获.PNG"></p>
+<h1 id="优选Peer-IP地址最小的对等体发来的路由"><a href="#优选Peer-IP地址最小的对等体发来的路由" class="headerlink" title="优选Peer-IP地址最小的对等体发来的路由"></a>优选Peer-IP地址最小的对等体发来的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc4fsbfq4j30o60cojy9.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/BGP的路由策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2592,264 +2871,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/路由器命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/01/10/路由器命令/" class="post-title-link" itemprop="url">路由器命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-10 06:49:47" itemprop="dateCreated datePublished" datetime="2020-01-10T06:49:47+08:00">2020-01-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-06-22 19:52:24" itemprop="dateModified" datetime="2020-06-22T19:52:24+08:00">2020-06-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/01/10/路由器命令/" class="leancloud_visitors" data-flag-title="路由器命令">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="进入配置模式"><a href="#进入配置模式" class="headerlink" title="进入配置模式"></a>进入配置模式</h1><p><strong>华为</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br></pre></td></tr></table></figure></p>
-<p><strong>思科</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure terminal</span><br></pre></td></tr></table></figure></p>
-<p><strong>Juniper</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure exclusive</span><br></pre></td></tr></table></figure></p>
-<h1 id="ISIS-协议"><a href="#ISIS-协议" class="headerlink" title="ISIS 协议"></a>ISIS 协议</h1><h2 id="查看ISIS的邻居状态"><a href="#查看ISIS的邻居状态" class="headerlink" title="查看ISIS的邻居状态"></a>查看ISIS的邻居状态</h2><p><strong>华为</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">display isis peer</span><br><span class="line"></span><br><span class="line">显示</span><br><span class="line"></span><br><span class="line">System Id     Interface    Circuit Id     State HoldTime   Type     PRI</span><br><span class="line"></span><br><span class="line">其中，System Id表示的是对端的邻居的Id，Interfere是本端的端口地址，Type表示走的是Level 1还是Level 2， State就是表示邻居是Up还是Down的</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看ISIS学到的路由"><a href="#查看ISIS学到的路由" class="headerlink" title="查看ISIS学到的路由"></a>查看ISIS学到的路由</h2><p><strong>华为</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display ip routing-table protocol isis</span><br></pre></td></tr></table></figure></p>
-<h1 id="ip地址配置"><a href="#ip地址配置" class="headerlink" title="ip地址配置"></a>ip地址配置</h1><p><strong>思科</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipv4 address ip地址/mask</span><br></pre></td></tr></table></figure></p>
-<h1 id="查看端口配置"><a href="#查看端口配置" class="headerlink" title="查看端口配置"></a>查看端口配置</h1><p><strong>思科</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#show running-config interface TenGigE 0/10/0/7</span><br><span class="line"></span><br><span class="line"># 如果在配置模式下查看端口配置的话，</span><br><span class="line">do show running-config interface TenGigE 0/10/0/7</span><br></pre></td></tr></table></figure>
-<h1 id="取消端口配置"><a href="#取消端口配置" class="headerlink" title="取消端口配置"></a>取消端口配置</h1><p><strong>思科</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no + 命令</span><br><span class="line">commit</span><br></pre></td></tr></table></figure></p>
-<h1 id="调流量"><a href="#调流量" class="headerlink" title="调流量"></a>调流量</h1><h2 id="IPM电路迁流量需要删除静态路由"><a href="#IPM电路迁流量需要删除静态路由" class="headerlink" title="IPM电路迁流量需要删除静态路由"></a>IPM电路迁流量需要删除静态路由</h2><p><strong>华为</strong></p>
-<p>1、查看当前端口的静态路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;HUAWEI&gt;display current-configuration | include ip | include route-static  | include GigabitEthernet1/0/4</span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">&lt;HUAWEI&gt;display current-configuration | include ip route-static  | include GigabitEthernet1/0/4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 ...</span><br></pre></td></tr></table></figure></p>
-<p>2、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
-<p>3、一条一条的删除静态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Undo ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 </span><br><span class="line">#不需要加后面的tag，只需要到上面这个地方就可以了</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">undo之后，记得commit，并且退出视图模式，save</span><br></pre></td></tr></table></figure></p>
-<p>调回流量：</p>
-<p>1、在视图模式下，添加原来的静态路由,把之前记录下来的都再次粘上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">记得commit，并且退出视图模式，save</span><br></pre></td></tr></table></figure></p>
-<p><strong>思科</strong></p>
-<p>1、查看静态路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show running-config router static | include 端口号</span><br></pre></td></tr></table></figure></p>
-<p>2、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
-<p>3、一条一条删除静态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式后</span><br><span class="line"></span><br><span class="line">router static </span><br><span class="line"></span><br><span class="line">address-family ipv4 unicast</span><br><span class="line"></span><br><span class="line">no 192.168.1.1/32 POS0/15/1/0 127.1.1.1 </span><br><span class="line"></span><br><span class="line"># 退出这一层级，再删除ipv6的，exit</span><br><span class="line"></span><br><span class="line">address-family ipv6 unicast</span><br><span class="line"></span><br><span class="line">no .........</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">之后记得commit，end退出</span><br></pre></td></tr></table></figure></p>
-<p>调回流量：<br>1、进入配置模式，添加原来的静态路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router static</span><br><span class="line"></span><br><span class="line">address-family ipv4 unicast</span><br><span class="line"></span><br><span class="line">192.168.1.1/32 POS0/15/1/0 127.1.1.1 tag...</span><br><span class="line"></span><br><span class="line">#退出这一层级，再添加ipv6的</span><br><span class="line">，</span><br><span class="line">address-family ipv4 unicast</span><br><span class="line">...ipv6静态地址......</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">commit 之后 end</span><br></pre></td></tr></table></figure></p>
-<p><strong>Juniper</strong></p>
-<p>1、查看静态路由</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">会显示：</span><br><span class="line"></span><br><span class="line">192.168.1.1/32  * ...</span><br><span class="line">               &gt; to 127.1.1.1 via et-2/0/0.0</span><br><span class="line"></span><br><span class="line"># 查看与et-2/0/0端口相关的IP地址有哪些，比如这个127.1.1.1,那么这个IP地址就是这个端口相关的静态路由IP地址，IPV6地址也有</span><br></pre></td></tr></table></figure>
-<p>2、查看与静态路由相关的IP地址的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show configuration routing-options static | display set | match 127.1.1.1</span><br><span class="line"></span><br><span class="line">会显示：</span><br><span class="line"></span><br><span class="line">&gt;set routing-options static route 222.221.220.1/32 next-hop 127.1.1.1</span><br><span class="line">&gt;set routing-options static route 111.11.111.1/32 next-hop 127.1.1.1</span><br><span class="line"></span><br><span class="line">通常也是两个IPv4地址，两个IPv6地址</span><br></pre></td></tr></table></figure></p>
-<p>3、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
-<p>4、进入配置模式,删除与静态路由相关的配置，（将原有配置的set改成delete）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete routing-options static route 222.221.220.1/32 next-hop 127.1.1.1</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>5、保存并退出配置模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure></p>
-<p>6、查看静态路由是否已删<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br></pre></td></tr></table></figure></p>
-<p>调回流量：</p>
-<p>1、进入配置模式，恢复静态路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set routing-options static route 111.11.111.1/32 next-hop 127.1.1.1</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>2、保存并退出配置模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure></p>
-<p>3、查看静态路由是否已恢复<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br></pre></td></tr></table></figure></p>
-<h2 id="骨干电路迁流量需要修改metric值"><a href="#骨干电路迁流量需要修改metric值" class="headerlink" title="骨干电路迁流量需要修改metric值"></a>骨干电路迁流量需要修改metric值</h2><p><strong>华为</strong><br>1、查看端口配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 端口号</span><br></pre></td></tr></table></figure>
-<p>2、修改metric值，通常是扩大10倍<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">isis cost 原来的metric值*10  level-2</span><br></pre></td></tr></table></figure></p>
-<p>调回流量</p>
-<p>1、查看端口配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 端口号</span><br></pre></td></tr></table></figure>
-<p>2、 查看IP网管的历史配置，看之前的metric值是多少，或者看反馈里值班人员写的调之前是多少</p>
-<p>3、修改metric值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">isis cost xxx  level-2</span><br></pre></td></tr></table></figure></p>
-<p><strong>思科</strong></p>
-<p>CRS设备：</p>
-<p>1、查看原来端口的ISIS-metric值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show running-config router isis | begin */*/*/*</span><br></pre></td></tr></table></figure></p>
-<p>2、把相关的配置复制粘贴下来，保存成txt文件</p>
-<p>3、调整ISIS-metric值扩大10倍<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router isis 进程号</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">metric XXXX level 2</span><br></pre></td></tr></table></figure></p>
-<p>4、确认检查修改后的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration</span><br></pre></td></tr></table></figure></p>
-<p>5、提交配置更改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit</span><br></pre></td></tr></table></figure></p>
-<p>GSR设备：</p>
-<p>1、查看原端口的ISIS-metric值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show running-config interface poS */*</span><br></pre></td></tr></table></figure></p>
-<p>2、把相关的配置复制粘贴下来，保存成txt文件</p>
-<p>3、调整ISIS-metric值扩大10倍<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">configure terminal</span><br><span class="line"></span><br><span class="line">interface pos */*</span><br><span class="line"></span><br><span class="line">isis metric XXXX level-2</span><br></pre></td></tr></table></figure></p>
-<p>4、保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write  memory</span><br></pre></td></tr></table></figure></p>
-<p>调回流量：</p>
-<p>步骤和上面是一样的，只是改的数字不一样罢了</p>
-<p><strong>Juniper</strong><br>1、查看原端口的ISIS-metric值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration protocols isis interface</span><br></pre></td></tr></table></figure></p>
-<p>2、调整ISIS-metric值到另一个值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在配置模式下，</span><br><span class="line"></span><br><span class="line">set protocols isis interface so-0/1/0.0 level 2 metric XXXX</span><br></pre></td></tr></table></figure></p>
-<p>3、确认检查修改后的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration</span><br></pre></td></tr></table></figure></p>
-<p>4、提交配置修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit</span><br></pre></td></tr></table></figure></p>
-<p>调回流量，与上面步骤一样</p>
-<h2 id="Bundle调流量"><a href="#Bundle调流量" class="headerlink" title="Bundle调流量"></a>Bundle调流量</h2><p><strong>华为</strong></p>
-<p>1、先查看Bundle口下的配置模式,查看需要解绑的那个物理端口,看是否在这个Bundle口下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface Bundle口</span><br></pre></td></tr></table></figure></p>
-<p>2、查看需要解绑的那个物理端口的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 物理端口号</span><br></pre></td></tr></table></figure></p>
-<p>3、复制粘贴端口下面的配置</p>
-<p>4、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入视图模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">undo 那个加bundle的命令</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
-<p>调回流量:<br>也就是加bundle<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入视图配置</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">把undo去掉，使用undo后面的命令</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
-<p><strong>思科</strong><br>1、查看并记录接口配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show running-config interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">description To  XXXXXXX::To-Bundle-TenGigE11</span><br><span class="line"> bundle id 11 mode on</span><br></pre></td></tr></table></figure></p>
-<p>2、去除接口bundle配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">no bundle id 11</span><br><span class="line"></span><br><span class="line">commit</span><br></pre></td></tr></table></figure></p>
-<p>调回流量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">bundle id 11 mode on</span><br><span class="line"></span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
-<p><strong>Juniper</strong></p>
-<p>1、查看端口原有配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show configuration interfaces xe-15/0/1 gigether-options | display set</span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">set interfaces xe-15/0/1 gigether-options 802.3ad ae0（</span><br></pre></td></tr></table></figure>
-<p>2、解除bundle<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">//关闭端口</span><br><span class="line">set interfaces xe-15/0/1 disable</span><br><span class="line"></span><br><span class="line">//解除bundle</span><br><span class="line">delete interfaces xe-15/0/1 gigether-options 802.3ad ae0</span><br><span class="line"></span><br><span class="line">//保存配置并退出配置模式</span><br><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure></p>
-<p>调回流量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//进入配置模式</span><br><span class="line">configure exclusive</span><br><span class="line"></span><br><span class="line">//恢复bundle，将删除bundle时的配置粘贴过来</span><br><span class="line">set interfaces xe-15/0/1 gigether-options 802.3ad ae0</span><br><span class="line"></span><br><span class="line">//打开端口</span><br><span class="line">delete interfaces xe-15/0/1 disable</span><br><span class="line"></span><br><span class="line">//保存配置并退出配置模式</span><br><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2896,7 +2917,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2947,7 +2968,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -3090,7 +3113,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">63</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
