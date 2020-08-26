@@ -142,6 +142,23 @@ end-policy-map
 # 流量监管和整形
 
 
+## 流量监管
+流量监管是限制进入网络的流量与突发，为网络的稳定提供了基本的QoS功能。
+
+流量监管TP（Traffic Policing）的典型应用是监督进入网络的某一流量的规格，把它限制在一个合理的范围之内，并对超出部分的流量进行“惩罚”，以保护网络资源和运营商的利益。
+
+
+
+## 流量整形 
+
+流量整形则是限制流出网络的流量与突发，为网络的稳定提供了基本的QoS功能。
+
+流量整形TS（Traffic Shaping）的典型作用是限制流出某一网络的某一连接的正常流量与突发流量，使这类报文以比较均匀的速度向外发送，是一种主动调整流量输出速率的措施。
+
+
+
+## Police限速
+
 对于Policing，对于限制外的，就直接丢弃了
 
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1ghels3mlqpj30jl0lsqd4.jpg)
@@ -152,7 +169,7 @@ end-policy-map
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1ghelurqctsj30jq0mvn6p.jpg)
 
 
-## Police限速
+
 
 ```
 policy-map pm5-8000K-in
@@ -169,6 +186,10 @@ policy-map pm5-8000K-in
     conform-action set mpls experimental importion 5
     exceed-action drop  
 ```
+
+
+
+
 
 
 ## Shape限速
@@ -304,3 +325,249 @@ show qos interface <interface> <input|output>
 
 
 ![tempsnip.png](http://ww1.sinaimg.cn/large/006eDJDNly1gher5eljt9j319h0olqju.jpg)
+
+
+
+
+
+# 华为的QoS
+
+
+
+## In方向策略
+
+通过上面思科系统的学习，知道了In方向通常只是对IP包进行分类（通过IP包的precedence），然后会有一个限速
+
+
+### Classifier 分类
+
+分类：根据IP包的precedence进行分类
+
+```
+traffic classifier dsipp7 operator or
+  if-match ip-precedence 7
+
+traffic classifier dsipp5 operator or
+  if-match ip-precedence 5
+
+traffic classifier dsipp3+6 operator or
+  if-match ip-precedence 3
+  if-match ip-precedence 6
+
+traffic classifier dsipp2 operator or
+  if-match ip-precedence 2
+
+traffic classifier others operator or
+  if-match ip-precedence 0
+  if-match ip-precedence 1
+  if-match ip-precedence 4 
+
+```
+
+
+
+### Behavior 动作
+
+对不同类的一些行为操作，比如限速等
+
+```
+
+
+# cir表示指定承诺信息速率
+# cbs表示指定突发尺寸，即令牌桶的容量
+# pbs表示指定峰值突发尺寸
+
+traffic behavior dsipp7
+  car cir <D> cbs XXXX pbs XXXX
+  service-class cs7 color green
+
+traffic behavior dsipp5
+  car cir <D+P> cbs XXXX pbs XXXX
+  service-class ef color green
+
+...
+
+
+traffic behavior others
+  service-class af1 color green
+
+```
+
+
+### policy
+
+将classifier和behavior合并之后，就变成了policy，也就是对于每一个分类，都有相应的行为操作
+
+Qos-profile的user-queue配置是对整个端口的限速，behavior中的限速是对某一个ipp的限速，Behavior的限速必定 小于等于 user-queue的限速
+
+```
+traffic policy XXX-in
+  classifier dsipp7 behavior dsipp7 
+  classifier dsipp5 behavior dsipp5
+  classifier dsipp3+6 behavior dsipp3+6
+  classifier dsipp2 behavior dsipp2
+  classifier others behavior others
+
+
+# cir表示指定承诺信息速率
+# pir表示指定峰值速率
+
+qos-profile XXX-in.p
+  user-queue cir 2048 pir 2048
+
+```
+
+
+### 流量监管（CAR）
+
+首先在接口下配置
+```
+interface Serial4/0/0/3:0
+   traffic-policy AAA-2M-in inbound
+
+```
+
+其中，AAA-2M-in为
+```
+traffic policy AAA-2M-in
+ share-mode
+ classifier ipp7 behavior bh-ipp7-AAA-2M-in
+ classifier ipp5 behavior bh-ipp5-AAA-2M-in
+ classifier all behavior bh-ipp2-in
+
+```
+其中，bh-ipp7-AAA-2M-in
+```
+traffic behavior bh-ipp7-AAA-2M-in
+ car cir 304 cbs 57000 pbs 57000 green pass yellow pass red discard
+ service-class cs7 color green no-remark
+
+```
+
+其中，
+```
+traffic classifier ipp7 operator or
+ if-match ip-precedence 7
+ if-match mpls-exp 7
+
+```
+
+配置检查命令
+
+查看behavior
+```
+display traffic behavior user-defined bh-ipp7-AAA-2M-in
+```
+查看traffic policy
+```
+display traffic policy user-defined AAA-2M-in
+```
+查看classifier
+```
+display traffic classifier user-defined ipp7
+```
+
+
+### 流量整形（flow-queue方式）
+
+
+queue命令用来在流队列模板中修改流队列的调度参数，包括：调度方式、shaping、WRED。
+
+参数：
+* cos-value，指定配置的流队列，取值可以是af1～af4、be、cs6、cs7、ef
+* weight-value，整数形式，取值范围是1～100
+* shaping-value，整形速率，表示每个流队列的整形速率，整数形式，取值范围是8～4294967294，单位为Kbit/s。
+* shaping-percentage-value，整形速率的百分比，表示整形带宽占Qos模板中用户队列峰值带宽的百分比。整数形式，取值范围是0～100
+* pq | wfq | lpq ： 配置该队列的调度方式。pq为绝对优先级队列调度；wfq为加权公平队列调度；lpq为低优先级调度。三种队列调度的优先级次序为：PQ队列的优先级高于WFQ队列的优先级。WFQ队列的优先级高于LPQ队列的优先级。高优先级的队列可以抢占低优先级队列的带宽。
+* pbs pbs-value，指定峰值突发尺寸（Peak Burst Size）
+* wred-name，配置该队列使用的WRED对象
+
+
+举例子：
+```
+在流队列WRED模板对象test中，配置af1队列的权重为50，整形速率为6Mbit/s。
+
+queue af1 wfq weight 50 shaping 6000 pbs 1000 flow-wred test
+
+```
+
+#### 配置方法：
+
+老的配置
+```
+#老的配置使用的是user-queue,新的使用的是qos-profile，
+interface GigabitEthernet3/0/0.402
+  user-queue cir 18227 pir 18227 flow-queue AAA-20M-out outbound
+
+
+flow-queue AAA-20M-out
+ queue af2 wfq weight 34 flow-wred ipp2-wred
+ queue af3 wfq weight 66 flow-wred ipp3-wred
+ queue cs7 pq shaping shaping-percentage 30
+
+```
+
+新的配置
+
+```
+interface GigabitEthernet2/1/0.153
+
+ qos-profile AAA-6M-out.p outbound identifier none
+ statistic enable
+
+
+qos-profile AAA-6M-out.p
+ user-queue cir 6144 pir 6144 flow-queue AAA-6M-out outbound
+
+
+flow-queue AAA-6M-out
+ queue af2 wfq weight 24 shaping shaping-percentage 100 flow-wred ipp2-wred
+ queue af3 wfq weight 46 shaping shaping-percentage 76 flow-wred ipp3-wred
+ queue ef wfq weight 30 shaping shaping-percentage 30 flow-wred ipp5-wred
+
+```
+
+
+查看配置命令：
+```
+ display flow-queue configuration verbose AAA-20M-out
+```
+
+
+
+### 拥塞管理
+
+拥塞管理指网络在发生拥塞时，如何进行管理和控制。处理的方法是使用队列技术，将从一个接口发出的所有报文放入多个队列，按照各个队列的优先级进行处理。不同的队列调度算法用来解决不同的问题，并产生不同的效果。
+
+比如，PQ队列，WFQ队列等等
+
+
+
+
+
+### 拥塞避免
+通过监视网络资源（如队列或内存缓冲区）的使用情况，在拥塞有加剧的趋势时，主动丢弃报文，通过调整网络的流量来解除网络过载的一种流量控制机制。拥塞避免用于防止因为线路拥塞而使设备的队列溢出。
+
+
+```
+interface GigabitEthernet6/0/2.100        
+ 
+ qos-profile AAA-out.p outbound identifier none
+ statistic enable
+
+
+
+qos-profile AAA-out.p
+ user-queue cir 2000000 pir 2000000 flow-queue AAA-out
+
+
+
+flow-queue AAA-out
+ queue cs7 pq flow-wred ipp3-wred
+
+
+flow-wred ipp3-wred                       
+ color green low-limit 50 high-limit 100 discard-percentage 100
+
+```
+
