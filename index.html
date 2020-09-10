@@ -328,6 +328,245 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/31/二层VPN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/08/31/二层VPN/" class="post-title-link" itemprop="url">二层VPN</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-31 08:43:18" itemprop="dateCreated datePublished" datetime="2020-08-31T08:43:18+08:00">2020-08-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-10 10:55:39" itemprop="dateModified" datetime="2020-09-10T10:55:39+08:00">2020-09-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数通/" itemprop="url" rel="index"><span itemprop="name">数通</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/08/31/二层VPN/" class="leancloud_visitors" data-flag-title="二层VPN">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MPLS L2VPN提供基于MPLS网络的二层VPN服务，包括<strong>点到点的VPWS业务</strong>（Virtual Private Wire Service）跟<strong>点到多点的VPLS业务</strong>（Virtual Private LAN Service）</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pfws5u8j31810je7fn.jpg" alt="捕获.PNG"></p>
+<p>MPLS L2VPN就是在MPLS网络上透明传递用户的二层数据。从用户的角度来看，这个MPLS网络就是一个二层的交换网络，通过这个网络，可以在不同站点之间建立二层的连接</p>
+<h1 id="VPWS"><a href="#VPWS" class="headerlink" title="VPWS"></a>VPWS</h1><h2 id="VPWS基本架构"><a href="#VPWS基本架构" class="headerlink" title="VPWS基本架构"></a>VPWS基本架构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9phz8sg5j30zy0bgq98.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>接入电路AC（Attachment Circuit）：一条连接CE和PE的独立的链路或电路。AC接口可以是物理接口或逻辑接口。</li>
+<li>虚电路VC（Virtual Circuit）：两个PE节点之间的一种逻辑连接。</li>
+<li>隧道Tunnel（MPLS Tunnel）：用于在PE之间透明地传输用户数据。</li>
+</ul>
+<blockquote>
+<p>VC提供用户二层数据穿越运营商骨干网络的通道，可以将其简单地理解为连接两个AC接口虚拟线路（点到点连接），将两条用户侧的AC“短接”起来。因此在MPLS L2VPN的实现中，VC又被称为PW（Pseudo Wire，伪线）。</p>
+</blockquote>
+<h2 id="VPWS-报文发送过程"><a href="#VPWS-报文发送过程" class="headerlink" title="VPWS 报文发送过程"></a>VPWS 报文发送过程</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pmfnnvpj31ac08sdjo.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>MPLS L2VPN通过标签栈实现用户报文在MPLS网络中的透明传送</li>
+<li>外层标签（称为Tunnel标签）用于将报文从一个PE传递到另一个PE。</li>
+<li>内层标签（在MPLS L2VPN中称为VC标签）用于区分不同VPN中的不同连接，接收方PE根据VC标签决定将报文转发给哪个CE（哪个AC接口）。</li>
+</ul>
+<blockquote>
+<p>华为查询方式：</p>
+<p>display mpls l2vc interface XXX ：能查询内层VC标签，查询到VC tunnel下的tunnel id</p>
+<p>display tunnel-info tunnel-id X ： 能查询出接口、外层标签</p>
+</blockquote>
+<h2 id="VPWS实现方式"><a href="#VPWS实现方式" class="headerlink" title="VPWS实现方式"></a>VPWS实现方式</h2><h3 id="Martini"><a href="#Martini" class="headerlink" title="Martini"></a>Martini</h3><p>Martini是基于LDP的，Martini方式使用两层标签，内层标签是采用扩展的LDP作为信令进行交互。</p>
+<p>PE之间建立LDP的remote session，PE为CE之间的每条连接分配一个VC标签。二层VPN信息将携带着VC标签，通过LDP建立的LSP转发到remote session的对端PE。</p>
+<p>在Martini方式中，两个CE间的VC Type + VC ID来识别一个VC。同一个VC Type的所有VC中，其VC ID必须在整个MPLS网络中唯一。</p>
+<ul>
+<li>VC-Type：表明VC的封装类型，例如ATM、VLAN或PPP。</li>
+<li>VC-ID：标识VC。相同VC-Type的所有VC，其VC-ID必须在整个MPLS网络中唯一。</li>
+</ul>
+<h3 id="Martini的标签协商-VLL技术"><a href="#Martini的标签协商-VLL技术" class="headerlink" title="Martini的标签协商-VLL技术"></a>Martini的标签协商-VLL技术</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia20woay1j30wt07xdgk.jpg" alt="捕获.PNG"></p>
+<p>在PE1上配置：</p>
+<p>首先在PE之间配置 mpls ldp remote 会话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mpls ldp remote-peer PE2</span><br><span class="line">    remote ip 3.0.0.42</span><br></pre></td></tr></table></figure></p>
+<p>之后在PE1接入CE的接口上创建L2VPN连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpls l2vc 3.0.0.42 1001</span><br></pre></td></tr></table></figure></p>
+<p>同样的，在PE2上配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mpls ldp remote-peer PE1</span><br><span class="line">    remote ip 3.0.0.44</span><br><span class="line"></span><br><span class="line">mpls l2vc 3.0.0.45 1001</span><br></pre></td></tr></table></figure></p>
+<p>这样，PE1和PE2之间就建立了一条VC（也就是PW），VC_ID为1001</p>
+<p>之后，先在PE1上的GE子接口上绑定L2VC，之后PE1会为该VC分配一个内层标签140288，放入mapping消息中，并发送request和mapping消息给PE2，由于PE2并没有配置L2VC，所以将不做回应</p>
+<p>然后，在PE2上的GE子接口上配置L2VC，此时PE2会为该VC分配一个标签140290，将这个标签放在mapping消息中，并发送mapping和request报文给PE1。PE1接收到PE2发送过来的request和mapping消息后，作出反应，将自己分配的标签140288放 入mapping消息中，并发送mapping消息给PE2，再检查PE2发过来的mapping消息发现VC信息符合，便将mapping里面的标签140290放入本地，作为PE1的Remote Label，并使本地的VC状态up，如下图示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia44kmgwrj30x109g3za.jpg" alt="捕获.PNG"></p>
+<p>PE2接收到PE1端过来的mapping报文，比较之后发现VC信息相符，则将mapping中的标签140288放入自己本地，作为PE2的Remote Label，将VC的状态改为UP，此时VC建立完毕，如上图示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia45j344ej30vs08vwf9.jpg" alt="捕获.PNG"></p>
+<h3 id="Martini的转发过程"><a href="#Martini的转发过程" class="headerlink" title="Martini的转发过程"></a>Martini的转发过程</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia46vkjmej30wg0bvq3u.jpg" alt="捕获.PNG"></p>
+<p>报文从CE1到达PE1，根据接口转发表查得公网标签（1027）和VC标签(140290)，打上标签从出接口转发出去。倒数第二跳的时候弹出标签，在PE2上查找VC标签对应的出接口，弹出私网标签，转发到CE2。</p>
+<h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Display mpls ldp session</span><br><span class="line"></span><br><span class="line">Display mpls ldp peer</span><br><span class="line"></span><br><span class="line">Display mpls l2vc brief</span><br><span class="line"></span><br><span class="line">Display mpls l2vc interface xxxxxxx</span><br><span class="line"></span><br><span class="line">display tunnel-info tunnel-id xxx</span><br><span class="line"></span><br><span class="line">display mpls l2vc vc-id</span><br></pre></td></tr></table></figure>
+<h3 id="Kompella"><a href="#Kompella" class="headerlink" title="Kompella"></a>Kompella</h3><h1 id="VPLS"><a href="#VPLS" class="headerlink" title="VPLS"></a>VPLS</h1><h2 id="VPLS基本结构"><a href="#VPLS基本结构" class="headerlink" title="VPLS基本结构"></a>VPLS基本结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9q1b3vzmj314e0j7k38.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>PW（Pseudo-Wire）：伪线。PW是VPLS中两个PE间的虚拟逻辑连接，在两个PE之间传输用户数据。</li>
+<li>VSI（Virtual Switch Instance）：虚拟交换实例。每个VSI提供单独的VPLS服务。通过VSI，可以将VPLS的实际接入链路映射到各条虚链接上。</li>
+<li>AC（Attachment Circuit）：接入线路。指CE与PE的连接，在L2VPN中，CE通过AC接入到PE。</li>
+<li>Tunnel（Network Tunnel）：隧道。用于承载PW，一条隧道上可以承载多条PW，一般情况下为MPLS隧道。隧道是一条本地PE与对端PE之间的直连通道，完成PE之间的数据透传。</li>
+</ul>
+<h2 id="VPLS基本工作原理"><a href="#VPLS基本工作原理" class="headerlink" title="VPLS基本工作原理"></a>VPLS基本工作原理</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sctbxn7j312p0fyjxu.jpg" alt="捕获.PNG"></p>
+<p>可以将每个VSI看作一台独立的交换机。PE连 接CE的端口（AC接口）作为交换机的端口，而连接各个PE的PW就是交换机的内部交叉电路。</p>
+<h2 id="VPLS与普通L2VPN的区别"><a href="#VPLS与普通L2VPN的区别" class="headerlink" title="VPLS与普通L2VPN的区别"></a>VPLS与普通L2VPN的区别</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sfozbwpj30yq0jzwmz.jpg" alt="捕获.PNG"></p>
+<h2 id="VPLS基本拓扑"><a href="#VPLS基本拓扑" class="headerlink" title="VPLS基本拓扑"></a>VPLS基本拓扑</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sk3h7khj30tj0d8n48.jpg" alt="捕获.PNG"></p>
+<p>同一个VSI中各个PE间必须建立<strong>全连接</strong>的PW，同时配置“水平分割”策略（无需配置，产品缺省），即如果PE收到远端PE发来的广播流量，它只向同一VPLS的所有AC端口转发流量，不向其他PE转发 。PE间全连接和水平分割一起保证了VPLS转发的可达性和无环路。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/QoS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2765,237 +3004,6 @@ for i, data in enumerate(trainloader, 0):
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/MPLS概述与静态LSP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/04/01/MPLS概述与静态LSP/" class="post-title-link" itemprop="url">MPLS概述与静态LSP</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-04-01 14:01:34 / 修改时间：16:18:00" itemprop="dateCreated datePublished" datetime="2020-04-01T14:01:34+08:00">2020-04-01</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MPLS/" itemprop="url" rel="index"><span itemprop="name">MPLS</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/04/01/MPLS概述与静态LSP/" class="leancloud_visitors" data-flag-title="MPLS概述与静态LSP">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MPLS的概述"><a href="#MPLS的概述" class="headerlink" title="MPLS的概述"></a>MPLS的概述</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8kaupm0j30nj0c5dje.jpg" alt="捕获.PNG"></p>
-<p>在IP报文前面会增加一个标签</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8mfirq5j30n50cpn2w.jpg" alt="捕获.PNG"></p>
-<h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8pnqnyjj30mj07ijtj.jpg" alt="捕获.PNG"></p>
-<ul>
-<li>LSR（Label Switch Router，标签交换路由器）：支持MPLS的路由器（实际上也指支持MPLS的交换机或其他网络设备），该设备能够根据报文的MPLS标签头部对其尽情转发（例如图中的R1，R2及R3）</li>
-<li>MPLS域（Domain）：一系列连续的LSR构成了一个MPLS域，如上图所示</li>
-<li>LER（Label Edge Router）：位于MPLS域边缘，连接其他网络的LSR，例如图中的R1，R3</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8vdorowj30ja06e0ue.jpg" alt="捕获.PNG"></p>
-<ul>
-<li>LSP（Label Switched Path，标签交换路径）：是标签报文穿越MPLS网络到达目的地所走的路径</li>
-<li>LSP实际上是一种类似Tunnel的概念，LSP的建立过程实际上也是报文转发路径中，沿途设备关于特定FEC的标签的确定过程</li>
-<li>LSP可以通过手工的方式建立（静态LSP），或者通过标签分发协议自动建立（动态LSP）</li>
-<li>LSP是单向的，如图所示</li>
-</ul>
-<ul>
-<li>LSP的入口LSR被称为Ingress LSR（入站LSR）</li>
-<li>位于LSP中间的LSR被称为Transit LSR（中转LSR）</li>
-<li>LSP的出口LSR被称为Egress LSR（出站LSR）</li>
-<li>Ingress LSR及Egress LSR都是LER</li>
-<li><p>上图来说，R1是Ingress LSR，R2是Transit LSR，R3是Egress LSR，一条LSP可以有0个，1个或多个Transit LSR，但有且只有一个Ingress LSR和一个Egress LSR</p>
-</li>
-<li><p>FEC（Forwarding Equivalence Class，转发等价类）是在转发过程中具有相同处理方式和处理待遇的数据流，可通过IP地址，隧道，Cos等方式来标识一个FEC。例如，在传统的采用最长匹配算法的IP转发中，到同一条路由的所有报文就是一个转发等价类</p>
-</li>
-<li>通常在一台设备上，对于一个FEC分配相同的标签</li>
-<li>属于一个FEC的流量具有相同的转发方式，转发路径和转发待遇。但是并不是所有拥有相同标签的报文都属于一个FEC，因为这些报文的EXP值可能不相同，执行方式可能不同。</li>
-<li>决定报文属于哪一个FEC的设备是Ingress LSR，因为是它对报文进行分类和压入标签。</li>
-</ul>
-<h2 id="MPLS架构"><a href="#MPLS架构" class="headerlink" title="MPLS架构"></a>MPLS架构</h2><h3 id="控制平面（Control-Plane）"><a href="#控制平面（Control-Plane）" class="headerlink" title="控制平面（Control Plane）"></a>控制平面（Control Plane）</h3><ul>
-<li>控制平面是无连接的，主要功能是负责产生和维护路由信息以及标签信息</li>
-<li>控制平面IP路由协议（IP Routing Protocol）模块用来传递路由信息，生成路由信息表；标签分发协议（Label Distribution Protocol）模块用来完成标签信息的交换，建立标签转发路径</li>
-<li>路由信息表RIB（Routing Information Base）：由IP路由协议（IP Routing Protocol）生成，用于选择路由</li>
-<li>标签分发协议LDP（Label Distribution Protocol）：负责标签的分配，标签转发信息表的建立，标签交换路径的建立，拆除等工作</li>
-<li>标签信息表LIB（Label Information Base）：由标签分发协议生成，用于管理标签信息</li>
-</ul>
-<h3 id="数据平面（Data-plane）"><a href="#数据平面（Data-plane）" class="headerlink" title="数据平面（Data plane）"></a>数据平面（Data plane）</h3><ul>
-<li>数据平面也称为转发平面，是面向连接的，主要功能是负责普通IP报文的转发以及带MPLS标签报文的转发。</li>
-<li>数据平面包括IP转发信息表（Forwarding Information Base）和标签转发信息表（Label Forwarding Information Base），当收到普通IP报文时，如果需要按照标签转发，根据标签转发表转发，如果需要转发到IP网络，则去掉标签后根据IP转发表转发</li>
-<li>转发信息表FIB（Forwarding Information Base）：从RIB提取必要的路由信息生成，负责普通IP报文的转发</li>
-<li>标签转发信息表LFIB（Label Forwarding Information Base）：简称标签转发表，由标签分发协议在LSR上建立LFIB，负责带MPLS标签报文的转发</li>
-</ul>
-<h2 id="MPLS标签结构"><a href="#MPLS标签结构" class="headerlink" title="MPLS标签结构"></a>MPLS标签结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdeaygxyxbj30mk0ca41x.jpg" alt="捕获.PNG"></p>
-<p>对于 BoS，靠近IP头部的是栈底，靠近二层帧头的是栈顶</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebdexmbyj30m10bawhz.jpg" alt="捕获.PNG"></p>
-<h3 id="标签空间"><a href="#标签空间" class="headerlink" title="标签空间"></a>标签空间</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebgdyzrwj30pa0cugqo.jpg" alt="捕获.PNG"></p>
-<h3 id="MPLS标签的处理"><a href="#MPLS标签的处理" class="headerlink" title="MPLS标签的处理"></a>MPLS标签的处理</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebi65455j30oq0akn1e.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebiq2700j30mh0cbwh9.jpg" alt="捕获.PNG"></p>
-<h3 id="LSP的建立"><a href="#LSP的建立" class="headerlink" title="LSP的建立"></a>LSP的建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebkcuu4fj30o10d00yb.jpg" alt="捕获.PNG"></p>
-<h3 id="静态LSP"><a href="#静态LSP" class="headerlink" title="静态LSP"></a>静态LSP</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebqcc3baj30nz06z419.jpg" alt="捕获.PNG"></p>
-<h3 id="静态LSP的建立"><a href="#静态LSP的建立" class="headerlink" title="静态LSP的建立"></a>静态LSP的建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebs6pjz4j30nu0cowjx.jpg" alt="捕获.PNG"></p>
-<h4 id="静态LSP的建立Step-1-部署路由"><a href="#静态LSP的建立Step-1-部署路由" class="headerlink" title="静态LSP的建立Step 1 部署路由"></a>静态LSP的建立Step 1 部署路由</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebud5ssuj30o40bg78e.jpg" alt="捕获.PNG"></p>
-<h4 id="静态LSP的建立Step-2-在设备上激活MPLS"><a href="#静态LSP的建立Step-2-在设备上激活MPLS" class="headerlink" title="静态LSP的建立Step 2  在设备上激活MPLS"></a>静态LSP的建立Step 2  在设备上激活MPLS</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebxwnxsej30m70bsjwb.jpg" alt="捕获.PNG"></p>
-<h4 id="静态LSP的建立Step-3-配置静态LSP"><a href="#静态LSP的建立Step-3-配置静态LSP" class="headerlink" title="静态LSP的建立Step 3  配置静态LSP"></a>静态LSP的建立Step 3  配置静态LSP</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec0515pmj30nz0cojvd.jpg" alt="捕获.PNG"></p>
-<p>注：1to4是自己起的名字 4.4.4.0 24是目的地址和掩码 nexthop是下一跳，需要注意的是，你的目的地址/掩码和下一跳必须和路由表中一致</p>
-<p>反向：<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec3kn42vj30o60cqjvd.jpg" alt="捕获.PNG"></p>
-<h4 id="静态LSP的建立Step-34-查看与验证"><a href="#静态LSP的建立Step-34-查看与验证" class="headerlink" title="静态LSP的建立Step 34  查看与验证"></a>静态LSP的建立Step 34  查看与验证</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec4wuzcxj30nv0c8q7c.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec67fdc2j30nx0cqn1c.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec6ur9foj30ne0cidjl.jpg" alt="捕获.PNG"></p>
-<h4 id="静态LSP配置注意事项"><a href="#静态LSP配置注意事项" class="headerlink" title="静态LSP配置注意事项"></a>静态LSP配置注意事项</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec7ej06zj30me0chgp5.jpg" alt="捕获.PNG"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3042,7 +3050,7 @@ for i, data in enumerate(trainloader, 0):
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3507,9 +3515,9 @@ for i, data in enumerate(trainloader, 0):
       
     
       
-        
-      
     
+      
+        
       
     
       

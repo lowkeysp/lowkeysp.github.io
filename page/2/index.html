@@ -328,6 +328,237 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/MPLS概述与静态LSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/01/MPLS概述与静态LSP/" class="post-title-link" itemprop="url">MPLS概述与静态LSP</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-01 14:01:34 / 修改时间：16:18:00" itemprop="dateCreated datePublished" datetime="2020-04-01T14:01:34+08:00">2020-04-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MPLS/" itemprop="url" rel="index"><span itemprop="name">MPLS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/04/01/MPLS概述与静态LSP/" class="leancloud_visitors" data-flag-title="MPLS概述与静态LSP">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MPLS的概述"><a href="#MPLS的概述" class="headerlink" title="MPLS的概述"></a>MPLS的概述</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8kaupm0j30nj0c5dje.jpg" alt="捕获.PNG"></p>
+<p>在IP报文前面会增加一个标签</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8mfirq5j30n50cpn2w.jpg" alt="捕获.PNG"></p>
+<h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8pnqnyjj30mj07ijtj.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>LSR（Label Switch Router，标签交换路由器）：支持MPLS的路由器（实际上也指支持MPLS的交换机或其他网络设备），该设备能够根据报文的MPLS标签头部对其尽情转发（例如图中的R1，R2及R3）</li>
+<li>MPLS域（Domain）：一系列连续的LSR构成了一个MPLS域，如上图所示</li>
+<li>LER（Label Edge Router）：位于MPLS域边缘，连接其他网络的LSR，例如图中的R1，R3</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8vdorowj30ja06e0ue.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>LSP（Label Switched Path，标签交换路径）：是标签报文穿越MPLS网络到达目的地所走的路径</li>
+<li>LSP实际上是一种类似Tunnel的概念，LSP的建立过程实际上也是报文转发路径中，沿途设备关于特定FEC的标签的确定过程</li>
+<li>LSP可以通过手工的方式建立（静态LSP），或者通过标签分发协议自动建立（动态LSP）</li>
+<li>LSP是单向的，如图所示</li>
+</ul>
+<ul>
+<li>LSP的入口LSR被称为Ingress LSR（入站LSR）</li>
+<li>位于LSP中间的LSR被称为Transit LSR（中转LSR）</li>
+<li>LSP的出口LSR被称为Egress LSR（出站LSR）</li>
+<li>Ingress LSR及Egress LSR都是LER</li>
+<li><p>上图来说，R1是Ingress LSR，R2是Transit LSR，R3是Egress LSR，一条LSP可以有0个，1个或多个Transit LSR，但有且只有一个Ingress LSR和一个Egress LSR</p>
+</li>
+<li><p>FEC（Forwarding Equivalence Class，转发等价类）是在转发过程中具有相同处理方式和处理待遇的数据流，可通过IP地址，隧道，Cos等方式来标识一个FEC。例如，在传统的采用最长匹配算法的IP转发中，到同一条路由的所有报文就是一个转发等价类</p>
+</li>
+<li>通常在一台设备上，对于一个FEC分配相同的标签</li>
+<li>属于一个FEC的流量具有相同的转发方式，转发路径和转发待遇。但是并不是所有拥有相同标签的报文都属于一个FEC，因为这些报文的EXP值可能不相同，执行方式可能不同。</li>
+<li>决定报文属于哪一个FEC的设备是Ingress LSR，因为是它对报文进行分类和压入标签。</li>
+</ul>
+<h2 id="MPLS架构"><a href="#MPLS架构" class="headerlink" title="MPLS架构"></a>MPLS架构</h2><h3 id="控制平面（Control-Plane）"><a href="#控制平面（Control-Plane）" class="headerlink" title="控制平面（Control Plane）"></a>控制平面（Control Plane）</h3><ul>
+<li>控制平面是无连接的，主要功能是负责产生和维护路由信息以及标签信息</li>
+<li>控制平面IP路由协议（IP Routing Protocol）模块用来传递路由信息，生成路由信息表；标签分发协议（Label Distribution Protocol）模块用来完成标签信息的交换，建立标签转发路径</li>
+<li>路由信息表RIB（Routing Information Base）：由IP路由协议（IP Routing Protocol）生成，用于选择路由</li>
+<li>标签分发协议LDP（Label Distribution Protocol）：负责标签的分配，标签转发信息表的建立，标签交换路径的建立，拆除等工作</li>
+<li>标签信息表LIB（Label Information Base）：由标签分发协议生成，用于管理标签信息</li>
+</ul>
+<h3 id="数据平面（Data-plane）"><a href="#数据平面（Data-plane）" class="headerlink" title="数据平面（Data plane）"></a>数据平面（Data plane）</h3><ul>
+<li>数据平面也称为转发平面，是面向连接的，主要功能是负责普通IP报文的转发以及带MPLS标签报文的转发。</li>
+<li>数据平面包括IP转发信息表（Forwarding Information Base）和标签转发信息表（Label Forwarding Information Base），当收到普通IP报文时，如果需要按照标签转发，根据标签转发表转发，如果需要转发到IP网络，则去掉标签后根据IP转发表转发</li>
+<li>转发信息表FIB（Forwarding Information Base）：从RIB提取必要的路由信息生成，负责普通IP报文的转发</li>
+<li>标签转发信息表LFIB（Label Forwarding Information Base）：简称标签转发表，由标签分发协议在LSR上建立LFIB，负责带MPLS标签报文的转发</li>
+</ul>
+<h2 id="MPLS标签结构"><a href="#MPLS标签结构" class="headerlink" title="MPLS标签结构"></a>MPLS标签结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdeaygxyxbj30mk0ca41x.jpg" alt="捕获.PNG"></p>
+<p>对于 BoS，靠近IP头部的是栈底，靠近二层帧头的是栈顶</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebdexmbyj30m10bawhz.jpg" alt="捕获.PNG"></p>
+<h3 id="标签空间"><a href="#标签空间" class="headerlink" title="标签空间"></a>标签空间</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebgdyzrwj30pa0cugqo.jpg" alt="捕获.PNG"></p>
+<h3 id="MPLS标签的处理"><a href="#MPLS标签的处理" class="headerlink" title="MPLS标签的处理"></a>MPLS标签的处理</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebi65455j30oq0akn1e.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebiq2700j30mh0cbwh9.jpg" alt="捕获.PNG"></p>
+<h3 id="LSP的建立"><a href="#LSP的建立" class="headerlink" title="LSP的建立"></a>LSP的建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebkcuu4fj30o10d00yb.jpg" alt="捕获.PNG"></p>
+<h3 id="静态LSP"><a href="#静态LSP" class="headerlink" title="静态LSP"></a>静态LSP</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebqcc3baj30nz06z419.jpg" alt="捕获.PNG"></p>
+<h3 id="静态LSP的建立"><a href="#静态LSP的建立" class="headerlink" title="静态LSP的建立"></a>静态LSP的建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebs6pjz4j30nu0cowjx.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-1-部署路由"><a href="#静态LSP的建立Step-1-部署路由" class="headerlink" title="静态LSP的建立Step 1 部署路由"></a>静态LSP的建立Step 1 部署路由</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebud5ssuj30o40bg78e.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-2-在设备上激活MPLS"><a href="#静态LSP的建立Step-2-在设备上激活MPLS" class="headerlink" title="静态LSP的建立Step 2  在设备上激活MPLS"></a>静态LSP的建立Step 2  在设备上激活MPLS</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebxwnxsej30m70bsjwb.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-3-配置静态LSP"><a href="#静态LSP的建立Step-3-配置静态LSP" class="headerlink" title="静态LSP的建立Step 3  配置静态LSP"></a>静态LSP的建立Step 3  配置静态LSP</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec0515pmj30nz0cojvd.jpg" alt="捕获.PNG"></p>
+<p>注：1to4是自己起的名字 4.4.4.0 24是目的地址和掩码 nexthop是下一跳，需要注意的是，你的目的地址/掩码和下一跳必须和路由表中一致</p>
+<p>反向：<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec3kn42vj30o60cqjvd.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-34-查看与验证"><a href="#静态LSP的建立Step-34-查看与验证" class="headerlink" title="静态LSP的建立Step 34  查看与验证"></a>静态LSP的建立Step 34  查看与验证</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec4wuzcxj30nv0c8q7c.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec67fdc2j30nx0cqn1c.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec6ur9foj30ne0cidjl.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP配置注意事项"><a href="#静态LSP配置注意事项" class="headerlink" title="静态LSP配置注意事项"></a>静态LSP配置注意事项</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec7ej06zj30me0chgp5.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/BGP的选路规则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2659,218 +2890,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/11/Anaconda下jupyter-notebook使用不同环境及安装xgboost/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/01/11/Anaconda下jupyter-notebook使用不同环境及安装xgboost/" class="post-title-link" itemprop="url">Anaconda下jupyter notebook使用不同环境及安装xgboost</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-11 15:39:03" itemprop="dateCreated datePublished" datetime="2020-01-11T15:39:03+08:00">2020-01-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-10 22:06:53" itemprop="dateModified" datetime="2020-02-10T22:06:53+08:00">2020-02-10</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Anaconda/" itemprop="url" rel="index"><span itemprop="name">Anaconda</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/01/11/Anaconda下jupyter-notebook使用不同环境及安装xgboost/" class="leancloud_visitors" data-flag-title="Anaconda下jupyter notebook使用不同环境及安装xgboost">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Anaconda下jupyter-notebook使用不同环境"><a href="#Anaconda下jupyter-notebook使用不同环境" class="headerlink" title="Anaconda下jupyter notebook使用不同环境"></a>Anaconda下jupyter notebook使用不同环境</h1><p>Anaconda的出世就是为了解决管理不同的环境配置的。具体的可以看我之前的一篇博客。而在Anaconda中，经常需要使用jupyter notebook，因此，希望可以在jupyter notebook中切换环境，具体做法如下：</p>
-<p>第一步</p>
-<p>安装ipykernel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install ipykernel</span><br></pre></td></tr></table></figure></p>
-<p>第二步</p>
-<p>将conda环境写入jupyter notebook中，（conda环境的创建可以看之前的博客）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --user --name 环境名称 --display-name &quot;你希望看见的环境名&quot;</span><br></pre></td></tr></table></figure>
-<p>晚上上面两步之后，就可以在jupyter notebook中的kernel-change kernel中选择不同的环境了</p>
-<p>如果想删除kernel环境的话，可以使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec remove 环境名称</span><br></pre></td></tr></table></figure></p>
-<p>在创建conda环境时也可以同时创建kernel，如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n 环境名称  pyhont=3.*/2.* ipykernel</span><br></pre></td></tr></table></figure></p>
-<p> 参考：<a href="https://blog.csdn.net/Mr_liuxy/article/details/100011867" target="_blank" rel="noopener">https://blog.csdn.net/Mr_liuxy/article/details/100011867</a></p>
-<h1 id="安装xgboost的GPU加速版"><a href="#安装xgboost的GPU加速版" class="headerlink" title="安装xgboost的GPU加速版"></a>安装xgboost的GPU加速版</h1><p>在安装xgboost的时候，如果只是安装CPU版本的话，就相当简单了，就一条命令，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install xgboost</span><br></pre></td></tr></table></figure></p>
-<p>但是如果你想安装GPU版本的话，一条命令是完成不了的，需要踩好多坑，现就将我成功的方式总结如下</p>
-<p>这次我使用的是win10+anaconda</p>
-<p>第一步</p>
-<p>下载 xgboost 源码：<a href="https://github.com/dmlc/xgboost" target="_blank" rel="noopener">https://github.com/dmlc/xgboost</a></p>
-<p>第二步</p>
-<p>从 <a href="http://ssl.picnet.com.au/xgboost/" target="_blank" rel="noopener">http://ssl.picnet.com.au/xgboost/</a> 中下载支持GPU版已编译好的DLL文件</p>
-<p>第三步</p>
-<p>将xgboost.dll复制到xgboost-master/python-package/xgboost目录下，打开控制台，进入到python-package目录下，执行python setup.py install命令，然后，需要把xgboost-master文件名改成xgboost。至此xgboost GPU版安装成功</p>
-<p>这时候，你以为你成功了，其实并没有，会报各种错误。过了两天，我忘记了有些错误的解决方法，这里就先提供还记得的方法，以后想起来了再补充</p>
-<h2 id="运行jupyter-报raise-NotImplementedError，"><a href="#运行jupyter-报raise-NotImplementedError，" class="headerlink" title="运行jupyter 报raise NotImplementedError，"></a>运行jupyter 报raise NotImplementedError，</h2><p>解决方法：</p>
-<p>找到：C:\Users\xxx\AppData\Local\Programs\Python\Python38\Lib\site-packages\tornado\platform\asyncio.py 这个文件，</p>
-<p>打开将下边这句编辑进去，保存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import asyncio</span><br><span class="line">import sys</span><br><span class="line">if sys.platform == &apos;win32&apos; and sys.version_info &gt; (3, 8, 0, &apos;alpha&apos;, 3) :</span><br><span class="line">    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())</span><br></pre></td></tr></table></figure>
-<h2 id="检测xgboost-GPU版本是否安装成功"><a href="#检测xgboost-GPU版本是否安装成功" class="headerlink" title="检测xgboost GPU版本是否安装成功"></a>检测xgboost GPU版本是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import xgboost as xgb</span><br><span class="line">import numpy as np</span><br><span class="line">from sklearn.datasets import fetch_covtype</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># Fetch dataset using sklearn</span><br><span class="line">cov = fetch_covtype()</span><br><span class="line">X = cov.data</span><br><span class="line">y = cov.target</span><br><span class="line"></span><br><span class="line"># Create 0.75/0.25 train/test split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=42)</span><br><span class="line"></span><br><span class="line"># Specify sufficient boosting iterations to reach a minimum</span><br><span class="line">num_round = 25 #3000</span><br><span class="line"></span><br><span class="line"># Leave most parameters as default</span><br><span class="line">param = &#123;&apos;objective&apos;: &apos;multi:softmax&apos;, # Specify multiclass classification</span><br><span class="line">         &apos;num_class&apos;: 8, # Number of possible output classes</span><br><span class="line">         &apos;tree_method&apos;: &apos;gpu_hist&apos; # Use GPU accelerated algorithm</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Convert input data from numpy to XGBoost format</span><br><span class="line">dtrain = xgb.DMatrix(X_train, label=y_train)</span><br><span class="line">dtest = xgb.DMatrix(X_test, label=y_test)</span><br><span class="line"></span><br><span class="line">gpu_res = &#123;&#125; # Store accuracy result</span><br><span class="line">tmp = time.time()</span><br><span class="line"># Train model</span><br><span class="line">param[&apos;tree_method&apos;] = &apos;gpu_hist&apos;</span><br><span class="line">xgb.train(param, dtrain, num_round, evals=[(dtest, &apos;test&apos;)], evals_result=gpu_res)</span><br><span class="line">print(&quot;GPU Training Time: %s seconds&quot; % (str(time.time() - tmp)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Repeat for CPU algorithm</span><br><span class="line">tmp = time.time()</span><br><span class="line">param[&apos;tree_method&apos;] = &apos;hist&apos;</span><br><span class="line">cpu_res = &#123;&#125;</span><br><span class="line">xgb.train(param, dtrain, num_round, evals=[(dtest, &apos;test&apos;)], evals_result=cpu_res)</span><br><span class="line">print(&quot;CPU Training Time: %s seconds&quot; % (str(time.time() - tmp)))</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a href="https://blog.csdn.net/weixin_30963287/article/details/79145107" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30963287/article/details/79145107</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/89888038" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/89888038</a></p>
-<p><a href="https://www.cnblogs.com/chenxiangzhen/p/10774000.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenxiangzhen/p/10774000.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2917,7 +2936,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
