@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="二层交换机功能 维护MAC地址表，MAC寻址 数据帧的转发及过滤 二层环路避免及冗余性支持  MAC地址及MAC地址表 二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。 MAC地址 寻址过程 至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。  3）查找MAC地址表，发现没有匹配表项      VLAN为什么需要VLAN在上">
+  <meta name="description" content="二层交换机功能 维护MAC地址表，MAC寻址 数据帧的转发及过滤 二层环路避免及冗余性支持  MAC地址及MAC地址表 二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。 MAC地址 寻址过程 至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。  3）查找MAC地址表，发现没有匹配表项      VLAN为什么需要VLAN">
 <meta name="keywords" content="数据,交换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二层交换原理">
 <meta property="og:url" content="http://yoursite.com/2020/02/26/二层交换原理/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="二层交换机功能 维护MAC地址表，MAC寻址 数据帧的转发及过滤 二层环路避免及冗余性支持  MAC地址及MAC地址表 二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。 MAC地址 寻址过程 至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。  3）查找MAC地址表，发现没有匹配表项      VLAN为什么需要VLAN在上">
+<meta property="og:description" content="二层交换机功能 维护MAC地址表，MAC寻址 数据帧的转发及过滤 二层环路避免及冗余性支持  MAC地址及MAC地址表 二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。 MAC地址 寻址过程 至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。  3）查找MAC地址表，发现没有匹配表项      VLAN为什么需要VLAN">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k670ugij30hw08ewig.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k83bmw0j30h508wwgr.jpg">
@@ -116,10 +116,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kw8509jj30cz0amq7g.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gc9lejthu5j30i708p42c.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gc9lt7i8naj30go0ay0us.jpg">
-<meta property="og:updated_time" content="2020-02-26T09:42:33.369Z">
+<meta property="og:updated_time" content="2020-11-19T03:37:00.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二层交换原理">
-<meta name="twitter:description" content="二层交换机功能 维护MAC地址表，MAC寻址 数据帧的转发及过滤 二层环路避免及冗余性支持  MAC地址及MAC地址表 二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。 MAC地址 寻址过程 至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。  3）查找MAC地址表，发现没有匹配表项      VLAN为什么需要VLAN在上">
+<meta name="twitter:description" content="二层交换机功能 维护MAC地址表，MAC寻址 数据帧的转发及过滤 二层环路避免及冗余性支持  MAC地址及MAC地址表 二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。 MAC地址 寻址过程 至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。  3）查找MAC地址表，发现没有匹配表项      VLAN为什么需要VLAN">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k670ugij30hw08ewig.jpg">
 
 
@@ -384,12 +384,24 @@
                 
               
 
-              <time title="创建时间：2020-02-26 09:24:10 / 修改时间：17:42:33" itemprop="dateCreated datePublished" datetime="2020-02-26T09:24:10+08:00">2020-02-26</time>
+              <time title="创建时间：2020-02-26 09:24:10" itemprop="dateCreated datePublished" datetime="2020-02-26T09:24:10+08:00">2020-02-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-19 11:37:00" itemprop="dateModified" datetime="2020-11-19T11:37:00+08:00">2020-11-19</time>
               
             
           </span>
@@ -452,7 +464,9 @@
       
 
       
-        <h1 id="二层交换机功能"><a href="#二层交换机功能" class="headerlink" title="二层交换机功能"></a>二层交换机功能</h1><ul>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="二层交换机功能"><a href="#二层交换机功能" class="headerlink" title="二层交换机功能"></a>二层交换机功能</h1><ul>
 <li>维护MAC地址表，MAC寻址</li>
 <li>数据帧的转发及过滤</li>
 <li>二层环路避免及冗余性支持</li>

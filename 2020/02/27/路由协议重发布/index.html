@@ -96,23 +96,23 @@
 
 
 
-  <meta name="description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由信息">
+  <meta name="description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由">
 <meta name="keywords" content="数据,重发布">
 <meta property="og:type" content="article">
 <meta property="og:title" content="路由协议重发布">
 <meta property="og:url" content="http://yoursite.com/2020/02/27/路由协议重发布/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由信息">
+<meta property="og:description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb0mdni7rj30a80a442b.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb10mntjtj30au08gt9n.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb1jzm0s2j30i507rgol.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2f0462xj30hs0a7n2l.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2g33yz3j30gx0ccwkd.jpg">
-<meta property="og:updated_time" content="2020-02-27T09:10:49.147Z">
+<meta property="og:updated_time" content="2020-11-19T03:37:58.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="路由协议重发布">
-<meta name="twitter:description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由信息">
+<meta name="twitter:description" content="概念路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程 路由重发布（路由引入）是有方向性的 只有存在于路由表中的路由才能够被执行路由重发布。 路由重发布需要注意的点： 路由优先级 路由倒灌问题 路由信息不兼容(度量值信息不一致) 收敛时间不一致（不同路由协议的收敛速度不同） 度量值  路由优先级 R2和R3接收到了R1的路由">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb0mdni7rj30a80a442b.jpg">
 
 
@@ -377,12 +377,24 @@
                 
               
 
-              <time title="创建时间：2020-02-27 15:34:31 / 修改时间：17:10:49" itemprop="dateCreated datePublished" datetime="2020-02-27T15:34:31+08:00">2020-02-27</time>
+              <time title="创建时间：2020-02-27 15:34:31" itemprop="dateCreated datePublished" datetime="2020-02-27T15:34:31+08:00">2020-02-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-19 11:37:58" itemprop="dateModified" datetime="2020-11-19T11:37:58+08:00">2020-11-19</time>
               
             
           </span>
@@ -445,7 +457,9 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程</p>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程</p>
 <p>路由重发布（路由引入）是有方向性的</p>
 <p>只有存在于路由表中的路由才能够被执行路由重发布。</p>
 <h2 id="路由重发布需要注意的点："><a href="#路由重发布需要注意的点：" class="headerlink" title="路由重发布需要注意的点："></a>路由重发布需要注意的点：</h2><ul>

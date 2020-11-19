@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="MPLS详细转发过程 NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。 NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。   FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射） 通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在Ing">
+  <meta name="description" content="MPLS详细转发过程 NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。 NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。   FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射） 通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在I">
 <meta name="keywords" content="MPLS,数据,LSP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MMPLS转发过程">
 <meta property="og:url" content="http://yoursite.com/2020/04/07/MPLS静态LSP的配置及MPLS转发过程/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="MPLS详细转发过程 NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。 NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。   FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射） 通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在Ing">
+<meta property="og:description" content="MPLS详细转发过程 NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。 NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。   FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射） 通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在I">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gdldk42f64j30o40cl0wr.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gdldm58w87j30nm0codkt.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gdldomw3kej30on0ckdkg.jpg">
-<meta property="og:updated_time" content="2020-04-07T10:28:13.977Z">
+<meta property="og:updated_time" content="2020-11-19T03:33:01.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MMPLS转发过程">
-<meta name="twitter:description" content="MPLS详细转发过程 NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。 NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。   FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射） 通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在Ing">
+<meta name="twitter:description" content="MPLS详细转发过程 NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。 NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。   FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射） 通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在I">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gdldk42f64j30o40cl0wr.jpg">
 
 
@@ -375,12 +375,24 @@
                 
               
 
-              <time title="创建时间：2020-04-07 16:30:47 / 修改时间：18:28:13" itemprop="dateCreated datePublished" datetime="2020-04-07T16:30:47+08:00">2020-04-07</time>
+              <time title="创建时间：2020-04-07 16:30:47" itemprop="dateCreated datePublished" datetime="2020-04-07T16:30:47+08:00">2020-04-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-19 11:33:01" itemprop="dateModified" datetime="2020-11-19T11:33:01+08:00">2020-11-19</time>
               
             
           </span>
@@ -443,7 +455,9 @@
       
 
       
-        <h1 id="MPLS详细转发过程"><a href="#MPLS详细转发过程" class="headerlink" title="MPLS详细转发过程"></a>MPLS详细转发过程</h1><ul>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="MPLS详细转发过程"><a href="#MPLS详细转发过程" class="headerlink" title="MPLS详细转发过程"></a>MPLS详细转发过程</h1><ul>
 <li>NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。<blockquote>
 <p>NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。</p>
 </blockquote>

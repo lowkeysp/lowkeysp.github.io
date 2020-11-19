@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="技术背景VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由 实现按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。 因此，提出了子接口的概念 通过子接口实现VLAN间路由在路由器">
+  <meta name="description" content="技术背景VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由 实现按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。 因此，提出了子接口的概念 通过子接口实现VLAN间路由在路">
 <meta name="keywords" content="数据,VLAN,交换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VLAN间路由互通">
 <meta property="og:url" content="http://yoursite.com/2020/02/26/VLAN间路由互通/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="技术背景VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由 实现按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。 因此，提出了子接口的概念 通过子接口实现VLAN间路由在路由器">
+<meta property="og:description" content="技术背景VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由 实现按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。 因此，提出了子接口的概念 通过子接口实现VLAN间路由在路">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcard6588tj30gc07hq5e.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcarimck47j30i00aw42a.jpg">
@@ -110,10 +110,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcasm5nz0oj307c09g3zo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcataaaljfj30f108ndhq.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcats0fb0qj30fu0aowhb.jpg">
-<meta property="og:updated_time" content="2020-02-27T04:03:17.535Z">
+<meta property="og:updated_time" content="2020-11-19T03:34:18.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VLAN间路由互通">
-<meta name="twitter:description" content="技术背景VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由 实现按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。 因此，提出了子接口的概念 通过子接口实现VLAN间路由在路由器">
+<meta name="twitter:description" content="技术背景VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由 实现按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。 因此，提出了子接口的概念 通过子接口实现VLAN间路由在路">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcard6588tj30gc07hq5e.jpg">
 
 
@@ -395,7 +395,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-27 12:03:17" itemprop="dateModified" datetime="2020-02-27T12:03:17+08:00">2020-02-27</time>
+                <time title="修改时间：2020-11-19 11:34:18" itemprop="dateModified" datetime="2020-11-19T11:34:18+08:00">2020-11-19</time>
               
             
           </span>
@@ -458,7 +458,9 @@
       
 
       
-        <h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><p>VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由</p>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><p>VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由</p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。</p>
 <p>因此，提出了子接口的概念</p>
 <h2 id="通过子接口实现VLAN间路由"><a href="#通过子接口实现VLAN间路由" class="headerlink" title="通过子接口实现VLAN间路由"></a>通过子接口实现VLAN间路由</h2><p>在路由器以太网接口上进行“子接口”的划分，与交换机的Trunk链路对接</p>

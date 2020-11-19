@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护">
+  <meta name="description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和">
 <meta name="keywords" content="光纤,OTN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OTN原理">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/OTN原理/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护">
+<meta property="og:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52u08t67xj30r70jdtgr.jpg">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g54utb54v7j30qs0f440u.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g54v31z2vwj30of0gkq4z.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g54x9nnedaj30ow0dowf5.jpg">
-<meta property="og:updated_time" content="2019-07-19T02:29:43.695Z">
+<meta property="og:updated_time" content="2020-11-19T03:33:08.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OTN原理">
-<meta name="twitter:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护">
+<meta name="twitter:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg">
 
 
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-19 10:29:43" itemprop="dateModified" datetime="2019-07-19T10:29:43+08:00">2019-07-19</time>
+                <time title="修改时间：2020-11-19 11:33:08" itemprop="dateModified" datetime="2020-11-19T11:33:08+08:00">2020-11-19</time>
               
             
           </span>
@@ -460,7 +460,9 @@
       
 
       
-        <h2 id="OTN产生的背景"><a href="#OTN产生的背景" class="headerlink" title="OTN产生的背景"></a>OTN产生的背景</h2><p>OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护。</p>
+        <meta name="referrer" content="no-referrer">
+
+<h2 id="OTN产生的背景"><a href="#OTN产生的背景" class="headerlink" title="OTN产生的背景"></a>OTN产生的背景</h2><p>OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护。</p>
 <h2 id="OTN的技术特点"><a href="#OTN的技术特点" class="headerlink" title="OTN的技术特点"></a>OTN的技术特点</h2><ul>
 <li><p>OTN从其功能上看，在子网内以全光形式传输，而在子网的边界处采用光-电-光转换，各个子网可以通过3R再生器联接，从而构成一个大的光网络。</p>
 </li>

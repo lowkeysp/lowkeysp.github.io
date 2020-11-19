@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="参考链接http://pytorch123.com/SecondSection/what_is_pytorch/ TensorsTensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。 比如，我们构造一个5*3的矩阵，不初始化 12345678&amp;gt;&amp;gt;&amp;gt; import torch&amp;gt;&amp;gt;&amp;gt; x = torch.emp">
+  <meta name="description" content="参考链接http://pytorch123.com/SecondSection/what_is_pytorch/ TensorsTensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。 比如，我们构造一个5*3的矩阵，不初始化 12345678&amp;gt;&amp;gt;&amp;gt; import torch&amp;gt;&amp;gt;&amp;gt; x = torch.e">
 <meta name="keywords" content="pytorch,Tensors">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pytorch的60分钟学习">
 <meta property="og:url" content="http://yoursite.com/2020/06/29/pytorch的60分钟学习/index.html">
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
-<meta property="og:description" content="参考链接http://pytorch123.com/SecondSection/what_is_pytorch/ TensorsTensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。 比如，我们构造一个5*3的矩阵，不初始化 12345678&amp;gt;&amp;gt;&amp;gt; import torch&amp;gt;&amp;gt;&amp;gt; x = torch.emp">
+<meta property="og:description" content="参考链接http://pytorch123.com/SecondSection/what_is_pytorch/ TensorsTensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。 比如，我们构造一个5*3的矩阵，不初始化 12345678&amp;gt;&amp;gt;&amp;gt; import torch&amp;gt;&amp;gt;&amp;gt; x = torch.e">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-02T16:57:17.295Z">
+<meta property="og:updated_time" content="2020-11-19T03:33:32.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pytorch的60分钟学习">
-<meta name="twitter:description" content="参考链接http://pytorch123.com/SecondSection/what_is_pytorch/ TensorsTensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。 比如，我们构造一个5*3的矩阵，不初始化 12345678&amp;gt;&amp;gt;&amp;gt; import torch&amp;gt;&amp;gt;&amp;gt; x = torch.emp">
+<meta name="twitter:description" content="参考链接http://pytorch123.com/SecondSection/what_is_pytorch/ TensorsTensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。 比如，我们构造一个5*3的矩阵，不初始化 12345678&amp;gt;&amp;gt;&amp;gt; import torch&amp;gt;&amp;gt;&amp;gt; x = torch.e">
 
 
 
@@ -388,7 +388,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-03 00:57:17" itemprop="dateModified" datetime="2020-07-03T00:57:17+08:00">2020-07-03</time>
+                <time title="修改时间：2020-11-19 11:33:32" itemprop="dateModified" datetime="2020-11-19T11:33:32+08:00">2020-11-19</time>
               
             
           </span>
@@ -451,7 +451,9 @@
       
 
       
-        <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="http://pytorch123.com/SecondSection/what_is_pytorch/" target="_blank" rel="noopener">http://pytorch123.com/SecondSection/what_is_pytorch/</a></p>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="http://pytorch123.com/SecondSection/what_is_pytorch/" target="_blank" rel="noopener">http://pytorch123.com/SecondSection/what_is_pytorch/</a></p>
 <h1 id="Tensors"><a href="#Tensors" class="headerlink" title="Tensors"></a>Tensors</h1><p>Tensors 类似于 NumPy 的 ndarrays ，同时 Tensors 可以使用 GPU 进行计算。</p>
 <p>比如，我们构造一个5*3的矩阵，不初始化</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import torch</span><br><span class="line">&gt;&gt;&gt; x = torch.empty(5,3)</span><br><span class="line">&gt;&gt;&gt; x</span><br><span class="line">tensor([[-1.2141e-25,  4.5783e-41, -1.2141e-25],</span><br><span class="line">        [ 4.5783e-41,  1.3563e-19,  1.3563e-19],</span><br><span class="line">        [ 1.3563e-19,  1.3563e-19,  1.3563e-19],</span><br><span class="line">        [ 1.3563e-19,  6.1678e+16,  6.4890e-07],</span><br><span class="line">        [ 2.6176e-12,  4.0058e-11,  2.5787e-09]])</span><br></pre></td></tr></table></figure>
