@@ -5,6 +5,7 @@ tags: ['MPLS','VPN']
 categories: MPLS
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 * CE（Customer Edge）设备：企业用户的网络设备
 * PE（Provider Edge）设备：运营商提供边缘设备

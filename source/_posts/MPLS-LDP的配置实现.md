@@ -5,6 +5,8 @@ tags: ['MPLS','LDP','数据',]
 categories: 数据
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 # LDP的基础配置案例1
 
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gdl7xclzuij30m90ae40z.jpg)

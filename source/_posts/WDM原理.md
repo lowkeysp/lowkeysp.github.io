@@ -5,7 +5,7 @@ tags: [光纤,WDM,波分]
 categories: 光纤
 mathjax: true
 ---
-
+<meta name="referrer" content="no-referrer" />
 ## 简介
 
 波分复用WDM(Wavelength Division Multiplexing)是将两种或多种不同波长的光载波信号（携带各种信息）在发送端经复用器(亦称合波器，Multiplexer)汇合在一起，并耦合到光线路的同一根光纤中进行传输的技术；在接收端，经解复用器 (亦称分波器或称去复用器，De-multiplexer)将各种波长的光载波分离，然后由光接收机作进一步处理以恢复原信号。这种在同一根光纤中同时传输两个或众多不同波长光信号的技术，称为波分复用。

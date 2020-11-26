@@ -5,6 +5,7 @@ tags: ['Anaconda','jupyter notebook','xgboost']
 categories: Anaconda
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 # Anaconda下jupyter notebook使用不同环境
 Anaconda的出世就是为了解决管理不同的环境配置的。具体的可以看我之前的一篇博客。而在Anaconda中，经常需要使用jupyter notebook，因此，希望可以在jupyter notebook中切换环境，具体做法如下：

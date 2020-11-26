@@ -7,7 +7,7 @@ categories: 数据
 
 
 
-
+<meta name="referrer" content="no-referrer" />
 
 
 # MPLS VPN
@@ -73,7 +73,7 @@ categories: 数据
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1ggycqgnotzj310j0juqit.jpg)
 
 
-# RT值
+## RT值
 * RT值实际上就是MP-BGP的扩展的community
 * 用于区分VPN（Customer）
 * 一条路由可以附加多个RT值

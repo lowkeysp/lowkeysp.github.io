@@ -5,7 +5,7 @@ tags: [ubuntu,anaconda,安装,配置]
 categories: 安装
 ---
 
-
+<meta name="referrer" content="no-referrer" />
 ## 参考文献
 
 

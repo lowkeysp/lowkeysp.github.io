@@ -4,7 +4,7 @@ date: 2020-04-07 18:32:17
 tags: ['LDP','MPLS','数据']
 categories: 数据
 ---
-
+<meta name="referrer" content="no-referrer" />
 
 # 标签通告模式 
 标签通告模式 Label Advertisement Mode:在MPLS体系中，由下游LSR决定将标签分配给特定FEC，再通知上游LSR，即标签由下游指定，标签的分配按从下游到上游的方向分发。标签发布方式有两种方式。具有标签分发邻接关系的上游LSR和下游LSR必须对使用的标签发布方式达成一致。

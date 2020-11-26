@@ -6,6 +6,7 @@ categories: pytorch
 mathjax: true
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 # 参考链接
 http://pytorch123.com/SecondSection/what_is_pytorch/

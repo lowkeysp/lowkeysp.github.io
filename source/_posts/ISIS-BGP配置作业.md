@@ -5,7 +5,7 @@ tags: ['ISIS','BGP']
 categories: 网络
 ---
 
-
+<meta name="referrer" content="no-referrer" />
 
 # 网络拓扑图
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg)

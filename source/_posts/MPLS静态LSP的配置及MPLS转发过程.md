@@ -5,6 +5,8 @@ tags: ['数据','MPLS','LSP']
 categories: 数据
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 # MPLS详细转发过程
 
 * NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。

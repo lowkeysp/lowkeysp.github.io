@@ -4,7 +4,7 @@ date: 2019-09-10 09:20:41
 tags: [SDH,故障处理,]
 categories: SDH
 ---
-
+<meta name="referrer" content="no-referrer" />
 
 本章的SDH故障处理主要是以华为为基础的
 

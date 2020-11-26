@@ -5,6 +5,8 @@ tags: [python,self]
 categories: python
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 先贴出一段代码
 ```
 class A():

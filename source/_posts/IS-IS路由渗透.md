@@ -4,7 +4,7 @@ date: 2019-05-21 17:06:51
 tags: [路由协议,网络,IS-IS协议]
 categories: 网络
 ---
-
+<meta name="referrer" content="no-referrer" />
 
 # IS-IS路由渗透
 通常情况下，Level-1区域内的路由通过Level-1路由器进行管理。所有的Level-2和Level-1-2路由器构成一个连续的骨干区域。Level-1区域必须且只能与骨干区域相连，不同的Level-1区域之间并不相连。

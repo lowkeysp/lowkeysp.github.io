@@ -5,6 +5,8 @@ tags: [anaconda,安装]
 categories: 安装
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 看到了一篇文章，感觉讲的挺好的，mark下来
 https://www.jianshu.com/p/eaee1fadc1e9
 

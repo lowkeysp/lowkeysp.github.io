@@ -4,6 +4,7 @@ date: 2020-02-26 17:46:27
 tags: [VLAN,数据,交换]
 categories: 数据
 ---
+<meta name="referrer" content="no-referrer" />
 
 # 技术背景
 VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由

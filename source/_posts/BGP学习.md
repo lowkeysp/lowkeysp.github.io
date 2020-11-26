@@ -3,7 +3,7 @@ title: BGP学习
 date: 2020-02-10 22:07:37
 tags: ['网络','BGP']
 ---
-
+<meta name="referrer" content="no-referrer" />
 
 # 自制系统（Autonomous System，AS）
 AS号范围：1-65535，其中，64512-65535属于私有AS号

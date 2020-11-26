@@ -5,6 +5,8 @@ tags: ['BGP','数据','路由策略']
 categories: 数据
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 # BGP路由自动汇总
 
 * BGP支持路由自动汇总功能，该功能缺省关闭，可以在BGP配置视图中使用'summary automatic'命令开启

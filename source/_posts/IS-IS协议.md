@@ -7,7 +7,7 @@ categories: 网络
 
 
 
-
+<meta name="referrer" content="no-referrer" />
 
 
 

@@ -5,6 +5,8 @@ tags: ['数据','MPLS','LSP']
 categories: MPLS
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 # MPLS的概述
 
 ![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gde8kaupm0j30nj0c5dje.jpg)

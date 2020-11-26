@@ -7,7 +7,7 @@ mathjax: true
 ---
 
 
-
+<meta name="referrer" content="no-referrer" />
 
 ## 什么是SDH？
 SDH是Synchronous Digital Hierarchy 的简称，也就是同步数字体系。是一整套可进行同步数字传输、复用和交叉连接的标准化数字信号的等级结构。

@@ -5,6 +5,7 @@ tags: ['数据','BGP']
 categories: 数据
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 # 介绍
 

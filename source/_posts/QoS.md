@@ -4,6 +4,7 @@ date: 2020-08-04 09:20:54
 tags: ['数通','QoS']
 categories: 数通
 ---
+<meta name="referrer" content="no-referrer" />
 
 # IP QoS三种模型
 * Best-Effort模型：目前Internet的缺省服务模型，主要实现技术是先进先出队列（FIFO）

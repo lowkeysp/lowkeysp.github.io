@@ -5,7 +5,7 @@ tags: [路由协议,网络]
 categories: 网络
 ---
 
-
+<meta name="referrer" content="no-referrer" />
 
 
 # 介绍

@@ -5,6 +5,8 @@ tags: [OTN,支路板,线路板]
 categories: OTN
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 华为OTN产品系列支持 支路板、线路板分离架构 。支路/线路板和集中交叉单板配合使用，除了可以完成OTU单板功能外，还可通过集中交叉单板进行各级别ODUk颗粒业务调度， 实现更加灵活的电层信号调度及更高的带宽利用率。
 
 

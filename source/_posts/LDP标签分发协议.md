@@ -5,6 +5,8 @@ tags: ['MPLS','数据','LDP']
 categories: 数据
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 # LDP标签分发协议
 
 LDP是专门为标签发布而制定的协议。LDP根据IGP，BGP路由信息通过逐跳的方式建立LSP

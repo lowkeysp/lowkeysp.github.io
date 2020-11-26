@@ -6,6 +6,7 @@ categories: 光纤
 mathjax: true
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 ## OTN产生的背景
 
