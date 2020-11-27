@@ -373,7 +373,7 @@
                 
               
 
-              <time title="创建时间：2020-11-27 09:16:40 / 修改时间：11:34:17" itemprop="dateCreated datePublished" datetime="2020-11-27T09:16:40+08:00">2020-11-27</time>
+              <time title="创建时间：2020-11-27 09:16:40 / 修改时间：11:37:04" itemprop="dateCreated datePublished" datetime="2020-11-27T09:16:40+08:00">2020-11-27</time>
             
 
             
@@ -443,14 +443,10 @@
 <p>之后，就是Hadoop的安装了</p>
 <h1 id="Hadoop安装"><a href="#Hadoop安装" class="headerlink" title="Hadoop安装"></a>Hadoop安装</h1><p>下载安装包,此处使用的是清华的镜像</p>
 <p><a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.10.1/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.10.1/</a></p>
-<h2 id="本地模式"><a href="#本地模式" class="headerlink" title="本地模式"></a>本地模式</h2><ul>
-<li>在/opt/modules/下创建一个hadoopstandalone目录</li>
-</ul>
+<h2 id="本地模式"><a href="#本地模式" class="headerlink" title="本地模式"></a>本地模式</h2><p>1、 在/opt/modules/下创建一个hadoopstandalone目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo mkdir / opt/modules/hadoopstandalone</span><br></pre></td></tr></table></figure>
-<ul>
-<li>解压<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo tar -zxvf hadoop-2.10.1.tar.gz -C /opt/modules/hadoopstandalone/</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 运行mapreduce程序，验证</span><br><span class="line"></span><br><span class="line">这是使用hadoop自带的wordcount例子来在本地模式下测试跑mapreduce</span><br><span class="line"></span><br><span class="line">自己在/opt/data/下生成一个文件，wc.input，内容如下：</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<p>2、解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo tar -zxvf hadoop-2.10.1.tar.gz -C /opt/modules/hadoopstandalone/</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3、 运行mapreduce程序，验证。这是使用hadoop自带的wordcount例子来在本地模式下测试跑mapreduce。自己在/opt/data/下生成一个文件，wc.input，内容如下：</span><br></pre></td></tr></table></figure>
 <p>#cat /opt/data/wc.input</p>
 <p>hadoop<br>mapreduce<br>hivehbase<br>spark<br>stormsqoop<br>hadoop<br>hivespark<br>hadoop</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行hadoop自带的mapreduce Demo</span><br></pre></td></tr></table></figure>
