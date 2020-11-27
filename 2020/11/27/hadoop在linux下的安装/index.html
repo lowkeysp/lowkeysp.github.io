@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="lowkeysp&#39; Blog">
 <meta property="og:description" content="首先，需要确认Linux系统是否装有JDK，如果没有的话，得先安装JDK Linux环境下安装JDK 从官网上下载Oracle JDK，此次下载的是 jdk-15.0.1_linux-x64_bin.tar.gz   解压：sudo tar -zxvf jdk-15.0.1_linux-aarch64_bin\ 1.tar.gz -C /opt/modules/  /opt 目录简单介绍：Opti">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-27T01:34:44.924Z">
+<meta property="og:updated_time" content="2020-11-27T03:23:49.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop在linux下的安装">
 <meta name="twitter:description" content="首先，需要确认Linux系统是否装有JDK，如果没有的话，得先安装JDK Linux环境下安装JDK 从官网上下载Oracle JDK，此次下载的是 jdk-15.0.1_linux-x64_bin.tar.gz   解压：sudo tar -zxvf jdk-15.0.1_linux-aarch64_bin\ 1.tar.gz -C /opt/modules/  /opt 目录简单介绍：Opti">
@@ -371,7 +371,7 @@
                 
               
 
-              <time title="创建时间：2020-11-27 09:16:40 / 修改时间：09:34:44" itemprop="dateCreated datePublished" datetime="2020-11-27T09:16:40+08:00">2020-11-27</time>
+              <time title="创建时间：2020-11-27 09:16:40 / 修改时间：11:23:49" itemprop="dateCreated datePublished" datetime="2020-11-27T09:16:40+08:00">2020-11-27</time>
             
 
             
@@ -444,16 +444,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir / opt/modules/hadoopstandalone</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf hadoop-2.10.1.tar.gz -C /opt/modules/hadoopstandalone/</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 运行mapreduce程序，验证</span><br><span class="line"></span><br><span class="line">这是使用hadoop自带的wordcount例子来在本地模式下测试跑mapreduce</span><br><span class="line"></span><br><span class="line">自己在/opt/data/下生成一个文件，wc.input，内容如下：</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf hadoop-2.10.1.tar.gz -C /opt/modules/hadoopstandalone/</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 运行mapreduce程序，验证</span><br><span class="line"></span><br><span class="line">这是使用hadoop自带的wordcount例子来在本地模式下测试跑mapreduce</span><br><span class="line"></span><br><span class="line">自己在/opt/data/下生成一个文件，wc.input，内容如下：</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>cat /opt/data/wc.input</span><br><span class="line"></span><br><span class="line">hadoop</span><br><span class="line">mapreduce</span><br><span class="line">hivehbase</span><br><span class="line">spark</span><br><span class="line">stormsqoop</span><br><span class="line">hadoop</span><br><span class="line">hivespark</span><br><span class="line">hadoop</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="cat-opt-data-wc-input"><a href="#cat-opt-data-wc-input" class="headerlink" title="cat /opt/data/wc.input"></a>cat /opt/data/wc.input</h1><p>hadoop<br>mapreduce<br>hivehbase<br>spark<br>stormsqoop<br>hadoop<br>hivespark<br>hadoop<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运行hadoop自带的mapreduce Demo</span><br></pre></td></tr></table></figure></p>
-<p>bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.10.1.jar wordcount /opt/data/wc.input output2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">去output2/目录下查看，</span><br></pre></td></tr></table></figure></p>
-<h1 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h1><p>part-r-00000  _SUCCESS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">其中,_SUCCESS文件说明JOB运行成功，part-r-00000是输出结果文件</span><br><span class="line"></span><br><span class="line">查看part-r-00000</span><br></pre></td></tr></table></figure>
-<p>#cat part-r-00000 </p>
-<p>hadoop    3<br>hivehbase    1<br>hivespark    1<br>mapreduce    1<br>spark    1<br>stormsqoop    1</p>
-<p><code>`</code></p>
+<p>运行hadoop自带的mapreduce Demo<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.10.1.jar wordcount /opt/data/wc.input output2</span><br></pre></td></tr></table></figure></p>
+<p>去output2/目录下查看，<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> ls</span><br><span class="line">part-r-00000  _SUCCESS</span><br></pre></td></tr></table></figure></p>
+<p>其中,_SUCCESS文件说明JOB运行成功，part-r-00000是输出结果文件</p>
+<p>查看part-r-00000<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>cat part-r-00000 </span><br><span class="line"></span><br><span class="line">hadoop	3</span><br><span class="line">hivehbase	1</span><br><span class="line">hivespark	1</span><br><span class="line">mapreduce	1</span><br><span class="line">spark	1</span><br><span class="line">stormsqoop	1</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -799,7 +796,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux环境下安装JDK"><span class="nav-number">1.</span> <span class="nav-text">Linux环境下安装JDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop安装"><span class="nav-number">2.</span> <span class="nav-text">Hadoop安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地模式"><span class="nav-number">2.1.</span> <span class="nav-text">本地模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cat-opt-data-wc-input"><span class="nav-number">3.</span> <span class="nav-text">cat /opt/data/wc.input</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ls"><span class="nav-number">4.</span> <span class="nav-text">ls</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux环境下安装JDK"><span class="nav-number">1.</span> <span class="nav-text">Linux环境下安装JDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop安装"><span class="nav-number">2.</span> <span class="nav-text">Hadoop安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地模式"><span class="nav-number">2.1.</span> <span class="nav-text">本地模式</span></a></li></ol></li></ol></div>
             
 
           </div>
