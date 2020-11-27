@@ -328,6 +328,445 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/MPLS静态LSP的配置及MPLS转发过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/07/MPLS静态LSP的配置及MPLS转发过程/" class="post-title-link" itemprop="url">MMPLS转发过程</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-07 16:30:47" itemprop="dateCreated datePublished" datetime="2020-04-07T16:30:47+08:00">2020-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-19 11:33:01" itemprop="dateModified" datetime="2020-11-19T11:33:01+08:00">2020-11-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/04/07/MPLS静态LSP的配置及MPLS转发过程/" class="leancloud_visitors" data-flag-title="MMPLS转发过程">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer">
+
+<h1 id="MPLS详细转发过程"><a href="#MPLS详细转发过程" class="headerlink" title="MPLS详细转发过程"></a>MPLS详细转发过程</h1><ul>
+<li>NHLFE（Next Hop Label Forwarding Entry，下一跳标签转发表项）用于指导MPLS报文的转发。<blockquote>
+<p>NHLFE包括：Tunnel ID，出接口，下一跳，出标签，标签操作类型等信息。</p>
+</blockquote>
+</li>
+<li>FTN （FEC-to-NHLFE,FEC到一组NHLFE的映射）<blockquote>
+<p>通过查看FIB表中Tunnel ID值不为0x0的表项，能够获得FTN的详细信息。FTN只在Ingress存在。</p>
+</blockquote>
+</li>
+<li><p>ILM（Incoming Label Map，入标签到一组下一跳标签转发表项的映射）</p>
+<blockquote>
+<p>ILM包括：Tunnel ID，入标签，入接口，标签操作类型等信息</p>
+<p>ILM在Transit LSR的作用是将标签和NHLFE绑定。通过标签索引ILM表，就相当于使用目的IP地址查询FIB，能够得到所有的标签转发信息。</p>
+</blockquote>
+</li>
+<li><p>Tunnel ID</p>
+<blockquote>
+<p>为了给使用隧道的上层应用（如VPN，路由管理）提供统一的接口，系统自动为隧道分配了一个ID，也称为Tunnel ID。该Tunnel ID的长度为32bit，只是本地有效。这是设备为各种隧道所分配的一个ID。在MPLS中，Tunnel ID还用于将FIB，ILM及NHLFE进行关联</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="在报文转发过程中"><a href="#在报文转发过程中" class="headerlink" title="在报文转发过程中"></a>在报文转发过程中</h2><p>在Ingress LSR，通过查询FIB表和NHLFE表指导报文的转发</p>
+<ul>
+<li>当IP报文进入MPLS域时，首先查看FIB表，检查目的IP地址对应的Tunnel ID值是否为0x0.<blockquote>
+<ul>
+<li>如果Tunnel ID值为0x0，则进入正常的IP转发流程。</li>
+<li>如果Tunnel ID值不为0x0，则进入MPLS转发流程</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>在Transit LSR，通过查询ILM表和NHLFE表指导MPLS报文的换法。</p>
+<p>在Egress LSR,通过查询ILM表指导MPLS报文的转发或查询路由表指导IP报文转发</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdldk42f64j30o40cl0wr.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdldm58w87j30nm0codkt.jpg" alt="捕获.PNG"></p>
+<p>R2是怎么知道这是一个标签报文呢？在L2数据链路层的报文头里面会有标识，表明后面跟的是标签还是IP报文头</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdldomw3kej30on0ckdkg.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/MPLS-LDP的配置实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/07/MPLS-LDP的配置实现/" class="post-title-link" itemprop="url">MPLS LDP的配置实现</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-07 15:05:32" itemprop="dateCreated datePublished" datetime="2020-04-07T15:05:32+08:00">2020-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-19 11:32:34" itemprop="dateModified" datetime="2020-11-19T11:32:34+08:00">2020-11-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/04/07/MPLS-LDP的配置实现/" class="leancloud_visitors" data-flag-title="MPLS LDP的配置实现">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer">
+
+<h1 id="LDP的基础配置案例1"><a href="#LDP的基础配置案例1" class="headerlink" title="LDP的基础配置案例1"></a>LDP的基础配置案例1</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl7xclzuij30m90ae40z.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl7zyed8aj30p80c8gpd.jpg" alt="捕获.PNG"></p>
+<h2 id="配置检查"><a href="#配置检查" class="headerlink" title="配置检查"></a>配置检查</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl8j1a2atj30iq08imzj.jpg" alt="捕获.PNG"></p>
+<h1 id="使用MPLS解决BGP路由黑洞问题"><a href="#使用MPLS解决BGP路由黑洞问题" class="headerlink" title="使用MPLS解决BGP路由黑洞问题"></a>使用MPLS解决BGP路由黑洞问题</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl99ojar1j30ow0d0grl.jpg" alt="捕获.PNG"></p>
+<h2 id="BGP路由黑洞问题"><a href="#BGP路由黑洞问题" class="headerlink" title="BGP路由黑洞问题"></a>BGP路由黑洞问题</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl9b8jv1aj30kx0biq5m.jpg" alt="捕获.PNG"></p>
+<h2 id="解决方案：激活MPLS及LDP"><a href="#解决方案：激活MPLS及LDP" class="headerlink" title="解决方案：激活MPLS及LDP"></a>解决方案：激活MPLS及LDP</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl9imvs33j30p90cq44l.jpg" alt="捕获.PNG"></p>
+<p>需要注意的是，下一跳4.4.4.4的路由只能迭代到R2，并不会迭代到LSP，因此，需要使用’route recursive-lookup tunnel’</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl9lnzxx5j30nv0cndkz.jpg" alt="捕获.PNG"></p>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
+<li>配置设备的LDP传输地址：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Quidway-if] mpls ldp transport-address intf.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>缺省情况下，公网的LDP传输地址等于节点的LSR-ID，私网的传输地址等于接口的主IP地址</p>
+<ul>
+<li>配置LSP建立的触发策略<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Quidway-if] lsp-trigger &#123;all|host|ip-prefix ip-prefix-name | none&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>缺省情况下，触发策略为host，即32位地址的主机IP路由（不包括接口的32位地址的主机IP路由）触发建立LSP，其他的触发策略如下：</p>
+<blockquote>
+<ul>
+<li>如果触发为all，则所有静态路由和IGP路由触发建立LSP。BGP公网路由不能触发建立LSP</li>
+<li>如果触发策略为ip-prefix，则只有通过IP地址前缀列表过滤的FEC项能够触发建立LSP</li>
+<li>如果触发策略为none，则不触发建立LSP</li>
+</ul>
+</blockquote>
+<p>host:意思就是如果直连的主机IP地址是32位的，则为这个IP路由建立起一个LSP</p>
+<ul>
+<li>配置LDP标签策略<br>一般情况下，LSR会向其上游和下游LDP对等体都分配标签，从而提高了LDP LSP的收敛速度。但是接收所有的标签映射，或者向所有对等体发送标签映射会导致大量LSP的建立，造成资源的浪费。为了减少LSP的数量，节省内存，可配置LDP水平分割策略</li>
+<li>配置LDP水平分割策略<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Quidway-mpls-ldp] outbound peer &#123;peer-id | all&#125; split-horizon</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>为LDP对等体配置水平分割策略，即控制LSR只向其上游LDP对等体分配标签。缺省情况下，没有为LDP对等体配置水平分割策略，即LSR会向其上游和下游LDP对等体都分配标签</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/LDP标签分发协议/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2373,471 +2812,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/二层交换原理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/02/26/二层交换原理/" class="post-title-link" itemprop="url">二层交换原理</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-26 09:24:10" itemprop="dateCreated datePublished" datetime="2020-02-26T09:24:10+08:00">2020-02-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-11-19 11:37:00" itemprop="dateModified" datetime="2020-11-19T11:37:00+08:00">2020-11-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/02/26/二层交换原理/" class="leancloud_visitors" data-flag-title="二层交换原理">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer">
-
-<h1 id="二层交换机功能"><a href="#二层交换机功能" class="headerlink" title="二层交换机功能"></a>二层交换机功能</h1><ul>
-<li>维护MAC地址表，MAC寻址</li>
-<li>数据帧的转发及过滤</li>
-<li>二层环路避免及冗余性支持</li>
-</ul>
-<h1 id="MAC地址及MAC地址表"><a href="#MAC地址及MAC地址表" class="headerlink" title="MAC地址及MAC地址表"></a>MAC地址及MAC地址表</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k670ugij30hw08ewig.jpg" alt="捕获.PNG"></p>
-<p>二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。</p>
-<h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k83bmw0j30h508wwgr.jpg" alt="捕获.PNG"></p>
-<h2 id="寻址过程"><a href="#寻址过程" class="headerlink" title="寻址过程"></a>寻址过程</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kesvvr9j30g609mjtp.jpg" alt="捕获.PNG"></p>
-<p>至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kfv5uuoj30fr09vwh7.jpg" alt="捕获.PNG"></p>
-<p>3）查找MAC地址表，发现没有匹配表项</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9khvzedsj30fy09v41g.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kj65v1fj30go0a9why.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kjrq6rxj30gf09lju8.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kkkdiojj30gu0aftc3.jpg" alt="捕获.PNG"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kl71jwij30go0a9tbw.jpg" alt="捕获.PNG"></p>
-<h1 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h1><h2 id="为什么需要VLAN"><a href="#为什么需要VLAN" class="headerlink" title="为什么需要VLAN"></a>为什么需要VLAN</h2><p>在上述进行寻址的过程中，发现了一个问题–泛洪。大量的泛洪会给非目的交换机带来很大额外的负担。</p>
-<ul>
-<li>整台交换机的所有端口均属于同一个广播域</li>
-<li>网络中的设备有可能被大量的广播损耗资源</li>
-<li>无法根据业务需求灵活的规划网络结构</li>
-</ul>
-<p>因此，VLAN可以解决这一问题</p>
-<p>通过将交换机的端口划入特定的VLAN，可以起到隔离广播域的作用</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kw8509jj30cz0amq7g.jpg" alt="捕获.PNG"></p>
-<ul>
-<li>一个VLAN中所有设备都是在同一广播域内，不同的VLAN为不同的广播域</li>
-<li>VLAN之间相互隔离，广播不能跨越VLAN传播，因此不同VLAN之间的设备一般无法访问，不同VLAN之间需要通过三层设备实现相互通信。</li>
-<li>一个VLAN一般为一个逻辑子网，由被配置为此VLAN成员的设备组成。</li>
-<li>VLAN中成员多基于交换机的端口分配，划分VLAN就是对交换机的接口划分</li>
-<li>VLAN工作于OSI参考模型的二层。</li>
-<li>VLAN是二层交换机的一个非常根本的工作机制</li>
-</ul>
-<h1 id="接口类型"><a href="#接口类型" class="headerlink" title="接口类型"></a>接口类型</h1><ul>
-<li>Access</li>
-<li>Trunk</li>
-<li>Hybrid</li>
-</ul>
-<h2 id="Access"><a href="#Access" class="headerlink" title="Access"></a>Access</h2><p>一般用于连接主机的端口，access端口只能属于一个VLAN</p>
-<ul>
-<li>这些端口都用于直连终端，他们被配置为Access类型</li>
-<li>Access 接口常用于连接PC，服务器或者其他终端，或路由器等设备</li>
-<li>Access接口只能加入一个VLAN，一旦加入特定VLAN后，该接口所连接的设备也就加入了该VLAN（默认缺失情况下为VLAN1）</li>
-</ul>
-<p>Access接口收到帧：</p>
-<ul>
-<li>如果该帧不带tag，则接收帧并打上端口的pvid</li>
-<li>如果该帧携带tag，则当vlan ID与所属VLAN ID相同时，接收该报文，否则丢弃</li>
-</ul>
-<p>Access接口发送帧：</p>
-<ul>
-<li>剥离802.1Q tag header,发出的帧为普通以太网帧</li>
-</ul>
-<h2 id="Trunk"><a href="#Trunk" class="headerlink" title="Trunk"></a>Trunk</h2><p>一般用于交换机之间连接的端口，trunk端口可以属于多个VLAN，可以接受和发送多个VLAN的报文</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9lejthu5j30i708p42c.jpg" alt="捕获.PNG"></p>
-<p>Trunk接口之间使用<strong>802.1Q标准</strong>进行通信</p>
-<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9lt7i8naj30go0ay0us.jpg" alt="捕获.PNG"></p>
-<p>上面的是原始的数据帧，下面的是打了tag标签的数据帧。</p>
-<p>如果是在一个交换机里面同一个VLAN里，比如上图的VLAN10，那么原始数据帧在进入到交换机时，会打上一个标签，但是在转发出交换机时，会摘掉这个标签，变成原始数据帧。但是，如果是要通过不同的交换机，也就是要经过Trunk接口时，这个数据帧的标签是不会取掉的，只有快到终端设备上时，才能取掉</p>
-<p>Trunk接口收到帧：</p>
-<ul>
-<li>如果数据不带tag，则打上接口pvid，若pvid在允许通过的vlan id 列表里，则接收该报文。若pvid不在允许通过的vlan id列表里，则丢弃该报文</li>
-</ul>
-<p>Trunk接口发送帧</p>
-<ul>
-<li>若vlan id与接口pvid相同，且该vlan在allow-pass vlan列表中，则去掉 tag，发送数据帧</li>
-<li>若vlan id与接口pvid不同，且该vlan在allow-pass vlan列表中，则保持原有Tag，发送该tag的数据帧</li>
-</ul>
-<h2 id="Hybrid"><a href="#Hybrid" class="headerlink" title="Hybrid"></a>Hybrid</h2><p>可以用于交换机之间的连接，也可以用于接用户的计算机。hybrid接口可以属于多个vlan，可以接收和发送多个vlan的报文</p>
-<h2 id="端口的缺省ID（PVID）"><a href="#端口的缺省ID（PVID）" class="headerlink" title="端口的缺省ID（PVID）"></a>端口的缺省ID（PVID）</h2><p>一个端口可以属于多个VLAN，但是只能有一个PVID,收到一个不带tag头的数据包时，会打上PVID所表示的VLAN号，视同该VLAN的数据包处理。（如果一个数据帧没有标签，则会打上这个默认标签）</p>
-<ul>
-<li>每个ACCESS,TRUNK,HYBRID,QINQ类型的端口都可以配置一个缺省VLAN（PVID：Port Default VLAN ID），表示端口所属的VLAN</li>
-<li>对于Access类型端口，PVID的数值表示当前所属的VLAN。</li>
-<li>对于Trunk，Hybrid类型端口，由于Hybrid类型端口和Trunk类型端口允许多个VLAN数据帧通过，也可以理解为这两种类型的端口属于多个VLAN，所以需要配置PVID。</li>
-<li>PVID，在缺省情况下为VLAN 1.</li>
-</ul>
-<h1 id="VLAN的基本配置"><a href="#VLAN的基本配置" class="headerlink" title="VLAN的基本配置"></a>VLAN的基本配置</h1><p>在交换机上创建VLAN并进入VLAN视图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vlan 10</span><br><span class="line"># 也可以批量创建  vlan batch 10 20...</span><br></pre></td></tr></table></figure></p>
-<p>件发给特定的接口配置为access，trunk等类型，并加入vlan<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[huawei]interface GigabitEthernet 0/0/1</span><br><span class="line">[huawei-GigabitEthernet 0/0/1] port link-type access</span><br><span class="line"># access类型</span><br><span class="line">[huawei-GigabitEthernet 0/0/1] port default vlan 10</span><br><span class="line"></span><br><span class="line">#trunk类型</span><br><span class="line">[huawei-GigabitEthernet 0/0/1] port trunk allow-pass vlan 10 20 99</span><br></pre></td></tr></table></figure></p>
-<p>配置trunk接口的pvid<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[huawei-GigabitEthernet 0/0/1] port trunk pvid vlan 99</span><br></pre></td></tr></table></figure></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>参考：<a href="https://www.bilibili.com/video/av37784983?from=search&amp;seid=8009006989023028859" target="_blank" rel="noopener">https://www.bilibili.com/video/av37784983?from=search&amp;seid=8009006989023028859</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/ISIS-BGP配置作业/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp">
-      <meta itemprop="description" content="lowkeysp">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/02/14/ISIS-BGP配置作业/" class="post-title-link" itemprop="url">ISIS-BGP配置作业</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-14 11:15:03" itemprop="dateCreated datePublished" datetime="2020-02-14T11:15:03+08:00">2020-02-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-11-19 11:31:58" itemprop="dateModified" datetime="2020-11-19T11:31:58+08:00">2020-11-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/02/14/ISIS-BGP配置作业/" class="leancloud_visitors" data-flag-title="ISIS-BGP配置作业">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer">
-
-<h1 id="网络拓扑图"><a href="#网络拓扑图" class="headerlink" title="网络拓扑图"></a>网络拓扑图</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg" alt="捕获.PNG"></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="分配地址"><a href="#分配地址" class="headerlink" title="分配地址"></a>分配地址</h2><p>在打开路由器的时候，默认的是用户视图，也就是命令行前面是&lt;&gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br></pre></td></tr></table></figure></p>
-<p>进入到每个端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface GigabitEthernet 0/0/0</span><br></pre></td></tr></table></figure></p>
-<p>为每个端口配置ip地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip address + IP地址 + 子网掩码</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]ip address 192.168.1.100 255.255.255.0</span><br></pre></td></tr></table></figure></p>
-<h2 id="配置ISIS"><a href="#配置ISIS" class="headerlink" title="配置ISIS"></a>配置ISIS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">isis 1 # 配置ISIS进程，进程使用数字1</span><br><span class="line">is-level level-2  #配置系统所属的区域为Level-2</span><br><span class="line">cost-style wide   #配置ISIS开销值的类型为wide格式</span><br><span class="line">network-entity 86.4134.0100.0000.0001.00 # 配置ISIS的NET值：86.AS号.loopback地址翻译.00</span><br><span class="line">circuit-cost 100000 level-2  #配置ISIS路由的接口缺省开销值为100000</span><br><span class="line">is-name PE1 #本地路由器上ISIS系统配置动态主机名</span><br><span class="line">maximum load-balancing 32  #配置ISIS负载分担路径最大条数为32条</span><br><span class="line"></span><br><span class="line">然后在端口下配置：</span><br><span class="line">进入端口</span><br><span class="line">interface + 接口号</span><br><span class="line">isis enable 1 #开启isis进程</span><br><span class="line">isis circuit-type p2p # 配置为p2p模式</span><br><span class="line">isis circuit-level level-2</span><br><span class="line">isis cost 1000 level-2</span><br></pre></td></tr></table></figure>
-<h2 id="配置BGP"><a href="#配置BGP" class="headerlink" title="配置BGP"></a>配置BGP</h2><p>CE1&amp;CE2的AS号为65530</p>
-<p>PE1~PE4的AS号为4809</p>
-<p>CE3&amp;CE4的AS号为65531</p>
-<p>因为是通过loopback地址建立邻居，因此首先需要loopback地址可以ping通，使用isis协议建立loopback地址之间的连接即可</p>
-<p>IBGP配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure></p>
-<p>EBGP配置</p>
-<p>首先EBGP路由器之间需要使用静态路由建立连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 对端的loopback地址 mask掩码 出去的端口  出去端口的对端ip地址</span><br><span class="line">比如：</span><br><span class="line">ip route-static 115.168.1.1 255.255.255.255 Ethernet 0/0/0 192.168.1.1</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure>
-<p>最后要注意，要比IBGP多一个修改跳数，因此IBGP默认跳数是255，但是EBGP默认跳数是1，需要改成大于1的数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer 对端的loopback地址 ebgp-max-hop 2</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2884,7 +2858,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
