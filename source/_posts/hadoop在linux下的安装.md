@@ -36,27 +36,23 @@ https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.10.1/
 
 ## 本地模式
 
-* 在/opt/modules/下创建一个hadoopstandalone目录
+1、 在/opt/modules/下创建一个hadoopstandalone目录
+
 ```
 sudo mkdir / opt/modules/hadoopstandalone
-
 ```
 
-* 解压
+2、解压
+
 ```
 sudo tar -zxvf hadoop-2.10.1.tar.gz -C /opt/modules/hadoopstandalone/
-
-``` 
-
-
-* 运行mapreduce程序，验证
-
-这是使用hadoop自带的wordcount例子来在本地模式下测试跑mapreduce
-
-自己在/opt/data/下生成一个文件，wc.input，内容如下：
 ```
-# cat /opt/data/wc.input
 
+
+3、 运行mapreduce程序，验证。这是使用hadoop自带的wordcount例子来在本地模式下测试跑mapreduce。自己在/opt/data/下生成一个文件，wc.input，内容如下：
+
+```
+#cat /opt/data/wc.input
 hadoop
 mapreduce
 hivehbase
@@ -66,7 +62,9 @@ hadoop
 hivespark
 hadoop
 ```
+
 运行hadoop自带的mapreduce Demo
+
 ```
 bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.10.1.jar wordcount /opt/data/wc.input output2
 ```
@@ -75,19 +73,16 @@ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.10.1.jar wordc
 ```
 # ls
 part-r-00000  _SUCCESS
-
 ```
 其中,_SUCCESS文件说明JOB运行成功，part-r-00000是输出结果文件
 
 查看part-r-00000
 ```
 #cat part-r-00000 
-
 hadoop	3
 hivehbase	1
 hivespark	1
 mapreduce	1
 spark	1
 stormsqoop	1
-
 ```
