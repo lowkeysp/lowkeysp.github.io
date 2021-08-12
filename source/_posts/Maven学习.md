@@ -4,6 +4,8 @@ date: 2021-07-22 15:18:50
 tags:
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 # Maven约定的目录结构
 
 一个简单的约定目录结构如下：

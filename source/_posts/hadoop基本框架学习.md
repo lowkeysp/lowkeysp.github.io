@@ -5,6 +5,7 @@ tags: [hadoop]
 categories: hadoop
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 # Hadoop基本框架
 

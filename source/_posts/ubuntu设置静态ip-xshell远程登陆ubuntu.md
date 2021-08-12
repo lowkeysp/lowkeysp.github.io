@@ -3,7 +3,7 @@ title: ubuntu设置静态ip-xshell远程登陆ubuntu
 date: 2021-06-27 16:02:37
 tags:
 ---
-
+<meta name="referrer" content="no-referrer" />
 
 # 设置静态IP地址
 

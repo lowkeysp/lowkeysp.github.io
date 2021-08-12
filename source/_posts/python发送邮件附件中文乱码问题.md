@@ -4,6 +4,7 @@ date: 2021-01-08 08:56:48
 tags: ['python']
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 在用python发邮件时，使用的是如下代码：
 

@@ -3,7 +3,7 @@ title: NameNode，SecondaryNameNode，DataNode工作机制
 date: 2021-07-14 14:27:52
 tags:
 ---
-
+<meta name="referrer" content="no-referrer" />
 
 # NameNode，SecondaryNameNode工作机制
 

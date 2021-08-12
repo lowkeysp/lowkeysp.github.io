@@ -4,6 +4,8 @@ date: 2021-07-02 22:10:24
 tags:
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 可以使用VMWARE PRO软件，创建若干个Linux虚拟机，进行Hadoop的集群搭建
 
 

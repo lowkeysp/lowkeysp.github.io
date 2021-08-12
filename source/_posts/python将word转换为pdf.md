@@ -4,6 +4,8 @@ date: 2021-01-08 09:34:27
 tags: ['python','word','pdf']
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 代码如下：
 ```python
 

@@ -4,6 +4,7 @@ date: 2020-11-27 09:16:40
 tags: 
 ---
 
+<meta name="referrer" content="no-referrer" />
 
 首先，需要确认Linux系统是否装有JDK，如果没有的话，得先安装JDK
 

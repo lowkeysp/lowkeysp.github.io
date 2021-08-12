@@ -4,6 +4,8 @@ date: 2021-07-05 10:09:42
 tags:
 ---
 
+<meta name="referrer" content="no-referrer" />
+
 ```
 # 创建目录
 hadoop fs -mkdir /d
