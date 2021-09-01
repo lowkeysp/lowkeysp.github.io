@@ -386,7 +386,17 @@ Mapper and Reducer implementations can use the Counter to report statistics
 
 # Combiner
 
-Combiner又叫做Mini-Reducer,该组件的主要作用是：当我们执行mapreduce任务时，
+Combiner又叫做Mini-Reducer,该组件的主要作用是：当我们执行mapreduce任务时，Mapper会产生大量的中间数据，这些中间数据需要传送到Reducer进行下一步处理，而传送则会带来很大的带宽压力，因此，Combiner的作用就是为了减轻这些带宽压力。Combiner是可选非必须的。在Mapper之后，在Reducer之前。
+
+下图是没有使用Combiner的流程图。可以看到，输入被拆分成两个Mapper，生成了9对key-value，也就是中间数据，之后，这些中间数据被送到reducer中进行进一步处理。
+
+![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gtzysewkp3j60po0o3tjv02.jpg)
+
+
+下图是使用了Combiner的流程图。可以看到，使用了combiner之后，甚至需要将4个key-value传送给reducer。需要值得注意的是，combiner是在mapper所在的机器上运行的。
+![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gtzyuur0juj60og0o1dqb02.jpg)
+
+
 
 
 
@@ -454,7 +464,68 @@ public abstract class InputSplit {
 
  
 
+# OutputFormat
+
+Reducer输出key-value对后，需要使用outputformat类，来把数据保存在数据库，文件等。
+
+OutputFormat的核心是重写`RecordWriter`,`RecordWriter`的作用为：将Reducer输出的数据写到输入文件中。
+
+下面介绍几种OutputFormat类
+
+* TextOutputFormat：这也是Hadoop默认的outputformat。在Text文件里面每一行都是一个key-value对，而且key，value可以是任何类型，因为TextOutputFormat会调用toString()方法把它们转换成String。Key和Value之间是通过`\tab`进行区分，这个也可以通过`MapReduce.output.textoutputformat.separator`进行配置。
+* SequenceFileInputFormat：将output写成序列化文件，通常被用在MapReduce任务之间，当作中间数据格式，可以快速的序列化以及反序列化。将前一个mapreduce任务产生的output序列化后，可以快速地反序列化，当作下一个mapreduce地输入。
+* SequenceFileAsBinaryOutputFormat：跟SequenceFileInputFormat类似，只不过是将key，values以二进制的形式序列化。
+* MapFileOutputFormat：将输入写成mapFiles。在MapFiles里面的key必须是排序的，因此 需要在reducer中保证输出的kay要排序。
+* MultipleOutputs：将output写成文件，这些文件的名字来自输出的key，value值，也可以是任意的string。
+* LazyOutputFormat：有时候，即使没有输出，outputformat也会产生一个空的文件，因此，可以使用LazyOutputFormat，仅当有内容时才会创建文件。LazyOutputFormat是一个wrapper。
+* DBOutputFormat：将输出写入关系数据库和HBase的输出格式。
+
+## 自定义OutputFormat
+
+创建自己的OutputFormat类，继承FileOutputFormat类,需要重写`getRecordWriter`方法，需要返回`RecordWriter`类。
+```java
+
+public class WordCountOutputFormat<K,V> extends FileOutputFormat<K, V> {
 
 
+    @Override
+    public RecordWriter<K, V> getRecordWriter(TaskAttemptContext job) throws IOException, InterruptedException {
+        
+        //获得job的配置
+        Configuration conf = job.getConfiguration();
+        //返回
+        return new WordCountLineRecordWriter<>()
+    }
+}
+```
 
 
+写自己的`RecordWriter`
+```java
+
+public class WordCountLineRecordWriter<K, V> extends RecordWriter<K, V> {
+
+ 
+    public WordCountLineRecordWriter() {
+        //构造器
+    }
+   
+
+    public synchronized void write(K key, V value) throws IOException {
+        //写入操作
+    }
+    public synchronized void close(TaskAttemptContext context) throws IOException {
+        //关闭操作
+    }
+}
+```
+
+驱动
+```java
+
+job.setOutputFormatClass(WordCountOutputFormat.class);
+
+FileInputFormat.addInputPath(job, input);
+//注意，FileOutputFormat需要输出一个_SUCCESS文件，这个setOutputPath是用来设置输出_SUCCESS文件的位置
+FileOutputFormat.setOutputPath(job, output);
+```
