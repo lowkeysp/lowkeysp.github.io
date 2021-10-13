@@ -529,3 +529,6 @@ FileInputFormat.addInputPath(job, input);
 //注意，FileOutputFormat需要输出一个_SUCCESS文件，这个setOutputPath是用来设置输出_SUCCESS文件的位置
 FileOutputFormat.setOutputPath(job, output);
 ```
+
+
+# Reduce Join
