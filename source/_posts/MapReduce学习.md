@@ -531,4 +531,46 @@ FileOutputFormat.setOutputPath(job, output);
 ```
 
 
-# Reduce Join
+# MR支持的压缩编码
+
+|  压缩格式   | 是否Hadoop自带 | 算法 | 文件扩展名 | 是否可切片 | 换成压缩格式后，原来的程序是否需要修改
+|  ----  | ----  |
+| DEFLATE | 是 | DEFLATE | .deflate | 否 | 不需要|
+| Gzip | 是 | Gzip | .gz | 否 | 不需要|
+| bzip2 | 是 | bzip2 | .bzip2 | 是 | 不需要|
+| LZO | 否，需要安装 | LZO | .lzo | 是 | 需要建索引，还需指定输入格式|
+| Snappy | 是 | Snappy | .snappy | 否 | 不需要|
+
+![捕获.PNG](http://ww1.sinaimg.cn/large/006eDJDNly1gvdhj2zb46j61fs0mh17w02.jpg)
+
+
+
+|压缩格式|对应的编码/解码器|
+|----|----|
+|DEFLATE| org.apache.hadoop.io.compress.DefalutCodec |
+|Gzip| org.apache.hadoop.io.compress.GzipCodec |
+|bzip2| org.apache.hadoop.io.compress.BZip2Codec |
+|LZO| com.hadoop.compression.lzo.LaopCodec |
+|Snappy| org.apache.hadoop.io.compress.SnappyCodec |
+
+在Hadoop中启用压缩，做以下配置
+
+| 参数| 默认值 | 阶段 | 建议 | 
+| ---- | ---- | ---- | ---- |
+
+输入阶段：
+
+可在`core-site.xml`中的`io.compression.codecs`中配置，可通过`hadoop checknative`命令行查看支持的压缩格式
+
+mapper输入阶段：
+
+在`mapred-site.xml`中，`mapreduce.map.output.compress`设置是否开启，默认是false，`mapreduce.map.output.compress.codec`设置编码格式，默认是`org.apache.hadoop.io.compress.DefalutCodec`
+
+reducer阶段：
+
+在`mapred-site.xml`中，`mapreduce.output.fileoutputformat.compress`设置是否开启，默认是false,`mapreduce.output.fileoutputformat.compress.codec`设置编码格式，默认是`org.apache.hadoop.io.compress.DefalutCodec`
+
+
+ 也可在driver驱动中设置压缩格式
+
+  
