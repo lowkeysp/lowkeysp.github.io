@@ -79,7 +79,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/lowkeysp/lowkeysp.github.io.git
+  repo: https://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@github.com/lowkeysp/lowkeysp.github.io.git
   branch: master
 
 
