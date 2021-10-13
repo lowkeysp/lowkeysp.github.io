@@ -67,3 +67,30 @@ Hadoop默认是容量调度器
 
 * yarn queue状态
 `yarn queue -status default`
+
+# Yarn生产环境核心配置参数
+
+## ResourceManager
+
+* `yarn.resourcemanager.scheduler.class`：配置调度器，默认容量调度器
+* `yarn.resourcemanager.scheduler.client.thread-count`：ResourceManager处理调度器请求的线程数量，默认50
+
+## NodeManager
+* `yarn.nodemanager.resource.detect-hardware-capabilities`：是否让yarn自己检测硬件进行配置，默认false
+* `yarn.nodemanager.resource.count-logical-processors-as-cores`：是否将虚拟核数当作cpu核数，默认false
+* `yarn.nodemanager.resource.pcores-vcores-multiplier`：虚拟核数和物理核数乘数，例如：4核8线程，该参数应该设置为2，默认为1
+* `yarn.nodemanager.resource.memory-mb`：NodeManager使用内存，默认8G
+* `yarn.nodemanager.resource.system-reserved-memory-mb`：NodeManager为系统保留多少内存，跟上面的参数配置一个即可
+* `yarn.nodemanager.resource.cpu-vcores`：NodeManager使用CPU核数，默认8个
+* `yarn.nodemanager.resource.pmem-check-enabled`：是否开启物理内存检查限制container，默认打开
+* `yarn.nodemanager.resource.vmem-check-enabled`：是否开启虚拟内存检查限制container，默认打开
+* `yarn.nodemanager.resource.vmem-pmem-ratio`：虚拟内存物理内存比例，默认2.1
+
+## Container
+
+* `yarn-scheduler.minimum-allocation-mb`：容器最小内存，默认1G
+* `yarn-scheduler.maximum-allocation-mb`: 容器最大内存，默认8G
+* `yarn-scheduler.minimum-allocation-vcores`: 容器最小CPU核数，默认1个
+* `yarn-scheduler.maximum-allocation-vcores`：容器默认最大CPU核数，默认4个
+
+
