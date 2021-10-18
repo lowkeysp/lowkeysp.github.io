@@ -156,6 +156,63 @@ hadoop jar /opt/module/hadoop-3.3.1/share/hadoop/mapreduce/hadoop-mapreduce-clie
 
 读数据并不会每个机器都读一遍，而是采用“就近原则”，选择最近的机器将文件读下来。如果客户端就在集群机器1上，则会出现不占用网络资源，读取速度比网络资源快的情况
 
+# DataNode配置多目录
+DataNode可以配置成多个目录，每个目录存储的数据不一样（数据不是副本）
+
+`hdfs-site.xml`配置
+```xml
+<property>
+  <name>dfs.datanode.data.dir</name>
+  <value>file://${hadoop.tmp.dir}/dfs/data1,file://${hadoop.tmp.dir}/dfs/data2</value>
+  <description>Determines where on the local filesystem an DFS data node should store its blocks. If this is a comma-delimited list of directories, then data will be stored in all named directories, typically on different devices. Directories that do not exist are ignored.</description>
+</property>
+```
+# 磁盘间数据均衡
+生产环境，由于硬盘空间不足，往往需要增加一块硬盘，刚加载的硬盘没有数据时，可以执行磁盘数据均衡命令（hadoop3.x特性）
+
+生成均衡计划
+```
+hdfs diskbalancer -plan 机器地址
+```
+
+执行均衡计划
+```
+hdfs diskbalancer -execute 机器地址.plan.json
+```
+
+查看当前均衡任务执行情况
+```
+hdfs diskbalancer -query 机器地址
+```
+
+取消均衡任务
+```
+hdfs diskbalancer -cancel 机器地址.plan.json
+```
+
+# HDFS集群扩容以及缩容
+## 白名单和黑名单创建
+可以在白名单中配置ip地址，在白名单中的ip地址所代表的node可以用来存储数据，否则不能进行存储数据，配置如下：
+
+* 在NameNode节点的`/opt/module/hadoop-3.3.1/etc/hadoop`目录下创建whitelist和blacklist
+* 在`hdfs-site.xml`配置文件中，指定白黑名单地址
+```xml
+<property>
+  <name>dfs.hosts</name>
+  <value>/opt/module/hadoop-3.3.1/etc/hadoop/whitelist</value>
+  <description>白名单</description>
+</property>
+
+<property>
+  <name>dfs.hosts.exclude</name>
+  <value>/opt/module/hadoop-3.3.1/etc/hadoop/blacklist</value>
+  <description>黑名单</description>
+</property>
+
+```
+* 第一次添加白名单和黑名单需要重启集群，如果不是第一次，则只需要刷新NameNode即可，`hdfs dfsadmin -refreshNodes`
+
+## 黑名单  
 
 
 
