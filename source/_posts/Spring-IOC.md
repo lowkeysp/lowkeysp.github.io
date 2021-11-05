@@ -323,3 +323,113 @@ book.price="100"
 
 
 
+## 注解方式
+
+
+有四种注解
+* @Component
+* @Service
+* @Controller
+* @Repository
+### 注解方式创建对象
+
+首先需要在xml文件中添加命名空间，`xmlns:context="http://www.springframework.org/schema/context`和`http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd`
+
+之后，开启组件扫描，如果扫描多个包，则可以使用逗号隔开。
+```xml
+ <context:component-scan base-package="com.example.beanlearning"></context:component-scan>
+```
+
+之后在类名上添加Component，其中，`@Component(value = "book")`中的book相当于`<bean id = "book">`的bean中的id。value其实可以不写，不写的话就默认是类名，然后首字母小写。
+```java
+@Component(value = "book")
+public class book {
+
+
+}
+```
+之后就可以获取对象了
+```java
+ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+book book = context.getBean("book",book.class);
+```
+
+### 组件扫描
+
+ 组件扫描可以进行过滤
+ ```xml
+
+    <!-- use-default-filters = false 表示不适用默认过滤器，下面过滤器定义了只扫描符合条件的-->
+<context:component-scan base-package="com.example.beanlearning" use-default-filters="false">
+        <context:include-filter type="annotation" 
+                                expression="org.springframework.stereotype.Controller"/>
+
+    </context:component-scan>
+
+
+    <!-- 表示符合条件的都不扫描-->
+<context:component-scan base-package="com.example.beanlearning" >
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+
+    </context:component-scan>
+ ```
+
+
+
+ ### 使用注解注入属性
+
+使用`@Autowired`进行自动装配，注入对象属性。会根据类型进行装配
+```java
+@Component
+public class User {
+
+    @Autowired
+    private Book book;
+}
+```
+使用`@Autowired`只能根据类型自动装配，会出现匹配多个的情况，则可以借助`@Qualifier`,根据value进行注入，注意：`@Qualifier`必须和`@Autowired`同时使用
+```java
+
+@Component(value = "book")
+public class Book {
+
+}
+
+@Component
+public class User {
+
+    @Autowired
+    @Qualifier(value = "book")
+    private Book book;
+}
+```
+
+`@Resource`可以根据类型注入，跟`@Autowired`一样，也可以根据名称注入，跟`@Qualifier`一样。
+
+`@Value`用来注入普通类型的属性，比如String等，下面表示了name = “abc”
+```java
+@Value(value = "abc")
+private String name;
+```
+
+### 完全注解
+上面还需要使用xml文件配置，比如需要配置`<context:component-scan base-package="com.example.beanlearning"></context:component-scan>`
+
+也可以不用使用xml配置文件，完全使用注解，实现如下：
+
+创建一个配置class，写上注解,`@Configuration`,`@ComponentScan(basePackages = {"com.example.beanlearning"})`
+```java
+@Configuration
+@ComponentScan(basePackages = {"com.example.beanlearning"})
+public class SpringConfig {
+
+}
+
+//加载Config文件
+ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+User user = context.getBean("user",User.class);
+```
+
+
+
