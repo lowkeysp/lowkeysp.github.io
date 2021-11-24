@@ -241,4 +241,112 @@ tomcat是否注入: false
 再进行测试时，发现了一个现象，就是如果`MyConfig.java`中，如果`user01`先于`pet`注入的话，则这个`ConditionalOnBean`不生效，应该是跟注入顺序有关，但是具体的原理还没查清楚。
 
 
+# @ImportResource
+
+ImportResource的作用为：将xml配置文件变成注解模式
+
+举例：生成一个`bean.xml`文件，注入一个user02，但是会发现IOC容器里并没有user02
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user02" class="com.example.boot.User">
+        <property name="username" value="user02"></property>
+        <property name="age" value="18"></property>
+    </bean>
+</beans>
+```
+测试Java代码如下：
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class MainApplication {
+
+    public static void main(String[] args) {
+        //返回IOC容器
+        ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);
+
+        boolean user02 = run.containsBean("user02");
+        System.out.println("user02是否注入: " + user02);
+    }
+}
+```
+输出为：
+```
+user02是否注入: false
+```
+
+如果使用`@ImportResource`注解，如下：
+```java
+@ImportResource("classpath:bean.xml")
+public class MyConfig {
+}
+```
+则再次运行上面程序，输出为：
+```
+user02是否注入: true
+```
+
+# @ConfigurationProperties
+
+自动配置绑定，可以将properties配置文件中的数值绑定到java bean上。
+
+举例说明
+
+`application.properties`文件如下：
+```
+car.brand=BYD
+car.price=10000
+```
+`Car.java`文件如下,
+```java
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+//如果要使用自动配置绑定，则这个bean必须注册到容器中
+@Component
+//前缀用于在配置文件中表明id
+@ConfigurationProperties(prefix = "car")
+public class Car {
+
+    private String brand;
+    private int price;
+
+    public Car(String brand, int price) {
+        this.brand = brand;
+        this.price = price;
+    }
+
+    public Car() {
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+}
+```
+
+
+
+
+
+
+
 
