@@ -177,3 +177,32 @@ test:
 [ 'Steve', 'Clark', 'Brian', 'Oren', 'Steve' ]
 ```
 
+# 配置提示
+自定义的类和配置文件绑定一般没有提示，可以使用`spring-boot-configuration-processor`实现自动提示，这样，在编写yaml文件时，可以自动提示出对象的属性等
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+由于这个依赖只是针对开发便捷而导入的，实际上对于应用没有任何作用，所以在打包的时候，不需要把这个依赖打包进来，可以使用下面让这个依赖在打包的时候不用打包进来
+```xml
+ <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
