@@ -834,3 +834,476 @@ Request Body内容格式如下：
     ]
 }
 ```
+
+# 复杂数据类型
+
+* UUID
+
+标准的通用唯一标识符(Universally Unique Identifier)，一般在数据库或者系统中表示ID
+
+在requests和responses中被认为是字符串类型
+
+* datetime.datetime
+
+标准的Python datetime.datetime
+
+在requests和responses中被认为是字符串类型，例如"2008-09-15T15:53:00+05:00"
+
+* datetime.date
+
+标准的Python datetime.date。
+
+在requests和responses中被认为是字符串类型，例如"2008-09-15"
+
+* datetime.time
+
+标准的Python datetime.time
+
+在requests和responses中被认为是字符串类型，例如"14:23:55.003"
+
+* datetime.timedelta
+
+标准的Python datetime.timedelta
+
+在requests和responses中被认为是表示秒数的float类型，例如"2008-09-15"
+
+* frozenset
+
+在requests和responses中等同于set
+
+在requests中，列表数据会先进行去重，然后转换成set
+
+在responses中，set会被转换成list
+
+* bytes
+
+标准的Python bytes
+
+在requests和responses中被认为是字符串类型
+
+* Decimal
+
+标准的Python Decimal
+
+在requests和responses中被认为是float类型
+
+```python
+from datetime import datetime, time, timedelta
+from uuid import UUID
+from fastapi import Body, FastAPI
+
+app = FastAPI()
+
+@app.put("/items/{item_id}")
+async def read_items(
+    item_id: UUID,
+    start_datetime: datetime = Body(None),
+    end_datetime: datetime = Body(None),
+    repeat_at: time = Body(None),
+    process_after: timedelta = Body(None),
+):
+    start_process = start_datetime + process_after
+    duration = end_datetime - start_process
+    return {
+        "item_id": item_id,
+        "start_datetime": start_datetime,
+        "end_datetime": end_datetime,
+        "repeat_at": repeat_at,
+        "process_after": process_after,
+        "start_process": start_process,
+        "duration": duration,
+    }
+```
+测试：
+```
+127.0.0.1:8000/items/a8098c1a-f86e-11da-bd1a-00112444be1e
+
+Body:
+
+{
+    "start_datetime": "2008-09-15T15:53:00+05:00",
+    "end_datetime": "2018-09-15T15:53:00+05:00",
+    "repeat_at": "14:23:55.003",
+    "process_after": "20080915"
+
+}
+```
+
+# Cookie参数
+
+
+利用Cookie模块声明cookie参数，与Query,Path类似，
+```python
+from typing import Optional
+from fastapi import Cookie, FastAPI
+
+app = FastAPI()
+
+@app.get("/items/")
+async def read_items(ads_id: Optional[str] = Cookie(None)):
+    return {"ads_id": ads_id}
+```
+则，请求中Cookie包含"ads_id = "xx"的话，则会直接解析出来 
+
+
+可以在Response中返回Cookie信息给终端
+
+* 使用Response参数
+
+在路径操作函数中声明Response参数，然后给这个临时的Response对象设置cookie信息,FastAPI通过这个临时的Response对象解析出cookie信息，然后放入到最终返回的Response对象中。
+
+```python
+from fastapi import FastAPI, Response
+
+app = FastAPI()
+
+@app.post("/cookie-and-object/")
+def create_cookie(response: Response):
+    response.set_cookie(key="fakesession", value="fake-cookie-session-value")
+    return {"message": "Come to the dark side, we have cookies"}
+```
+
+* 直接返回Response
+
+也可以在直接返回的Response对象中设置cookie信息
+```python
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+
+app = FastAPI()
+
+@app.post("/cookie/")
+def create_cookie():
+    content = {"message": "Come to the dark side, we have cookies"}
+    
+    response = JSONResponse(content=content)
+    response.set_cookie(key="fakesession", value="fake-cookie-session-value")
+    return response
+```
+
+# Header参数
+
+
+## 声明Header参数
+使用定义 Query, Path 和 Cookie 参数一样的方法定义 Header 参数
+
+```python
+from typing import Optional
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+@app.get("/items/")
+async def read_items(user_agent: Optional[str] = Header(None)):
+    return {"User-Agent": user_agent}
+```
+
+
+## 自动转换
+
+Header 在 Path, Query 和 Cookie 提供的功能之上有一点额外的功能。
+
+大多数标准的headers用 "连字符" 分隔，也称为 "减号" (-)。
+
+但是像 user-agent 这样的变量在Python中是无效的。
+
+因此, 默认情况下, Header 将把参数名称的字符从下划线 (_) 转换为连字符 (-) 来提取并记录 headers.
+
+同时，HTTP headers 是大小写不敏感的，因此，因此可以使用标准Python样式(也称为 "snake_case")声明它们。
+
+因此，您可以像通常在Python代码中那样使用 user_agent ，而不需要将首字母大写为 User_Agent 或类似的东西。
+
+如果出于某些原因，你需要禁用下划线到连字符的自动转换，设置Header的参数 convert_underscores 为 False:
+
+```python
+from typing import Optional
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+@app.get("/items/")
+async def read_items(
+    strange_header: Optional[str] = Header(None, convert_underscores=False)
+):
+    return {"strange_header": strange_header}
+```
+
+在设置 convert_underscores 为 False 之前，请记住，一些HTTP代理和服务器不允许使用带有下划线的headers
+
+
+## 重复的 headers
+有可能收到重复的headers。这意味着，相同的header具有多个值
+
+您可以在类型声明中使用一个list来定义这些情况。
+
+你可以通过一个Python list 的形式获得重复header的所有值。
+
+比如, 为了声明一个 X-Token header 可以出现多次，你可以这样写：
+```python
+from typing import List, Optional
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+@app.get("/items/")
+async def read_items(x_token: Optional[List[str]] = Header(None)):
+    return {"X-Token values": x_token}
+```
+
+如果你与路径操作通信时发送两个HTTP headers，就像：
+```
+X-Token: foo
+X-Token: bar
+```
+响应会是:
+```
+{
+    "X-Token values": [
+        "bar",
+        "foo"
+    ]
+}
+```
+
+# Response模型
+在路径操作中，我们可以用参数response_model来声明Response模型
+
+```python
+from typing import List
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: str = None
+    price: float
+    tax: float = None
+    tags: List[str] = []
+
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item):
+    return item
+```
+注意response_model是装饰器方法(get，post等)的参数
+
+Response模型可以是一个Pydantic模型，也可以是一个Pydantic模型的列表，例如`List[Item]`
+
+支持任意路径操作
+* @app.get()
+* @app.post()
+* @app.put()
+* @app.delete()
+
+Response模型最主要的是限制输出数据只能是所声明的Response模型
+
+
+## 输入输出模型示例
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+class UserIn(BaseModel):
+    username: str
+    password: str
+    email: EmailStr
+    full_name: str = None
+
+class UserOut(BaseModel):
+    username: str
+    email: EmailStr
+    full_name: str = None
+
+@app.post("/user/", response_model=UserOut)
+async def create_user(*, user: UserIn):
+    return user
+```
+
+如上所示，虽然路径操作函数返回的结果是user(包含了password)，但我们声明的Response模型是UserOut(不包含password)。
+
+FastAPI会过滤掉所有不在输出模型中的数据，因此最终的输出结果里并没有password
+
+如果输入内容如下：
+```
+{
+    "username": "user",
+    "password": "1234",
+    "email": "user@qq.com",
+    "full_name": "full_name"
+}
+```
+那么输出结果为：
+```
+{
+    "username": "user",
+    "email": "user@qq.com",
+    "full_name": "full_name"
+}
+```
+
+## Response模型参数
+
+
+```python
+from typing import List
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: str = None
+    price: float
+    tax: float = 10.5
+    tags: List[str] = []
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2},
+    "baz": {"name": "Baz", "description": None, "price": 50.2, "tax": 10.5, "tags": []},
+}
+
+@app.get("/items/{item_id}", response_model=Item, response_model_exclude_unset=True)
+async def read_item(item_id: str):
+    return items[item_id]
+```
+响应模型可以具有默认值，比如，
+* description: Optional[str] = None 具有默认值 None
+* tax: float = 10.5 具有默认值 10.5
+* tags: List[str] = [] 具有一个空列表作为默认值： []
+
+
+
+### response_model_exclude_unset 参数
+但如果它们并没有存储实际的值，你可能想从结果中忽略它们的默认值。
+
+举个例子，当你在 NoSQL 数据库中保存了具有许多可选属性的模型，但你又不想发送充满默认值的很长的 JSON 响应
+
+你可以设置路径操作装饰器的 response_model_exclude_unset=True 参数：
+
+然后响应中将不会包含那些默认值，而是仅有实际设置的值。
+
+则，当你访问：
+```# 访问：
+http://127.0.0.1:8000/items/foo
+```
+则返回：
+```
+{
+    "name": "Foo",
+    "price": 50.2
+}
+```
+
+### response_model_include 和 response_model_exclude 参数
+
+实际中尽量少用这两个参数，而是应该声明不同的类表示不同的数据需求，这样更利于数据维护和逻辑清晰
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: str = None
+    price: float
+    tax: float = 10.5
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The Bar fighters", "price": 62, "tax": 20.2},
+    "baz": {
+        "name": "Baz",
+        "description": "There goes my baz",
+        "price": 50.2,
+        "tax": 10.5,
+    },
+}
+
+#包含name, description
+@app.get("/items/{item_id}/name", response_model=Item, response_model_include={"name", "description"})
+async def read_item_name(item_id: str):
+    return items[item_id]
+
+#排除tax
+@app.get("/items/{item_id}/public", response_model=Item, response_model_exclude={"tax"})
+async def read_item_public_data(item_id: str):
+    return items[item_id]
+```
+
+## Response联合（Union）模型
+可以声明Response模型是一个Union类型(包含两种类型)，实际返回结果可以是Union其中任何一个
+
+```python
+from typing import Union
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class BaseItem(BaseModel):
+    description: str
+    type: str
+
+class CarItem(BaseItem):
+    type = "car"
+
+class PlaneItem(BaseItem):
+    type = "plane"
+    size: int
+
+items = {
+    "item1": {"description": "All my friends drive a low rider", "type": "car"},
+    "item2": {
+        "description": "Music is my aeroplane, it's my aeroplane",
+        "type": "plane",
+        "size": 5,
+    },
+}
+
+@app.get("/items/{item_id}", response_model=Union[PlaneItem, CarItem])
+async def read_item(item_id: str):
+    return items[item_id]
+```
+
+## Response列表模型
+Response模型也可以是一个列表
+```python
+from typing import List
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: str
+
+items = [
+    {"name": "Foo", "description": "There comes my hero"},
+    {"name": "Red", "description": "It's my aeroplane"},
+]
+
+@app.get("/items/", response_model=List[Item])
+async def read_items():
+    return items
+```
+## Response字典模型
+
+```python
+from typing import Dict
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/keyword-weights/", response_model=Dict[str, float])
+async def read_keyword_weights():
+    return {"foo": 2.3, "bar": 3.4}
+```
