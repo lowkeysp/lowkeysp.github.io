@@ -1237,6 +1237,135 @@ async def read_item_public_data(item_id: str):
     return items[item_id]
 ```
 
+
+
+
+
+
+## 多个模型
+```python
+from typing import Optional
+
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+class UserIn(BaseModel):
+    username: str
+    password: str
+    email: EmailStr
+    full_name: Optional[str] = None
+
+class UserOut(BaseModel):
+    username: str
+    email: EmailStr
+    full_name: Optional[str] = None
+
+class UserInDB(BaseModel):
+    username: str
+    hashed_password: str
+    email: EmailStr
+    full_name: Optional[str] = None
+
+def fake_password_hasher(raw_password: str):
+    return "supersecret" + raw_password
+
+def fake_save_user(user_in: UserIn):
+    hashed_password = fake_password_hasher(user_in.password)
+    user_in_db = UserInDB(**user_in.dict(), hashed_password=hashed_password)
+    print("User saved! ..not really")
+    return user_in_db
+
+@app.post("/user/", response_model=UserOut)
+async def create_user(user_in: UserIn):
+    user_saved = fake_save_user(user_in)
+    return user_saved
+```
+
+其上是包含多个模型，有用户输入模型，用户输出模型，数据库模型等，用户输入模型需要拥有密码属性，输出模型不应该包含密码，数据库模型需要保存密码的哈希值。
+
+### 关于**user_in.dict()
+
+user_in是UserIn类的Pydantic模型。
+
+Pydantic 模型具有 .dict（） 方法，该方法返回一个拥有模型数据的 dict。
+
+因此，如果我们像下面这样创建一个 Pydantic 对象 user_in：
+```python
+user_in = UserIn(username="john", password="secret", email="john.doe@example.com")
+```
+然后我们调用：
+```python
+user_dict = user_in.dict()
+```
+现在我们有了一个数据位于变量 user_dict 中的 dict（它是一个 dict 而不是 Pydantic 模型对象）。
+
+如果我们调用：
+```python
+print(user_dict)
+```
+我们将获得一个这样的 Python dict：
+```
+{
+    'username': 'john',
+    'password': 'secret',
+    'email': 'john.doe@example.com',
+    'full_name': None,
+}
+```
+如果我们将 user_dict 这样的 dict 以 `**user_dict`形式传递给一个函数（或类），Python将对其进行 **解包**。它会将 user_dict 的键和值作为关键字参数直接传递。
+
+因此，从上面的 user_dict 继续，编写：
+```python
+UserInDB(**user_dict)
+```
+会产生类似于以下的结果：
+```python
+UserInDB(
+    username="john",
+    password="secret",
+    email="john.doe@example.com",
+    full_name=None,
+)
+```
+或者更确切地，直接使用 user_dict 来表示将来可能包含的任何内容：
+```python
+UserInDB(
+    username = user_dict["username"],
+    password = user_dict["password"],
+    email = user_dict["email"],
+    full_name = user_dict["full_name"],
+)
+```
+如上例所示，我们从 user_in.dict（） 中获得了 user_dict，此代码：
+```python
+user_dict = user_in.dict()
+UserInDB(**user_dict)
+```
+等同于
+```python
+UserInDB(**user_in.dict())
+```
+因为 user_in.dict() 是一个 dict，然后我们通过以`**`开头传递给 UserInDB 来使 Python**解包**它。
+
+这样，我们获得了一个来自于其他 Pydantic 模型中的数据的 Pydantic 模型。
+
+然后添加额外的关键字参数 hashed_password=hashed_password，例如：
+```python
+UserInDB(**user_in.dict(), hashed_password=hashed_password)
+```
+最终结果如下:
+```python
+UserInDB(
+    username = user_dict["username"],
+    password = user_dict["password"],
+    email = user_dict["email"],
+    full_name = user_dict["full_name"],
+    hashed_password = hashed_password,
+)
+```
+
 ## Response联合（Union）模型
 可以声明Response模型是一个Union类型(包含两种类型)，实际返回结果可以是Union其中任何一个
 
@@ -1302,8 +1431,487 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-
 @app.get("/keyword-weights/", response_model=Dict[str, float])
 async def read_keyword_weights():
     return {"foo": 2.3, "bar": 3.4}
+```
+# Response状态码
+
+## 通过参数status_code自定义状态码
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.post("/items/", status_code=201)
+async def create_item(name: str):
+    return {"name": name}
+```
+支持任意路径操作
+```
+@app.get()
+@app.post()
+@app.put()
+@app.delete()
+```
+status_code 参数接收一个表示 HTTP 状态码的数字,status_code 是装饰器方法（get，post 等）的一个参数。不像之前的所有参数和请求体，它不属于路径操作函数。
+
+可以从`fastapi.status`导入状态码常量，便于使用和记忆
+```python
+from fastapi import FastAPI, status
+
+app = FastAPI()
+
+@app.post("/items/", status_code=status.HTTP_201_CREATED)
+async def create_item(name: str):
+    return {"name": name}
+```
+
+## 通过Response参数自定义状态码
+可以在路径操作函数中声明Response参数，然后给这个临时的Response对象设置status_code信息
+
+FastAPI通过这个临时的Response对象解析出status_code信息(以及header、cookie信息等)，然后放入到最终返回的Response对象中
+
+```python
+from fastapi import FastAPI, Response, status
+
+app = FastAPI()
+
+tasks = {"foo": "Listen to the Bar Fighters"}
+
+@app.put("/get-or-create-task/{task_id}", status_code=200)
+def get_or_create_task(task_id: str, response: Response):
+    if task_id not in tasks:
+        tasks[task_id] = "This didn't exist before" 
+        response.status_code = status.HTTP_201_CREATED
+    return tasks[task_id]
+```
+
+## 通过直接返回Response自定义状态码
+FastAPI默认情况下会通过JSONResponse返回请求结果，返回的状态码是默认状态码或者是路径操作中设置的状态码
+
+如果我们想自定义状态码，可以通过直接返回Response对象来设置状态码，比如直接返回JSONResponse对象。
+
+如下示例，我们需要先导入JSONResponse，然后自定义状态码，直接返回数据对象
+```python
+from typing import Optional
+from fastapi import Body, FastAPI, status
+from fastapi.responses import JSONResponse
+
+app = FastAPI()
+
+items = {"foo": {"name": "Fighters", "size": 6}, "bar": {"name": "Tenders", "size": 3}}
+
+@app.put("/items/{item_id}")
+async def upsert_item(item_id: str, name: Optional[str] = Body(None), size: Optional[int] = Body(None)):
+    if item_id in items:
+        item = items[item_id]
+        item["name"] = name
+        item["size"] = size
+        return item
+    else:
+        item = {"name": name, "size": size}
+        items[item_id] = item
+        return JSONResponse(status_code=status.HTTP_201_CREATED, content=item)
+```
+>100 及以上状态码用于「消息」响应。你很少直接使用它们。具有这些状态代码的响应不能带有响应体。
+>
+>200 及以上状态码用于「成功」响应。这些是你最常使用的。200 是默认状态代码，它表示一切「正常」。另一个例子会是 201，「已创建」。它通常在数据库中创建了一条新记录后使用。一个特殊的例子是 204，「无内容」。此响应在没有内容返回给客户端时使用，因此该响应不能包含响应体。
+>
+>300 及以上状态码用于「重定向」。具有这些状态码的响应可能有或者可能没有响应体，但 304「未修改」是个例外，该响应不得含有响应体。
+>
+>400 及以上状态码用于「客户端错误」响应。这些可能是你第二常使用的类型。一个例子是 404，用于「未找到」响应。对于来自客户端的一般错误，你可以只使用 400。
+>
+>500 及以上状态码用于服务器端错误。你几乎永远不会直接使用它们。当你的应用程序代码或服务器中的某些部分出现问题时，它将自动返回这些状态代码之一。
+
+# 表单数据
+接收的不是 JSON，而是表单字段时，要使用 Form
+
+要使用表单，需预先安装 python-multipart
+```
+pip install python-multipart
+```
+
+声明表单参数的方式与Query或者Path相同
+```python
+from fastapi import Form
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.post("/login/")
+async def login(*, username: str = Form(...), password: str = Form(...)):
+     return {"username": username}
+```
+
+# 请求文件
+
+File用于定义客户端的上传文件，上传文件以「表单数据」形式发送
+
+## 导入文件
+
+
+```python
+from fastapi import FastAPI, File, UploadFile
+
+app = FastAPI()
+
+@app.post("/files/")
+async def create_file(file: bytes = File(...)):
+    return {"file_size": len(file)}
+
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    return {"filename": file.filename}
+```
+创建文件（File）参数的方式与 Body 和 Form 一样，File 是直接继承自 Form 的类。
+
+如果把路径操作函数参数的类型声明为 bytes，FastAPI 将以 bytes 形式读取和接收文件内容
+
+这种方式把文件的所有内容都存储在内存里，适用于小型文件
+
+不过，很多情况下，UploadFile 更好用，UploadFile 与 bytes 相比有更多优势：
+* 使用 spooled 文件：存储在内存的文件超出最大上限时，FastAPI 会把文件存入磁盘；
+* 这种方式更适于处理图像、视频、二进制文件等大型文件，好处是不会占用所有内存；
+* 可获取上传文件的元数据；
+* 自带 file-like async 接口；
+* 暴露的 Python SpooledTemporaryFile 对象，可直接传递给其他预期「file-like」对象的库。
+
+UploadFile 的属性如下:
+* filename：上传文件名字符串（str），例如， myimage.jpg；
+* content_type：内容类型（MIME 类型 / 媒体类型）字符串（str），例如，image/jpeg；
+* file： SpooledTemporaryFile（ file-like 对象）。其实就是 Python文件，可直接传递给其他预期 file-like 对象的函数或支持库。
+
+UploadFile 支持以下 async 方法，（使用内部 SpooledTemporaryFile）可调用相应的文件方法。
+* write(data)：把 data （str 或 bytes）写入文件；
+* read(size)：按指定数量的字节或字符（size (int)）读取文件内容；
+* seek(offset)：移动至文件 offset （int）字节处的位置；例如，await myfile.seek(0) 移动到文件开头；执行 await myfile.read() 后，需再次读取已读取内容时，这种方法特别好用；
+* close()：关闭文件。
+
+因为上述方法都是 async 方法，要搭配「await」使用c
+
+例如，在 async 路径操作函数 内，要用以下方式读取文件内容：
+```python
+contents = await myfile.read()
+```
+在普通 def 路径操作函数 内，则可以直接访问 UploadFile.file，例如：
+```python
+contents = myfile.file.read()
+```
+## 多文件上传
+可用同一个「表单字段」发送含多个文件的「表单数据」
+
+上传多个文件时，要声明含 bytes 或 UploadFile 的列表（List）
+
+```python
+from typing import List
+
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import HTMLResponse
+
+app = FastAPI()
+
+#使用List实现多文件上传
+@app.post("/files/")
+async def create_files(files: List[bytes] = File(...)):
+    return {"file_sizes": [len(file) for file in files]}
+
+
+@app.post("/uploadfiles/")
+async def create_upload_files(files: List[UploadFile] = File(...)):
+    return {"filenames": [file.filename for file in files]}
+
+
+@app.get("/")
+async def main():
+    content = """
+<body>
+<form action="/files/" enctype="multipart/form-data" method="post">
+<input name="files" type="file" multiple>
+<input type="submit">
+</form>
+<form action="/uploadfiles/" enctype="multipart/form-data" method="post">
+<input name="files" type="file" multiple>
+<input type="submit">
+</form>
+</body>
+    """
+    return HTMLResponse(content=content)
+```
+
+# 请求表单与文件
+FastAPI 支持同时使用 File 和 Form 定义文件和表单字段
+```python
+from fastapi import FastAPI, File, Form, UploadFile
+
+app = FastAPI()
+
+@app.post("/files/")
+async def create_file(
+    file: bytes = File(...), fileb: UploadFile = File(...), token: str = Form(...)
+):
+    return {
+        "file_size": len(file),
+        "token": token,
+        "fileb_content_type": fileb.content_type,
+    }
+```
+在同一个请求中接收数据和文件时，应同时使用 File 和 Form
+
+# 错误处理
+某些情况下，需要向客户端返回错误提示
+
+
+## HTTPException
+向客户端返回 HTTP 错误响应，可以使用 HTTPException
+```python
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+items = {"foo": "The Foo Wrestlers"}
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str):
+    if item_id not in items:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return {"item": items[item_id]}
+```
+## 添加自定义响应头
+```python
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+items = {"foo": "The Foo Wrestlers"}
+
+@app.get("/items-header/{item_id}")
+async def read_item_header(item_id: str):
+    if item_id not in items:
+        raise HTTPException(
+            status_code=404,
+            detail="Item not found",
+            headers={"X-Error": "There goes my error"},
+        )
+    return {"item": items[item_id]}
+```
+
+## 自定义异常处理器
+使用Starlette的异常工具（https://www.starlette.io/exceptions/），可以自定义异常处理器
+
+假设要触发的自定义异常叫作 UnicornException，且需要 FastAPI 实现全局处理该异常，此时，可以用 @app.exception_handler() 添加自定义异常控制器
+```python
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+
+class UnicornException(Exception):
+    def __init__(self, name: str):
+        self.name = name
+
+app = FastAPI()
+
+@app.exception_handler(UnicornException)
+async def unicorn_exception_handler(request: Request, exc: UnicornException):
+    return JSONResponse(
+        status_code=418,
+        content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},
+    )
+
+@app.get("/unicorns/{name}")
+async def read_unicorn(name: str):
+    if name == "yolo":
+        raise UnicornException(name=name)
+    return {"unicorn_name": name}
+```
+请求 `/unicorns/yolo` 时，路径操作函数就会抛出异常 UnicornException，这个异常会被我们的异常处理器unicorn_exception_handler捕获到,收到的HTTP状态码就是418，内容如下：
+```
+{"message": "Oops! yolo did something. There goes a rainbow..."}
+```
+
+## 覆盖缺省异常处理器
+FastAPI有一些缺省的异常处理器，触发 HTTPException 或请求无效数据时，这些处理器返回缺省的 JSON 响应结果。
+
+可以重写这些缺省异常处理器
+
+当一个请求包含非法数据的时候，FastAPI内部会抛出RequestValidationError异常，并且有默认的异常处理器来处理。
+
+可以用`@app.exception_handler(RequestValidationError)`来重写这个异常处理器
+```python
+from fastapi import FastAPI, HTTPException
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import PlainTextResponse
+
+app = FastAPI()
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    return PlainTextResponse(str(exc), status_code=400)
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):
+    if item_id == 3:
+        raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
+    return {"item_id": item_id}
+```
+当请求/items/foo时，由于item_id要求是int，foo是str，则抛出异常，返回结果不是默认的下面内容：
+```
+{
+    "detail": [
+        {
+            "loc": [
+                "path",
+                "item_id"
+            ],
+            "msg": "value is not a valid integer",
+            "type": "type_error.integer"
+        }
+    ]
+}
+```
+而是变成了
+```
+1 validation error
+path -> item_id
+  value is not a valid integer (type=type_error.integer)
+```
+
+RequestValidationError 包含其接收到的无效数据请求的 body ,开发时，可以用这个请求体生成日志、调试错误，并返回给用户
+```python
+from fastapi import FastAPI, Request, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
+app = FastAPI()
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
+    )
+
+class Item(BaseModel):
+    title: str
+    size: int
+
+@app.post("/items/")
+async def create_item(item: Item):
+    return item
+```
+如果传递了不合法的数据
+```
+{
+  "title": "towel",
+  "size": "XL"
+}
+```
+那么我们收到的返回结果如下：
+```
+{
+  "detail": [
+    {
+      "loc": [
+        "body",
+        "item",
+        "size"
+      ],
+      "msg": "value is not a valid integer",
+      "type": "type_error.integer"
+    }
+  ],
+  "body": {
+    "title": "towel",
+    "size": "XL"
+  }
+}
+```
+FastAPI HTTPException vs Starlette HTTPException
+
+FastAPI 也提供了自有的 HTTPException。
+
+FastAPI 的 HTTPException 继承自 Starlette 的 HTTPException 错误类。
+
+它们之间的唯一区别是，FastAPI 的 HTTPException 可以在响应中添加响应头。
+
+OAuth 2.0 等安全工具需要在内部调用这些响应头。
+
+因此你可以继续像平常一样在代码中触发 FastAPI 的 HTTPException 。
+
+但注册异常处理器时，应该注册到来自 Starlette 的 HTTPException。
+
+这样做是为了，当 Starlette 的内部代码、扩展或插件触发 Starlette HTTPException 时，处理程序能够捕获、并处理此异常。
+
+注意，本例代码中同时使用了这两个 HTTPException，此时，要把 Starlette 的 HTTPException 命名为 StarletteHTTPException：
+
+
+
+## 覆盖 HTTPException 错误处理器
+例如，只为错误返回纯文本响应，而不是返回 JSON 格式的内容：
+```python
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import PlainTextResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+app = FastAPI()
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request, exc):
+    return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):
+    if item_id == 3:
+        raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
+return {"item_id": item_id}
+```
+如果请求 /items/3，这时候返回的错误信息为：
+```
+Nope! I don't like 3.
+```
+如果没有自定义异常处理器http_exception_handler，返回的错误信息为：
+```
+{
+    "detail": "Nope! I don't like 3."
+}
+```
+
+
+# 复用 FastAPI 异常处理器
+FastAPI 支持先对异常进行某些处理，然后再使用 FastAPI 中处理该异常的默认异常处理器。从 fastapi.exception_handlers 中导入要复用的默认异常处理器：
+```python
+from fastapi import FastAPI, HTTPException
+# 从fastapi.exception_handlers导入缺省异常处理器
+from fastapi.exception_handlers import (
+    http_exception_handler,
+    request_validation_exception_handler,
+)
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+app = FastAPI()
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_http_exception_handler(request, exc):
+    print(f"OMG! An HTTP error!: {repr(exc)}")
+    #在使用缺省异常处理器之前添加了一条日志输出
+    return await http_exception_handler(request, exc)
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    print(f"OMG! The client sent invalid data!: {exc}")
+    #在使用缺省异常处理器之前添加了一条日志输出
+    return await request_validation_exception_handler(request, exc)
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):
+    if item_id == 3:
+        raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
+    return {"item_id": item_id}
 ```
