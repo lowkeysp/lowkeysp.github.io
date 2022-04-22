@@ -1915,3 +1915,292 @@ async def read_item(item_id: int):
         raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
     return {"item_id": item_id}
 ```
+
+# 路径操作配置
+可以将几个参数传递给**路径操作装饰器**来配置它，这些参数直接传递给路径操作装饰器，而不是路径操作函数
+## 响应状态码
+可以定义status_code要在路径操作的响应中使用的 (HTTP) 。可以直接传递int代码，例如404，也可以使用快捷常量status：
+```python
+from typing import Optional, Set
+from fastapi import FastAPI, status
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: Set[str] = []
+
+
+@app.post("/items/", response_model=Item, status_code=status.HTTP_201_CREATED)
+async def create_item(item: Item):
+    return item
+```
+## 标签
+```python
+from typing import Optional, Set
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: Set[str] = []
+
+@app.post("/items/", response_model=Item, tags=["items"])
+async def create_item(item: Item):
+    return item
+
+@app.get("/items/", tags=["items"])
+async def read_items():
+    return [{"name": "Foo", "price": 42}]
+
+
+@app.get("/users/", tags=["users"])
+async def read_users():
+    return [{"username": "johndoe"}]
+```
+
+## 总结和描述(summary和description)
+```python
+from typing import Optional, Set
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: Set[str] = []
+
+@app.post(
+    "/items/",
+    response_model=Item,
+    summary="Create an item",
+    description="Create an item with all the information, name, description, price, tax and a set of unique tags",
+)
+async def create_item(item: Item):
+    return item
+```
+## 文档字符串的描述
+由于描述往往很长并且涵盖多行，可以在函数docstring 中声明路径操作描述，FastAPI将从那里读取它。
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: Set[str] = []
+
+
+@app.post("/items/", response_model=Item, summary="Create an item")
+async def create_item(item: Item):
+    """
+    Create an item with all the information:
+
+    - **name**: each item must have a name
+    - **description**: a long description
+    - **price**: required
+    - **tax**: if the item doesn't have tax, you can omit this
+    - **tags**: a set of unique tag strings for this item
+    """
+    return item
+```
+
+## 响应说明(response_description)
+```python
+from typing import Optional, Set
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: Set[str] = []
+
+
+@app.post(
+    "/items/",
+    response_model=Item,
+    summary="Create an item",
+    response_description="The created item",
+)
+async def create_item(item: Item):
+    """
+    Create an item with all the information:
+
+    - **name**: each item must have a name
+    - **description**: a long description
+    - **price**: required
+    - **tax**: if the item doesn't have tax, you can omit this
+    - **tags**: a set of unique tag strings for this item
+    """
+    return item
+```
+response_description特指响应，description泛指路径操作
+
+## 弃用路径操作(deprecated)
+如果要弃用某个路径操作，但是并不删除它，可以使用deprecated
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/items/", tags=["items"])
+async def read_items():
+    return [{"name": "Foo", "price": 42}]
+
+
+@app.get("/users/", tags=["users"])
+async def read_users():
+    return [{"username": "johndoe"}]
+
+
+@app.get("/elements/", tags=["items"], deprecated=True)
+async def read_elements():
+    return [{"item_id": "Foo"}]
+```
+
+# JSON兼容编码器
+在进行数据存储或者传输的时候，有时候需要把数据(比如Pydantic模型)转换成JSON兼容的格式(如dict、list等)。
+
+FastAPI提供了 jsonable_encoder 函数来实现
+```python
+from datetime import datetime
+from typing import Optional
+
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
+
+fake_db = {}
+
+class Item(BaseModel):
+    title: str
+    timestamp: datetime
+    description: Optional[str] = None
+
+app = FastAPI()
+
+@app.put("/items/{id}")
+def update_item(id: str, item: Item):
+    json_compatible_item_data = jsonable_encoder(item)
+    fake_db[id] = json_compatible_item_data
+```
+假设fake_db只接受JSON 兼容数据的数据库，在此例中，将Pydantic模型转换为一个字典，并将这个datetime转换为一个字符串
+
+# 更新数据
+## 用PUT更新数据
+更新数据请用`HTTP PUT`操作,PUT用于接收替换现有数据的数据
+```python
+from typing import List, Optional
+
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = None
+    tax: float = 10.5
+    tags: List[str] = []
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2},
+    "baz": {"name": "Baz", "description": None, "price": 50.2, "tax": 10.5, "tags": []},
+}
+
+@app.get("/items/{item_id}", response_model=Item)
+async def read_item(item_id: str):
+    return items[item_id]
+
+@app.put("/items/{item_id}", response_model=Item)
+async def update_item(item_id: str, item: Item):
+    update_item_encoded = jsonable_encoder(item)
+    items[item_id] = update_item_encoded
+    return update_item_encoded
+```
+## 用PATCH进行部分更新
+HTTP PATCH 操作用于更新 部分 数据。即，只发送要更新的数据，其余数据保持不变。
+
+PATCH 没有 PUT 知名，也怎么不常用。很多人甚至只用 PUT 实现部分更新。
+
+FastAPI 对此没有任何限制，可以随意互换使用这两种操作。
+
+```python
+from typing import List, Optional
+
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = None
+    tax: float = 10.5
+    tags: List[str] = []
+
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2},
+    "baz": {"name": "Baz", "description": None, "price": 50.2, "tax": 10.5, "tags": []},
+}
+
+
+@app.get("/items/{item_id}", response_model=Item)
+async def read_item(item_id: str):
+    return items[item_id]
+
+
+@app.patch("/items/{item_id}", response_model=Item)
+async def update_item(item_id: str, item: Item):
+
+    stored_item_data = items[item_id]
+    stored_item_model = Item(**stored_item_data)
+    # 使用exclude_unset参数，则返回时，只包含创建 item 模型时显式设置的数据，不包括默认值
+    # 只更新用户设置过的值，不用模型中的默认值覆盖已存储过的值
+    update_data = item.dict(exclude_unset=True)
+    # 为已存储的模型创建副本，用接收的数据更新其属性 （使用 update 参数）
+    updated_item = stored_item_model.copy(update=update_data)
+    # 把模型副本转换为可存入数据库的形式（比如，使用 jsonable_encoder）
+    items[item_id] = jsonable_encoder(updated_item)
+    return updated_item
+```
+
+# 依赖项
+```python
+
+```
