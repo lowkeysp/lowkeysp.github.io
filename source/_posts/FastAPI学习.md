@@ -2201,6 +2201,186 @@ async def update_item(item_id: str, item: Item):
 ```
 
 # 依赖项
-```python
 
+
+下面举一个简单的例子，用于了解依赖注入系统是怎么工作的。
+
+
+```python
+from typing import Optional
+from fastapi import Depends, FastAPI
+
+app = FastAPI()
+
+#依赖项，依赖项函数的形式和结构与路径操作函数一样
+# 可以把依赖项当作没有「装饰器」（即，没有 @app.get("/some-path") ）的路径操作函数
+# 依赖项可以返回各种内容
+async def common_parameters(q: Optional[str] = None, skip: int = 0, limit: int = 100):
+    return {"q": q, "skip": skip, "limit": limit}
+
+# 与在路径操作函数参数中使用 Body、Query 的方式相同，声明依赖项需要使用 Depends 和一个新的参数
+# 这里只能传给 Depends 一个参数
+# 且该参数必须是可调用对象，比如函数。该函数接收的参数和路径操作函数的参数一样
+@app.get("/items/")
+async def read_items(commons: dict = Depends(common_parameters)):
+    return commons
+
+@app.get("/users/")
+async def read_users(commons: dict = Depends(common_parameters)):
+    return commons
 ```
+接收到新的请求时，FastAPI 执行如下操作：
+* 用正确的参数调用依赖项函数（「可依赖项」）
+* 获取依赖项函数返回的结果
+* 把依赖项函数返回的结果赋值给路径操作函数的参数
+
+这样，只编写一次代码，FastAPI 就可以为多个路径操作共享这段代码
+
+## 类作为依赖项
+依赖项并不一定非要是函数，只要是**可调用**的即可，比如Python的类
+
+可以将上述的`common_parameters`函数变成类
+```python
+class CommonQueryParams:
+    def __init__(self, q: str = None, skip: int = 0, limit: int = 100):
+        self.q = q
+        self.skip = skip
+        self.limit = limit
+```
+注意，这里我们用了`__init__`方法来实现类的初始化。并且类的初始化参数与依赖项函数完全相同
+
+使用依赖项类
+```python
+from typing import Optional
+from fastapi import Depends, FastAPI
+
+app = FastAPI()
+
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
+
+class CommonQueryParams:
+    def __init__(self, q: Optional[str] = None, skip: int = 0, limit: int = 100):
+        self.q = q
+        self.skip = skip
+        self.limit = limit
+
+@app.get("/items/")
+async def read_items(commons: CommonQueryParams = Depends(CommonQueryParams)):
+    response = {}
+    if commons.q:
+        response.update({"q": commons.q})
+    items = fake_items_db[commons.skip : commons.skip + commons.limit]
+    response.update({"items": items})
+    return response
+```
+## 子依赖项
+FastAPI 支持创建含子依赖项的依赖项，可以按需声明任意深度的子依赖项嵌套层级，FastAPI 负责处理解析不同深度的子依赖项。
+
+先声明第一个依赖项函数
+```python
+def query_extractor(q11: str, q12: str):
+    return q11 + q12
+```
+
+第二个依赖项函数
+```python
+def query_or_cookie_extractor(q2: str = Depends(query_extractor), last_query: str = Cookie(None)):
+    if not q2:
+        return last_query
+    return q2
+```
+使用这两个依赖项函数
+```python
+from fastapi import Cookie, Depends, FastAPI
+
+app = FastAPI()
+
+def query_extractor(q11: str, q12: str):
+    return q11 + q12
+
+def query_or_cookie_extractor(q2: str = Depends(query_extractor), last_query: str = Cookie(None)):
+    if not q2:
+        return last_query
+    return q2
+
+@app.get("/items/")
+async def read_query(query_or_default: str = Depends(query_or_cookie_extractor)):
+    return {"q_or_cookie": query_or_default}
+```
+在路径操作函数` read_query`中，仅声明了依赖项函数`query_or_cookie_extractor`，但Fast API只要需要先调用第一个依赖项函数`query_extractor`,然后把结果传给`query_or_cookie_extractor`
+
+
+依赖项的多次调用
+
+如果某个依赖项在同一个路径操作中被声明了多次，例如，多个依赖项都有一个共同的子依赖项，那么FastAPI默认在每一次请求中只会调用这个依赖项一次，FastAPI会把这个依赖项的返回值缓存起来，然后把这个值传递给需要的依赖项，而不是在同一个请求中多次调用这个依赖项。
+
+在有些场景下，我们并不需要缓存这个依赖项的返回值，而是需要多次调用，那么我们可以使用参数`use_cache=False`来禁止依赖项的缓存
+
+```python
+async def needy_dependency(fresh_value: str = Depends(get_value, use_cache=False)):
+return {"fresh_value": fresh_value}
+```
+## 路径操作装饰器依赖项
+有些时候，我们不需要在路径操作函数中使用依赖项的返回值，或者，有些依赖项并不返回值，但仍要执行或解析该依赖项。对这种情况，不必在声明路径操作函数的参数时使用 Depends，而是可以在路径操作装饰器中添加一个由 dependencies 组成的 list
+
+
+在路径操作装饰器中添加 dependencies 参数,该参数的值是由 Depends() 组成的 list
+```python
+from fastapi import Depends, FastAPI, Header, HTTPException
+
+app = FastAPI()
+
+async def verify_token(x_token: str = Header(...)):
+    if x_token != "fake-super-secret-token":
+        raise HTTPException(status_code=400, detail="X-Token header invalid")
+
+async def verify_key(x_key: str = Header(...)):
+    if x_key != "fake-super-secret-key":
+        raise HTTPException(status_code=400, detail="X-Key header invalid")
+    return x_key
+
+@app.get("/items/", dependencies=[Depends(verify_token), Depends(verify_key)])
+async def read_items():
+    return [{"item": "Foo"}, {"item": "Bar"}]
+```
+它们的执行方或解析方式和普通依赖项一样，但就算这些依赖项会返回值，它们的值也不会传递给路径操作函数
+
+## 全局依赖项
+有时，我们要为整个应用添加依赖项
+```python
+from fastapi import Depends, FastAPI, Header, HTTPException
+
+
+async def verify_token(x_token: str = Header(...)):
+    if x_token != "fake-super-secret-token":
+        raise HTTPException(status_code=400, detail="X-Token header invalid")
+
+
+async def verify_key(x_key: str = Header(...)):
+    if x_key != "fake-super-secret-key":
+        raise HTTPException(status_code=400, detail="X-Key header invalid")
+    return x_key
+
+
+app = FastAPI(dependencies=[Depends(verify_token), Depends(verify_key)])
+
+
+@app.get("/items/")
+async def read_items():
+    return [{"item": "Portal Gun"}, {"item": "Plumbus"}]
+
+
+@app.get("/users/")
+async def read_users():
+    return [{"username": "Rick"}, {"username": "Morty"}]
+```
+ 在本例中，这些依赖项可以用于应用中的所有路径操作
+
+ ##  与yield的依赖关系
+
+ （没理解，先跳过）
+ FastAPI支持依赖项在请求结束后做一些额外的工作,要实现这个功能，我们需要用yield代替return，然后其后添加一些额外的工作。
+
+ 比如，
+
+ # 安全
