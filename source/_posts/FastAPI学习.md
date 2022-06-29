@@ -2384,3 +2384,28 @@ async def read_users():
  比如，
 
  # 安全
+
+## 安全简介
+* OAuth2
+
+OAuth2是一个规范，它定义了几种处理身份认证和授权的方法。它是一个相当广泛的规范，涵盖了一些复杂的使用场景。它包括了使用「第三方」进行身份认证的方法。Facebook，Google等都使用这种安全机制
+
+* OpenID Connect
+
+OpenID Connect 是另一个基于 OAuth2 的规范。它只是扩展了 OAuth2，并明确了一些在 OAuth2 中相对模糊的内容，以尝试使其更具互操作性。例如，Google 登录使用 OpenID Connect（底层使用OAuth2）。但是 Facebook 登录不支持 OpenID Connect。它具有自己的 OAuth2 风格。
+
+* OpenAPI
+
+OpenAPI（以前称为 Swagger）是用于构建 API 的开放规范（现已成为 Linux Foundation 的一部分）。FastAPI 基于 OpenAPI。
+
+OpenAPI 定义了以下安全方案：
+
+1）apiKey：一个特定于应用程序的密钥，可以来自：查询参数。请求头。cookie。
+
+2）http：标准的 HTTP 身份认证系统，包括：bearer: 一个值为 Bearer 加令牌字符串的 Authorization 请求头。这是从 OAuth2 继承的。HTTP Basic 认证方式。HTTP Digest，等等。
+
+3）oauth2：所有的 OAuth2 处理安全性的方式（称为「流程」）
+
+4）openIdConnect：提供了一种定义如何自动发现 OAuth2 身份认证数据的方法。此自动发现机制是 OpenID Connect 规范中定义的内容。
+
+## 
