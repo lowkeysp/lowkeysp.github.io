@@ -1,23 +1,1227 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="MPLS VPN优势：  PE路由器与CE路由器运行动态路由协议 PE为每个客户维护一个独立的路由表 允许客户使用重叠的地址空间   MPLS 初体验路由层面  PE会创建两个VRF，用于区分两个不同的客户，同时用于解决从客户上收过来的路由冲突 两个PE之间建立MP-BGP，用于传递vpnv4的路由表（vpnv4路由：RD值：ip地址&#x2F;掩码，比如：4813：12：10.1.1.0&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MPLSVPN-红茶">
+<meta property="og:url" content="http://yoursite.com/2020/07/09/MPLSVPN-%E7%BA%A2%E8%8C%B6/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="MPLS VPN优势：  PE路由器与CE路由器运行动态路由协议 PE为每个客户维护一个独立的路由表 允许客户使用重叠的地址空间   MPLS 初体验路由层面  PE会创建两个VRF，用于区分两个不同的客户，同时用于解决从客户上收过来的路由冲突 两个PE之间建立MP-BGP，用于传递vpnv4的路由表（vpnv4路由：RD值：ip地址&#x2F;掩码，比如：4813：12：10.1.1.0&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggxpof8g7xj30i40byjxg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggybkm1rc2j310u0eo7k9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggybp11u3jj311q0f2dsf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggybxxatlaj310m0ldtq9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggycqgnotzj310j0juqit.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggycse0c3lj311l0gl12m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggkzk3a036j311l0k4k29.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggydpep9qnj311q0n8aop.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggl09m806bj31070k3gym.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggykexytyyj312j0kwqfv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggykgbgn60j30z60nuguv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggyl4g5ntij31180nr4cj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggyljnpanxj311v0o4k6s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggyl6uj7zuj31140ogn96.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggym74mybcj311b0foak6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggymaqh4tnj310j0hu4d5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggymbd64imj310u0fxtnd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggymc688ubj310u0hcwtk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggymfglmsdj311e0jltru.jpg">
+<meta property="article:published_time" content="2020-07-09T12:29:24.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="MPLS">
+<meta property="article:tag" content="VPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ggxpof8g7xj30i40byjxg.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/07/09/MPLSVPN-%E7%BA%A2%E8%8C%B6/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MPLSVPN-红茶 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/09/MPLSVPN-%E7%BA%A2%E8%8C%B6/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MPLSVPN-红茶
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-09 20:29:24" itemprop="dateCreated datePublished" datetime="2020-07-09T20:29:24+08:00">2020-07-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/07/09/MPLSVPN-%E7%BA%A2%E8%8C%B6/" class="leancloud_visitors" data-flag-title="MPLSVPN-红茶">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+
+<h1 id="MPLS-VPN"><a href="#MPLS-VPN" class="headerlink" title="MPLS VPN"></a>MPLS VPN</h1><p>优势：</p>
+<ul>
+<li>PE路由器与CE路由器运行动态路由协议</li>
+<li>PE为每个客户维护一个独立的路由表</li>
+<li>允许客户使用重叠的地址空间</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggxpof8g7xj30i40byjxg.jpg" alt="捕获.PNG"></p>
+<h1 id="MPLS-初体验"><a href="#MPLS-初体验" class="headerlink" title="MPLS 初体验"></a>MPLS 初体验</h1><h2 id="路由层面"><a href="#路由层面" class="headerlink" title="路由层面"></a>路由层面</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggybkm1rc2j310u0eo7k9.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>PE会创建两个VRF，用于区分两个不同的客户，同时用于解决从客户上收过来的路由冲突</li>
+<li>两个PE之间建立MP-BGP，用于传递vpnv4的路由表（vpnv4路由：RD值：ip地址&#x2F;掩码，比如：4813：12：10.1.1.0&#x2F;24）。RD值用来防止地址冲突。</li>
+<li>另一端的PE路由器使用RT值来区分这两个路由，RT值可实际上是扩展的community，默认另一端的PE路由器的VRF都是拒收任何路由的，配上import的RT值之后，则可以接受该RT值的vpnv4的路由。然后将接受的vpnv4路由再转给相应的客户。</li>
+</ul>
+<p>可以看出，RD值和RT值是用来转发路由的，是路由层面的，和数据转发层面没有关系。</p>
+<h2 id="数据层面"><a href="#数据层面" class="headerlink" title="数据层面"></a>数据层面</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggybp11u3jj311q0f2dsf.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>100的标签是左边的PE设备给右边通告的，用于区分左边的不同客户，当一个带有100标签的数据包传给左边的PE设备后，左边的PE设备就知道这个数据应该是给上面的黄色客户的。这个标签值也是通过MP-BGP协议传递给右边的PE设备的，和RT值传递的方式一样。这是内层的标签，可以说，内层的标签用来区分客户</li>
+<li>301的标签是通过MPLS协议，P设备给右边的PE设备的，也就是建立双向的LDP。外层的标签用于在骨干网的转发。</li>
+</ul>
+<p>可以看出，内层标签是通过MP-BGP传递，外层标签则是MPLS，通过两层标签来进行数据层面的转发。</p>
+<p>顶层标签有PHP机制，但是VPN标签不能再倒数第二跳弹出，因为Exgress PE需要这层标签</p>
+<p>外层标签的数据转发是这样的，当PE2给PE1传递MP-BGP路由时，next-hop会是自身，然后，客户给PE1传递数据包后，PE1查找下一跳为PE2，然后发现使用的是MPLS，则会加上外层标签进行传递，而不是基于IP地址进行传递。</p>
+<h1 id="MPLS-VPN架构-PE-router"><a href="#MPLS-VPN架构-PE-router" class="headerlink" title="MPLS VPN架构 -PE router"></a>MPLS VPN架构 -PE router</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggybxxatlaj310m0ldtq9.jpg" alt="捕获.PNG"></p>
+<p>一个PE设备会维护一个全局路由表和多个VRF路由表。</p>
+<h2 id="RD值"><a href="#RD值" class="headerlink" title="RD值"></a>RD值</h2><p>用来区分冲突的私网路由，64bit</p>
+<ul>
+<li>用于在MP-BGP运载VRF的IPv4路由前缀时，确保这些前缀的唯一性</li>
+<li>RD并不会说明该前缀属于哪一个VRF（需要搭配RT）</li>
+<li>64bits的RD与32bit的IPv4前缀构成96bit的VPNv4前缀</li>
+<li>如果不同的VPN客户，存在相同的IPv4地址空间，那么可以通过设置不同的RD值从而保障前缀的唯一性</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggycqgnotzj310j0juqit.jpg" alt="捕获.PNG"></p>
+<h2 id="RT值"><a href="#RT值" class="headerlink" title="RT值"></a>RT值</h2><ul>
+<li>RT值实际上就是MP-BGP的扩展的community</li>
+<li>用于区分VPN（Customer）</li>
+<li>一条路由可以附加多个RT值</li>
+<li>import和export</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggycse0c3lj311l0gl12m.jpg" alt="捕获.PNG"></p>
+<h1 id="VRF-MODEL"><a href="#VRF-MODEL" class="headerlink" title="VRF MODEL"></a>VRF MODEL</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggkzk3a036j311l0k4k29.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>一个VRF需要定义RD值和RT值（export和import）。默认不配import的话，是拒收任何路由的。</li>
+<li>一个VRF可以有多个接口，一个接口只能属于一个VRF</li>
+</ul>
+<p>一个VRF可以想象成是一个虚拟路由器，有路由表，转发表，属于该VRF的接口，还有与VRF关联的其他信息，如RD值和RT值</p>
+<h2 id="MP-BGP"><a href="#MP-BGP" class="headerlink" title="MP-BGP"></a>MP-BGP</h2><ul>
+<li>BGP 能够承载大批量的路由前缀</li>
+<li>BGP 拥有丰富的路径属性及丰富的策略部署工具</li>
+<li>BGP 能够在非直连的Peer之间交互路由信息，因此P路由器无需运行BGP即无需维护客户的路由信息，大大减轻了负担</li>
+</ul>
+<p>MP-BGP在MPLS VPN中用于在PE路由器之间交互VPNv4路由， 同时为VPNv4路由分配标签</p>
+<p>IPv4路由重发布进MP-BGP（如果PE-CE之间跑的就是BGP，则不用重发布路由）</p>
+<p>一个MP-BGP的update报文所包含的元素有：</p>
+<ul>
+<li>VPNv4地址</li>
+<li>扩展的community属性，如RT值，SOO等</li>
+<li>用于VPN报文转发的标签</li>
+<li>其他的普通的BGP的属性，如MED等等</li>
+</ul>
+<h1 id="路由汇总对MPLS-VPN数据传输的影响"><a href="#路由汇总对MPLS-VPN数据传输的影响" class="headerlink" title="路由汇总对MPLS VPN数据传输的影响"></a>路由汇总对MPLS VPN数据传输的影响</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggydpep9qnj311q0n8aop.jpg" alt="捕获.PNG"></p>
+<p>如果在P路由器上对PE的loopback地址做了汇总，由于汇总路由是在这台P设备上产生的，因此PHP机制在这个P设备上起效，在P设备上就进行了标签弹出，由于这台P设备面对的是一个VPN标签，但是这个P设备不认识这个VPN标签，那么就会丢弃。</p>
+<h1 id="VRF-和-MP-BGP的配置"><a href="#VRF-和-MP-BGP的配置" class="headerlink" title="VRF 和 MP-BGP的配置"></a>VRF 和 MP-BGP的配置</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggl09m806bj31070k3gym.jpg" alt="捕获.PNG"></p>
+<ul>
+<li><p>在PE上创建VRF，将PE-CE的接口放入VRF</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ip vrf cisco</span><br><span class="line"> rd 1:1</span><br><span class="line"> route-target export 234:2       # 本地的RT export</span><br><span class="line"> route-target import 234:4       # 匹配PE2所配置的RT export</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface XX</span><br><span class="line"> ip vrf forwarding cisco         #将该接口放入VRF cisco</span><br><span class="line"> ip address XXXX XXXX</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"># 配置完之后，这个接口就不属于全局路由表中了，不会在全局路由表中出现这个接口，而是在VRF的虚拟路由表中，可以通过</span><br><span class="line">show ip route vrf cisco </span><br><span class="line">中查看vrf的虚拟路由表</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>PE配置MP-MGP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[config] router bgp 234</span><br><span class="line">[config-router] bgp router-id 2.2.2.2</span><br><span class="line">[config-router] no bgp default ipv4-unicast # 如果我们不需要PE1与PE2之间交互IPv4前缀的话，可以将默认建立Ipv4的BGP邻居开关关掉</span><br><span class="line">[config-route] neighbor 4.4.4.4 remote 234</span><br><span class="line">[config-router] neighbor 4.4.4.4 update-source loopback0</span><br><span class="line">[config-router] address-family vpnv4</span><br><span class="line">[config-router-af] neighbor 4.4.4.4 activate</span><br><span class="line">[config-router] neighbor 4.4.4.4 send-community extended</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#查看MP-BGP的邻居</span><br><span class="line">[cisco] show ip bgp vpnv4 all summary</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>完成PE-CE之间路由的重发布</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[config] router bgp 234</span><br><span class="line">[config-router] address-family ipv4 vrf cisco #必须在这个cisco中进行重发布</span><br><span class="line">[config-router-af] redistribute ospf 1 vrf cisco match internal external </span><br><span class="line"># internal表示只重发布ospf的内部路由，external表示只重发布ospf的外部路由</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">PE给CE的重发布</span><br><span class="line">[config] router ospf 1 vrf cisco</span><br><span class="line">[config-router] redistribute bgp 234 subnets</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看vpnv4的路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show ip bgp vpnv4 all</span><br><span class="line"></span><br><span class="line">show ip bgp vpnv4 all X.X.X.X #查看某一条vpnv4路由</span><br></pre></td></tr></table></figure></li>
+<li><p>查看本地给路由分配的标签,也就是内部标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip bgp vpnv4 all labels</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看vrf路由表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show ip route vrf cisco</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>查看本地配置的vrf以及其下关联的接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip vrf</span><br></pre></td></tr></table></figure></li>
+<li><p>查看vrf详细信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip vrf detail</span><br></pre></td></tr></table></figure></li>
+<li><p>查看vrf接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip vrf interface</span><br></pre></td></tr></table></figure></li>
+<li><p>查看VRF的CEF表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip cef vrf</span><br></pre></td></tr></table></figure></li>
+<li><p>查看VRF CEF表的详细信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip cef vrf detail</span><br></pre></td></tr></table></figure></li>
+<li><p>ping</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping vrf vrfname dst-addr</span><br></pre></td></tr></table></figure></li>
+<li><p>traceroute</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traceroute vrf vrfname ? </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="RR"><a href="#RR" class="headerlink" title="RR"></a>RR</h1><ul>
+<li><p>在MPLS VPN网络中，RR和其他BGP设备（PE）的工作方式有所不同，在RT没有在RR配置的时候，RR并不会拒绝VPNv4路由，这点和PE不一样，PE路由器如果收到一条没有在任何RT输入到VRF的VPNv4路由的话，该路由就会被拒绝，PE采用这种方式来节省内存</p>
+</li>
+<li><p>没有必要让一个RR或一组RR拥有或反射BGP表里所有的VPNv4路由。可以将这些VPNv4路由分成几组，然后让多个RR或多组RR分别承载这几组路由。操作的方式是，在VPNv4地址簇模式中通过命令bgp rr-group extcommunity-list来实现，这个扩展的community-list用来指定希望通过这个RR允许或拒绝RT。</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggykexytyyj312j0kwqfv.jpg" alt="捕获.PNG"> </p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggykgbgn60j30z60nuguv.jpg" alt="捕获.PNG"></p>
+<h1 id="PE与CE之间的路由协议"><a href="#PE与CE之间的路由协议" class="headerlink" title="PE与CE之间的路由协议"></a>PE与CE之间的路由协议</h1><h2 id="EBGP"><a href="#EBGP" class="headerlink" title="EBGP"></a>EBGP</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggyl4g5ntij31180nr4cj.jpg" alt="捕获.PNG"></p>
+<p>那么PE从CE学到的路由，直接就是BGP的路由条目，这个VRF-A routing table就是BGP路由表，那么，只需要加上RD前缀，RT值，标签等就能直接变成vpnv4路由传给对端PE，但是如果PE与CE是OSPF连接的话，那么学到的是OSPF路由条目，VRF-A routing table也是OSPF路由表，那么就需要重发布到MP-BGP中。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggyljnpanxj311v0o4k6s.jpg" alt="捕获.PNG"></p>
+<h2 id="静态路由"><a href="#静态路由" class="headerlink" title="静态路由"></a>静态路由</h2><p>在PE上做配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 需要在vrf中做</span><br><span class="line">ip route vrf cisco 1.1.1.1 255.255.255.255 10.1.12.1 e0/0</span><br><span class="line"></span><br><span class="line"># 重发布</span><br><span class="line">router bgp 234</span><br><span class="line">  address-family ipv4 vrf cisco</span><br><span class="line">    redistribute static</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggyl6uj7zuj31140ogn96.jpg" alt="捕获.PNG"></p>
+<h1 id="SOO"><a href="#SOO" class="headerlink" title="SOO"></a>SOO</h1><p>使用SOO用于防环路,Site of Origin</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggym74mybcj311b0foak6.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggymaqh4tnj310j0hu4d5.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggymbd64imj310u0fxtnd.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggymc688ubj310u0hcwtk.jpg" alt="捕获.PNG"></p>
+<p>解决方法：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ggymfglmsdj311e0jltru.jpg" alt="捕获.PNG"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MPLS/" rel="tag"># MPLS</a>
+          
+            <a href="/tags/VPN/" rel="tag"># VPN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/08/MPLS-VPN/" rel="next" title="MPLS VPN">
+                <i class="fa fa-chevron-left"></i> MPLS VPN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/04/QoS/" rel="prev" title="QoS">
+                QoS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MPLS-VPN"><span class="nav-number">1.</span> <span class="nav-text">MPLS VPN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MPLS-%E5%88%9D%E4%BD%93%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">MPLS 初体验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%B1%82%E9%9D%A2"><span class="nav-number">2.1.</span> <span class="nav-text">路由层面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">数据层面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MPLS-VPN%E6%9E%B6%E6%9E%84-PE-router"><span class="nav-number">3.</span> <span class="nav-text">MPLS VPN架构 -PE router</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RD%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">RD值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RT%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">RT值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VRF-MODEL"><span class="nav-number">4.</span> <span class="nav-text">VRF MODEL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MP-BGP"><span class="nav-number">4.1.</span> <span class="nav-text">MP-BGP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%B1%87%E6%80%BB%E5%AF%B9MPLS-VPN%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">5.</span> <span class="nav-text">路由汇总对MPLS VPN数据传输的影响</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VRF-%E5%92%8C-MP-BGP%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">VRF 和 MP-BGP的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RR"><span class="nav-number">7.</span> <span class="nav-text">RR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PE%E4%B8%8ECE%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="nav-number">8.</span> <span class="nav-text">PE与CE之间的路由协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EBGP"><span class="nav-number">8.1.</span> <span class="nav-text">EBGP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-number">8.2.</span> <span class="nav-text">静态路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SOO"><span class="nav-number">9.</span> <span class="nav-text">SOO</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

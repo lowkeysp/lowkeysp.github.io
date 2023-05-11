@@ -1,23 +1,1224 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="属性分类公认属性 well-known 公认必遵属性（Well-Known mandatory） 所有的BGP实现都必须能识别，且在update报文中必须携带的属性，如Origin，As-Path，Next-hop   公认自由决定属性（Well-Known discretionary） 所有的BGP实现都必须能识别，但不要求必须包含在update报文中，如Local-Preference，A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BGP的路径属性">
+<meta property="og:url" content="http://yoursite.com/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="属性分类公认属性 well-known 公认必遵属性（Well-Known mandatory） 所有的BGP实现都必须能识别，且在update报文中必须携带的属性，如Origin，As-Path，Next-hop   公认自由决定属性（Well-Known discretionary） 所有的BGP实现都必须能识别，但不要求必须包含在update报文中，如Local-Preference，A">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq03bvwtgj30i30bf782.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0amg13zj30fb084mz4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0gfo6iyj30js08b761.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0kj270xj30g806vmyq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0mhpikgj30j7091dhk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq184x5s5j30hy04z0ud.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1b5qfjbj30gr0b9adj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1pwst8pj30ji09u76f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1u7qfgvj30k60d5n4e.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1wz1br4j30ka0ac0x0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq34dpo6vj30nl06g0wr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbihr3twj30np0ccjvo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbmt3atlj30od0bygq0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbwhsq1qj30nt0ae0v8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqby8053qj30nx0bgaec.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqc1a9e5fj30mm0b10wl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqc2n6kqlj30lq0cf77l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcjnq94xj30fp06babj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcra8kvhj30mc07s0uj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcsi3qlnj30jl0aj0vs.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqct6ndfvj30lk0apgp4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcvtd3uzj30lk0apgp4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqd1400xyj30ki0a30vy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqd3ponokj30iy09tn06.jpg">
+<meta property="article:published_time" content="2020-03-11T03:21:59.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.419Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="BGP">
+<meta property="article:tag" content="数据">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcq03bvwtgj30i30bf782.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>BGP的路径属性 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BGP的路径属性
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-11 11:21:59" itemprop="dateCreated datePublished" datetime="2020-03-11T11:21:59+08:00">2020-03-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/" class="leancloud_visitors" data-flag-title="BGP的路径属性">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="属性分类"><a href="#属性分类" class="headerlink" title="属性分类"></a>属性分类</h1><h2 id="公认属性-well-known"><a href="#公认属性-well-known" class="headerlink" title="公认属性 well-known"></a>公认属性 well-known</h2><ul>
+<li>公认必遵属性（Well-Known mandatory）<blockquote>
+<p>所有的BGP实现都必须能识别，且在update报文中必须携带的属性，如Origin，As-Path，Next-hop</p>
+</blockquote>
+</li>
+<li>公认自由决定属性（Well-Known discretionary）<blockquote>
+<p>所有的BGP实现都必须能识别，但不要求必须包含在update报文中，如Local-Preference，ATOMIC_Aggregate</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="可选属性-Optical"><a href="#可选属性-Optical" class="headerlink" title="可选属性 Optical"></a>可选属性 Optical</h2><ul>
+<li>可选传递的 (Optical transitive）<blockquote>
+<p>可以不支持该属性，但即使不支持也应当接受包含该属性的路由并传递给其他对等体，如Community，Aggregator</p>
+</blockquote>
+</li>
+<li>可选非传递的（optical non-transitive）<blockquote>
+<p>可以不支持该属性，不识别的BGP进程忽略包含这个属性的更新消息并且不传递给其他BGP对等体，如MED，Originator_ID,Cluster_ID,*pre_value</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq03bvwtgj30i30bf782.jpg" alt="捕获.PNG"></p>
+<p>BGP路由前缀指的就是目的地址，如果多个目的地址的路径属性是一样的话，则可以使用一个update报文，BGP路径前缀可以包括好多个目的地址</p>
+<h1 id="Preferred-Value"><a href="#Preferred-Value" class="headerlink" title="Preferred_Value"></a>Preferred_Value</h1><ul>
+<li>华为BGP私有路径属性，取值范围：0~65535；越大越优先</li>
+<li>在路由器本地配置，只对本路由器有效，不会传播给任何BGP对等体。</li>
+<li>本地始发的路由器默认Preferred_Value为0，从其他对等体学到的路由缺省值也是0</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0amg13zj30fb084mz4.jpg" alt="捕获.PNG"></p>
+<p>R1和R3都给R2宣告了这条路由，但是在宣告的update报文当中，是不携带Preferred_Value属性的，也就是R2都默认为R1和R3的Preferred_Value是0.然后，你可以在R2上对Preferred_Value上进行修改，从而手动优选走R1的路由，当然，这个值也只在R2上有效</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0gfo6iyj30js08b761.jpg" alt="捕获.PNG"></p>
+<h1 id="Local-Preference"><a href="#Local-Preference" class="headerlink" title="Local_Preference"></a>Local_Preference</h1><ul>
+<li>本地优先级，公认自决属性，用于告诉AS中的路由器，哪条路径是离开AS的首先路径</li>
+<li>Local_Preference越大则路径越优，缺省Local_Preference值为100</li>
+<li>只能发送给IBGP对等体，而不能传递给EBGP对等体</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0kj270xj30g806vmyq.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0mhpikgj30j7091dhk.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>Local_Preference属性只能在IBGP对等体之间传递（除非部署了路由策略否则该属性值在IBGP对等体传递过程中不会丢失），不能在EBGP对等体之间传递</li>
+<li>如果从EBBGP对等体收到的路由携带了Local_Preference,则会触发Notifacation报文；但是可以在AS边界路由器上使用import方向的策略来修改Local_Preference属性</li>
+<li>路由器network及重发布到BGP的路由，Local_Preference的缺省值为100，使用<code>bgp default local-preference</code>命令可修改缺省Local_Preference值</li>
+<li>BGP路由器在向其EBGP对等体发送BGP路由时，不能携带Local_Preference属性，但是对方会在本地为这条路由赋一个缺省Local_Preference也就是100，然后再将属性传递给自己的IBGP对等体</li>
+</ul>
+<h1 id="AS-PATH"><a href="#AS-PATH" class="headerlink" title="AS_PATH"></a>AS_PATH</h1><ul>
+<li>AS_PATH是公认必遵属性，是BGP路由传递过程中所经过的AS号的列表</li>
+<li>AS_PATH可用于确保路由再EBGP对等体之间传递时的无环，另外也作为路由优选的依据之一。</li>
+<li>BGP路由被通告给EBGP对等体时会再AS_PATH中追加上本地的AS号，通告给IBGP邻居时不修改AS_PATH</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq184x5s5j30hy04z0ud.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1b5qfjbj30gr0b9adj.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1pwst8pj30ji09u76f.jpg" alt="捕获.PNG"></p>
+<p>{100，200}是AS_SET，是无序的,长度是1；300与{100，200}是AS_SEQ，是有序的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1u7qfgvj30k60d5n4e.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1wz1br4j30ka0ac0x0.jpg" alt="捕获.PNG"></p>
+<h1 id="ORIGIN"><a href="#ORIGIN" class="headerlink" title="ORIGIN"></a>ORIGIN</h1><p>公认必遵属性</p>
+<ul>
+<li>IGP：标记为i，通过BGP network的路由，也就是起源于IGP的路由，因为BGP network必须保证该网络在路由表中</li>
+<li>EGP: 标记为e，是由EGP这种早期的协议重发布而来</li>
+<li>Incomplete: 标记为？，是从其他渠道学习到的，路由来源不完全（确认该路由来源的信息不完全，重发布的路由，import-route）</li>
+</ul>
+<h1 id="MED"><a href="#MED" class="headerlink" title="MED"></a>MED</h1><ul>
+<li>MED(Multi Exit Discriminator)是可选非传递属性，是一种度量值，用于向外部对等体指出进入AS的首选路径，即当入口有多个时，AS可以使用MED动态地影响其他AS如何进入地路径</li>
+<li>MED属性值越小则BGP路径越优</li>
+<li>MED主要用于在AS之间影响BGP的选路。MED被传递给EBGP对等体后，对等体在其AS内传递路由时，携带该MED值，但不会将该MED值传递给下一个AS。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq34dpo6vj30nl06g0wr.jpg" alt="捕获.PNG"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>缺省情况下，只比较来自同一对等体AS的BGP路由的MED值，也就是说如果去往同一个目的地的两条路由来自不同的AS，则不进行MED值得比较。</li>
+<li>MED只在直接相邻得AS间影响业务量，而不会跨AS传递</li>
+<li>一台BGP路由器将路由通告给EBGP对等体时，是否携带MED属性，需要根据以下条件进行判断（不对EBGP对等体使用策略得情况下）：</li>
+<li><ul>
+<li>如果该BGP路由是本地始发（本地通过network或import-route命令引入）的，则缺省携带MED属性发送给EBGP对等体</li>
+</ul>
+</li>
+<li><ul>
+<li>如果该BGP路由是从其他BGP对等体学习过来的，那么将该路由通告给EBGP对等体时不携带MED。</li>
+</ul>
+</li>
+<li>在IBGP对等体之间传递路由时，MED值会被保留并且传递，除非部署了策略，否则MED值在传递过程中不发生改变也不会丢失。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbihr3twj30np0ccjvo.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbmt3atlj30od0bygq0.jpg" alt="捕获.PNG"></p>
+<h1 id="Next-Hop"><a href="#Next-Hop" class="headerlink" title="Next_Hop"></a>Next_Hop</h1><p>该属性是一个公认必遵属性，用于指定到达目标网络的下一跳地址。</p>
+<ul>
+<li>当路由器学习到BGP路由时，需对BGP路由的Next_Hop属性值进行检查，该属性值（IP地址）必须在本地路由可达，如果不可达，则这条BGP路由不可用。</li>
+<li>在EBGP及IBGP对等体的场景中，Next_Hop的缺省操作是存在差异的。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbwhsq1qj30nt0ae0v8.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqby8053qj30nx0bgaec.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqc1a9e5fj30mm0b10wl.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqc2n6kqlj30lq0cf77l.jpg" alt="捕获.PNG"></p>
+<p>中间是一个交换机</p>
+<p>上图的操作是BGP做了一个优化，也就是这三个路由器通过交换机连接，是在同一个网段的。按照通常情况下，A会把BGP路由传递给C，并且下一跳改成自己的地址，这样，C要访问的B的话得先通过A，再通过B。会发现经过A是多此一举，因为C明明可以直接访问B，因此，如果A发现Next_Hop地址值和要更新的EBGP对等体同属于一个网段的话，则Next_Hop不发生变化</p>
+<h1 id="Community"><a href="#Community" class="headerlink" title="Community"></a>Community</h1><p>有了community属性值，可以为不同种类的路由打上不同的community属性值，这些属性值会随着BGP路由更新给其他AS，路由器只需要根据Community属性值来执行差异化的策略即可而不用去关心具体的路由前缀</p>
+<ul>
+<li>该属性是可选传递属性，是一种路由标记，用于简化路由策略的执行</li>
+<li>可以将某些路由分配一个特定的community属性值，之后就可以根据community值而不是网络号&#x2F;掩码信息来抓取路由并执行相应的策略了。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcjnq94xj30fp06babj.jpg" alt="捕获.PNG"></p>
+<h2 id="Community属性值"><a href="#Community属性值" class="headerlink" title="Community属性值"></a>Community属性值</h2><ul>
+<li>Community属性值长度为32个比特，也就是四个字节。通常使用两种形式呈现，一是十进制的整数格式，二是十六进制的AA:NN格式，其中AA表示AS号，NN是自定义的编号</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcra8kvhj30mc07s0uj.jpg" alt="捕获.PNG"></p>
+<h3 id="no-advertise"><a href="#no-advertise" class="headerlink" title="no-advertise"></a>no-advertise</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcsi3qlnj30jl0aj0vs.jpg" alt="捕获.PNG"></p>
+<h3 id="no-export"><a href="#no-export" class="headerlink" title="no-export"></a>no-export</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqct6ndfvj30lk0apgp4.jpg" alt="捕获.PNG"></p>
+<h3 id="no-export-subconfed"><a href="#no-export-subconfed" class="headerlink" title="no-export-subconfed"></a>no-export-subconfed</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcvtd3uzj30lk0apgp4.jpg" alt="捕获.PNG"></p>
+<h1 id="Atomic-Aggregate及aggregator"><a href="#Atomic-Aggregate及aggregator" class="headerlink" title="Atomic_Aggregate及aggregator"></a>Atomic_Aggregate及aggregator</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqd1400xyj30ki0a30vy.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqd3ponokj30iy09tn06.jpg" alt="捕获.PNG"></p>
+<p>表明你的汇总路由的路由器和AS，Atomic_Aggregate只是做了一个标记，说明这个是一个汇总路由</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BGP/" rel="tag"># BGP</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE/" rel="tag"># 数据</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" rel="next" title="路由策略">
+                <i class="fa fa-chevron-left"></i> 路由策略
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" rel="prev" title="BGP的路由策略">
+                BGP的路由策略 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">属性分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E8%AE%A4%E5%B1%9E%E6%80%A7-well-known"><span class="nav-number">1.1.</span> <span class="nav-text">公认属性 well-known</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E5%B1%9E%E6%80%A7-Optical"><span class="nav-number">1.2.</span> <span class="nav-text">可选属性 Optical</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Preferred-Value"><span class="nav-number">2.</span> <span class="nav-text">Preferred_Value</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Local-Preference"><span class="nav-number">3.</span> <span class="nav-text">Local_Preference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AS-PATH"><span class="nav-number">4.</span> <span class="nav-text">AS_PATH</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ORIGIN"><span class="nav-number">5.</span> <span class="nav-text">ORIGIN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MED"><span class="nav-number">6.</span> <span class="nav-text">MED</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">6.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Next-Hop"><span class="nav-number">7.</span> <span class="nav-text">Next_Hop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Community"><span class="nav-number">8.</span> <span class="nav-text">Community</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Community%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="nav-number">8.1.</span> <span class="nav-text">Community属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#no-advertise"><span class="nav-number">8.1.1.</span> <span class="nav-text">no-advertise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#no-export"><span class="nav-number">8.1.2.</span> <span class="nav-text">no-export</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#no-export-subconfed"><span class="nav-number">8.1.3.</span> <span class="nav-text">no-export-subconfed</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Atomic-Aggregate%E5%8F%8Aaggregator"><span class="nav-number">9.</span> <span class="nav-text">Atomic_Aggregate及aggregator</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

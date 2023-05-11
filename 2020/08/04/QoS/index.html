@@ -1,23 +1,1243 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="IP QoS三种模型 Best-Effort模型：目前Internet的缺省服务模型，主要实现技术是先进先出队列（FIFO） IntServ模型: 业务通过信令向网络申请特定的QoS服务，网络在流量参数描述的范围内，预留资源以承诺满足该需求 DiffServ模型：当网络出现拥塞时，根据业务的不同服务等级约定，有差别地进行流量控制和转发来解决拥塞问题  FIFO模型 MQC配置模式 配置流程为：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QoS">
+<meta property="og:url" content="http://yoursite.com/2020/08/04/QoS/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="IP QoS三种模型 Best-Effort模型：目前Internet的缺省服务模型，主要实现技术是先进先出队列（FIFO） IntServ模型: 业务通过信令向网络申请特定的QoS服务，网络在流量参数描述的范围内，预留资源以承诺满足该需求 DiffServ模型：当网络出现拥塞时，根据业务的不同服务等级约定，有差别地进行流量控制和转发来解决拥塞问题  FIFO模型 MQC配置模式 配置流程为：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghej7q1xlkj315c0llwtp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghejgv4ao9j30zz0lpne1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghels3mlqpj30jl0lsqd4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghelurqctsj30jq0mvn6p.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghem6esxtjj311z0mc7hk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghen0jj02xj31400nk12r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghenccq7rxj311q0g77gf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gher5eljt9j319h0olqju.jpg">
+<meta property="article:published_time" content="2020-08-04T01:20:54.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="数通">
+<meta property="article:tag" content="QoS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1ghej7q1xlkj315c0llwtp.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/08/04/QoS/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>QoS | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/QoS/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">QoS
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-04 09:20:54" itemprop="dateCreated datePublished" datetime="2020-08-04T09:20:54+08:00">2020-08-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">数通</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/08/04/QoS/" class="leancloud_visitors" data-flag-title="QoS">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="IP-QoS三种模型"><a href="#IP-QoS三种模型" class="headerlink" title="IP QoS三种模型"></a>IP QoS三种模型</h1><ul>
+<li>Best-Effort模型：目前Internet的缺省服务模型，主要实现技术是先进先出队列（FIFO）</li>
+<li>IntServ模型: 业务通过信令向网络申请特定的QoS服务，网络在流量参数描述的范围内，预留资源以承诺满足该需求</li>
+<li>DiffServ模型：当网络出现拥塞时，根据业务的不同服务等级约定，有差别地进行流量控制和转发来解决拥塞问题</li>
+</ul>
+<h1 id="FIFO模型"><a href="#FIFO模型" class="headerlink" title="FIFO模型"></a>FIFO模型</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghej7q1xlkj315c0llwtp.jpg" alt="捕获.PNG"></p>
+<h1 id="MQC配置模式"><a href="#MQC配置模式" class="headerlink" title="MQC配置模式"></a>MQC配置模式</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghejgv4ao9j30zz0lpne1.jpg" alt="捕获.PNG"></p>
+<p>配置流程为：先配置class-map,再配置policy-map，再配置到service-map，然后再应用到端口即可</p>
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#先是分类，分等级</span><br><span class="line"></span><br><span class="line">class-map match-all ipp7</span><br><span class="line">   description for Diamond</span><br><span class="line">   match precedence 7</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 然后对于每一个等级，进行带宽的分配，限速等配置</span><br><span class="line">policy-map pm5-8000K-in</span><br><span class="line">    class ipp7</span><br><span class="line">      police rate 1200000 bps burst 150000 bytes peak-burst 150000 bytes</span><br><span class="line">    </span><br><span class="line">      conform-action set mpls experimental imposition7</span><br><span class="line">      exceed-action drop</span><br><span class="line">   ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#对于总的带宽，进行一个配置</span><br><span class="line"></span><br><span class="line">policy-map pm5-8000K-in.p</span><br><span class="line">  class class-default</span><br><span class="line">    service-policy pm5-8000K-in</span><br><span class="line">    police rate 8000000 bps burst 1000000 bytes peak-burst 1000000 bytes</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#把该policy应用到端口中去</span><br><span class="line"></span><br><span class="line">interface GigabitEthernet0/0/0/3.142</span><br><span class="line">  description For ...</span><br><span class="line">  service-policy input pm5-8000K-in.p</span><br><span class="line">  service-policy output pm5-8000K-out.p</span><br><span class="line">  vrf VPN12432</span><br><span class="line">  ipv4 address 10.122.122.122 255.255.255.252</span><br><span class="line">  encapsulation dot1q 111</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="VPN业务等级"><a href="#VPN业务等级" class="headerlink" title="VPN业务等级"></a>VPN业务等级</h1><ul>
+<li>IPP7 &#x3D; 钻石</li>
+<li>IPP5 &#x3D; 白金</li>
+<li>IPP3+6 &#x3D; 金</li>
+<li>IPP2 &#x3D; 银</li>
+<li>IPP1 &#x3D; 铜</li>
+<li>IPP0 &#x3D; 其他</li>
+</ul>
+<h1 id="分类和标记（Classification-and-Marking）"><a href="#分类和标记（Classification-and-Marking）" class="headerlink" title="分类和标记（Classification and Marking）"></a>分类和标记（Classification and Marking）</h1><p>对不同的包进行分类，如果没有分类的，则视为是一样的</p>
+<p>分类完成后，需要对不同的包进行标记，通常使用IP包的IP precedence ，MPLS的EXP标记位进行分类</p>
+<h2 id="分类的配置"><a href="#分类的配置" class="headerlink" title="分类的配置"></a>分类的配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class-map match-all ipp7</span><br><span class="line">   description for Diamond</span><br><span class="line">   match precedence 7  # 匹配的是IP包的procedence标志位，也就是根据用户的IP包进行分类</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class-map match-all ipp5</span><br><span class="line">   description for Premium</span><br><span class="line">   match precedence 5</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class-map match-all ipp3</span><br><span class="line">   description for Gold</span><br><span class="line">   match precedence 3</span><br><span class="line">end-class-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class-map match-all ipp2</span><br><span class="line">   description for Silver</span><br><span class="line">   match precedence 2</span><br><span class="line">end-class-map</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="标记配置"><a href="#标记配置" class="headerlink" title="标记配置"></a>标记配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-in</span><br><span class="line">  class ipp7</span><br><span class="line">    police rate 1200000 bps burst 150000 bytes peak-burst 150000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 7  #在MPLS的EXP上进行标记，逻辑上也就是从客户收过来IP包，通过IP Precedence进行分类，分类位ipp7的，在MPLS包上进行打标，设置为7</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp5</span><br><span class="line">     police rate 1600000 bps burst 200000 bytes peak-burst 200000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 5</span><br><span class="line">    exceed-action drop  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp3</span><br><span class="line">    set mpls experimental importion 3 </span><br><span class="line"></span><br><span class="line">  class ipp2</span><br><span class="line">    set mpls experimental importion 2</span><br><span class="line"></span><br><span class="line">  class class-default</span><br><span class="line">    set mpls experimental importion 1</span><br><span class="line"></span><br><span class="line">end-policy-map  </span><br></pre></td></tr></table></figure>
+
+<h1 id="流量监管和整形"><a href="#流量监管和整形" class="headerlink" title="流量监管和整形"></a>流量监管和整形</h1><h2 id="流量监管"><a href="#流量监管" class="headerlink" title="流量监管"></a>流量监管</h2><p>流量监管是限制进入网络的流量与突发，为网络的稳定提供了基本的QoS功能。</p>
+<p>流量监管TP（Traffic Policing）的典型应用是监督进入网络的某一流量的规格，把它限制在一个合理的范围之内，并对超出部分的流量进行“惩罚”，以保护网络资源和运营商的利益。</p>
+<h2 id="流量整形"><a href="#流量整形" class="headerlink" title="流量整形"></a>流量整形</h2><p>流量整形则是限制流出网络的流量与突发，为网络的稳定提供了基本的QoS功能。</p>
+<p>流量整形TS（Traffic Shaping）的典型作用是限制流出某一网络的某一连接的正常流量与突发流量，使这类报文以比较均匀的速度向外发送，是一种主动调整流量输出速率的措施。</p>
+<h2 id="Police限速"><a href="#Police限速" class="headerlink" title="Police限速"></a>Police限速</h2><p>对于Policing，对于限制外的，就直接丢弃了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghels3mlqpj30jl0lsqd4.jpg" alt="捕获.PNG"></p>
+<p>对于shaping，会进行一个平滑，对于超限的，会有一个缓存区先缓存着，缓存区满了才会进行丢弃</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghelurqctsj30jq0mvn6p.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-in</span><br><span class="line">  class ipp7</span><br><span class="line">    #使用的是police配置</span><br><span class="line">    #burst 允许突发一点，</span><br><span class="line">    police rate 1200000 bps burst 150000 bytes peak-burst 150000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 7 </span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp5</span><br><span class="line">     police rate 1600000 bps burst 200000 bytes peak-burst 200000 bytes</span><br><span class="line">    conform-action set mpls experimental importion 5</span><br><span class="line">    exceed-action drop  </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="Shape限速"><a href="#Shape限速" class="headerlink" title="Shape限速"></a>Shape限速</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-out.p</span><br><span class="line"></span><br><span class="line">  class class-default</span><br><span class="line">  service-policy pm5-8000K-out</span><br><span class="line">  shape average 8000000bps #shape限速</span><br><span class="line"></span><br><span class="line">end-policy-map</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="拥塞管理及避免"><a href="#拥塞管理及避免" class="headerlink" title="拥塞管理及避免"></a>拥塞管理及避免</h1><ul>
+<li>网络拥塞时，保证不同的优先级的报文得到不同的QoS待遇</li>
+<li>将不同优先级的报文入不同的队列，不同队列将得到不同的调度优先级，概率或带宽保证</li>
+</ul>
+<h2 id="PQ-Priority-Queuing"><a href="#PQ-Priority-Queuing" class="headerlink" title="PQ: Priority Queuing"></a>PQ: Priority Queuing</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghem6esxtjj311z0mc7hk.jpg" alt="捕获.PNG"></p>
+<p>问题：如果Queue 1一直不空的话，那么Queue 2 和Queue 3就饿死了 根本转发不了，因此这种策略往往只用在最重要的业务才会设置这个，优先转发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-out</span><br><span class="line">  class ipp7</span><br><span class="line">    #配置一个PQ,</span><br><span class="line">    priority level 1</span><br><span class="line">    police rate percent 15</span><br><span class="line">    conform-action transmit </span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="CBWFQ配置"><a href="#CBWFQ配置" class="headerlink" title="CBWFQ配置"></a>CBWFQ配置</h2><ul>
+<li>Priority：优先转发</li>
+<li>Bandwidth：带宽报障 在拥塞时发生作用，具体的就是，即使发生了拥塞，仍有这些带宽报障，当然，最高也不能超过Police</li>
+<li>Police：带宽限速</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">policy-map pm5-8000K-out</span><br><span class="line">  class ipp7 </span><br><span class="line">    priority level 1</span><br><span class="line">    police rate percent 15</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp5 </span><br><span class="line">    bandwidth percent 5</span><br><span class="line">    police rate percent 25</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line">    queue-limit 32 packets</span><br><span class="line"></span><br><span class="line">  class ipp3 </span><br><span class="line">    bandwidth percent 30</span><br><span class="line">    police rate percent 50</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line">    queue-limit 384 packetsmit</span><br><span class="line">    random-detect precedence 3 100 packets 280 packets</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class ipp2 </span><br><span class="line">    bandwidth percent 25</span><br><span class="line">    police rate percent 75</span><br><span class="line">    conform-action transmit</span><br><span class="line">    exceed-action drop</span><br><span class="line"></span><br><span class="line">    queue-limit 384 packetsmit</span><br><span class="line">    random-detect precedence 2 80 packets 225 packets</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  class class-default </span><br><span class="line">    bandwidth percent 25</span><br><span class="line">    queue-limit 384 packetsmit</span><br><span class="line">    random-detect precedence 6,4,1,0,73 packets 150 packets</span><br><span class="line"></span><br><span class="line">end-policy-map</span><br></pre></td></tr></table></figure>
+
+<h2 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h2><p>在网络没有发生拥塞以前根据队列状态进行有选择性的丢包</p>
+<p>算法：</p>
+<ul>
+<li>RED  ： Random Early Detection</li>
+<li>WRED ： Weighted Random Early Detection</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghen0jj02xj31400nk12r.jpg" alt="捕获.PNG"></p>
+<p>横坐标时队列的大小，在0-32的时候，是不丢包的，在32-40的时候，是随机丢，40之后，就全部丢，tail drop &#x3D;&#x3D; full drop</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1ghenccq7rxj311q0g77gf.jpg" alt="捕获.PNG"></p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 针对优先级为3的流量使用WRED策略</span><br><span class="line"># 100以内，不丢，100-280 随机丢 </span><br><span class="line">random-detect precedence 3 100 packets 280 packets</span><br></pre></td></tr></table></figure>
+
+<h1 id="QoS相关命令"><a href="#QoS相关命令" class="headerlink" title="QoS相关命令"></a>QoS相关命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">show running class-maps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show running policy-map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show running-config interface </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show policy-map interface  &lt;interface&gt; &lt;input|output&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show qos interface &lt;interface&gt; &lt;input|output&gt;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>policed and dropped ：如果超过限速的值，那么就丢弃了</li>
+<li>RED random drops: 随机丢弃</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gher5eljt9j319h0olqju.jpg" alt="tempsnip.png"></p>
+<h1 id="华为的QoS"><a href="#华为的QoS" class="headerlink" title="华为的QoS"></a>华为的QoS</h1><h2 id="In方向策略"><a href="#In方向策略" class="headerlink" title="In方向策略"></a>In方向策略</h2><p>通过上面思科系统的学习，知道了In方向通常只是对IP包进行分类（通过IP包的precedence），然后会有一个限速</p>
+<h3 id="Classifier-分类"><a href="#Classifier-分类" class="headerlink" title="Classifier 分类"></a>Classifier 分类</h3><p>分类：根据IP包的precedence进行分类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">traffic classifier dsipp7 operator or</span><br><span class="line">  if-match ip-precedence 7</span><br><span class="line"></span><br><span class="line">traffic classifier dsipp5 operator or</span><br><span class="line">  if-match ip-precedence 5</span><br><span class="line"></span><br><span class="line">traffic classifier dsipp3+6 operator or</span><br><span class="line">  if-match ip-precedence 3</span><br><span class="line">  if-match ip-precedence 6</span><br><span class="line"></span><br><span class="line">traffic classifier dsipp2 operator or</span><br><span class="line">  if-match ip-precedence 2</span><br><span class="line"></span><br><span class="line">traffic classifier others operator or</span><br><span class="line">  if-match ip-precedence 0</span><br><span class="line">  if-match ip-precedence 1</span><br><span class="line">  if-match ip-precedence 4 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Behavior-动作"><a href="#Behavior-动作" class="headerlink" title="Behavior 动作"></a>Behavior 动作</h3><p>对不同类的一些行为操作，比如限速等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># cir表示指定承诺信息速率</span><br><span class="line"># cbs表示指定突发尺寸，即令牌桶的容量</span><br><span class="line"># pbs表示指定峰值突发尺寸</span><br><span class="line"></span><br><span class="line">traffic behavior dsipp7</span><br><span class="line">  car cir &lt;D&gt; cbs XXXX pbs XXXX</span><br><span class="line">  service-class cs7 color green</span><br><span class="line"></span><br><span class="line">traffic behavior dsipp5</span><br><span class="line">  car cir &lt;D+P&gt; cbs XXXX pbs XXXX</span><br><span class="line">  service-class ef color green</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">traffic behavior others</span><br><span class="line">  service-class af1 color green</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="policy"><a href="#policy" class="headerlink" title="policy"></a>policy</h3><p>将classifier和behavior合并之后，就变成了policy，也就是对于每一个分类，都有相应的行为操作</p>
+<p>Qos-profile的user-queue配置是对整个端口的限速，behavior中的限速是对某一个ipp的限速，Behavior的限速必定 小于等于 user-queue的限速</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">traffic policy XXX-in</span><br><span class="line">  classifier dsipp7 behavior dsipp7 </span><br><span class="line">  classifier dsipp5 behavior dsipp5</span><br><span class="line">  classifier dsipp3+6 behavior dsipp3+6</span><br><span class="line">  classifier dsipp2 behavior dsipp2</span><br><span class="line">  classifier others behavior others</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># cir表示指定承诺信息速率</span><br><span class="line"># pir表示指定峰值速率</span><br><span class="line"></span><br><span class="line">qos-profile XXX-in.p</span><br><span class="line">  user-queue cir 2048 pir 2048</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="流量监管（CAR）"><a href="#流量监管（CAR）" class="headerlink" title="流量监管（CAR）"></a>流量监管（CAR）</h3><p>首先在接口下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface Serial4/0/0/3:0</span><br><span class="line">   traffic-policy AAA-2M-in inbound</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中，AAA-2M-in为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">traffic policy AAA-2M-in</span><br><span class="line"> share-mode</span><br><span class="line"> classifier ipp7 behavior bh-ipp7-AAA-2M-in</span><br><span class="line"> classifier ipp5 behavior bh-ipp5-AAA-2M-in</span><br><span class="line"> classifier all behavior bh-ipp2-in</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中，bh-ipp7-AAA-2M-in</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">traffic behavior bh-ipp7-AAA-2M-in</span><br><span class="line"> car cir 304 cbs 57000 pbs 57000 green pass yellow pass red discard</span><br><span class="line"> service-class cs7 color green no-remark</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">traffic classifier ipp7 operator or</span><br><span class="line"> if-match ip-precedence 7</span><br><span class="line"> if-match mpls-exp 7</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>配置检查命令</p>
+<p>查看behavior</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display traffic behavior user-defined bh-ipp7-AAA-2M-in</span><br></pre></td></tr></table></figure>
+<p>查看traffic policy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display traffic policy user-defined AAA-2M-in</span><br></pre></td></tr></table></figure>
+<p>查看classifier</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display traffic classifier user-defined ipp7</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="流量整形（flow-queue方式）"><a href="#流量整形（flow-queue方式）" class="headerlink" title="流量整形（flow-queue方式）"></a>流量整形（flow-queue方式）</h3><p>queue命令用来在流队列模板中修改流队列的调度参数，包括：调度方式、shaping、WRED。</p>
+<p>参数：</p>
+<ul>
+<li>cos-value，指定配置的流队列，取值可以是af1～af4、be、cs6、cs7、ef</li>
+<li>weight-value，整数形式，取值范围是1～100</li>
+<li>shaping-value，整形速率，表示每个流队列的整形速率，整数形式，取值范围是8～4294967294，单位为Kbit&#x2F;s。</li>
+<li>shaping-percentage-value，整形速率的百分比，表示整形带宽占Qos模板中用户队列峰值带宽的百分比。整数形式，取值范围是0～100</li>
+<li>pq | wfq | lpq ： 配置该队列的调度方式。pq为绝对优先级队列调度；wfq为加权公平队列调度；lpq为低优先级调度。三种队列调度的优先级次序为：PQ队列的优先级高于WFQ队列的优先级。WFQ队列的优先级高于LPQ队列的优先级。高优先级的队列可以抢占低优先级队列的带宽。</li>
+<li>pbs pbs-value，指定峰值突发尺寸（Peak Burst Size）</li>
+<li>wred-name，配置该队列使用的WRED对象</li>
+</ul>
+<p>举例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在流队列WRED模板对象test中，配置af1队列的权重为50，整形速率为6Mbit/s。</span><br><span class="line"></span><br><span class="line">queue af1 wfq weight 50 shaping 6000 pbs 1000 flow-wred test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置方法："><a href="#配置方法：" class="headerlink" title="配置方法："></a>配置方法：</h4><p>老的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#老的配置使用的是user-queue,新的使用的是qos-profile，</span><br><span class="line">interface GigabitEthernet3/0/0.402</span><br><span class="line">  user-queue cir 18227 pir 18227 flow-queue AAA-20M-out outbound</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flow-queue AAA-20M-out</span><br><span class="line"> queue af2 wfq weight 34 flow-wred ipp2-wred</span><br><span class="line"> queue af3 wfq weight 66 flow-wred ipp3-wred</span><br><span class="line"> queue cs7 pq shaping shaping-percentage 30</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet2/1/0.153</span><br><span class="line"></span><br><span class="line"> qos-profile AAA-6M-out.p outbound identifier none</span><br><span class="line"> statistic enable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">qos-profile AAA-6M-out.p</span><br><span class="line"> user-queue cir 6144 pir 6144 flow-queue AAA-6M-out outbound</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flow-queue AAA-6M-out</span><br><span class="line"> queue af2 wfq weight 24 shaping shaping-percentage 100 flow-wred ipp2-wred</span><br><span class="line"> queue af3 wfq weight 46 shaping shaping-percentage 76 flow-wred ipp3-wred</span><br><span class="line"> queue ef wfq weight 30 shaping shaping-percentage 30 flow-wred ipp5-wred</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>查看配置命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display flow-queue configuration verbose AAA-20M-out</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="拥塞管理"><a href="#拥塞管理" class="headerlink" title="拥塞管理"></a>拥塞管理</h3><p>拥塞管理指网络在发生拥塞时，如何进行管理和控制。处理的方法是使用队列技术，将从一个接口发出的所有报文放入多个队列，按照各个队列的优先级进行处理。不同的队列调度算法用来解决不同的问题，并产生不同的效果。</p>
+<p>比如，PQ队列，WFQ队列等等</p>
+<h3 id="拥塞避免-1"><a href="#拥塞避免-1" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><p>通过监视网络资源（如队列或内存缓冲区）的使用情况，在拥塞有加剧的趋势时，主动丢弃报文，通过调整网络的流量来解除网络过载的一种流量控制机制。拥塞避免用于防止因为线路拥塞而使设备的队列溢出。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet6/0/2.100        </span><br><span class="line"> </span><br><span class="line"> qos-profile AAA-out.p outbound identifier none</span><br><span class="line"> statistic enable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">qos-profile AAA-out.p</span><br><span class="line"> user-queue cir 2000000 pir 2000000 flow-queue AAA-out</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flow-queue AAA-out</span><br><span class="line"> queue cs7 pq flow-wred ipp3-wred</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flow-wred ipp3-wred                       </span><br><span class="line"> color green low-limit 50 high-limit 100 discard-percentage 100</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E9%80%9A/" rel="tag"># 数通</a>
+          
+            <a href="/tags/QoS/" rel="tag"># QoS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/09/MPLSVPN-%E7%BA%A2%E8%8C%B6/" rel="next" title="MPLSVPN-红茶">
+                <i class="fa fa-chevron-left"></i> MPLSVPN-红茶
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/31/%E4%BA%8C%E5%B1%82VPN/" rel="prev" title="二层VPN">
+                二层VPN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-QoS%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">IP QoS三种模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FIFO%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">FIFO模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MQC%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">MQC配置模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPN%E4%B8%9A%E5%8A%A1%E7%AD%89%E7%BA%A7"><span class="nav-number">4.</span> <span class="nav-text">VPN业务等级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E8%AE%B0%EF%BC%88Classification-and-Marking%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">分类和标记（Classification and Marking）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">分类的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">标记配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E7%9B%91%E7%AE%A1%E5%92%8C%E6%95%B4%E5%BD%A2"><span class="nav-number">6.</span> <span class="nav-text">流量监管和整形</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E7%9B%91%E7%AE%A1"><span class="nav-number">6.1.</span> <span class="nav-text">流量监管</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%95%B4%E5%BD%A2"><span class="nav-number">6.2.</span> <span class="nav-text">流量整形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Police%E9%99%90%E9%80%9F"><span class="nav-number">6.3.</span> <span class="nav-text">Police限速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shape%E9%99%90%E9%80%9F"><span class="nav-number">6.4.</span> <span class="nav-text">Shape限速</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E7%AE%A1%E7%90%86%E5%8F%8A%E9%81%BF%E5%85%8D"><span class="nav-number">7.</span> <span class="nav-text">拥塞管理及避免</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PQ-Priority-Queuing"><span class="nav-number">7.1.</span> <span class="nav-text">PQ: Priority Queuing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CBWFQ%E9%85%8D%E7%BD%AE"><span class="nav-number">7.2.</span> <span class="nav-text">CBWFQ配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="nav-number">7.3.</span> <span class="nav-text">拥塞避免</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QoS%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">QoS相关命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8E%E4%B8%BA%E7%9A%84QoS"><span class="nav-number">9.</span> <span class="nav-text">华为的QoS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#In%E6%96%B9%E5%90%91%E7%AD%96%E7%95%A5"><span class="nav-number">9.1.</span> <span class="nav-text">In方向策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Classifier-%E5%88%86%E7%B1%BB"><span class="nav-number">9.1.1.</span> <span class="nav-text">Classifier 分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Behavior-%E5%8A%A8%E4%BD%9C"><span class="nav-number">9.1.2.</span> <span class="nav-text">Behavior 动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-number">9.1.3.</span> <span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E7%9B%91%E7%AE%A1%EF%BC%88CAR%EF%BC%89"><span class="nav-number">9.1.4.</span> <span class="nav-text">流量监管（CAR）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%95%B4%E5%BD%A2%EF%BC%88flow-queue%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="nav-number">9.1.5.</span> <span class="nav-text">流量整形（flow-queue方式）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">9.1.5.1.</span> <span class="nav-text">配置方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E7%AE%A1%E7%90%86"><span class="nav-number">9.1.6.</span> <span class="nav-text">拥塞管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D-1"><span class="nav-number">9.1.7.</span> <span class="nav-text">拥塞避免</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

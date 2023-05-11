@@ -1,23 +1,3385 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="lowkeysp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lowkeysp&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/page/8/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="lowkeysp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/page/8/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85anaconda/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/22/ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85anaconda/" class="post-title-link" itemprop="url">ubuntu下安装anaconda</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-22 14:17:42" itemprop="dateCreated datePublished" datetime="2019-07-22T14:17:42+08:00">2019-07-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%AE%89%E8%A3%85/" itemprop="url" rel="index"><span itemprop="name">安装</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/22/ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85anaconda/" class="leancloud_visitors" data-flag-title="ubuntu下安装anaconda">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+## 参考文献
+
+
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu">https://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/devilmaycry812839668/p/10349602.html">https://www.cnblogs.com/devilmaycry812839668/p/10349602.html</a></p>
+<h2 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h2><p>这里我是给我的腾讯云服务器上面装的miniconda。<br>首先，使用清华镜下载Miniconda3-latest-Linux-x86_64.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>下载好之后，执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>这样就安装好了，如果你发现你的python3不是最新的话，需要进行环境变量配置，在.bashrc文件里添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;/home/ubuntu/miniconda3/bin:$PATH&quot;</span><br></pre></td></tr></table></figure>
+
+<p>还有一个问题就是配置好之后，在命令行前面会出现一个base，去除base的原因是第二个参考文献给出，解决方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/OTN%E5%8E%9F%E7%90%86/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/16/OTN%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">OTN原理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-16 09:25:49" itemprop="dateCreated datePublished" datetime="2019-07-16T09:25:49+08:00">2019-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/16/OTN%E5%8E%9F%E7%90%86/" class="leancloud_visitors" data-flag-title="OTN原理">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h2 id="OTN产生的背景"><a href="#OTN产生的背景" class="headerlink" title="OTN产生的背景"></a>OTN产生的背景</h2><p>OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护。</p>
+<h2 id="OTN的技术特点"><a href="#OTN的技术特点" class="headerlink" title="OTN的技术特点"></a>OTN的技术特点</h2><ul>
+<li><p>OTN从其功能上看，在子网内以全光形式传输，而在子网的边界处采用光-电-光转换，各个子网可以通过3R再生器联接，从而构成一个大的光网络。</p>
+</li>
+<li><p>光信号的处理可以基于单个波长，或基于一个波分复用组。在光域内可以实现业务信号的传递、复用、路由选择，支持多种上层业务或协议。</p>
+</li>
+<li><p>在OTN网络的边缘，不同体制的信号被统一封装进入开销丰富的OTN的帧结构中去，并以此为基础，实现基于OTN体制的全网统一运营、管理、维护，便于故障定位，能够提供很好的网络生存性。</p>
+</li>
+<li><p>OTN可以解决传统WDM网络波长&#x2F;子波长业务调度能力弱、组网能力弱（以点到点连接为主的组网方式）、保护能力弱等问题。</p>
+</li>
+<li><p>OTN解决了SDH基于VC-12&#x2F;VC4的交叉颗粒偏小、调度较复杂、不适应大颗粒业务传送需求的问题。</p>
+</li>
+</ul>
+<h2 id="OTN网络结构"><a href="#OTN网络结构" class="headerlink" title="OTN网络结构"></a>OTN网络结构</h2><p>OTN的网络分成可以分为光通道层（OCh，Optical Channel ），光复用段层（OMS，Optical Multiplex Section）和光传送段层（OTS，Optical Transmission Section）三个层面。另外，为了解决客户信号的数字监视问题，光通道层又分为光通路净荷单元（OPU），光通道数据单元（ODUk）和光通道传送单元（OTUk）三个子层，类似于SDH技术的段层和通道层。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg"></p>
+<p>OTN层次结构和信息流之间的关系如下图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g52u08t67xj30r70jdtgr.jpg"></p>
+<p>其中，client是光层。OH是overhead 开销的意思。</p>
+<ul>
+<li>OPU（Optical Channel Payload Unit）：光通道净荷单元，提供客户信号的映射功能；</li>
+<li>ODU（Optical Channel Data Unit）：光通道数据单元，提供客户信号的数字包封、OTN的保护倒换、提供踪迹监测、通用通信处理等功能；</li>
+<li>OTU（Optical Channel Transport Unit）：光通道传输单元、提供OTN成帧、FEC处理、通信处理等功能。波分设备中的发送OTU单板完成了信号从客户接口到OCC的变化；波分设备中的接收OTU单板完成了信号从OCC到客户接口的变化。 </li>
+<li>OCC（Optical Channel Carrier）：光通路载波  </li>
+<li>OSC（Optical Supervisory Channel）：光监控信道</li>
+<li>OPS（Optical Physical Section）：光物理段</li>
+<li>OOS（OTM Overhead Signal）：OTM开销信号</li>
+<li>OTM-n.m：n代表系统波长数目，m代表速率级别，m可以是1，2，3，12，23，123。比如23代表一个合路信号当中有10G和40G混和传输的情况。</li>
+<li>OTM-nr.m：中的r代表简化功能。这一接口一般用于没有光监控的系统</li>
+<li>OTM-0.m：代表的是黑白光口，即1310nm或者1550nm的单路光信号。这种接口代表客户侧支持OTN帧结构的信号。</li>
+</ul>
+<h2 id="OTN的映射和复用关系"><a href="#OTN的映射和复用关系" class="headerlink" title="OTN的映射和复用关系"></a>OTN的映射和复用关系</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53pfg8gg6j30ny0gaqcc.jpg"></p>
+<p>用户信号映射到低阶OPU，标识为OPU（L）；OPU（L）信号映射到相关的低阶ODU，标识为ODU（L）；ODU（L）信号映射到相关的OTU[V]信号或者ODTU信号。ODTU信号复用到ODTU组（ODTUG）。ODTUG信号映射到高阶OPU，标识为OPU（H）。OPU（H）信号映射到相关的高阶ODU，标识为ODU（H）。ODU（H）信号映射到相关的OTU[V]。</p>
+<p>OPU（L）和OPU（H）具有相同的信息结构，但承载不同的用户信号。ODU（L）和ODU（H）具有相同的信息结构，但承载不同的用户信号。</p>
+<p>同SDH类似，用户信号映射到OPUk，一般采用异步映射方法，需要进行速率调整，包括正速率调整和负速率调整。对于复用，OTN采用字节间插式时分复用与波分复用相结合的方法，通过多次时分复用形成OCh，再通过波分复用形成OTM。</p>
+<p>对于ODUk的时分复用，4个ODU1信号时分复用到1个ODTUG2，ODTUG2映射到OPU2。ODU2和ODU1的混合信号可以时分复用到ODTUG3，ODTUG3映射到OPU3。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53zk8n3iaj30o50gzt9y.jpg"></p>
+<p>上图表示将4个ODU1信号复用到OPU2信号。1个ODU1信号使用帧定位开销进行扩展，并且通过判决开销（JOH）异步映射光通路数据支路单元1到2（ODTU12）。4个ODTU12信号时分复用到光通路数据单元支路单元群2（ODTUG2），之后映射到OPU2。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53zps8e9vj30nt0gpadu.jpg"></p>
+<p>上面这个图可以更直观的看清楚，客户信号可以是STM-16，ATM，GFP等，组建成一个OPU1，然后再加上一个ODU1开销，就组成了一个ODU1，然后，我们可以将4个ODU1信号复用到一个OPU2，加上一个OPU2开销，之后，再加上一个ODU2开销，就变成了一个ODU2，之后再加上一个OUT2 FEC，就组成了一个OTU2。</p>
+<p>下面是另一种ODUk时分复用</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g54utb54v7j30qs0f440u.jpg"></p>
+<p>表示将最多16个ODU1信号和&#x2F;或最多4个ODU2信号复用到OPU3信号中。ODU1信号使用帧定位开销进行扩展，并且通过判决开销（JOH）异步映射光通路数据支路单元1到3（ODTU13）。ODU2信号使用帧定位开销进行扩展，并且通过判决开销（JOH）异步映射光通路数据支路单元2到3（ODTU23）。在信号映射到OPU3后，“x”个ODTU23（0≤x≤4）和“16-4x”个ODTU13信号时分复用到光通路数据单元支路单元群3（ODTUG3）。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g54v31z2vwj30of0gkq4z.jpg"></p>
+<p>OTU[V]电信号被转换到光通路信号（标识为OCh和OChr）或者OTLk.n。OCh&#x2F;OChr信号被调制到光通路载波，标识为“OCC和OCCr”。OCC&#x2F;OCCr信号复用到光载波群，标识为OCG-n.m或OCG-nr.m。OCG-n.m信号加上光复用段开销组成OMSn。OMSn信号加上光传送段开销组成OTSn。OTSn信号出现在OTM-n.m接口。OCG-nr.m信号映射到OPSn。OPSn信号出现在OTM-nr.m接口。单个OCCr信号映射到OPS0。OPS0信号出现在OTM-0.m接口。一组n路OPS0信号出现在OTM-0.mvn接口。</p>
+<p>目前为IrDI定义了三种简化功能的OTM接口OTM-nr.m、OTM-0.m和OTM-0.mvn：</p>
+<ul>
+<li>OTM-nr.m支持多波长光通路，信号包含n个OCC，m&#x3D;1,2,3,4,12,23,34,123,1234，不需要OSC和OOS。</li>
+<li>OTM-0.m支持单波长光通路，m&#x3D;1,2,3,4，不需要OSC和OOS。</li>
+<li>OTM-0.mvn支持一个多通道光信号。目前定义了2种OTM-0.mvn接口信号：OTM-0.3v4（承载OTU3）和OTM-0.4v4（承载OTU4）。每种承载包含一个OTUk[V]信号分发到四个光通道上的四路光信号。不需要OSC和OOS。</li>
+</ul>
+<p>除了上面的三种简化功能的OTM接口，还定义了一种全功能的OTM接口。OTM-n.m：</p>
+<ul>
+<li>OTM-n.m支持单个或多个光区段内的n个光通路，接口不要求3R再生。信号包含n个OCC，m&#x3D;1,2,3,4,12,23,34,123,1234。</li>
+</ul>
+<h2 id="OTN的帧结构"><a href="#OTN的帧结构" class="headerlink" title="OTN的帧结构"></a>OTN的帧结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g54x9nnedaj30ow0dowf5.jpg"></p>
+<ul>
+<li>帧定界开销用于指示一个帧的开始；</li>
+<li>OTUk开销产生于电光转换之前，用于监控整个光通道的传输性能。</li>
+<li>ODUk是基本的电交叉颗粒，ODUk部分的开销用于监控交叉颗粒的传输性能；</li>
+<li>OPUk用来指示净荷中的业务类型以及进行简单的正负字节调整。</li>
+<li>FEC部分用来对信息净荷部分进行纠错。</li>
+</ul>
+<p>OTU帧根据速率等级分为OTU1、OTU2、OTU3、OTU4。OTUk（k&#x3D;1、2、3、4）帧由OTUk开销、ODUk帧和OTUk FEC三部分组成，总共4行4080列，4×4080&#x3D;16320字节。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/WDM%E5%8E%9F%E7%90%86/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/15/WDM%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">WDM原理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-15 10:30:31" itemprop="dateCreated datePublished" datetime="2019-07-15T10:30:31+08:00">2019-07-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/15/WDM%E5%8E%9F%E7%90%86/" class="leancloud_visitors" data-flag-title="WDM原理">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+## 简介
+
+<p>波分复用WDM(Wavelength Division Multiplexing)是将两种或多种不同波长的光载波信号（携带各种信息）在发送端经复用器(亦称合波器，Multiplexer)汇合在一起，并耦合到光线路的同一根光纤中进行传输的技术；在接收端，经解复用器 (亦称分波器或称去复用器，De-multiplexer)将各种波长的光载波分离，然后由光接收机作进一步处理以恢复原信号。这种在同一根光纤中同时传输两个或众多不同波长光信号的技术，称为波分复用。</p>
+<h2 id="WDM发展的原因"><a href="#WDM发展的原因" class="headerlink" title="WDM发展的原因"></a>WDM发展的原因</h2><ul>
+<li><p>私有光电器件的迅速发展，特别是EDFA的成熟和商用化，使在光放大器（1530～1565nm）区域采用WDM技术成为可能。</p>
+</li>
+<li><p>利用TDM方式已接近硅和镓砷技术的极限，TDM已无太多的潜力，且传输设备价格高。</p>
+</li>
+<li><p>已敷设G.652光纤1550nm窗口的高色散限制了TDM10Gb&#x2F;s系统的传输，光纤色散的影响日益严重。从电复用转移到光复用，即从光频上用各种复用方式来提高复用速率，WDM技术是能够商用化最简单的光复用技术。</p>
+</li>
+</ul>
+<h2 id="WDM分类"><a href="#WDM分类" class="headerlink" title="WDM分类"></a>WDM分类</h2><p>WDM可以根据波长间隔的不同，分为DWDM（密集波分复用）和CWDM（粗波分复用），DWDM的波长间隔是0.2-0.8nm，而CWDM的波长间隔是20nm。</p>
+<h3 id="DWDM"><a href="#DWDM" class="headerlink" title="DWDM"></a>DWDM</h3><p>使用波长为C波段和L波段。</p>
+<ul>
+<li>C波段波长范围为1528 ～ 1561nm；L波段波长范围为1577 ～ 1603nm；</li>
+<li>最大可支持192波系统。常用C波段80波系统，通路频率间隔为50GHz；</li>
+<li>对于40&#x2F;32波系统，通路波长间隔为100GHz(约0.8nm)。</li>
+<li>对于DWDM的波长间隔，如果系统波长40波系统，波长间隔0.8nm；如果系统80波，波长间隔0.4nm。</li>
+</ul>
+<h3 id="CWDM"><a href="#CWDM" class="headerlink" title="CWDM"></a>CWDM</h3><p>使用全部五个波段。</p>
+<ul>
+<li>波长范围为1271 ～1611nm，波长间隔20nm，最大支持18个波；</li>
+<li>成本低廉，但不支持光放大器，距离受限。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50bu88s9kj30qt0dndgg.jpg"></p>
+<h2 id="DWDM技术发展的原因"><a href="#DWDM技术发展的原因" class="headerlink" title="DWDM技术发展的原因"></a>DWDM技术发展的原因</h2><p>DWDM技术是在波长1550nm窗口附近，在EDFA能提供增益的波长范围内，选用密集的但相互又有一定波长间隔的多路光载波，这些光载波各自受不同数字信号的调制，复合在一根光纤上传输，提高了每根光纤的传输容量。 </p>
+<p>目前该系统是在1550nm波长区段内的。一般系统应用时所采用的信道波长是等间隔的。</p>
+<h2 id="波分系统的基本组成"><a href="#波分系统的基本组成" class="headerlink" title="波分系统的基本组成"></a>波分系统的基本组成</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50cmeawxcj30rj07a3z1.jpg"></p>
+<p>上图是一个波分系统的基本组成示意图</p>
+<h3 id="光波长转换单元（OTU）"><a href="#光波长转换单元（OTU）" class="headerlink" title="光波长转换单元（OTU）"></a>光波长转换单元（OTU）</h3><p>将非标准的波长转换为ITU-T所规范的标准波长，系统中应用光&#x2F;电&#x2F;光（O&#x2F;E&#x2F;O）的变换，即先用光电二极管PIN或APD把接收到的光信号转换为电信号，然后该电信号对标准波长的激光器进行调制，从而得到新的合乎要求的光波长信号。也就是输入的是非标准光，输入的是标准光，这一转变过程是通过光-电-光变换来实现的。并可支持编码、纠错、信号中继、告警检测等功能。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50i7tvsysj30r80ah0t3.jpg"></p>
+<p>光信号转换成电信号后，经过3R功能（再整形、再定时、再生），确保信号在进入波分系统时性能最好。</p>
+<h3 id="合波器-x2F-分波器-OMU-x2F-ODU"><a href="#合波器-x2F-分波器-OMU-x2F-ODU" class="headerlink" title="合波器 &#x2F;分波器(OMU&#x2F;ODU)"></a>合波器 &#x2F;分波器(OMU&#x2F;ODU)</h3><p>合波器将OTU发出的标准波分波长汇聚到一根光纤中；分波器可以把不同波长的信号由一根光纤中分离出来，发送给对应的OTU。</p>
+<p>OMU&#x2F;ODU的器件类型有很多，这里介绍四种。</p>
+<ul>
+<li>光栅型光波分复用器</li>
+<li>介质薄膜滤波器型</li>
+<li>耦合器型（熔锥型）</li>
+<li>阵列波导光栅型(AWG)</li>
+</ul>
+<h4 id="光栅型光波分复用器"><a href="#光栅型光波分复用器" class="headerlink" title="光栅型光波分复用器"></a>光栅型光波分复用器</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50ifw4ja5j30cv0drmx7.jpg"></p>
+<ul>
+<li>原理：属于角色散型器件，当光到光栅上后，由于光栅的角色散作用，使不同的光信号以不同的角度出射，然后经过透镜会聚 到不同的输出光纤，从而完成波长选择和分离的作用，反之就可以实现波长的合并。</li>
+<li>优点：波长选择特性优良，可以使波长间隔小到0.5nm左右并联工作，插入损耗不会随复用信道的数目增加而增加</li>
+<li>缺点：温度稳定性不好</li>
+</ul>
+<h4 id="介质薄膜滤波器型"><a href="#介质薄膜滤波器型" class="headerlink" title="介质薄膜滤波器型"></a>介质薄膜滤波器型</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50inlb2xuj30dr0cxt8r.jpg"></p>
+<ul>
+<li>原理：利用几十层不同的介质薄膜组合起来，组成具有特定波长选择特性的干涉滤波器，就可以实现将不同的波长分离或合并</li>
+<li>优点：可以实现结构稳定的小型化器件；信号通带比较平坦；插入损耗较低；温度特性很好</li>
+<li>缺点：加工复杂，但目前的工艺已经比较成熟；通路数不能太多。</li>
+</ul>
+<h4 id="耦合器型（熔锥型）"><a href="#耦合器型（熔锥型）" class="headerlink" title="耦合器型（熔锥型）"></a>耦合器型（熔锥型）</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50iry94gkj30kv0almx7.jpg"></p>
+<ul>
+<li>原理：通过将多根光纤熔融在一起，使多个输入波长可以耦合在一起，达到波长合并的目的，但不能用来将不同波长进行分离。</li>
+<li>优点：温度特性很好；光通道带宽较好；制造简单，易于批量生产</li>
+<li>缺点：尺寸较大，信道隔离度差，复用的波长数少</li>
+</ul>
+<h4 id="阵列波导光栅型-AWG"><a href="#阵列波导光栅型-AWG" class="headerlink" title="阵列波导光栅型(AWG)"></a>阵列波导光栅型(AWG)</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50ium4sadj30rd0c6146.jpg"></p>
+<p>AWG(Arrayed Waveguide Grating)是密集波分复用系统（DWDM）中的首选技术。一组具有相等长度差的阵列波导形成的光栅，使用具有分波的能力。</p>
+<ul>
+<li>原理：是以光集成技术为基础的平面波导型器件。</li>
+<li>优点：并联工作，可以复用的通道数多；尺寸小；易于批量生产</li>
+<li>缺点：需要温度补偿</li>
+</ul>
+<p>波分复用器主要参数：</p>
+<ul>
+<li>复用通路数：代表波分复用器件能进行复用与解复用的光通路数量， 它与器件的分辨率、隔离度等参数密切相关</li>
+<li>信道隔离度： 它表征此光元器件中各复用光通路彼此之间的隔离程度</li>
+<li>插入损耗：波分复用器件本身对光信号的衰耗作用</li>
+<li>反射系数：是指在波分复用器件的输入端，反射光功率与入射光功率之比。</li>
+<li>中心波长：进出复用器的波长与ITU-T规定的标准波长相比不能相差太大偏差，否则会引起系统崩溃。</li>
+<li>带宽：该参数仅对分波器有效，-20dB描述分波器阻带特性，-0.5dB描述分波器带通特性。</li>
+</ul>
+<h3 id="光放大器（OA）"><a href="#光放大器（OA）" class="headerlink" title="光放大器（OA）"></a>光放大器（OA）</h3><p>光放大器不但可以对光信号进行直接放大，同时还具有实时、高增益、宽带、在线、低噪声、低损耗的全光放大器，是新一代光纤通信系统中必不可少的关键器件。在目前实用的光纤放大器中主要有掺铒光纤放大器（EDFA）和光纤拉曼放大器（FRA）等，其中掺铒光纤放大器以其优越的性能被广泛应用于长距离、大容量、高速率的光纤通信系统中，作为前置放大器、线路放大器、功率放大器使用。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50ka68286j30pj081dh8.jpg"></p>
+<p>光放大器是一种不需要经过光&#x2F;电&#x2F;光变换而直接对光信号进行放大的有源器件。</p>
+<p>光放大器比光中继器有着很多的优点，比如光中继器不能放大合波信号，只能放大单波信号；光中继器实质上是是电中继器加光&#x2F;电和电&#x2F;光变换接口即以实现，不稳定。</p>
+<p>光纤放大器是一种可以放大光信号的全光装置，它能对光纤所有信道中不同波长的光信号同时供给能量。它的一个重要特点与光波分复用一样，就是对信息比特和传送格式具有透明性，即无论是数字信号还是模拟信号，无论传输速率为多少都一概透明通过。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50kfrv44wj30qt0c6dh3.jpg"></p>
+<p>DWDM系统中使用的EDFA必须具有：</p>
+<ul>
+<li>足够的带宽</li>
+<li>平坦的增益</li>
+<li>低噪声系数</li>
+<li>高输出功率</li>
+</ul>
+<h3 id="光监控信道单元（OSC）"><a href="#光监控信道单元（OSC）" class="headerlink" title="光监控信道单元（OSC）"></a>光监控信道单元（OSC）</h3><p>光监控信道单元完成设备的控制单元与网管之间的通信，实现性能实时监控和网管指令的下达。</p>
+<p>光监控信道是为WDM的光传输系统的监控而设立的。ITU-T建议优选采用1510nm波长，容量为2Mbit&#x2F;8Mbit&#x2F;100Mbit。但必须在EDFA之前下光路，而在EDFA之后上光路。因其不能被放大器放大，所以借助低速率下高的接收灵敏度（优于-43dBm）从而正常工作。</p>
+<h2 id="波分技术的优点"><a href="#波分技术的优点" class="headerlink" title="波分技术的优点"></a>波分技术的优点</h2><ul>
+<li>可以充分利用光纤的巨大带宽资源，使传输容量比单波长传输增加几倍至几十倍</li>
+<li>在网络扩充和发展中，无需对光缆线路进行改造，增加一个附加波长即可引入任意的新业务</li>
+<li>由于DWDM系统按光波长的不同进行复用和解复用，而与信号的速率和电调制方式无关，即对数据是“透明”的。一个WDM系统的业务可以承载多种格式的“业务”信号，如ATM、IP或者将来有可能出现的信号。WDM系统完成的是透明传输，对于“业务”层信号来说，WDM系统中的各个光波长通道就像“虚拟”的光纤一样 。</li>
+</ul>
+<h2 id="波分常见站点类型"><a href="#波分常见站点类型" class="headerlink" title="波分常见站点类型"></a>波分常见站点类型</h2><h3 id="光终端复用站-OTM（Optical-Terminal-Multiplexer）"><a href="#光终端复用站-OTM（Optical-Terminal-Multiplexer）" class="headerlink" title="光终端复用站 OTM（Optical Terminal Multiplexer）"></a>光终端复用站 OTM（Optical Terminal Multiplexer）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50d8p9d4vj30pz0h5zkz.jpg"></p>
+<p>OTM一般用在链型或点到点网络的两端，只与一个方向进行业务传递。图示环带链网络的A站点就是OTM站点。</p>
+<p>OTM站点需要用到OTU、合分波器、放大器、OSC等器件。所有的业务在此全部被OTU处理。</p>
+<h3 id="光线路放大站-OLA（Optical-Line-Amplifier）"><a href="#光线路放大站-OLA（Optical-Line-Amplifier）" class="headerlink" title="光线路放大站 OLA（Optical Line Amplifier）"></a>光线路放大站 OLA（Optical Line Amplifier）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50dc9j5t0j30pb0ert97.jpg"></p>
+<p>OLA一般在业务传输距离较长的情况下用于业务收发两端之间。与两个方向进行业务传递。图示环带链网络的B站点就是OLA站点。</p>
+<p>OLA站点需要用到放大器和OSC等器件。没有业务上下，也不会对单独的波长进行处理，只起到放大光功率的作用。</p>
+<h3 id="光分插复用站-OADM（Optical-Add-x2F-Drop-Multiplexer）"><a href="#光分插复用站-OADM（Optical-Add-x2F-Drop-Multiplexer）" class="headerlink" title="光分插复用站 OADM（Optical Add&#x2F;Drop Multiplexer）"></a>光分插复用站 OADM（Optical Add&#x2F;Drop Multiplexer）</h3><p>用于链型或环型组网，部分业务在此上下，部分业务穿通。是环型组网中最常见的站点类型，根据所使用合分波单元的不同，又可分为几种类型：</p>
+<h4 id="FOADM-（Fixed-Optical-Add-x2F-Drop-Multiplexer）"><a href="#FOADM-（Fixed-Optical-Add-x2F-Drop-Multiplexer）" class="headerlink" title="FOADM （Fixed Optical Add&#x2F;Drop Multiplexer）"></a>FOADM （Fixed Optical Add&#x2F;Drop Multiplexer）</h4><p>固定光分叉复用站，一般用普通的分叉复用器或合分波器构成；</p>
+<p>特点是某个波长只能从固定的端口上下或穿通。</p>
+<p>下图是FOADM使用合分波器构成的。使用OMU+ODU组合的FOADM是最常见的，也称为背靠背OTM，优点在于业务并行上下，平滑扩容，容量大；缺点在于系统体积大，插损较大。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50hd40cokj30ql0hq75h.jpg"></p>
+<p>下图是FOADM使用分插复用器</p>
+<p>使用介质薄膜滤波器的FOADM，一般用在上下波数比较少（少于16波）的情况下。优点在于结构简单，成本低，插入损耗小；缺点在于不能灵活升级，扩容需要中断业务。</p>
+<p>一般用在接入层和边缘汇聚层，在环网内部，应尽量避免全网都配置成这种站点，以免产生自激。解决方法是核心站点上下波使用背靠背OTM。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50hgtwdbtj30qy0gk0tl.jpg"></p>
+<h4 id="ROADM（Reconfigurable-Optical-Add-x2F-Drop-Multiplexer）"><a href="#ROADM（Reconfigurable-Optical-Add-x2F-Drop-Multiplexer）" class="headerlink" title="ROADM（Reconfigurable Optical Add&#x2F;Drop Multiplexer）"></a>ROADM（Reconfigurable Optical Add&#x2F;Drop Multiplexer）</h4><p>可重构光分叉复用站，由可重构光分插复用单元完成光调度。</p>
+<ul>
+<li>如果要实现波长级别的业务调度，就必须采用可重构光分插复用器件（ROADM）。其特点是某一波长可以在器件的不同端口实现波长上下或者穿通、广播。</li>
+<li>ROADM站点是渐渐兴起的一种新配置方式，在国外的应用较为广泛，并且具有较好的扩展性，最大支持9维度，并且可以从低维度到高维度平滑升级。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50hkjatxqj30r50gxmyh.jpg"></p>
+<h2 id="40波系统"><a href="#40波系统" class="headerlink" title="40波系统"></a>40波系统</h2><h3 id="40波系统波长分配表"><a href="#40波系统波长分配表" class="headerlink" title="40波系统波长分配表"></a>40波系统波长分配表</h3><table>
+<thead>
+<tr>
+<th align="center">波长编号</th>
+<th align="center">中心频率  (THz)</th>
+<th align="center">波长值 (nm）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">192.1</td>
+<td align="center">1560.61</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">192.2</td>
+<td align="center">1559.79</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">192.3</td>
+<td align="center">1558.98</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">192.4</td>
+<td align="center">1558.17</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">192.5</td>
+<td align="center">1557.36</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">192.6</td>
+<td align="center">1556.55</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">192.7</td>
+<td align="center">1555.75</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">192.8</td>
+<td align="center">1554.94</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">192.9</td>
+<td align="center">1554.13</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">193.0</td>
+<td align="center">1553.33</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">193.1</td>
+<td align="center">1552.52</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">193.2</td>
+<td align="center">1551.72</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">193.3</td>
+<td align="center">1550.92</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">193.4</td>
+<td align="center">1550.12</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">193.5</td>
+<td align="center">1549.32</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">193.6</td>
+<td align="center">1548.51</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">193.7</td>
+<td align="center">1547.72</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">193.8</td>
+<td align="center">1546.92</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">193.9</td>
+<td align="center">1546.12</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">194.0</td>
+<td align="center">1545.32</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">194.1</td>
+<td align="center">1544.53</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">194.2</td>
+<td align="center">1543.73</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">194.3</td>
+<td align="center">1542.94</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">194.4</td>
+<td align="center">1542.14</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">194.5</td>
+<td align="center">1541.35</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">194.6</td>
+<td align="center">1540.56</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">194.7</td>
+<td align="center">1539.77</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td align="center">194.8</td>
+<td align="center">1538.98</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td align="center">194.9</td>
+<td align="center">1538.19</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td align="center">195.0</td>
+<td align="center">1537.40</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td align="center">195.1</td>
+<td align="center">1536.61</td>
+</tr>
+<tr>
+<td align="center">32</td>
+<td align="center">195.2</td>
+<td align="center">1535.82</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td align="center">195.3</td>
+<td align="center">1535.04</td>
+</tr>
+<tr>
+<td align="center">34</td>
+<td align="center">195.4</td>
+<td align="center">1534.25</td>
+</tr>
+<tr>
+<td align="center">35</td>
+<td align="center">195.5</td>
+<td align="center">1533.47</td>
+</tr>
+<tr>
+<td align="center">36</td>
+<td align="center">195.6</td>
+<td align="center">1532.68</td>
+</tr>
+<tr>
+<td align="center">37</td>
+<td align="center">195.7</td>
+<td align="center">1531.90</td>
+</tr>
+<tr>
+<td align="center">38</td>
+<td align="center">195.8</td>
+<td align="center">1531.12</td>
+</tr>
+<tr>
+<td align="center">39</td>
+<td align="center">195.9</td>
+<td align="center">1530.33</td>
+</tr>
+<tr>
+<td align="center">40</td>
+<td align="center">196.0</td>
+<td align="center">1529.55</td>
+</tr>
+</tbody></table>
+<ul>
+<li>工作波长范围：C波段（1530nm~1565nm）</li>
+<li>频率范围：192.1 THz ~ 196.0 THz</li>
+<li>通路间隔：100 GHz</li>
+<li>中心频率偏差：±20GHz（速率低于2.5Gbit&#x2F;s）；±12.5GHz（速率10Gbit&#x2F;s）</li>
+</ul>
+<p>如果是80波系统的话，</p>
+<ul>
+<li>工作波长范围：C波段（1530nm~1565nm）</li>
+<li>频率范围：C波段    192.1THz-196.05THz</li>
+<li>通路间隔：50GHz</li>
+<li>中心频率偏差：±5GHz</li>
+</ul>
+<h2 id="光信噪比（OSNR-Optical-Signal-Noise-Ratio）"><a href="#光信噪比（OSNR-Optical-Signal-Noise-Ratio）" class="headerlink" title="光信噪比（OSNR-Optical Signal Noise Ratio）"></a>光信噪比（OSNR-Optical Signal Noise Ratio）</h2><p>光信噪比的定义是在光有效带宽为0。1nm内光信号功率和噪声功率的比值。光信号的功率一般取峰峰值，而噪声的功率一般取两相临通路的中间点的功率电平。光信噪比是一个十分重要的参数，对估算和测量系统有重大意义。</p>
+<p>$$  OSNR &#x3D; 10lg\frac{P_i}{N_i}+10lg\frac{B_m}{B_r}$$</p>
+<p>其中，$P_i$是是第$i$个通路内的信号功率,$B_r$是参考光带宽,通常取0.1nm；$B_m$是噪声等效带宽；$N_i$是等效噪声带宽$B_m$范围内窜入的噪声功率</p>
+<p>如果级联的每个放大器输出的总光功率相同，并且放大器增益远大于1，那么OSNR可以近似为:</p>
+<p>$$ OSNR &#x3D; P_{out}-10lgM-L+58dBm-N_f-10lgN-\Delta P $$</p>
+<p>其中，P_{out}为总入纤光功率，$M$为通道数量，$L$为线路损耗， $N_f$ 为EDFA噪声系数，$N$为光再生段数量， $\Delta P$为通道功率与均值间差异。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g50m5dhfy7j30rf0gejsh.jpg"></p>
+<p>对于WDM系统传输来说，目前对传输距离造成限制的主要因素是：光信噪比OSNR、色散和非线性。色散的问题可以通过色散补偿光纤完成。光信噪比OSNR的受限是通过RAMAN放大器、超强FEC技术和电中继业务板解决的。</p>
+<p>光信噪比OSNR是光纤信号与噪声的比值。OSNR的大小决定了信号质量的优劣。一般对于10Gbit&#x2F;s信号接收端要求在25dB以上(没有前向纠错编FEC技术时)，光信噪比在WDM系统发送端一般有35～40dB，但是经过第1个光放大器后，信号OSNR将有比较明显的下降，以后每经过一个光放大器EDFA，OSNR都将继续下降，但下降的速度会逐渐放慢。劣化主要原因在于光放大器在放大信号、噪声的同时，还引入了新的ASE噪声，也就是本放大器的噪声，使总噪声水平提高，OSNR下降。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/SDH/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/11/SDH/" class="post-title-link" itemprop="url">SDH</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-11 15:48:22" itemprop="dateCreated datePublished" datetime="2019-07-11T15:48:22+08:00">2019-07-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/11/SDH/" class="leancloud_visitors" data-flag-title="SDH">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h2 id="什么是SDH？"><a href="#什么是SDH？" class="headerlink" title="什么是SDH？"></a>什么是SDH？</h2><p>SDH是Synchronous Digital Hierarchy 的简称，也就是同步数字体系。是一整套可进行同步数字传输、复用和交叉连接的标准化数字信号的等级结构。</p>
+<h2 id="SDH的工作方式"><a href="#SDH的工作方式" class="headerlink" title="SDH的工作方式"></a>SDH的工作方式</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyap7j37j30zn0gkjtv.jpg"></p>
+<p>STM-1是SDH的第一个等级，又叫基本同步传送模块，比特率为155.520Mb&#x2F;s。STM-N是SDH第N个等级的同步传送模块，比特率是STM-1的N倍(N&#x3D;4n&#x3D;1，4，16，64，256)。</p>
+<p>低阶SDH  -&gt; 高阶SDH</p>
+<p>比如，STM-1-&gt;STM-4。采用字节间插复用方式，4个STM-1变成一个STM-4</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyf20o6jj30wk0deac2.jpg"></p>
+<h2 id="帧结构"><a href="#帧结构" class="headerlink" title="帧结构"></a>帧结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vygod61wj311q0ii44b.jpg"></p>
+<p>可以计算，当N&#x3D;1时，也就是STM-1，$8\times(9\times270\times1)\times8000&#x3D;155520000&#x3D;155.52Mbit&#x2F;s$</p>
+<h3 id="STM-N净负荷"><a href="#STM-N净负荷" class="headerlink" title="STM-N净负荷"></a>STM-N净负荷</h3><p>STM-N净负荷是一个9行$\times$ 261列 $\times$N。</p>
+<p>这是用来放置各种业务信息的地方。2M&#x2F;34M&#x2F;140M等PDH信号、ATM信号、IP信息包等打包成信息包后，放于其中。然后由STM-N信号承载，在SDH网上传输。若将STM-N信号帧比做一辆货车，其净负荷区即为该货车的车厢。</p>
+<p>在将低速信号打包装箱时，在每一个信息包中加入通道开销POH，以完成对每一个“货物包”在“运输”中的监视。</p>
+<p>下图是对上述描述的解释。低速信号打包后，再加上POH，然后就是一个信息包，放到这个净负荷区中。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x0jy1lp1j30w00hetbz.jpg"></p>
+<h3 id="段开销"><a href="#段开销" class="headerlink" title="段开销"></a>段开销</h3><p> 完成对STM-N整体信号流进行监控。即对STM-N“车厢”中所有“货物包”进行整体上的性能监控。其中，</p>
+<ul>
+<li>再生段开销(RSOH)—完成对STM-N整体信息结构进行监控</li>
+<li>复用段开销(MSOH)—完成对STM-N中的复用段层信息结构进行监控</li>
+<li>RSOH、MSOH、POH组成SDH层层细化的监控体制</li>
+<li>二者区别：宏观（RSOH）和微观（MSOH）</li>
+</ul>
+<h3 id="管理单元指针——AU-PTR"><a href="#管理单元指针——AU-PTR" class="headerlink" title="管理单元指针——AU-PTR"></a>管理单元指针——AU-PTR</h3><ul>
+<li>定位低速信号在STM-N帧中(净负荷)的位置，使低速信号在高速信号中的位置可预知。</li>
+<li>发端在将信号包装入STM-N净负荷时，加入AU-PTR，指示信号包在净负荷中的位置，即将装入“车厢”的“货物包”，赋予一个位置坐标值。</li>
+<li>收端根据AU指针值，从STM-N帧净负荷中直接拆分出所需的低速支路信号；即依据“货物包”位置坐标，从“车厢”中直接所需要的那一个“货包”。</li>
+<li>由于“车厢”中的“货物包”是以一定的规律摆放的——字节间插复用方式；所以对货物包的定位仅需定位“车厢”中第一个“货物包”即可。</li>
+</ul>
+<p> <img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x14ll91ej30s50gb0vy.jpg"></p>
+<p> 若复用的低速信号速率较低，即打包后信息包太小，例：2M、34M。需进行二级指针定位。先将小信息包打包成中信息包，通过支路单元指针TU-PTR定位其在中信息包中的位置。然后将若干中信息包打包成大信息包，通过AU-PTR指示相应中信息包的位置。</p>
+<p> <img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x17bsdtxj30t60fwgmy.jpg"></p>
+<h2 id="复用步骤（复用方式，复用结构）"><a href="#复用步骤（复用方式，复用结构）" class="headerlink" title="复用步骤（复用方式，复用结构）"></a>复用步骤（复用方式，复用结构）</h2><p>低阶SDH→高阶SDH：同步字节间插复用方式</p>
+<p>PDH信号→STM-N：同步复用和灵活的映射</p>
+<ul>
+<li>140M→STM-N</li>
+<li>34M→STM-N</li>
+<li>2M→STM-N</li>
+</ul>
+<p>复用是依复用路线图进行的，ITU-T规定的路线图有多种，但通常一个国家或地区仅使用一种。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x1cus2p4j30t50k9783.jpg"></p>
+<h3 id="140M复用步骤"><a href="#140M复用步骤" class="headerlink" title="140M复用步骤"></a>140M复用步骤</h3><p>使用的是C4</p>
+<p>C-4： 容器4；与140M相对应的标准信息结构，完成速率适配功能。</p>
+<p>VC-4：虚容器4；与C-4相对应的标准信息结构，完成对<br>装载的140M信号进行实时的性能监控。</p>
+<p>AU-4：管理单元4，与VC-4相对应的信息结构</p>
+<p>复用路线140M—C-4—VC-4—AU-4—STM-1，所以STM-1<br>仅能复用进一路140M信号</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x1zj7lutj30rj099jt9.jpg"><br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x205i2s2j30n70a0tac.jpg"></p>
+<p>从图中可以看到，在C-4容器中，是1-260，然后，加了一个POH，变成了1-261，这个就是之前介绍的净负荷区。<br>然后需要加一个指针定位AU-PTR，是一个1-9的，然后，加入段开销，就变成了一个完整的帧。</p>
+<h3 id="34M复用步骤"><a href="#34M复用步骤" class="headerlink" title="34M复用步骤"></a>34M复用步骤</h3><p>C-3： 容器3；与34M相对应的标准信息结构，完成速率适配功能。</p>
+<p>VC-3： 虚容器3；与C-3相对应的标准信息结构，完成对装载的34M信号进行实时的性能监控。</p>
+<p>TU-3： 支路单元3；与VC-3相对应的标准信息结构，完成一级指针<br>定位。</p>
+<p>TUG-3： 支路单元组3；与TU-3相对应的标准信息结构。</p>
+<p>复用路线34M—C-3—VC-3—TU-3—TUG-3；3TUG-3—VC-4—STM-<br>1；所以STM-1仅能复用进3路34M。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x31mfxvbj30pk08qwfx.jpg"><br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x328jauaj30q008k401.jpg"></p>
+<p> 从图中可以看到，速度适配后，C-3是从1-84的，再加上一个POH，变成了1-85，由于不符合1-261，因此，可以将三个叠加起来，所以，先进行一级指针定位，然后，补齐缺口后，变成了1-86，这时候，将三个合在一起，$86\times3&#x3D;258+3&#x3D;261$,其中R是填充。这样就变成了一个VC-4，也就是一个STM-1。</p>
+<h3 id="2M复用步骤"><a href="#2M复用步骤" class="headerlink" title="2M复用步骤"></a>2M复用步骤</h3><p>C-12： 容器12；与2M相对应的标准信息结构，完成2M信号速率适<br>配，4个基帧组成一复帧。</p>
+<p>VC-12：虚容器12；与2M相对应的标准信息结构，完成对某路2M<br>信号实时监控。</p>
+<p>TU-12：支路单元12；与VC-12相对应的标准信息结构，完成对VC-<br>12的一级指针定位。</p>
+<p>TUG-2：支路单元组2；TUG-3——支路单元组3。</p>
+<p>2M—C-12—VC-12—TU-12；3TU-12—TUG-2；7TUG-2—TUG-<br>3；3TUG-3—VC-4—STM-1。</p>
+<p>STM-1可装入3×7×3&#x3D;63个2M信号。2M复用结构是3-7-3结构。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x3mviuwbj30qm07y0ul.jpg"><br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x3nkjqlpj30oi07vq3u.jpg"></p>
+<p>从图中，2M速度适配后变成了1-4，然后进行加POH监控和一级指针定位。之后进行3倍的字节间插，就变成了1-12，然后再进行7倍的字节间插，添加两个填充，就变成了1-86，之后再进行3倍字节间插（和34M是一样的），因此STM-1可以装$3\times7\times3&#x3D;63$个2M信号。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%95%88%E5%BA%94/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/11/%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%95%88%E5%BA%94/" class="post-title-link" itemprop="url">非线性效应</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-11 11:29:33" itemprop="dateCreated datePublished" datetime="2019-07-11T11:29:33+08:00">2019-07-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/11/%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%95%88%E5%BA%94/" class="leancloud_visitors" data-flag-title="非线性效应">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+光纤介质的非线性效应来自光纤的非线性极化效应，当入纤光功率超过一定数值后，由于光纤有效截面积很小(50~80µm2 )，使得光纤芯径中的光功率密度过高，从而诱导了光纤材料的非线性极化。
+
+<p>光纤的非线性效应 与信号的光功率密度成正比，并显著地影响了信号光的相位、脉冲形状和功率演化。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vqscmimwj30nf0b5dhh.jpg"></p>
+<h2 id="自相位调制（SPM）"><a href="#自相位调制（SPM）" class="headerlink" title="自相位调制（SPM）"></a>自相位调制（SPM）</h2><p>信号光强的瞬时变化引起其自身的相位调制，使信号频谱逐渐展宽。</p>
+<p>光纤中激光强度的变化导致光纤折射率的变化，引起光信号自身的相位调整。</p>
+<p>由于折射率对光强存在依赖关系，在光脉冲持续时间内折射率发生变化，脉冲峰值的相位对于前、后沿来说均是延迟的，这种相移随着传输距离的增加而积累起来，达到一定距离后显示出相当大的相位调制，从而使光谱展宽导致脉冲展宽，这就称为自相位调制SPM。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vun316zmj30ls0dqtb0.jpg"></p>
+<p>一般情况下，自相位调制SPM效应只在超长系统中表现比较明显，同时在色散大的光纤中也表现比较明显，所以，采用G.653光纤，且将信道设置在零色散区附近，有利于减小自相位调制效应，对于使用G.652光纤，且长度小于1000km的系统，可以在适当的间隔进行色散补偿的方法来控制自相位调制SPM效应。</p>
+<h2 id="交叉相位调制（XPM）"><a href="#交叉相位调制（XPM）" class="headerlink" title="交叉相位调制（XPM）"></a>交叉相位调制（XPM）</h2><p>光纤中传播不同频率的波长时，介质的折射率与所有波长的光场都有关系，因此，某一特定频率的相位不但与自身的光场有关，还与其它频率的光场有关。这种相互作用称为交叉相位调制（XPM）。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vv003wkij30hj0atdgj.jpg"></p>
+<p>当光子晶体光纤中传播不同频率的光波时，介质的折射率与所有光波的光场都有关系，因此，某一特定频率的相位不但与自身的光场有关，还与其它频率的光场有关。这种相互作用称为交叉相位调制(CPM，即Cross-phase Modulation)。</p>
+<h2 id="四波混频（FWM）"><a href="#四波混频（FWM）" class="headerlink" title="四波混频（FWM）"></a>四波混频（FWM）</h2><p>介质中两个或三个特定频率的光波在非线性材料中交会时，有可能产生另外两个频率的讯号，相互作用所引起的非线性光学效应。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vv3w6v2tj30ij080dgb.jpg"></p>
+<p>四波混频(Four-WaveMixing，FWM)亦称四声子混合，是光纤介质三阶极化实部作用产生的一种光波间耦合效应，是因不同波长的两三个光波相互作用而导致在其它波长上产生所谓混频产物，或边带的新光波，这种互作用可能发生于多信道系统的信号之间，可以产生三倍频、和频、差频等多种参量效应。</p>
+<p>发生四波混频的原因是入射光中的某一个波长上的光会使光纤的折射率发生改变，则在不同的频率上产生了光波相位的变化，从而产生了新的波长的光波。</p>
+<h2 id="受激拉曼散射（SRS）和受激布里渊散射（SBS）"><a href="#受激拉曼散射（SRS）和受激布里渊散射（SBS）" class="headerlink" title="受激拉曼散射（SRS）和受激布里渊散射（SBS）"></a>受激拉曼散射（SRS）和受激布里渊散射（SBS）</h2><p>这两种散射都是指光波与声子之间发生能量交换，导致光波分散为不同的波长。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vva94uh6j30lz0jvwfv.jpg"></p>
+<p>从本质上说，任何物质都是由分子、原子等基本组成单元组成。在常温下，这些基本组成单元在不断地作自发热运动和振动。光纤中的受激布里渊散射SBS和受激拉曼散射SRS 都是激光光波通过光纤介质时，被其分子振动所调制的结果，而且SBS 和SRS都具有增益特性，在一定条件下，这种增益可沿光纤积累。SBS 与SRS 的区别在于，SBS 激发的是声频支声子，SRS激发的是光频支声子。</p>
+<p>受激拉曼散射SRS 产生原理：受激拉曼散射SRS是光与硅原子振动模式间相互作用有关的宽带效应，在任何情况下，短波长的信号总是被这种过程所衰减，同时长波长信号得到增强。</p>
+<p>受激布里渊散射SBS 产生原理：SBS是光纤中泵浦光与声子间相互作用的结果，在使用窄谱线宽度光源的强度调制系统中，一旦信号光功率超过受激布里渊散射SBS 的门限时（SBS的门限较低，对于1550nm 的激光器，一般为7~8dBm ），将有很强的前向传输信号光转化为后向传输，随着前向传输功率的逐渐饱和，使后向散射功率急剧增加。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/%E5%85%89%E7%BA%A4%E8%89%B2%E6%95%A3/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/10/%E5%85%89%E7%BA%A4%E8%89%B2%E6%95%A3/" class="post-title-link" itemprop="url">光纤色散</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-10 17:06:00" itemprop="dateCreated datePublished" datetime="2019-07-10T17:06:00+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/10/%E5%85%89%E7%BA%A4%E8%89%B2%E6%95%A3/" class="leancloud_visitors" data-flag-title="光纤色散">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="色散"><a href="#色散" class="headerlink" title="色散"></a>色散</h1><p>在光纤中传输的光信号（脉冲）的不同频率成份或不同的模式分量以不同的速度传播，到达一定距离后必然产生信号失真（脉冲展宽），这种现象称为光纤的色散</p>
+<p>常见的色散有色度色散（CD）和偏振模色散（PMD）</p>
+<p>色度色散包括：</p>
+<ul>
+<li>材料色散</li>
+<li>波导色散</li>
+</ul>
+<h2 id="材料色散"><a href="#材料色散" class="headerlink" title="材料色散"></a>材料色散</h2><p>波速v和折射率n的关系为$v&#x3D;c&#x2F;n$</p>
+<p>对于光线中用到的二氧化硅，其折射率是随波长变化的，于是，波的速度也随波长变化。如果速度的变化是由材料的某些性质引起的，则称之为材料色散，如果由其自身的结果引起的，称之为波导色散。</p>
+<p>单一频率的光在现实中是不现实的，实际的光源在一个特定的波长范围内发光。这个范围称为光源的线宽，或者谱宽。光源的线宽越窄，其相干性就越好。理想的相干光源发射单波长的光，其线宽为0，因而是理想单色的。下表给出了常用光源的典型线宽值。</p>
+<table>
+<thead>
+<tr>
+<th align="center">光源</th>
+<th align="center">线宽(nm)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">发光二极管</td>
+<td align="center">20~100</td>
+</tr>
+<tr>
+<td align="center">半导体激光器</td>
+<td align="center">1~5</td>
+</tr>
+<tr>
+<td align="center">Nd:YAG激光器</td>
+<td align="center">0.1</td>
+</tr>
+<tr>
+<td align="center">氦氖激光器</td>
+<td align="center">0.002</td>
+</tr>
+</tbody></table>
+<p>用波长$\Delta\lambda$表示的谱宽与由频率$\Delta{f}$表示的带宽之间满足以下关系</p>
+<p>$$ \frac{\Delta{f}}{f} &#x3D; \frac{\Delta\lambda}{\lambda} $$</p>
+<p>式中，$f$是中心频率，$\lambda$是中心波长，这个goon故事说明无论以波长还是频率为基础，对光源辐射谱宽的相对值都是相同的。</p>
+<p>从表格中可以看出，半导体激光器（LD）比LED具有更好的相干性。</p>
+<p>考虑一个具有非零谱宽的实际光源发出一个光脉冲到色散的玻璃光纤时的情形。原始脉冲由形状完全相同但波长不同的脉冲组成，这些脉冲以不同的速度传输，到达光纤末端的时间会有细微的差别。在输出端再将其叠加起来，形成输出脉冲，相对于输入信号，输出信号被展宽了。这解释了色散如何导致脉冲畸变。脉冲传输的越远，其展宽就越严重。下图是一个示意图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vma6ct97j30ke0i23zo.jpg"></p>
+<p>上面解释了脉冲畸变，除此之外，色散同样会使模拟信号产生失真。下图给出了由三个不同波长组成的一个模拟波形的传播。在输入端，三个波长在相位上变化相同，叠加在一起产生一个更大的信号变化。在色散介质中传播一段距离后，这些不同波长的信号相位不再相同。当叠加在一起后，所形成信号的幅度变得低于输入信号的幅度。色散并没有改变平均功率或调制功率，但的确减小了信号的幅度变化。我们可以将这种结果看做是信号峰值的扩展（降低其幅度）和波谷的填充（抬高其幅度）。过度的展宽将造成信号变化的损耗。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vmfzqj05j30g40c7t9o.jpg"></p>
+<p>由材料色散（或波导色散）引起的信号畸变可以通过使用窄线宽光源来降低，也就是使用相干性更好的发光器件。因此，半导体激光器比发光二极管有优势。</p>
+<h2 id="波导色散"><a href="#波导色散" class="headerlink" title="波导色散"></a>波导色散</h2><p>光纤的第三类色散是波导色散。光纤的纤芯与包层的折射率大于一定程度，波导色散占主导，在交界面产生全反射时，有一部分平行于界面的光进入包层之内。这部分光在包层内传输一定距离后，又可能回到纤芯中继续传输。进入包层内的这部分光强的大小与光波长有关，这就相当于光传输路径长度随光波波长的不同而异。把有一定波谱宽度的光源发出的光脉冲射入光纤后，由于不同波长的光传输路径不完全相同，所以到达终点的时间也不相同，从而出现脉冲展宽。具体来说，入射光的波长越长，全反射角越大，进入包层中的光强比例就越大，这部分光走过的距离就越长。这种色散是由光纤中的光波导引起的，由此产生的脉冲展宽现象叫做波导色散。</p>
+<p>波导色散是模式本身的色散，是指光纤中某一种波导模式在不同的频率下，相位常数不同、群速度不同而引起的色散。形象地说，就是理想状态下光线中的波导只在纤芯中传输，但由于光纤的几何结构、形状等方面的不完善，使得光波一部分在纤芯中传输，而另一部分在包层中传输，由于纤芯和包层的折射率不同，这样造成脉冲展宽的现象，就是波导色散，或称结构色散。这种色散主要是由光波导的结构参数而决定的。</p>
+<h2 id="啁啾效应"><a href="#啁啾效应" class="headerlink" title="啁啾效应"></a>啁啾效应</h2><p>光脉冲瞬时频率随时间的变化而变化</p>
+<p>啁啾产生的原因主要是由于介质的折射率由于动态电信号调制的影响产生动态变化，从而引起在介质中传播的光信号的相位也产生动态变化，这种相位的变化，直接就体现为光信号频率的动态变化。</p>
+<p>一个光脉冲的啁啾即为其瞬时频率随时间的变化而变化的特性。具体的来说，如果一个光脉冲的瞬时频率在时域上升高（或降低），即称该脉冲具有上啁啾（或下啁啾）。 </p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vp1uqx0cj30na0cbgm3.jpg" alt="一个具有强上啁啾的脉冲，其瞬时频率随时间的推移而上升"></p>
+<p>脉冲在透明介质中传播后，由于色散和非线性效应（如由克尔效应引起的自相位调制）的影响，会具有啁啾。在半导体激光器和放大器中，由于载流子浓度变化导致的折射率变化也会导致脉冲具有啁啾。一个脉冲的啁啾可以将脉冲通过一些具有适当色散的元件后而被消除或者反转。</p>
+<p>啁啾效应将使光纤划分为正常色散光纤和反常色散光纤。正常色散光纤中，脉冲的高频成分位于脉冲后沿，低频成分位于脉冲前沿；反常色散光纤中，脉冲的低频成分位于脉冲后沿，高频成分位于脉冲前沿。在传输线路中，合理使用两种光纤，可以抵消啁啾效应，消除脉冲的色散展宽</p>
+<h2 id="偏振模色散（Polarization-Mode-Dispersion）"><a href="#偏振模色散（Polarization-Mode-Dispersion）" class="headerlink" title="偏振模色散（Polarization Mode Dispersion）"></a>偏振模色散（Polarization Mode Dispersion）</h2><p>一个信号脉冲沿着理想的对称圆形单模光纤在不受外界干扰情况下传输时,光纤输入端的光脉冲可分裂成两个垂直的偏振输出脉冲,以相同的的传播速度进行传输,并同时到达光纤输出端,这两个脉冲叠加在一起会重现出它们在光纤输入端时的偏振状态,实际上光纤由于种种原因,会引起双折射,即x轴方向和y轴方向上的折射率是不一样的,这将引起偏振模色散。</p>
+<p>形成偏振模色散的原因有光纤的内在原因和外在原因。通常,表现出来的只是内在原因和外在原因的综合结果。在理想情况下,光纤是圆对称的,不存在模式的极化取向问题,两个相互垂直的本征偏振模沿光纤以相同的速度传输,同时到达接收器。但是,在制造光纤的过程中,光纤芯不可避免地产生一定的椭圆度;在拉制光纤时,总是要在光纤中遗留下残存的内部应力,从而,实际的光纤总是表现出双折射性。这些不对称性使光纤的折射率分布与方向有关,这时,基模的两个相互垂直的本征偏振态不再简并,它们沿光纤以不相同的速度传输,引起脉冲展宽。光纤芯的椭圆度可以很简单地解释两个相互垂直的偏振态有不同的群速度。由于在水平方向有效群指数较大,因此水平方向偏振的模传输较慢,而在垂直方向有较小的有效群指数,因此在垂直方向偏振的模传输较快。在传输一段距离后,两个偏振模之间产生时延差。不管怎样降低这些内在原因,并不可能完全消除偏振模现象。这是因为成缆和光缆敷设时产生的应力、光缆熔接或连接器等外在因素都要影响偏振模色散</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/%E5%88%86%E8%B4%9D%E5%8D%95%E4%BD%8D/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/10/%E5%88%86%E8%B4%9D%E5%8D%95%E4%BD%8D/" class="post-title-link" itemprop="url">分贝单位</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-10 13:56:46" itemprop="dateCreated datePublished" datetime="2019-07-10T13:56:46+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/10/%E5%88%86%E8%B4%9D%E5%8D%95%E4%BD%8D/" class="leancloud_visitors" data-flag-title="分贝单位">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>在通信线路中保持一定量的光功率值是系统设计的主要部分。分贝（dB）是表示通信系统系统中相对功率电平的一个十分方便的量。如果系统中某一点的功率是P<sub>1</sub>瓦，线路中更远点出的功率是P<sub>2</sub>瓦，则P<sub>2</sub>&#x2F;P<sub>1</sub>是这两个位置处传输功率的比值。换句话说，P<sub>2</sub>&#x2F;P<sub>1</sub>是这两点间的传输效率。将这个比率用分贝表示，即</p>
+<p>$$ dB &#x3D; 10lg\frac{P_2}{P_1}$$</p>
+<p>$P_2$和$P_1$的单位必须相同，例如都是瓦特或者都是毫瓦。小于1的数字的对数值都是负数，所以如果$P_2$小于$P_1$，分贝值就是负的，当系统中存在损耗时会发生这种情况。如果$P_2$大于$P_1$（如果在两点之间放置放大器，就可能发生这种情况），分贝值就是正的。</p>
+<p>一些元件级联时，使用对数计算是很方便的，因为这样很容易算出功率电平的整体变化。考虑下图所示的由三个单元构成的系统框图，这三个单元可以分别代表光源到光纤的耦合器，光纤本身和连接器。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4usget5i7j30be01vmx1.jpg"></p>
+<p>其输出功率可以通过连乘每个单元的效率得到，其表达式为</p>
+<p>$$ \frac{P_4}{P_1} &#x3D; \frac{P_4}{P_3} \times \frac{P_3}{P_2} \times \frac{P_2}{P_1} $$</p>
+<p>用分贝表示的相应损耗为：</p>
+<p>$$ dB &#x3D; 10lg\frac{P_4}{P_1} &#x3D; 10lg(\frac{P_4}{P_3} \times \frac{P_3}{P_2} \times \frac{P_2}{P_1})$$</p>
+<p>利用对数的运算性质，即各项乘积的对数等于各项对数之和，就可以得到</p>
+<p>$$ dB &#x3D; 10lg\frac{P_4}{P_3} + 10lg\frac{P_3}{P_2} + 10lg\frac{P_2}{P_1}$$</p>
+<p>也就是说，总的效率（以分贝为单位）是单个级联部分的效率之和</p>
+<p>我们可以用分贝来表示绝对功率。为此，我们将功率与一个固定的参考值相比较。在光纤通信系统中最方便的参考电平是1毫瓦。相对于1毫瓦用分贝表示的功率值用dBm表示。则</p>
+<p>$$ dBm &#x3D; 10lgP_2 $$</p>
+<p>发射功率$dBm_t$，系统损耗$dB_s$和接受功率电平$dBm_r$之间的关系为</p>
+<p>$$ dBm_r &#x3D; dBm_t + dB_s $$</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/%E5%9F%BA%E6%9C%AC%E5%85%89%E7%BA%A4%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/09/%E5%9F%BA%E6%9C%AC%E5%85%89%E7%BA%A4%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">基本光纤通信系统</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-09 15:29:48" itemprop="dateCreated datePublished" datetime="2019-07-09T15:29:48+08:00">2019-07-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/09/%E5%9F%BA%E6%9C%AC%E5%85%89%E7%BA%A4%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F/" class="leancloud_visitors" data-flag-title="基本光纤通信系统">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+![](http://ww1.sinaimg.cn/large/006eDJDNly1g4uggxzky4j30p00hfgnw.jpg)
+
+<h2 id="信源"><a href="#信源" class="headerlink" title="信源"></a>信源</h2><p>信源可以有多种物理形式，通用的就是将非电信号转换成电信号。比如将声波转换成电流信号的麦克风。无论是在电通信还是光通信，信息在传输之前必定都是电形态的。</p>
+<h2 id="调制器"><a href="#调制器" class="headerlink" title="调制器"></a>调制器</h2><p>调制器主要有两个功能</p>
+<ul>
+<li>将电信号转换成合适传输的形态</li>
+<li>将这种信号加载到由载波源产生的载波上</li>
+</ul>
+<p>所采用的调制格式有模拟和数字两种。</p>
+<ul>
+<li>模拟信号是连续信号，与源信息的形态非常相似。在这种情况下，调制器不需要改变信号的形式，但是需要适当的放大这个信号，使其有足够的幅度驱动载波源</li>
+<li>数字信号只有“开”和“关”两种状态。“开”代表数字1，“关”代表数字0。数据速率是指每秒发送的比特数（bps）。模&#x2F;数转换器可以将模拟信号转换成数字信号。为了将数字信号加载到载波上，调制器只需要在适当的时候将载波源打开或者关闭即可</li>
+</ul>
+<h2 id="载波源"><a href="#载波源" class="headerlink" title="载波源"></a>载波源</h2><p>在光纤通信系统中，使用半导体激光器（LD，laser diode）或发光二极管（LED，light-emitting diode）产生光载波。更准确的说，这两个器件应该叫光振荡器。</p>
+<p>需要注意的是，电流信号是有正负的，但是光辐射的输出功率始终是正的，因此，需要在电信号上面加一个直流偏置电流，这样会使得电流信号是正的，从而光辐射的输出功率也是正的。</p>
+<p>下图分别是光载波的未调制，模拟调制和数字调制 示意图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4uovebpxyj30kp0n740f.jpg"></p>
+<h2 id="信道耦合器"><a href="#信道耦合器" class="headerlink" title="信道耦合器"></a>信道耦合器</h2><p>信道耦合器的功能是将光功率送到信号。在光纤通信系统中，就是需要有效地将来自光源的已调制的光束传送到光纤</p>
+<h2 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h2><p>信道是指发送机和接收机之间的传输路径。在光纤通信系统中，玻璃（或塑料）光纤就是信道。</p>
+<ul>
+<li>光放大器： 可以放大弱信号的功率</li>
+<li>中继器：将微弱的并已失真的光信号转换成电信号，然后还原成原来的数字脉冲串，以便进一步传输。中继器只能适用在数字系统中，而光放大器则对模拟和数字信号都适用。光放大器只能补偿信号的衰减，而中继器却可以重建数字信号的幅度和波形。</li>
+</ul>
+<h2 id="检测器"><a href="#检测器" class="headerlink" title="检测器"></a>检测器</h2><p>从信道接收到的信息必须从其载波上分离出来，也就是“解调”。在光纤通信系统中，光检测器将光波转换成电流。</p>
+<p>对于模拟信号，通信系统中各个点上信号之间的关系如下图所示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4uowuqbn0j30bg0jrmyc.jpg"></p>
+<p>由信源变换器产生的电流在图1.10（a）中画出，这就是要传输的信号。调制器在信号电流上加了一个常量的偏置电流，如图1.10（b）。再用此电流控制光载波。于是图1.10（c）所示的光载波功率波形就包含了待发送的信息。随着信号在光线中传播，信号衰减，光功率将下降，如图1.10（d）所示。检测器将光的波形转换成电的形式，如图1.10(e)所示。为了完成传输过程，还要从检测器的输出电流中滤除其常量偏置部分（如果需要还要对其进行放大）。最后，这两项功能在系统的信号处理模块中完成。图1.10（f）所示的结果就是想要得到的信息波形。</p>
+<h2 id="信宿"><a href="#信宿" class="headerlink" title="信宿"></a>信宿</h2><p>说白了信号的接收者</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/24/%E9%9B%86%E7%BA%BF%E5%99%A8%EF%BC%8C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/24/%E9%9B%86%E7%BA%BF%E5%99%A8%EF%BC%8C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">集线器，交换机和路由器的区别</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-24 09:38:57" itemprop="dateCreated datePublished" datetime="2019-05-24T09:38:57+08:00">2019-05-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/05/24/%E9%9B%86%E7%BA%BF%E5%99%A8%EF%BC%8C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB/" class="leancloud_visitors" data-flag-title="集线器，交换机和路由器的区别">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="集线器，交换机和路由器的区别"><a href="#集线器，交换机和路由器的区别" class="headerlink" title="集线器，交换机和路由器的区别"></a>集线器，交换机和路由器的区别</h1><p>今天在youtube上看到了一个关于集线器，交换机和路由器之间的区别视频，觉得比较好，记录下来</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1z0ULvg_pW8">Hub,Switch and Router Explained</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/eNSP%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/23/eNSP%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">eNSP基本命令配置</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-23 14:53:10" itemprop="dateCreated datePublished" datetime="2019-05-23T14:53:10+08:00">2019-05-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/05/23/eNSP%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE/" class="leancloud_visitors" data-flag-title="eNSP基本命令配置">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="System-View"><a href="#System-View" class="headerlink" title="System-View"></a>System-View</h3><p>在打开路由器的时候，默认的是用户视图，也就是命令行前面是&lt;&gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br></pre></td></tr></table></figure>
+
+<h3 id="interface-接口名"><a href="#interface-接口名" class="headerlink" title="interface + 接口名"></a>interface + 接口名</h3><p>这是用来配置接口的，使用这个命令之后，我们就进入到该接口可以进行配置。比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface GigabitEthernet 0/0/0</span><br></pre></td></tr></table></figure>
+<p>这样就进入到了该接口，显示为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei-GigabitEthernet0/0/0]</span><br></pre></td></tr></table></figure>
+
+<h3 id="ip-address-IP地址-子网掩码"><a href="#ip-address-IP地址-子网掩码" class="headerlink" title="ip address + IP地址 + 子网掩码"></a>ip address + IP地址 + 子网掩码</h3><p>用来给接口配置IP地址的，前提是需要进入到该接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei-GigabitEthernet0/0/0]ip address 192.168.1.100 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/7/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot; aria-label&#x3D;&quot;上一页&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot; aria-label&#x3D;&quot;下一页&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

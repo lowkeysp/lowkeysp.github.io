@@ -1,23 +1,1253 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="进入配置模式华为 1system-view  思科 1configure terminal Juniper 1configure exclusive  ISIS 协议查看ISIS的邻居状态华为 1234567display isis peer显示System Id     Interface    Circuit Id     State HoldTime   Type     PRI其中，S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路由器命令">
+<meta property="og:url" content="http://yoursite.com/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="进入配置模式华为 1system-view  思科 1configure terminal Juniper 1configure exclusive  ISIS 协议查看ISIS的邻居状态华为 1234567display isis peer显示System Id     Interface    Circuit Id     State HoldTime   Type     PRI其中，S">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-09T22:49:47.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="命令">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>路由器命令 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">路由器命令
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-10 06:49:47" itemprop="dateCreated datePublished" datetime="2020-01-10T06:49:47+08:00">2020-01-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/" class="leancloud_visitors" data-flag-title="路由器命令">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="进入配置模式"><a href="#进入配置模式" class="headerlink" title="进入配置模式"></a>进入配置模式</h1><p><strong>华为</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br></pre></td></tr></table></figure>
+
+<p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure terminal</span><br></pre></td></tr></table></figure>
+<p><strong>Juniper</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure exclusive</span><br></pre></td></tr></table></figure>
+
+<h1 id="ISIS-协议"><a href="#ISIS-协议" class="headerlink" title="ISIS 协议"></a>ISIS 协议</h1><h2 id="查看ISIS的邻居状态"><a href="#查看ISIS的邻居状态" class="headerlink" title="查看ISIS的邻居状态"></a>查看ISIS的邻居状态</h2><p><strong>华为</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">display isis peer</span><br><span class="line"></span><br><span class="line">显示</span><br><span class="line"></span><br><span class="line">System Id     Interface    Circuit Id     State HoldTime   Type     PRI</span><br><span class="line"></span><br><span class="line">其中，System Id表示的是对端的邻居的Id，Interfere是本端的端口地址，Type表示走的是Level 1还是Level 2， State就是表示邻居是Up还是Down的</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看ISIS学到的路由"><a href="#查看ISIS学到的路由" class="headerlink" title="查看ISIS学到的路由"></a>查看ISIS学到的路由</h2><p><strong>华为</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display ip routing-table protocol isis</span><br></pre></td></tr></table></figure>
+
+<h1 id="ip地址配置"><a href="#ip地址配置" class="headerlink" title="ip地址配置"></a>ip地址配置</h1><p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipv4 address ip地址/mask</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看端口配置"><a href="#查看端口配置" class="headerlink" title="查看端口配置"></a>查看端口配置</h1><p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#show running-config interface TenGigE 0/10/0/7</span><br><span class="line"></span><br><span class="line"># 如果在配置模式下查看端口配置的话，</span><br><span class="line">do show running-config interface TenGigE 0/10/0/7</span><br></pre></td></tr></table></figure>
+<h1 id="取消端口配置"><a href="#取消端口配置" class="headerlink" title="取消端口配置"></a>取消端口配置</h1><p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no + 命令</span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+<h1 id="调流量"><a href="#调流量" class="headerlink" title="调流量"></a>调流量</h1><h2 id="IPM电路迁流量需要删除静态路由"><a href="#IPM电路迁流量需要删除静态路由" class="headerlink" title="IPM电路迁流量需要删除静态路由"></a>IPM电路迁流量需要删除静态路由</h2><p><strong>华为</strong></p>
+<p>1、查看当前端口的静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;HUAWEI&gt;display current-configuration | include ip | include route-static  | include GigabitEthernet1/0/4</span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">&lt;HUAWEI&gt;display current-configuration | include ip route-static  | include GigabitEthernet1/0/4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>2、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
+<p>3、一条一条的删除静态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Undo ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 </span><br><span class="line">#不需要加后面的tag，只需要到上面这个地方就可以了</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">undo之后，记得commit，并且退出视图模式，save</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<p>1、在视图模式下，添加原来的静态路由,把之前记录下来的都再次粘上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">记得commit，并且退出视图模式，save</span><br></pre></td></tr></table></figure>
+
+<p><strong>思科</strong></p>
+<p>1、查看静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show running-config router static | include 端口号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
+<p>3、一条一条删除静态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式后</span><br><span class="line"></span><br><span class="line">router static </span><br><span class="line"></span><br><span class="line">address-family ipv4 unicast</span><br><span class="line"></span><br><span class="line">no 192.168.1.1/32 POS0/15/1/0 127.1.1.1 </span><br><span class="line"></span><br><span class="line"># 退出这一层级，再删除ipv6的，exit</span><br><span class="line"></span><br><span class="line">address-family ipv6 unicast</span><br><span class="line"></span><br><span class="line">no .........</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">之后记得commit，end退出</span><br></pre></td></tr></table></figure>
+
+
+<p>调回流量：<br>1、进入配置模式，添加原来的静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router static</span><br><span class="line"></span><br><span class="line">address-family ipv4 unicast</span><br><span class="line"></span><br><span class="line">192.168.1.1/32 POS0/15/1/0 127.1.1.1 tag...</span><br><span class="line"></span><br><span class="line">#退出这一层级，再添加ipv6的</span><br><span class="line">，</span><br><span class="line">address-family ipv4 unicast</span><br><span class="line">...ipv6静态地址......</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">commit 之后 end</span><br></pre></td></tr></table></figure>
+
+<p><strong>Juniper</strong></p>
+<p>1、查看静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">会显示：</span><br><span class="line"></span><br><span class="line">192.168.1.1/32  * ...</span><br><span class="line">               &gt; to 127.1.1.1 via et-2/0/0.0</span><br><span class="line"></span><br><span class="line"># 查看与et-2/0/0端口相关的IP地址有哪些，比如这个127.1.1.1,那么这个IP地址就是这个端口相关的静态路由IP地址，IPV6地址也有</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、查看与静态路由相关的IP地址的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show configuration routing-options static | display set | match 127.1.1.1</span><br><span class="line"></span><br><span class="line">会显示：</span><br><span class="line"></span><br><span class="line">&gt;set routing-options static route 222.221.220.1/32 next-hop 127.1.1.1</span><br><span class="line">&gt;set routing-options static route 111.11.111.1/32 next-hop 127.1.1.1</span><br><span class="line"></span><br><span class="line">通常也是两个IPv4地址，两个IPv6地址</span><br></pre></td></tr></table></figure>
+
+<p>3、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
+<p>4、进入配置模式,删除与静态路由相关的配置，（将原有配置的set改成delete）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete routing-options static route 222.221.220.1/32 next-hop 127.1.1.1</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>5、保存并退出配置模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+
+<p>6、查看静态路由是否已删</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<p>1、进入配置模式，恢复静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set routing-options static route 111.11.111.1/32 next-hop 127.1.1.1</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>2、保存并退出配置模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+<p>3、查看静态路由是否已恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="骨干电路迁流量需要修改metric值"><a href="#骨干电路迁流量需要修改metric值" class="headerlink" title="骨干电路迁流量需要修改metric值"></a>骨干电路迁流量需要修改metric值</h2><p><strong>华为</strong><br>1、查看端口配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 端口号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、修改metric值，通常是扩大10倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">isis cost 原来的metric值*10  level-2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>调回流量</p>
+<p>1、查看端口配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 端口号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、 查看IP网管的历史配置，看之前的metric值是多少，或者看反馈里值班人员写的调之前是多少</p>
+<p>3、修改metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">isis cost xxx  level-2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>思科</strong></p>
+<p>CRS设备：</p>
+<p>1、查看原来端口的ISIS-metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show running-config router isis | begin */*/*/*</span><br></pre></td></tr></table></figure>
+
+<p>2、把相关的配置复制粘贴下来，保存成txt文件</p>
+<p>3、调整ISIS-metric值扩大10倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router isis 进程号</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">metric XXXX level 2</span><br></pre></td></tr></table></figure>
+
+<p>4、确认检查修改后的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show configuration</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>5、提交配置更改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p>GSR设备：</p>
+<p>1、查看原端口的ISIS-metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show running-config interface poS */*</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、把相关的配置复制粘贴下来，保存成txt文件</p>
+<p>3、调整ISIS-metric值扩大10倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">configure terminal</span><br><span class="line"></span><br><span class="line">interface pos */*</span><br><span class="line"></span><br><span class="line">isis metric XXXX level-2</span><br></pre></td></tr></table></figure>
+<p>4、保存配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write  memory</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<p>步骤和上面是一样的，只是改的数字不一样罢了</p>
+<p><strong>Juniper</strong><br>1、查看原端口的ISIS-metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration protocols isis interface</span><br></pre></td></tr></table></figure>
+<p>2、调整ISIS-metric值到另一个值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在配置模式下，</span><br><span class="line"></span><br><span class="line">set protocols isis interface so-0/1/0.0 level 2 metric XXXX</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3、确认检查修改后的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration</span><br></pre></td></tr></table></figure>
+<p>4、提交配置修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+
+
+<p>调回流量，与上面步骤一样</p>
+<h2 id="Bundle调流量"><a href="#Bundle调流量" class="headerlink" title="Bundle调流量"></a>Bundle调流量</h2><p><strong>华为</strong></p>
+<p>1、先查看Bundle口下的配置模式,查看需要解绑的那个物理端口,看是否在这个Bundle口下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface Bundle口</span><br></pre></td></tr></table></figure>
+
+<p>2、查看需要解绑的那个物理端口的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 物理端口号</span><br></pre></td></tr></table></figure>
+
+<p>3、复制粘贴端口下面的配置</p>
+<p>4、</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入视图模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">undo 那个加bundle的命令</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>调回流量:<br>也就是加bundle</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入视图配置</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">把undo去掉，使用undo后面的命令</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>思科</strong><br>1、查看并记录接口配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show running-config interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">description To  XXXXXXX::To-Bundle-TenGigE11</span><br><span class="line"> bundle id 11 mode on</span><br></pre></td></tr></table></figure>
+<p>2、去除接口bundle配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">no bundle id 11</span><br><span class="line"></span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">bundle id 11 mode on</span><br><span class="line"></span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p><strong>Juniper</strong></p>
+<p>1、查看端口原有配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show configuration interfaces xe-15/0/1 gigether-options | display set</span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">set interfaces xe-15/0/1 gigether-options 802.3ad ae0（</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、解除bundle</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">//关闭端口</span><br><span class="line">set interfaces xe-15/0/1 disable</span><br><span class="line"></span><br><span class="line">//解除bundle</span><br><span class="line">delete interfaces xe-15/0/1 gigether-options 802.3ad ae0</span><br><span class="line"></span><br><span class="line">//保存配置并退出配置模式</span><br><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//进入配置模式</span><br><span class="line">configure exclusive</span><br><span class="line"></span><br><span class="line">//恢复bundle，将删除bundle时的配置粘贴过来</span><br><span class="line">set interfaces xe-15/0/1 gigether-options 802.3ad ae0</span><br><span class="line"></span><br><span class="line">//打开端口</span><br><span class="line">delete interfaces xe-15/0/1 disable</span><br><span class="line"></span><br><span class="line">//保存配置并退出配置模式</span><br><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
+          
+            <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag"># 路由器</a>
+          
+            <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"># 命令</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/11/anaconda%E5%AE%89%E8%A3%85/" rel="next" title="anaconda安装">
+                <i class="fa fa-chevron-left"></i> anaconda安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/11/Anaconda%E4%B8%8Bjupyter-notebook%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E5%AE%89%E8%A3%85xgboost/" rel="prev" title="Anaconda下jupyter notebook使用不同环境及安装xgboost">
+                Anaconda下jupyter notebook使用不同环境及安装xgboost <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">进入配置模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ISIS-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text">ISIS 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BISIS%E7%9A%84%E9%82%BB%E5%B1%85%E7%8A%B6%E6%80%81"><span class="nav-number">2.1.</span> <span class="nav-text">查看ISIS的邻居状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BISIS%E5%AD%A6%E5%88%B0%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="nav-number">2.2.</span> <span class="nav-text">查看ISIS学到的路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">ip地址配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">查看端口配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%96%E6%B6%88%E7%AB%AF%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">取消端口配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E6%B5%81%E9%87%8F"><span class="nav-number">6.</span> <span class="nav-text">调流量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPM%E7%94%B5%E8%B7%AF%E8%BF%81%E6%B5%81%E9%87%8F%E9%9C%80%E8%A6%81%E5%88%A0%E9%99%A4%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-number">6.1.</span> <span class="nav-text">IPM电路迁流量需要删除静态路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%A8%E5%B9%B2%E7%94%B5%E8%B7%AF%E8%BF%81%E6%B5%81%E9%87%8F%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9metric%E5%80%BC"><span class="nav-number">6.2.</span> <span class="nav-text">骨干电路迁流量需要修改metric值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bundle%E8%B0%83%E6%B5%81%E9%87%8F"><span class="nav-number">6.3.</span> <span class="nav-text">Bundle调流量</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

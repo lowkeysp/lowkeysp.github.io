@@ -1,23 +1,1202 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OTN原理">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/OTN%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="OTN产生的背景OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52u08t67xj30r70jdtgr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g53pfg8gg6j30ny0gaqcc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g53zk8n3iaj30o50gzt9y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g53zps8e9vj30nt0gpadu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g54utb54v7j30qs0f440u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g54v31z2vwj30of0gkq4z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g54x9nnedaj30ow0dowf5.jpg">
+<meta property="article:published_time" content="2019-07-16T01:25:49.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="光纤">
+<meta property="article:tag" content="OTN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/OTN%E5%8E%9F%E7%90%86/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>OTN原理 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/OTN%E5%8E%9F%E7%90%86/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OTN原理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-16 09:25:49" itemprop="dateCreated datePublished" datetime="2019-07-16T09:25:49+08:00">2019-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/16/OTN%E5%8E%9F%E7%90%86/" class="leancloud_visitors" data-flag-title="OTN原理">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h2 id="OTN产生的背景"><a href="#OTN产生的背景" class="headerlink" title="OTN产生的背景"></a>OTN产生的背景</h2><p>OTN（光传送网，Optical Transport Network）出现之前，主要采用WDM技术实现大容量的传送，但WDM只是物理层面的标准（只针对系统中传送信号的波段、频率间隔等做了规定，而对信号的帧结构没有统一的标准 ），这使得WDM系统中同时传送多种体制的信号（如STM-64，10GbE等），这些信号的性能、帧结构、开销等各不相同，不能方便地进行统一的调度、运营、管理和维护。</p>
+<h2 id="OTN的技术特点"><a href="#OTN的技术特点" class="headerlink" title="OTN的技术特点"></a>OTN的技术特点</h2><ul>
+<li><p>OTN从其功能上看，在子网内以全光形式传输，而在子网的边界处采用光-电-光转换，各个子网可以通过3R再生器联接，从而构成一个大的光网络。</p>
+</li>
+<li><p>光信号的处理可以基于单个波长，或基于一个波分复用组。在光域内可以实现业务信号的传递、复用、路由选择，支持多种上层业务或协议。</p>
+</li>
+<li><p>在OTN网络的边缘，不同体制的信号被统一封装进入开销丰富的OTN的帧结构中去，并以此为基础，实现基于OTN体制的全网统一运营、管理、维护，便于故障定位，能够提供很好的网络生存性。</p>
+</li>
+<li><p>OTN可以解决传统WDM网络波长&#x2F;子波长业务调度能力弱、组网能力弱（以点到点连接为主的组网方式）、保护能力弱等问题。</p>
+</li>
+<li><p>OTN解决了SDH基于VC-12&#x2F;VC4的交叉颗粒偏小、调度较复杂、不适应大颗粒业务传送需求的问题。</p>
+</li>
+</ul>
+<h2 id="OTN网络结构"><a href="#OTN网络结构" class="headerlink" title="OTN网络结构"></a>OTN网络结构</h2><p>OTN的网络分成可以分为光通道层（OCh，Optical Channel ），光复用段层（OMS，Optical Multiplex Section）和光传送段层（OTS，Optical Transmission Section）三个层面。另外，为了解决客户信号的数字监视问题，光通道层又分为光通路净荷单元（OPU），光通道数据单元（ODUk）和光通道传送单元（OTUk）三个子层，类似于SDH技术的段层和通道层。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g52ty37fhlj30o50dx75a.jpg"></p>
+<p>OTN层次结构和信息流之间的关系如下图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g52u08t67xj30r70jdtgr.jpg"></p>
+<p>其中，client是光层。OH是overhead 开销的意思。</p>
+<ul>
+<li>OPU（Optical Channel Payload Unit）：光通道净荷单元，提供客户信号的映射功能；</li>
+<li>ODU（Optical Channel Data Unit）：光通道数据单元，提供客户信号的数字包封、OTN的保护倒换、提供踪迹监测、通用通信处理等功能；</li>
+<li>OTU（Optical Channel Transport Unit）：光通道传输单元、提供OTN成帧、FEC处理、通信处理等功能。波分设备中的发送OTU单板完成了信号从客户接口到OCC的变化；波分设备中的接收OTU单板完成了信号从OCC到客户接口的变化。 </li>
+<li>OCC（Optical Channel Carrier）：光通路载波  </li>
+<li>OSC（Optical Supervisory Channel）：光监控信道</li>
+<li>OPS（Optical Physical Section）：光物理段</li>
+<li>OOS（OTM Overhead Signal）：OTM开销信号</li>
+<li>OTM-n.m：n代表系统波长数目，m代表速率级别，m可以是1，2，3，12，23，123。比如23代表一个合路信号当中有10G和40G混和传输的情况。</li>
+<li>OTM-nr.m：中的r代表简化功能。这一接口一般用于没有光监控的系统</li>
+<li>OTM-0.m：代表的是黑白光口，即1310nm或者1550nm的单路光信号。这种接口代表客户侧支持OTN帧结构的信号。</li>
+</ul>
+<h2 id="OTN的映射和复用关系"><a href="#OTN的映射和复用关系" class="headerlink" title="OTN的映射和复用关系"></a>OTN的映射和复用关系</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53pfg8gg6j30ny0gaqcc.jpg"></p>
+<p>用户信号映射到低阶OPU，标识为OPU（L）；OPU（L）信号映射到相关的低阶ODU，标识为ODU（L）；ODU（L）信号映射到相关的OTU[V]信号或者ODTU信号。ODTU信号复用到ODTU组（ODTUG）。ODTUG信号映射到高阶OPU，标识为OPU（H）。OPU（H）信号映射到相关的高阶ODU，标识为ODU（H）。ODU（H）信号映射到相关的OTU[V]。</p>
+<p>OPU（L）和OPU（H）具有相同的信息结构，但承载不同的用户信号。ODU（L）和ODU（H）具有相同的信息结构，但承载不同的用户信号。</p>
+<p>同SDH类似，用户信号映射到OPUk，一般采用异步映射方法，需要进行速率调整，包括正速率调整和负速率调整。对于复用，OTN采用字节间插式时分复用与波分复用相结合的方法，通过多次时分复用形成OCh，再通过波分复用形成OTM。</p>
+<p>对于ODUk的时分复用，4个ODU1信号时分复用到1个ODTUG2，ODTUG2映射到OPU2。ODU2和ODU1的混合信号可以时分复用到ODTUG3，ODTUG3映射到OPU3。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53zk8n3iaj30o50gzt9y.jpg"></p>
+<p>上图表示将4个ODU1信号复用到OPU2信号。1个ODU1信号使用帧定位开销进行扩展，并且通过判决开销（JOH）异步映射光通路数据支路单元1到2（ODTU12）。4个ODTU12信号时分复用到光通路数据单元支路单元群2（ODTUG2），之后映射到OPU2。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g53zps8e9vj30nt0gpadu.jpg"></p>
+<p>上面这个图可以更直观的看清楚，客户信号可以是STM-16，ATM，GFP等，组建成一个OPU1，然后再加上一个ODU1开销，就组成了一个ODU1，然后，我们可以将4个ODU1信号复用到一个OPU2，加上一个OPU2开销，之后，再加上一个ODU2开销，就变成了一个ODU2，之后再加上一个OUT2 FEC，就组成了一个OTU2。</p>
+<p>下面是另一种ODUk时分复用</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g54utb54v7j30qs0f440u.jpg"></p>
+<p>表示将最多16个ODU1信号和&#x2F;或最多4个ODU2信号复用到OPU3信号中。ODU1信号使用帧定位开销进行扩展，并且通过判决开销（JOH）异步映射光通路数据支路单元1到3（ODTU13）。ODU2信号使用帧定位开销进行扩展，并且通过判决开销（JOH）异步映射光通路数据支路单元2到3（ODTU23）。在信号映射到OPU3后，“x”个ODTU23（0≤x≤4）和“16-4x”个ODTU13信号时分复用到光通路数据单元支路单元群3（ODTUG3）。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g54v31z2vwj30of0gkq4z.jpg"></p>
+<p>OTU[V]电信号被转换到光通路信号（标识为OCh和OChr）或者OTLk.n。OCh&#x2F;OChr信号被调制到光通路载波，标识为“OCC和OCCr”。OCC&#x2F;OCCr信号复用到光载波群，标识为OCG-n.m或OCG-nr.m。OCG-n.m信号加上光复用段开销组成OMSn。OMSn信号加上光传送段开销组成OTSn。OTSn信号出现在OTM-n.m接口。OCG-nr.m信号映射到OPSn。OPSn信号出现在OTM-nr.m接口。单个OCCr信号映射到OPS0。OPS0信号出现在OTM-0.m接口。一组n路OPS0信号出现在OTM-0.mvn接口。</p>
+<p>目前为IrDI定义了三种简化功能的OTM接口OTM-nr.m、OTM-0.m和OTM-0.mvn：</p>
+<ul>
+<li>OTM-nr.m支持多波长光通路，信号包含n个OCC，m&#x3D;1,2,3,4,12,23,34,123,1234，不需要OSC和OOS。</li>
+<li>OTM-0.m支持单波长光通路，m&#x3D;1,2,3,4，不需要OSC和OOS。</li>
+<li>OTM-0.mvn支持一个多通道光信号。目前定义了2种OTM-0.mvn接口信号：OTM-0.3v4（承载OTU3）和OTM-0.4v4（承载OTU4）。每种承载包含一个OTUk[V]信号分发到四个光通道上的四路光信号。不需要OSC和OOS。</li>
+</ul>
+<p>除了上面的三种简化功能的OTM接口，还定义了一种全功能的OTM接口。OTM-n.m：</p>
+<ul>
+<li>OTM-n.m支持单个或多个光区段内的n个光通路，接口不要求3R再生。信号包含n个OCC，m&#x3D;1,2,3,4,12,23,34,123,1234。</li>
+</ul>
+<h2 id="OTN的帧结构"><a href="#OTN的帧结构" class="headerlink" title="OTN的帧结构"></a>OTN的帧结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g54x9nnedaj30ow0dowf5.jpg"></p>
+<ul>
+<li>帧定界开销用于指示一个帧的开始；</li>
+<li>OTUk开销产生于电光转换之前，用于监控整个光通道的传输性能。</li>
+<li>ODUk是基本的电交叉颗粒，ODUk部分的开销用于监控交叉颗粒的传输性能；</li>
+<li>OPUk用来指示净荷中的业务类型以及进行简单的正负字节调整。</li>
+<li>FEC部分用来对信息净荷部分进行纠错。</li>
+</ul>
+<p>OTU帧根据速率等级分为OTU1、OTU2、OTU3、OTU4。OTUk（k&#x3D;1、2、3、4）帧由OTUk开销、ODUk帧和OTUk FEC三部分组成，总共4行4080列，4×4080&#x3D;16320字节。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%85%89%E7%BA%A4/" rel="tag"># 光纤</a>
+          
+            <a href="/tags/OTN/" rel="tag"># OTN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/15/WDM%E5%8E%9F%E7%90%86/" rel="next" title="WDM原理">
+                <i class="fa fa-chevron-left"></i> WDM原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/22/ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85anaconda/" rel="prev" title="ubuntu下安装anaconda">
+                ubuntu下安装anaconda <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E4%BA%A7%E7%94%9F%E7%9A%84%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">OTN产生的背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%9A%84%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">OTN的技术特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">OTN网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%9A%84%E6%98%A0%E5%B0%84%E5%92%8C%E5%A4%8D%E7%94%A8%E5%85%B3%E7%B3%BB"><span class="nav-number">4.</span> <span class="nav-text">OTN的映射和复用关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%9A%84%E5%B8%A7%E7%BB%93%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text">OTN的帧结构</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

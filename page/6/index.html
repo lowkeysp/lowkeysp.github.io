@@ -1,23 +1,3389 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="lowkeysp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lowkeysp&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="lowkeysp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/page/6/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/ISIS-BGP%E9%85%8D%E7%BD%AE%E4%BD%9C%E4%B8%9A/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/14/ISIS-BGP%E9%85%8D%E7%BD%AE%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">ISIS-BGP配置作业</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-14 11:15:03" itemprop="dateCreated datePublished" datetime="2020-02-14T11:15:03+08:00">2020-02-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/14/ISIS-BGP%E9%85%8D%E7%BD%AE%E4%BD%9C%E4%B8%9A/" class="leancloud_visitors" data-flag-title="ISIS-BGP配置作业">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="网络拓扑图"><a href="#网络拓扑图" class="headerlink" title="网络拓扑图"></a>网络拓扑图</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gbvrbro5nfj317l0liagt.jpg" alt="捕获.PNG"></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="分配地址"><a href="#分配地址" class="headerlink" title="分配地址"></a>分配地址</h2><p>在打开路由器的时候，默认的是用户视图，也就是命令行前面是&lt;&gt;，这时候如果要进入系统视图的话，就需要使用system-view,这样就进入到了系统视图，前面的命令行前面变成了[]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br></pre></td></tr></table></figure>
+
+<p>进入到每个端口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface GigabitEthernet 0/0/0</span><br></pre></td></tr></table></figure>
+
+<p>为每个端口配置ip地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip address + IP地址 + 子网掩码</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]ip address 192.168.1.100 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置ISIS"><a href="#配置ISIS" class="headerlink" title="配置ISIS"></a>配置ISIS</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">isis 1 # 配置ISIS进程，进程使用数字1</span><br><span class="line">is-level level-2  #配置系统所属的区域为Level-2</span><br><span class="line">cost-style wide   #配置ISIS开销值的类型为wide格式</span><br><span class="line">network-entity 86.4134.0100.0000.0001.00 # 配置ISIS的NET值：86.AS号.loopback地址翻译.00</span><br><span class="line">circuit-cost 100000 level-2  #配置ISIS路由的接口缺省开销值为100000</span><br><span class="line">is-name PE1 #本地路由器上ISIS系统配置动态主机名</span><br><span class="line">maximum load-balancing 32  #配置ISIS负载分担路径最大条数为32条</span><br><span class="line"></span><br><span class="line">然后在端口下配置：</span><br><span class="line">进入端口</span><br><span class="line">interface + 接口号</span><br><span class="line">isis enable 1 #开启isis进程</span><br><span class="line">isis circuit-type p2p # 配置为p2p模式</span><br><span class="line">isis circuit-level level-2</span><br><span class="line">isis cost 1000 level-2 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置BGP"><a href="#配置BGP" class="headerlink" title="配置BGP"></a>配置BGP</h2><p>CE1&amp;CE2的AS号为65530</p>
+<p>PE1~PE4的AS号为4809</p>
+<p>CE3&amp;CE4的AS号为65531</p>
+<p>因为是通过loopback地址建立邻居，因此首先需要loopback地址可以ping通，使用isis协议建立loopback地址之间的连接即可</p>
+<p>IBGP配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure>
+
+<p>EBGP配置</p>
+<p>首先EBGP路由器之间需要使用静态路由建立连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 对端的loopback地址 mask掩码 出去的端口  出去端口的对端ip地址</span><br><span class="line">比如：</span><br><span class="line">ip route-static 115.168.1.1 255.255.255.255 Ethernet 0/0/0 192.168.1.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bgp 4809  #定位路由器所在的AS号</span><br><span class="line">router-id loopback地址     </span><br><span class="line">peer 对端的loopback地址  as-number 对端的AS号</span><br><span class="line">peer 对端的loopback地址  connect-interface LoopBack 0 #如果是使用loopback地址建立bgp邻居的话，则这一条命令是必须的</span><br></pre></td></tr></table></figure>
+<p>最后要注意，要比IBGP多一个修改跳数，因此IBGP默认跳数是255，但是EBGP默认跳数是1，需要改成大于1的数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer 对端的loopback地址 ebgp-max-hop 2</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/BGP%E5%AD%A6%E4%B9%A0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/10/BGP%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">BGP学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-10 22:07:37" itemprop="dateCreated datePublished" datetime="2020-02-10T22:07:37+08:00">2020-02-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/10/BGP%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="BGP学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="自制系统（Autonomous-System，AS）"><a href="#自制系统（Autonomous-System，AS）" class="headerlink" title="自制系统（Autonomous System，AS）"></a>自制系统（Autonomous System，AS）</h1><p>AS号范围：1-65535，其中，64512-65535属于私有AS号</p>
+<h1 id="BGP相关特性"><a href="#BGP相关特性" class="headerlink" title="BGP相关特性"></a>BGP相关特性</h1><ul>
+<li>BGP报文是基于TCP端口号179。</li>
+<li>是单播建立邻居（手工指邻居）。没有组播和广播<blockquote>
+<p>注：由于BGP报文是基于TCP端口号179的，也就是BGP协议是一个三层之上的协议，说明BGP的邻居建立是不需要直连的，两个BGP对等体之间只要能TCP协议可达，且179端口号没有被占用的话，则就可以建立邻居. 一个运行了BGP协议的路由器也就是一直在监听这个179端口号</p>
+</blockquote>
+</li>
+<li>支持VLSM,CIDR</li>
+<li>以AS为单位的路径矢量属性的路由协议</li>
+<li>会话开始的时候会发送整张路由表,以后会触发更新[触发式增量更新]</li>
+<li>有丰富的路径属性,简单的路由算法</li>
+</ul>
+<h1 id="BGP基本配置及邻居建立"><a href="#BGP基本配置及邻居建立" class="headerlink" title="BGP基本配置及邻居建立"></a>BGP基本配置及邻居建立</h1><p>BGP有两种类型的邻居关系: EBGP(不同AS之间的邻居关系)和IBGP(一个AS内的邻居关系)</p>
+<h2 id="EBGP"><a href="#EBGP" class="headerlink" title="EBGP"></a>EBGP</h2><p>假设有两台路由器分别属于两个AS, 路由器1在AS-100中,路由器2在AS-101中, 这两个路由器相连的端口地址分别是12.1.1.1(路由器1)和 12.1.1.2(路由器2)(12.1.1.0&#x2F;24)</p>
+<p>路由器1配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">router bgp 100 #  router bgp AS号 指定这个路由器所在的AS号</span><br><span class="line"></span><br><span class="line">bgp router-id id号   # 指定router-id,通常是loopback地址</span><br><span class="line"></span><br><span class="line">neighbor 12.1.1.2 remote-as 101 # neighbor 对端地址 remote-as AS号   指定邻居, 还得标注对等体所在的AS号,从而能知道是使用EBGP还是IBGP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>路由器2使用同样的配置</p>
+<p>检验BGP是否已经起来,使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show ip bgp summary</span><br><span class="line"></span><br><span class="line"># 打印出来后,有一个TblVer列,这列说明当路由表发生变化时,则版本会加1</span><br></pre></td></tr></table></figure>
+<p>还可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tcp brief #查看179端口 TCP是否已经建立</span><br></pre></td></tr></table></figure>
+
+
+<p>如果使用loopback地址建立邻居的时候,需要特别注意的是,要设置<strong>多跳特性</strong>.因为默认情况下,EBGP的跳数为1,(而IBGP的默认跳数是255跳)因此,需要设置跳数大于1.比如设置成2,如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">neighbor 对端loopback地址 ebgp-muiltihop 2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常，设置成2，而且不推荐使用比2大的数。因为GTSM(通用TTL安全机制)，如果设置成2的话，则肯定是对端<strong>直连</strong>路由器的loopback地址，而如果设置成比较大的数，比如255，则有可能黑客会冒充路由器和你连接，黑客假如在250跳这里等着你，则这样就不安全，而如果设置成2的话，则就能保证只能直连的才能建立连接。</p>
+</blockquote>
+<p>而且如果使用loopback地址建立邻居的话,还需要更新源，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">neighbor 新的地址  remote-as AS号</span><br><span class="line">neighbor 新的地址 update-source 端口标识(如 loopback 1) #更新源，如果不更新源的话，则会使用端口地址和对方的loopback地址去建立tcp连接，这显然是不对的，而且也是建立不成功的。所以这条命令就是说我用我的loopback地址去和对方建立邻居关系</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="IBGP"><a href="#IBGP" class="headerlink" title="IBGP"></a>IBGP</h2><p>IBGP建立不需要直连,只要两端的TCP 179端口 通就可以</p>
+<p>假设在AS-101中有两台路由器,一台是路由器2(上面的路由器2),一台是路由器3,一台是路由器5.其中,路由器2和路由器5没有直连,而是通过路由器3连接.</p>
+<p>路由器2和路由器3直连(23.1.1.0&#x2F;24):</p>
+<blockquote>
+<p>路由器2的地址:23.1.1.2 </p>
+<p>路由器3的地址:23.1.1.3</p>
+</blockquote>
+<p>路由器3和路由器5直连(35.1.1.0&#x2F;24):</p>
+<blockquote>
+<p>路由器3的地址:35.1.1.3</p>
+<p>路由器5的地址:35.1.1.5</p>
+</blockquote>
+<p>因此,如果路由器2和路由器5之间要建立IBGP的话,前提条件是要保障路由器2和路由器5是三层可达的.可以使用动态路由或者静态路由保证可达.</p>
+<p>如果是静态路由的话,在路由器2上配置一条静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route 35.1.1.0 255.255.255.0 23.1.1.3</span><br></pre></td></tr></table></figure>
+<p>路由器5上配置静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route 23.1.1.0 255.255.255.0 35.1.1.3</span><br></pre></td></tr></table></figure>
+
+<p>三层可达之后,就可以使用上面EBGP的命令去建立邻居关系</p>
+<p>更新邻居建立的端口地址可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">neighbor 新的地址  remote-as AS号</span><br><span class="line">neighbor 新的地址 update-source 端口标识(如 loopback 1) </span><br><span class="line"># 两个命令一起使用,先指定对端的as号,然后再两个对等体地址更新</span><br></pre></td></tr></table></figure>
+<h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1:"></a>问题1:</h2><blockquote>
+<p>问题:RIP协议是使用的是UDP的520端口,而BGP协议使用的是TCP的172端口,那么,如果使用RIP协议的单播模式,能否可以实现非直连,像IBGP一样</p>
+<p>答:不可以.因为虽然RIP也得需要三层可达,使用UDP协议.但是 RIP的跳数只能是1跳.因此,只能直连,而IBGP的默认跳数是255跳.EBGP的默认跳数是1跳.但是,BGP的跳数是可以修改的,但是RIP的跳数是不能修改的.因此,RIP协议只能直连</p>
+</blockquote>
+<h1 id="B站视频的BGP学习"><a href="#B站视频的BGP学习" class="headerlink" title="B站视频的BGP学习"></a>B站视频的BGP学习</h1><p>链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av49497733?p=1">https://www.bilibili.com/video/av49497733?p=1</a></p>
+<p>该教程使用的是华为的路由器</p>
+<h2 id="BGP的EBGP邻居"><a href="#BGP的EBGP邻居" class="headerlink" title="BGP的EBGP邻居"></a>BGP的EBGP邻居</h2><p>构建BGP邻居的命令在上面已经给出了，这里不再重复</p>
+<p>当你使用<code>display bgp peer</code>查看邻居关系时，解释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]display bgp peer</span><br><span class="line"></span><br><span class="line"> BGP local router ID : 115.168.1.1</span><br><span class="line"> Local AS number : 65530</span><br><span class="line"> Total number of peers : 2		  Peers in established state : 2</span><br><span class="line"></span><br><span class="line">  Peer            V          AS  MsgRcvd  MsgSent  OutQ  Up/Down       State PrefRcv</span><br><span class="line"></span><br><span class="line">  59.43.1.1       4        4809       13       13     0 00:11:35 Established     0</span><br><span class="line">  115.168.1.2     4       65530       13       14     0 00:11:35 Established     0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  其中，</p>
+<ul>
+<li>MsgRcvd表示接受的报文</li>
+<li>MsgSent表示发送的报文</li>
+<li>OutQ表示出去的队列，如果链路很拥塞的话，则这个队列就不是0了</li>
+<li>PrefRcv表示接受到BGP peer的路由条目数</li>
+</ul>
+<p>  还可以通过<code>display bgp peer verbose</code>查看更详细的信息</p>
+<p>  在两个AS之间是不能运行IGP的，因此需要<strong>静态路由</strong></p>
+<h2 id="BGP的IBGP邻居和路由"><a href="#BGP的IBGP邻居和路由" class="headerlink" title="BGP的IBGP邻居和路由"></a>BGP的IBGP邻居和路由</h2><ul>
+<li>传输协议：TCP，端口号是179</li>
+<li>无需周期性更新</li>
+<li>路由更新：只发送增量路由</li>
+<li>周期性发送KeepAlive 报文检测TCP的连通性</li>
+</ul>
+<p>Loopback地址接口无法关闭，只要设备开启，则loopback接口就会开启</p>
+<p>BGP路由产生的方式</p>
+<p>1）network 方式</p>
+<p>需要在BGP进程下进行配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bgp AS号</span><br><span class="line">network IP地址 子网掩码</span><br></pre></td></tr></table></figure>
+<p>该命令表示该设备上如果存在该IP地址的路由（通过IGP或者直连路由产生），则使用该命令可以产生该IP地址的BGP路由</p>
+<p>通过这种方式，就进入到了BGP路由表中。可以通过<code>display bgp routing-table</code>查看。（注：BGP Routing-Table只是BGP的路由表，并不代表最佳路由，比如去一个目的地会有多个路径，它会都放在这个BGP路由表中，真正的BGP最佳路由可以使用 <code>display ip routing-table protocol bgp</code>查看）。</p>
+<p>使用这种方式引入路由的起源属性是IGP</p>
+<p>2）引入路由（import-route）方式</p>
+<p>通过<code>import-route</code>命令可以把其他协议学习到的路由引入BGP路由中。<br><code>import-route</code>后面可以是不同的协议，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">direct  Connected routes</span><br><span class="line">isis    Intermediate System to Intermediate System (IS-IS) routes</span><br><span class="line">ospf    Open Shortest Path First (OSPF) routes</span><br><span class="line">rip     Routing Information Protocol (RIP) routes</span><br><span class="line">static  Static routes</span><br><span class="line">unr     User network routes</span><br></pre></td></tr></table></figure>
+<p>使用这种方式产生路由的起源属性是incomplete。</p>
+<p>3）聚合路由（汇总路由）</p>
+<p>使用这种方式引入路由的起源属性是IGP</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gby3ofyl6xj30ih0bq40z.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>Adj-RIB-In :对等体宣告给本地speaker的未处理的路由信息库</li>
+<li>Adj-RIB-Out ：本地Speaker宣告给指定对等体的路由信息库</li>
+</ul>
+<p>从图中可以看出，从对等体传来路由信息后，首先会经过一个输入策略引擎，进行一个过滤，也就是需要哪些，丢弃哪些，然后过滤后的会进入到BGP路由表中（Loc-RIB），BGP路由表会将最佳路由放入到IP路由表中，还会把BGP路由传给输出策略引擎，进行过滤，需要将哪些路由传出去，哪些不传，然后传给对等体。</p>
+<h2 id="BGP报文类型"><a href="#BGP报文类型" class="headerlink" title="BGP报文类型"></a>BGP报文类型</h2><p>(复制之前的BGP协议博客)</p>
+<p>BGP的运行是通过消息驱动的，共有Open、Update、Notification、Keepalive和Route-Refresh等5种消息类型。</p>
+<ul>
+<li><p>Open消息：是TCP连接建立后发送的第一个消息，用于建立BGP对等体之间的连接关系。对等体在接收到Open消息并协商成功后，将发送Keepalive消息确认并保持连接的有效性。确认后，对等体间可以进行Update、Notification、Keepalive和Route-Refresh消息的交换。</p>
+</li>
+<li><p>Update消息：用于在对等体之间交换路由信息。Update消息可以发布多条属性相同的可达路由信息，也可以撤销多条不可达路由信息。</p>
+<blockquote>
+<ul>
+<li>一条Update消息可以发布多条具有相同路由属性的可达路由，这些路由可共享一组路由属性。所有包含在一个给定的Update消息里的路由属性适用于该Update消息中的NLRI（Network Layer Reachability Information）字段里的所有目的地（用IP前缀表示）</li>
+<li>一条Update消息可以撤销多条不可达路由。每一个路由通过目的地（用IP前缀表示），清楚的定义了BGP Speaker之间先前通告过的路由。</li>
+<li>一条Update消息可以只用于撤销路由，这样就不需要包括路径属性或者NLRI。相反，也可以只用于通告可达路由，就不需要携带撤销路由信息了。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>Notification消息：当BGP检测到错误状态时，就向对等体发出Notification消息，之后BGP连接会立即中断</p>
+</li>
+<li><p>Keepalive消息：BGP会周期性的向对等体发出Keepalive消息，用来保持连接的有效性。</p>
+</li>
+<li><p>Route-Refresh消息：Route-Refresh消息用来通知对等体自己支持路由刷新能力（Route-Refresh capability）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">refresh  bgp all import / export</span><br><span class="line"></span><br><span class="line"># export Trigger outbound soft reconfiguration 该参数是将自己的路由策略发送给对等体，会发出update报文</span><br><span class="line"># import Trigger inbound soft reconfiguration 该参数是向对等体发出去route-Refresh报文，请求对等体将路由策略发给自己</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>在所有BGP交换机使能Route-Refresh能力的情况下，如果BGP的入口路由策略发生了变化，本地BGP交换机会向对等体发布Route-Refresh消息，收到此消息的对等体会将其路由信息重新发给本地BGP交换机。这样，可以在不中断BGP连接的情况下，对BGP路由表进行动态刷新，并应用新的路由策略。</p>
+<h3 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gbzhy4yprgj30h80b3ad9.jpg" alt="捕获.PNG"></p>
+<p>IDLE状态的原因：</p>
+<ol>
+<li><p>没有建立TCP连接。</p>
+</li>
+<li><p>EBGP通过loopback地址建立邻居时，没有修改EBGP-MAX-HOP大于1</p>
+</li>
+<li><p>没有到达对端的路由</p>
+</li>
+<li><p>在地址族中没有激活邻居，举例，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ipv4-family unicast</span><br><span class="line">  undo synchronization</span><br><span class="line">  undo peer 22.1.1.1 enable</span><br></pre></td></tr></table></figure>
+<p>上述说明了对端邻居22.1.1.1没有激活。默认情况下，只有IPv4单播协议默认激活邻居，其他协议默认不激活邻居（如Ipv6）</p>
+</li>
+<li><p>管理性的关闭了邻居 Idle（Admin）。如使用<code>peer 22.1.1.1 ignore</code>关闭邻居</p>
+</li>
+</ol>
+<h2 id="BGP路由通告原则"><a href="#BGP路由通告原则" class="headerlink" title="BGP路由通告原则"></a>BGP路由通告原则</h2><p>建立连接时，BGP Speaker 只把本身用的最优路由通告给对等体<br>（可以通过命令<code>dis bgp routing-table peer 22.1.1.1 advertised-routes</code>查看，表示向22.1.1.1通告的路由条目有哪些）</p>
+<p>多条路径时，BGP Speaker 只选最优的路由放入路由表</p>
+<p>BGP Speaker 从EBGP获得的路由会向它所有的BGP对等体通告（包括EBGP和IBGP，除了给这个路由的BGP对等体）</p>
+<p>BGP Speaker 从IBGP获得的路由不会通告给它的IBGP邻居（防止环路，EBGP防环是通过AS号码。如果接受的路由中的AS-Path包含了和自身相同的AS，则拒绝接受该路由）</p>
+<p>BGP Speaker 从IBGP获得的路由是否通告给它的EBGP对等体要依IGP和BGP同步的情况来决定。（BGP和IGP同步的概念：BGP Speaker 不将从IBGP对等体对等体获得的路由信息通告给它的EBGP对等体，除非该路由信息也能通过IGP获得）。如果没有同步的话，则不会有有效路由，这样也就不会更新给EBGP了，同步之后会有有效路由。（华为设备不支持同步）</p>
+<h2 id="BGP路由下一跳"><a href="#BGP路由下一跳" class="headerlink" title="BGP路由下一跳"></a>BGP路由下一跳</h2><p>在BGP中，每经过一个AS叫做一跳。所以当一个router从一个EBGP邻居学来的路由宣告给IBGP邻居的时候,不会更改这个路由的下一跳地址，所以当IBGP邻居学到这个路由的时候，下一跳往往是AS外面的一个地址。对于这个router来说是不可达的。<strong>它在BGP路由表中存在这一条路由，但是这条路有前面没有&gt;，也就是没有最佳路由选入到IP路由表中</strong>。对此，解决的办法是，将从EBGP学来路由的路由器在宣告这条路由给它的IBGP邻居的时候，宣告下一跳地址为自己，使用的命令为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">peer 3.3.3.3 next-hop-local</span><br><span class="line">#这条命令表示将BGP的路由发送给3.3.3.3这个邻居时,将路由的下一跳设置成自己的地址，这个地址是与3.3.3.3建立邻居所使用的源地址</span><br></pre></td></tr></table></figure>
+
+<h2 id="BGP路由黑洞"><a href="#BGP路由黑洞" class="headerlink" title="BGP路由黑洞"></a>BGP路由黑洞</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc0qn7pn3ij30qo0c8neo.jpg" alt="捕获.PNG"></p>
+<p>当我们在R3上没有运行BGP进程，我们在R5上关闭了同步，这时它会将一条并没有优化的路由传送给R7，当R7要发向R1发包时，它看到R5是它的下一跳，于是将包发给R5，然后R5又查看它的路由表，发现到R1的下一跳是R2，并继续查找，发现在通过R3可以达到R2，于是它将数据送给R3，这时问题出现了，因为R3没有运行BGP，它不知道R1怎么走，于是它将数据包丢弃，从而造成路由黑洞</p>
+<p>由此可见，BGP与IGP同步的重要性。（华为设备不支持，Cisco设备支持）</p>
+<p>BGP路由黑洞的解决方案：</p>
+<h3 id="Full-Mesh（全互联）"><a href="#Full-Mesh（全互联）" class="headerlink" title="Full Mesh（全互联）"></a>Full Mesh（全互联）</h3><p>所有路由器运行BGP进程，且一个AS内所有路由器两两之间需要建立IBGP邻居关系</p>
+<blockquote>
+<p>问题：过多的TCP会话以及没有必要的路由更新</p>
+</blockquote>
+<h3 id="路由反射器"><a href="#路由反射器" class="headerlink" title="路由反射器"></a>路由反射器</h3><p>会专门讲解路由反射器</p>
+<h2 id="对等体组"><a href="#对等体组" class="headerlink" title="对等体组"></a>对等体组</h2><p>对等体组是为了简化重复的配置，因此，有了对等体组的概念</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">group 对等体组-名字 internal/external</span><br><span class="line"># internal表示是IBGP对等体，externa表示是EBGP对等体</span><br><span class="line"></span><br><span class="line">#然后，就能使用对等体组进行配置，和对等体的配置是一样的，只不过换成了对等体组名字</span><br><span class="line">peer 对等体组-名字 connect-interface LoopBack0</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">#将44.1.1.1假如到这个对等体组中去</span><br><span class="line">peer 44.1.1.1 group 对等体组-名字</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="BGP路由聚合"><a href="#BGP路由聚合" class="headerlink" title="BGP路由聚合"></a>BGP路由聚合</h2><p>路由聚合可以将具体路由聚合成一条聚合路由</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc1sf72sumj30h7093gp6.jpg" alt="捕获.PNG"></p>
+<h3 id="路由聚合原则"><a href="#路由聚合原则" class="headerlink" title="路由聚合原则"></a>路由聚合原则</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc1shgi2naj30ig07vmzq.jpg" alt="捕获.PNG"></p>
+<p>1)自动聚合</p>
+<p>对BGP引入的子网络路由进行自然掩码聚合。配置自动聚合后，生成聚合后的自然网段路由，而原引入的子网路由被抑制，不会被优选和发布给BGP邻居<br>（也就是仅对引入路由有效）<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc1u08dry4j30jd075tcl.jpg" alt="捕获.PNG"></p>
+<p>2）手动聚合</p>
+<p>IGP协议，直连路由等先进行聚合路由，然后再加入到BGP路由当中</p>
+<p>3）aggregate</p>
+<p>要求本路由器至少有一条明细路由才能进行手工聚合,并且要使用network通告明细路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">aggregate (聚合路由，Aggregate address) 掩码 参数</span><br><span class="line"># 参数可以是</span><br><span class="line">  as-set             Generate the route with AS-SET path-attribute</span><br><span class="line">  attribute-policy   Set aggregation attributes</span><br><span class="line">  detail-suppressed  Filter more detail route from updates</span><br><span class="line">  origin-policy      Filter the originate routes of the aggregate</span><br><span class="line">  suppress-policy    Filter more detail route from updates through a Routing</span><br><span class="line">                     policy </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Detail-suppressed : 对于华为路由器来讲，在进行BGP的手工聚合时，默认不会抑制明细路由，即在手工聚合以后，会将汇总路由和明细路由都通告给邻居。使用Detail-suppressed可以抑制明细路由的通告，只通告汇总路由给邻居</li>
+<li>AS_set ：携带路由起源的AS属性，用于防环。当在非明细路由起源的AS聚合路由时，默认会丢弃明细路由的起源AS属性，这样可能导致环路，可添加AS_set属性则会携带明细起源的AS号到路径属性的最右边，如果明细从多个AS产生，明会使用｛｝括起来。</li>
+<li>Attribute-policy ：可以更改路由的属性，比如一条路由的起源属性更改为incomplete.</li>
+<li>Suppress-policy : 抑制策略，如果使用Detail-suppressed则会抑制所有的路由，而使用Suppress-policy则只会抑制被route-policy匹配的路由。</li>
+</ul>
+<p>下面通过实验来说明</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc232gvn4nj30s80jsq4w.jpg" alt="捕获.PNG"></p>
+<p>R4和R2 R3建立IBGP邻居，R1同R2和R3建立直连的EBGP邻居，R1上有三个环回口11.1.1.1&#x2F;32，11.1.1.2&#x2F;32，11.1.1.3&#x2F;32，将它们通告到BGP中</p>
+<ul>
+<li>自动聚合</li>
+</ul>
+<p>在R1上引入直连路由，并进行自动聚合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">R1：</span><br><span class="line">bgp 100</span><br><span class="line">summary automatic #自动聚合只对重分布的路由生效，对于network的不生效。</span><br><span class="line">import-route direct</span><br></pre></td></tr></table></figure>
+<p>在R2上查看结果，发现已经能看到这条汇总路由了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">R2：</span><br><span class="line">&lt;R2&gt;display bgp routing-table</span><br><span class="line"></span><br><span class="line">&gt; 11.0.0.0 123.1.1.1 0 100? 已经没有掩码了</span><br><span class="line">&gt; 123.0.0.0 123.1.1.1 0 100?</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>aggregate方式</li>
+</ul>
+<p>在默认情况下，手工聚合不抑制明细路由，明细和汇总路由会一起通告给邻居</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[R1-bgp]display this</span><br><span class="line">[V200R003C00]</span><br><span class="line">#</span><br><span class="line">bgp 100</span><br><span class="line">router-id 11.1.1.1</span><br><span class="line"></span><br><span class="line">aggregate 11.1.1.0 255.255.255.252</span><br><span class="line">network 11.1.1.1 255.255.255.255</span><br><span class="line">network 11.1.1.2 255.255.255.255</span><br><span class="line">network 11.1.1.3 255.255.255.255</span><br></pre></td></tr></table></figure>
+<p>在R1上查看BGP表，发现有明细路由和汇总路由，都是有效且最优的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[R1-bgp]display bgp routing-table</span><br><span class="line">&gt; 11.1.1.0/30 127.0.0.1 0 i</span><br><span class="line">&gt; 11.1.1.1/32 0.0.0.0 0 0 i</span><br><span class="line">&gt; 11.1.1.2/32 0.0.0.0 0 0 i</span><br><span class="line">&gt; 11.1.1.3/32 0.0.0.0 0 0 i</span><br></pre></td></tr></table></figure>
+
+<p>在R2上查看BGP表，可以看到明细，也可以看到汇总路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;R2&gt;display bgp routing-table</span><br><span class="line">&gt; 11.1.1.0/30 123.1.1.1 0 100i</span><br><span class="line">&gt; 11.1.1.1/32 123.1.1.1 0 0 100i</span><br><span class="line">&gt; 11.1.1.2/32 123.1.1.1 0 0 100i</span><br><span class="line">&gt; 11.1.1.3/32 123.1.1.1 0 0 100i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在R1上通告汇总路由并且抑制明细<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">R1：</span><br><span class="line">bgp 100</span><br><span class="line">aggregate 11.1.1.0 255.255.255.252 detail-suppressed</span><br><span class="line">network 11.1.1.1 255.255.255.255</span><br><span class="line">network 11.1.1.2 255.255.255.255</span><br><span class="line">network 11.1.1.3 255.255.255.255</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>R1上查看BGP表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[R1-bgp]display bgp routing-table # 明细路由被抑制了，不会通告给邻居</span><br><span class="line">*&gt; 11.1.1.0/30 127.0.0.1 0 i</span><br><span class="line">s&gt; 11.1.1.1/32 0.0.0.0 0 0 i</span><br><span class="line">s&gt; 11.1.1.2/32 0.0.0.0 0 0 i</span><br><span class="line">s&gt; 11.1.1.3/32 0.0.0.0 0 0 i</span><br></pre></td></tr></table></figure>
+<p>可以看到，明细路由已经不是最佳路由了 ，被抑制了，所以是通过让这些明细路由不是最佳路由，这样就不会向邻居通告了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;R2&gt;display bgp routing-table #在R2上已经看不到明细路由了</span><br><span class="line">*&gt; 11.1.1.0/30 123.1.1.1 0 100i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在R2上聚合11.1.1.0&#x2F;30的路由，添加AS_set属性</li>
+</ul>
+<p>我们取消在R1上做的手工聚合，改成在R2上做聚合，如果不加AS_set，则这条聚合路由在AS200中默认不是没有AS_path属性的。</p>
+<p>我们在R2上进行聚合，则如果不加AS_SET的话，则不会将AS-100添加到AS_path中的，虽然明细路由是从AS-100中来的，其实都没有AS_Path属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">R2：</span><br><span class="line">bgp 200</span><br><span class="line">aggregate 11.1.1.0 255.255.255.252</span><br></pre></td></tr></table></figure>
+
+<p>在R2和R4上查看BGP表，这条路由都没有AS_path属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R2&gt;display bgp routing-table</span><br><span class="line"></span><br><span class="line">*&gt; 11.1.1.0/30 127.0.0.1 0 i</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R4&gt;display bgp routing-table</span><br><span class="line"></span><br><span class="line">*&gt;i 11.1.1.0/30 22.1.1.1 100 0 i</span><br></pre></td></tr></table></figure>
+
+<p>在R2上将聚合路由带上as_set属性，这样会在聚合路由上添加明细路由起源自哪个AS，用于防环(如何防环？在R2进行路由聚合，带上AS-100之后，则R2就不会将这条路由再通告给R1了，如果通告给R1，那就形成了环路)。如果这些明细来自不同的AS，则会在AS_path的最右边使用｛｝将产生明细的多个AS放入｛｝中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[R2-bgp]aggregate 11.1.1.0 255.255.255.252 as-set</span><br></pre></td></tr></table></figure>
+<p>接着在R2和R4上查看BGP表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[R2-bgp]display bgp routing-table</span><br><span class="line"></span><br><span class="line">*&gt; 11.1.1.0/30 127.0.0.1 0 100i</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;R4&gt;display bgp routing-table</span><br><span class="line">*&gt;i 11.1.1.0/30 22.1.1.1 100 0 100i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更改聚合路由的属性，将起源属性更改为未完成</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R2：</span><br><span class="line"></span><br><span class="line">#路由规则</span><br><span class="line">route-policy ATT1 permit node 10</span><br><span class="line">apply origin incomplete #改成incomplete</span><br><span class="line"></span><br><span class="line">aggregate 11.1.1.0 255.255.255.252 as-set attribute-policy ATT1</span><br></pre></td></tr></table></figure>
+
+<p>查看R2的BGP表，发现11.1.1.0&#x2F;30这条汇聚路由的起源属性变成了?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;R2&gt;display bgp routing-table</span><br><span class="line">*&gt; 11.1.1.0/30 127.0.0.1 0 100?</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;R4&gt;display bgp routing-table</span><br><span class="line">*&gt;i 11.1.1.0/30 22.1.1.1 100 0 100?</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在R2上聚合11.1.1.0&#x2F;30，只抑制11.1.1.2这一条明细路由</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[R2-bgp]aggregate 11.1.1.0 255.255.255.252 as-set attribute-policy ATT1 suppress-policy supp</span><br><span class="line"></span><br><span class="line">route-policy supp permit node 10</span><br><span class="line">if-match acl 2000</span><br><span class="line"></span><br><span class="line">acl number 2000</span><br><span class="line">rule 10 permit source 11.1.1.2 0</span><br></pre></td></tr></table></figure>
+
+<p>查看R2的BGP表，发现11.1.1.2&#x2F;32的路由是存在的（被抑制），但这条路由在R4上是不存在的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[R2]display bgp routing-table</span><br><span class="line"></span><br><span class="line">&gt; 11.1.1.0/30 127.0.0.1 0 100?</span><br><span class="line">&gt; 11.1.1.1/32 123.1.1.1 0 0 100i</span><br><span class="line">s&gt; 11.1.1.2/32 123.1.1.1 0 0 100i</span><br><span class="line">*&gt; 11.1.1.3/32 123.1.1.1 0 0 100i</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R2]display bgp routing-table 11.1.1.2 32，被抑制的路由，没有通告给任何的邻居。</span><br><span class="line"></span><br><span class="line">BGP local router ID : 22.1.1.1</span><br><span class="line">Local AS number : 200</span><br><span class="line">Paths: 1 available, 1 best, 1 select</span><br><span class="line">BGP routing table entry information of 11.1.1.2/32:</span><br><span class="line">From: 123.1.1.1 (11.1.1.1)</span><br><span class="line">Route Duration: 00h08m12s</span><br><span class="line">Direct Out-interface: GigabitEthernet0/0/2</span><br><span class="line">Original nexthop: 123.1.1.1</span><br><span class="line">Qos information : 0x0</span><br><span class="line">AS-path 100, origin igp, MED 0, suppressed, pref-val 0, valid, external, best, select, active, pre 255</span><br><span class="line">Not advertised to any peer yet</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[R2]display bgp routing-table 11.1.1.1 32 像这条路由，就通告到R4上去了。</span><br><span class="line"></span><br><span class="line">BGP local router ID : 22.1.1.1</span><br><span class="line">Local AS number : 200</span><br><span class="line">Paths: 1 available, 1 best, 1 select</span><br><span class="line">BGP routing table entry information of 11.1.1.1/32:</span><br><span class="line">From: 123.1.1.1 (11.1.1.1)</span><br><span class="line">Route Duration: 00h08m38s</span><br><span class="line">Direct Out-interface: GigabitEthernet0/0/2</span><br><span class="line">Original nexthop: 123.1.1.1</span><br><span class="line">Qos information : 0x0</span><br><span class="line">AS-path 100, origin igp, MED 0, pref-val 0, valid, external, best, select, active, pre 255</span><br><span class="line">Advertised to such 1 peers:</span><br><span class="line">44.1.1.1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;R4&gt;display bgp routing-table</span><br><span class="line"></span><br><span class="line">*&gt;i 11.1.1.0/30 22.1.1.1 100 0 100?</span><br><span class="line">i 11.1.1.1/32 123.1.1.1 0 100 0 100i</span><br><span class="line">i 11.1.1.3/32 123.1.1.1 0 100 0 100i</span><br></pre></td></tr></table></figure>
+
+<h2 id="RR路由反射器"><a href="#RR路由反射器" class="headerlink" title="RR路由反射器"></a>RR路由反射器</h2><p>参考：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av35766062?from=search&seid=13651713699760369094">https://www.bilibili.com/video/av35766062?from=search&amp;seid=13651713699760369094</a></p>
+<p>由于IBGP的水平分割（从IBGP邻居学来的路由不会转发给其他的IBGP邻居），导致在AS内需要full-mesh（全互联），这样导致连接数量会非常大。因此，为了保证AS内所有的路由器都能学习到完整的BGP路由信息，解决方案：</p>
+<ul>
+<li>路由反射器</li>
+<li>BGP联邦</li>
+</ul>
+<p>这一部分，讲解路由反射器</p>
+<p>RR就像一面镜子，将自己学习到的IBGP路由“反射”出去，使得IBGP路由得以在AS内传递。</p>
+<p>将一台BGP路由器指定为RR时，还需要指定client。至于client本身，无需做任何配置，而且它不知道网络中RR的存在</p>
+<h3 id="对等体之间的关系"><a href="#对等体之间的关系" class="headerlink" title="对等体之间的关系"></a>对等体之间的关系</h3><ul>
+<li>Client只需维护与RR之间的IBGP会话</li>
+<li>RR与RR之间需要建立IBGP的全互联</li>
+<li>Non-Client与Non-Client之间需要建立IBGP全互联</li>
+<li>RR与Non-CLient之间需要建立IBGP全互联</li>
+</ul>
+<h3 id="路由反射宣告原则"><a href="#路由反射宣告原则" class="headerlink" title="路由反射宣告原则"></a>路由反射宣告原则</h3><p>当RR收到BGP对等体发来的路由，首先使用BGP选路策略来选择最佳路由。RR在发布学习到的路由信息时，按照RFC2796中的规则发布路由:</p>
+<ul>
+<li>从非客户机IBGP对等体学习到的路由，<strong>反射</strong>给此RR的所有客户机</li>
+<li>从客户机学到的路由，<strong>反射</strong>给此RR的所有非客户机和客户机（包括EBGP邻居，不包括发此路由的客户机）</li>
+<li>从EBGP对等体学到的路由，<strong>发送</strong>给所有的非客户机和客户机<blockquote>
+<p>“反射”和“发送”的区别。“发送”指的是传统情况下（RR不存在的情境下）的BGP路由传递行为。“反射”指的是遵循路由反射规则的情况下，RR执行路由传递动作，被反射出去的路由会被RR插入特殊的路径属性。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="RR场景下的BGP路由防环"><a href="#RR场景下的BGP路由防环" class="headerlink" title="RR场景下的BGP路由防环"></a>RR场景下的BGP路由防环</h2><p>由于AS_PATH属性在AS内不会发生改变，因此AS内才需要IBGP水平分割用于防止IBGP路由的环路，而RR的存在实际上放宽了水平分割原则。这就会给路由环路带来一定的隐患。BGP通过两个特殊的属性来实现RR场景下的BGP路由环路</p>
+<ul>
+<li>Originator_ID</li>
+<li>Cluster_List</li>
+</ul>
+<p>来防止环路，这两个是可选非传递属性</p>
+<p>Originator_ID</p>
+<p>Originator_ID属性类型为9，是一个32bit的值。RR将一条BGP路由进行反射时会在反射出去的路由中增加该路径属性。</p>
+<blockquote>
+<ol>
+<li>如果路由为本地AS始发，则Originator_ID被设置为BGP路由宣告者的Router-ID</li>
+<li>如果路由非本地AS始发，则Originator_ID被设置为本地AS的边界路由器的Router-ID</li>
+</ol>
+</blockquote>
+<p>如果AS内存在多个RR，则Originator_ID属性由第一个RR创建，并且不会被后续的RR所修改。</p>
+<p>当BGP路由器收到一条携带Originator_ID属性的IBGP路由器，并且Originator_ID属性值与自身的router-ID相同，则会忽略关于该路由的更新</p>
+<p>Originator_ID及Cluster_list属性将会影响BGP路径优选决策</p>
+<p>举个例子：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc35rn04qlj30hw07qq5a.jpg" alt="捕获.PNG"></p>
+<p>防环示意图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc35ttq1ouj30do09xad2.jpg" alt="捕获.PNG"></p>
+<p>Cluster</p>
+<p>路由反射簇包括反射器RR以及Client，一个AS内允许存在多个cluster。</p>
+<p>每一个簇都有唯一的cluster-id。 缺省时是RR的BGP的router-id</p>
+<p>当一条路由被反射后，该RR（该簇）的cluster-id就会被添加到路由的cluster-id中</p>
+<p>当RR收到一条携带cluster-list属性的BGP路由，且该属性值中包含该簇的cluster-id时，RR认为该条路由存在环路，因此将忽略对该条路由的更新</p>
+<p>实例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc364d6zugj30gl0astce.jpg" alt="捕获.PNG"></p>
+<h3 id="实际配置"><a href="#实际配置" class="headerlink" title="实际配置"></a>实际配置</h3><p>比如R4是配置成RR，R3是R4的client</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">R4：</span><br><span class="line"></span><br><span class="line">peer 3.3.3.3 reflect-client#设置R3为自己的client</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cluster id也是可以修改的</span><br><span class="line">reflector cluster-id id号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc38poav1tj30fr07n0va.jpg" alt="捕获.PNG"></p>
+<h2 id="BGP联邦（Confederation）"><a href="#BGP联邦（Confederation）" class="headerlink" title="BGP联邦（Confederation）"></a>BGP联邦（Confederation）</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc38ugmmhoj30iu0aydkj.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc390d21dyj30og0ctgt6.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/11/Anaconda%E4%B8%8Bjupyter-notebook%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E5%AE%89%E8%A3%85xgboost/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/11/Anaconda%E4%B8%8Bjupyter-notebook%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E5%AE%89%E8%A3%85xgboost/" class="post-title-link" itemprop="url">Anaconda下jupyter notebook使用不同环境及安装xgboost</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-11 15:39:03" itemprop="dateCreated datePublished" datetime="2020-01-11T15:39:03+08:00">2020-01-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Anaconda/" itemprop="url" rel="index"><span itemprop="name">Anaconda</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/01/11/Anaconda%E4%B8%8Bjupyter-notebook%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E5%AE%89%E8%A3%85xgboost/" class="leancloud_visitors" data-flag-title="Anaconda下jupyter notebook使用不同环境及安装xgboost">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="Anaconda下jupyter-notebook使用不同环境"><a href="#Anaconda下jupyter-notebook使用不同环境" class="headerlink" title="Anaconda下jupyter notebook使用不同环境"></a>Anaconda下jupyter notebook使用不同环境</h1><p>Anaconda的出世就是为了解决管理不同的环境配置的。具体的可以看我之前的一篇博客。而在Anaconda中，经常需要使用jupyter notebook，因此，希望可以在jupyter notebook中切换环境，具体做法如下：</p>
+<p>第一步</p>
+<p>安装ipykernel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install ipykernel</span><br></pre></td></tr></table></figure>
+
+<p>第二步</p>
+<p>将conda环境写入jupyter notebook中，（conda环境的创建可以看之前的博客）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --user --name 环境名称 --display-name &quot;你希望看见的环境名&quot;</span><br></pre></td></tr></table></figure>
+
+<p>晚上上面两步之后，就可以在jupyter notebook中的kernel-change kernel中选择不同的环境了</p>
+<p>如果想删除kernel环境的话，可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec remove 环境名称</span><br></pre></td></tr></table></figure>
+
+<p>在创建conda环境时也可以同时创建kernel，如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n 环境名称  pyhont=3.*/2.* ipykernel</span><br></pre></td></tr></table></figure>
+
+<p> 参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_liuxy/article/details/100011867">https://blog.csdn.net/Mr_liuxy/article/details/100011867</a></p>
+<h1 id="安装xgboost的GPU加速版"><a href="#安装xgboost的GPU加速版" class="headerlink" title="安装xgboost的GPU加速版"></a>安装xgboost的GPU加速版</h1><p>在安装xgboost的时候，如果只是安装CPU版本的话，就相当简单了，就一条命令，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install xgboost</span><br></pre></td></tr></table></figure>
+
+<p>但是如果你想安装GPU版本的话，一条命令是完成不了的，需要踩好多坑，现就将我成功的方式总结如下</p>
+<p>这次我使用的是win10+anaconda</p>
+<p>第一步</p>
+<p>下载 xgboost 源码：<a target="_blank" rel="noopener" href="https://github.com/dmlc/xgboost">https://github.com/dmlc/xgboost</a></p>
+<p>第二步</p>
+<p>从 <a target="_blank" rel="noopener" href="http://ssl.picnet.com.au/xgboost/">http://ssl.picnet.com.au/xgboost/</a> 中下载支持GPU版已编译好的DLL文件</p>
+<p>第三步</p>
+<p>将xgboost.dll复制到xgboost-master&#x2F;python-package&#x2F;xgboost目录下，打开控制台，进入到python-package目录下，执行python setup.py install命令，然后，需要把xgboost-master文件名改成xgboost。至此xgboost GPU版安装成功</p>
+<p>这时候，你以为你成功了，其实并没有，会报各种错误。过了两天，我忘记了有些错误的解决方法，这里就先提供还记得的方法，以后想起来了再补充</p>
+<h2 id="运行jupyter-报raise-NotImplementedError，"><a href="#运行jupyter-报raise-NotImplementedError，" class="headerlink" title="运行jupyter 报raise NotImplementedError，"></a>运行jupyter 报raise NotImplementedError，</h2><p>解决方法：</p>
+<p>找到：C:\Users\xxx\AppData\Local\Programs\Python\Python38\Lib\site-packages\tornado\platform\asyncio.py 这个文件，</p>
+<p>打开将下边这句编辑进去，保存。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import asyncio</span><br><span class="line">import sys</span><br><span class="line">if sys.platform == &#x27;win32&#x27; and sys.version_info &gt; (3, 8, 0, &#x27;alpha&#x27;, 3) :</span><br><span class="line">    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="检测xgboost-GPU版本是否安装成功"><a href="#检测xgboost-GPU版本是否安装成功" class="headerlink" title="检测xgboost GPU版本是否安装成功"></a>检测xgboost GPU版本是否安装成功</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import xgboost as xgb</span><br><span class="line">import numpy as np</span><br><span class="line">from sklearn.datasets import fetch_covtype</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># Fetch dataset using sklearn</span><br><span class="line">cov = fetch_covtype()</span><br><span class="line">X = cov.data</span><br><span class="line">y = cov.target</span><br><span class="line"></span><br><span class="line"># Create 0.75/0.25 train/test split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=42)</span><br><span class="line"></span><br><span class="line"># Specify sufficient boosting iterations to reach a minimum</span><br><span class="line">num_round = 25 #3000</span><br><span class="line"></span><br><span class="line"># Leave most parameters as default</span><br><span class="line">param = &#123;&#x27;objective&#x27;: &#x27;multi:softmax&#x27;, # Specify multiclass classification</span><br><span class="line">         &#x27;num_class&#x27;: 8, # Number of possible output classes</span><br><span class="line">         &#x27;tree_method&#x27;: &#x27;gpu_hist&#x27; # Use GPU accelerated algorithm</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Convert input data from numpy to XGBoost format</span><br><span class="line">dtrain = xgb.DMatrix(X_train, label=y_train)</span><br><span class="line">dtest = xgb.DMatrix(X_test, label=y_test)</span><br><span class="line"></span><br><span class="line">gpu_res = &#123;&#125; # Store accuracy result</span><br><span class="line">tmp = time.time()</span><br><span class="line"># Train model</span><br><span class="line">param[&#x27;tree_method&#x27;] = &#x27;gpu_hist&#x27;</span><br><span class="line">xgb.train(param, dtrain, num_round, evals=[(dtest, &#x27;test&#x27;)], evals_result=gpu_res)</span><br><span class="line">print(&quot;GPU Training Time: %s seconds&quot; % (str(time.time() - tmp)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Repeat for CPU algorithm</span><br><span class="line">tmp = time.time()</span><br><span class="line">param[&#x27;tree_method&#x27;] = &#x27;hist&#x27;</span><br><span class="line">cpu_res = &#123;&#125;</span><br><span class="line">xgb.train(param, dtrain, num_round, evals=[(dtest, &#x27;test&#x27;)], evals_result=cpu_res)</span><br><span class="line">print(&quot;CPU Training Time: %s seconds&quot; % (str(time.time() - tmp)))</span><br></pre></td></tr></table></figure>
+
+
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30963287/article/details/79145107">https://blog.csdn.net/weixin_30963287/article/details/79145107</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89888038">https://zhuanlan.zhihu.com/p/89888038</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenxiangzhen/p/10774000.html">https://www.cnblogs.com/chenxiangzhen/p/10774000.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">路由器命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-10 06:49:47" itemprop="dateCreated datePublished" datetime="2020-01-10T06:49:47+08:00">2020-01-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/01/10/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%91%BD%E4%BB%A4/" class="leancloud_visitors" data-flag-title="路由器命令">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="进入配置模式"><a href="#进入配置模式" class="headerlink" title="进入配置模式"></a>进入配置模式</h1><p><strong>华为</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br></pre></td></tr></table></figure>
+
+<p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure terminal</span><br></pre></td></tr></table></figure>
+<p><strong>Juniper</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure exclusive</span><br></pre></td></tr></table></figure>
+
+<h1 id="ISIS-协议"><a href="#ISIS-协议" class="headerlink" title="ISIS 协议"></a>ISIS 协议</h1><h2 id="查看ISIS的邻居状态"><a href="#查看ISIS的邻居状态" class="headerlink" title="查看ISIS的邻居状态"></a>查看ISIS的邻居状态</h2><p><strong>华为</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">display isis peer</span><br><span class="line"></span><br><span class="line">显示</span><br><span class="line"></span><br><span class="line">System Id     Interface    Circuit Id     State HoldTime   Type     PRI</span><br><span class="line"></span><br><span class="line">其中，System Id表示的是对端的邻居的Id，Interfere是本端的端口地址，Type表示走的是Level 1还是Level 2， State就是表示邻居是Up还是Down的</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看ISIS学到的路由"><a href="#查看ISIS学到的路由" class="headerlink" title="查看ISIS学到的路由"></a>查看ISIS学到的路由</h2><p><strong>华为</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display ip routing-table protocol isis</span><br></pre></td></tr></table></figure>
+
+<h1 id="ip地址配置"><a href="#ip地址配置" class="headerlink" title="ip地址配置"></a>ip地址配置</h1><p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipv4 address ip地址/mask</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看端口配置"><a href="#查看端口配置" class="headerlink" title="查看端口配置"></a>查看端口配置</h1><p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#show running-config interface TenGigE 0/10/0/7</span><br><span class="line"></span><br><span class="line"># 如果在配置模式下查看端口配置的话，</span><br><span class="line">do show running-config interface TenGigE 0/10/0/7</span><br></pre></td></tr></table></figure>
+<h1 id="取消端口配置"><a href="#取消端口配置" class="headerlink" title="取消端口配置"></a>取消端口配置</h1><p><strong>思科</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no + 命令</span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+<h1 id="调流量"><a href="#调流量" class="headerlink" title="调流量"></a>调流量</h1><h2 id="IPM电路迁流量需要删除静态路由"><a href="#IPM电路迁流量需要删除静态路由" class="headerlink" title="IPM电路迁流量需要删除静态路由"></a>IPM电路迁流量需要删除静态路由</h2><p><strong>华为</strong></p>
+<p>1、查看当前端口的静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;HUAWEI&gt;display current-configuration | include ip | include route-static  | include GigabitEthernet1/0/4</span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">&lt;HUAWEI&gt;display current-configuration | include ip route-static  | include GigabitEthernet1/0/4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>2、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
+<p>3、一条一条的删除静态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Undo ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 </span><br><span class="line">#不需要加后面的tag，只需要到上面这个地方就可以了</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">undo之后，记得commit，并且退出视图模式，save</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<p>1、在视图模式下，添加原来的静态路由,把之前记录下来的都再次粘上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip route-static 168.1.1.1 255.255.255.255 GigabitEthernet1/0/4 127.1.1.1 ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">记得commit，并且退出视图模式，save</span><br></pre></td></tr></table></figure>
+
+<p><strong>思科</strong></p>
+<p>1、查看静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show running-config router static | include 端口号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
+<p>3、一条一条删除静态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式后</span><br><span class="line"></span><br><span class="line">router static </span><br><span class="line"></span><br><span class="line">address-family ipv4 unicast</span><br><span class="line"></span><br><span class="line">no 192.168.1.1/32 POS0/15/1/0 127.1.1.1 </span><br><span class="line"></span><br><span class="line"># 退出这一层级，再删除ipv6的，exit</span><br><span class="line"></span><br><span class="line">address-family ipv6 unicast</span><br><span class="line"></span><br><span class="line">no .........</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">之后记得commit，end退出</span><br></pre></td></tr></table></figure>
+
+
+<p>调回流量：<br>1、进入配置模式，添加原来的静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router static</span><br><span class="line"></span><br><span class="line">address-family ipv4 unicast</span><br><span class="line"></span><br><span class="line">192.168.1.1/32 POS0/15/1/0 127.1.1.1 tag...</span><br><span class="line"></span><br><span class="line">#退出这一层级，再添加ipv6的</span><br><span class="line">，</span><br><span class="line">address-family ipv4 unicast</span><br><span class="line">...ipv6静态地址......</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">commit 之后 end</span><br></pre></td></tr></table></figure>
+
+<p><strong>Juniper</strong></p>
+<p>1、查看静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">会显示：</span><br><span class="line"></span><br><span class="line">192.168.1.1/32  * ...</span><br><span class="line">               &gt; to 127.1.1.1 via et-2/0/0.0</span><br><span class="line"></span><br><span class="line"># 查看与et-2/0/0端口相关的IP地址有哪些，比如这个127.1.1.1,那么这个IP地址就是这个端口相关的静态路由IP地址，IPV6地址也有</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、查看与静态路由相关的IP地址的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show configuration routing-options static | display set | match 127.1.1.1</span><br><span class="line"></span><br><span class="line">会显示：</span><br><span class="line"></span><br><span class="line">&gt;set routing-options static route 222.221.220.1/32 next-hop 127.1.1.1</span><br><span class="line">&gt;set routing-options static route 111.11.111.1/32 next-hop 127.1.1.1</span><br><span class="line"></span><br><span class="line">通常也是两个IPv4地址，两个IPv6地址</span><br></pre></td></tr></table></figure>
+
+<p>3、把这些显示的配置粘贴出来，保存成一个txt文件。之后，可以看一下IP网管，看一下当前配置是否正确，一般来说会有两个ipv4静态和两个ipv6静态</p>
+<p>4、进入配置模式,删除与静态路由相关的配置，（将原有配置的set改成delete）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete routing-options static route 222.221.220.1/32 next-hop 127.1.1.1</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>5、保存并退出配置模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+
+<p>6、查看静态路由是否已删</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<p>1、进入配置模式，恢复静态路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set routing-options static route 111.11.111.1/32 next-hop 127.1.1.1</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>2、保存并退出配置模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+<p>3、查看静态路由是否已恢复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show route protocol static output interface et-2/0/0</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="骨干电路迁流量需要修改metric值"><a href="#骨干电路迁流量需要修改metric值" class="headerlink" title="骨干电路迁流量需要修改metric值"></a>骨干电路迁流量需要修改metric值</h2><p><strong>华为</strong><br>1、查看端口配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 端口号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、修改metric值，通常是扩大10倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">isis cost 原来的metric值*10  level-2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>调回流量</p>
+<p>1、查看端口配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 端口号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、 查看IP网管的历史配置，看之前的metric值是多少，或者看反馈里值班人员写的调之前是多少</p>
+<p>3、修改metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#进入配置模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">isis cost xxx  level-2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>思科</strong></p>
+<p>CRS设备：</p>
+<p>1、查看原来端口的ISIS-metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show running-config router isis | begin */*/*/*</span><br></pre></td></tr></table></figure>
+
+<p>2、把相关的配置复制粘贴下来，保存成txt文件</p>
+<p>3、调整ISIS-metric值扩大10倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router isis 进程号</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">metric XXXX level 2</span><br></pre></td></tr></table></figure>
+
+<p>4、确认检查修改后的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show configuration</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>5、提交配置更改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p>GSR设备：</p>
+<p>1、查看原端口的ISIS-metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show running-config interface poS */*</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、把相关的配置复制粘贴下来，保存成txt文件</p>
+<p>3、调整ISIS-metric值扩大10倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">configure terminal</span><br><span class="line"></span><br><span class="line">interface pos */*</span><br><span class="line"></span><br><span class="line">isis metric XXXX level-2</span><br></pre></td></tr></table></figure>
+<p>4、保存配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write  memory</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<p>步骤和上面是一样的，只是改的数字不一样罢了</p>
+<p><strong>Juniper</strong><br>1、查看原端口的ISIS-metric值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration protocols isis interface</span><br></pre></td></tr></table></figure>
+<p>2、调整ISIS-metric值到另一个值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在配置模式下，</span><br><span class="line"></span><br><span class="line">set protocols isis interface so-0/1/0.0 level 2 metric XXXX</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3、确认检查修改后的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show configuration</span><br></pre></td></tr></table></figure>
+<p>4、提交配置修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+
+
+<p>调回流量，与上面步骤一样</p>
+<h2 id="Bundle调流量"><a href="#Bundle调流量" class="headerlink" title="Bundle调流量"></a>Bundle调流量</h2><p><strong>华为</strong></p>
+<p>1、先查看Bundle口下的配置模式,查看需要解绑的那个物理端口,看是否在这个Bundle口下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface Bundle口</span><br></pre></td></tr></table></figure>
+
+<p>2、查看需要解绑的那个物理端口的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display current-configuration interface 物理端口号</span><br></pre></td></tr></table></figure>
+
+<p>3、复制粘贴端口下面的配置</p>
+<p>4、</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入视图模式</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">undo 那个加bundle的命令</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>调回流量:<br>也就是加bundle</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入视图配置</span><br><span class="line"></span><br><span class="line">interface 端口号</span><br><span class="line"></span><br><span class="line">把undo去掉，使用undo后面的命令</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>思科</strong><br>1、查看并记录接口配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show running-config interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">description To  XXXXXXX::To-Bundle-TenGigE11</span><br><span class="line"> bundle id 11 mode on</span><br></pre></td></tr></table></figure>
+<p>2、去除接口bundle配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">no bundle id 11</span><br><span class="line"></span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">interface TenGigE0/11/1/0</span><br><span class="line"></span><br><span class="line">bundle id 11 mode on</span><br><span class="line"></span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p><strong>Juniper</strong></p>
+<p>1、查看端口原有配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show configuration interfaces xe-15/0/1 gigether-options | display set</span><br><span class="line"></span><br><span class="line">显示：</span><br><span class="line">set interfaces xe-15/0/1 gigether-options 802.3ad ae0（</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、解除bundle</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">进入配置模式</span><br><span class="line"></span><br><span class="line">//关闭端口</span><br><span class="line">set interfaces xe-15/0/1 disable</span><br><span class="line"></span><br><span class="line">//解除bundle</span><br><span class="line">delete interfaces xe-15/0/1 gigether-options 802.3ad ae0</span><br><span class="line"></span><br><span class="line">//保存配置并退出配置模式</span><br><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+
+<p>调回流量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//进入配置模式</span><br><span class="line">configure exclusive</span><br><span class="line"></span><br><span class="line">//恢复bundle，将删除bundle时的配置粘贴过来</span><br><span class="line">set interfaces xe-15/0/1 gigether-options 802.3ad ae0</span><br><span class="line"></span><br><span class="line">//打开端口</span><br><span class="line">delete interfaces xe-15/0/1 disable</span><br><span class="line"></span><br><span class="line">//保存配置并退出配置模式</span><br><span class="line">commit synchronize and-quit</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/anaconda%E5%AE%89%E8%A3%85/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/11/anaconda%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">anaconda安装</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-11 23:23:29" itemprop="dateCreated datePublished" datetime="2019-12-11T23:23:29+08:00">2019-12-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%AE%89%E8%A3%85/" itemprop="url" rel="index"><span itemprop="name">安装</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/12/11/anaconda%E5%AE%89%E8%A3%85/" class="leancloud_visitors" data-flag-title="anaconda安装">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>看到了一篇文章，感觉讲的挺好的，mark下来<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eaee1fadc1e9">https://www.jianshu.com/p/eaee1fadc1e9</a></p>
+<p>另外，使用conda安装pytorch的时候，下载速度十分的慢，解决方法也很简单,就是将下载源更换为清华源即可，具体做法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config   -- add  channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config   --add   channels  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config   --set   show_channel_urls  yes</span><br></pre></td></tr></table></figure>
+<p>同时添加第三方的下载源，（强烈建议添加，否则有可能在清华源找不到这个库）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line"></span><br><span class="line">conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/menpo/</span><br><span class="line"></span><br><span class="line">conda config     --add    channels   https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br></pre></td></tr></table></figure>
+
+<p>根据Python和CUDA选择对应的版本，然后官方给出提示可通过运行：</p>
+<p>conda install pytorch torchvision cudatoolkit&#x3D;9.0 -c pytorch</p>
+<p>但是这里一定要注意，去掉-c pytorch，安装的时候才会默认从清华源下载相应的包，</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/python%E7%9A%84self%E5%AD%A6%E4%B9%A0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/24/python%E7%9A%84self%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">python的self学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-24 14:10:50" itemprop="dateCreated datePublished" datetime="2019-10-24T14:10:50+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/10/24/python%E7%9A%84self%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="python的self学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>先贴出一段代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def song(one):</span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line">    def sing(self,one):</span><br><span class="line">        print(one)</span><br></pre></td></tr></table></figure>
+
+<p>首先要搞清楚的一个问题 <code>a=A()</code>与<code>a=A</code>，这两个赋值之间的区别</p>
+<p>对于<code>a=A()</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=A()</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line"></span><br><span class="line">&lt;__main__.A object at 0x000001B19F046DD8&gt;</span><br></pre></td></tr></table></figure>
+<p>对于<code>a=A</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = A</span><br><span class="line">print(a)</span><br><span class="line">print(A)</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line"></span><br><span class="line">&lt;class &#x27;__main__.A&#x27;&gt;</span><br><span class="line">&lt;class &#x27;__main__.A&#x27;&gt;</span><br></pre></td></tr></table></figure>
+<p>从上面可以看到，<code>a=A()</code>是一个实例，是有地址的。而<code>a=A</code>则只是一个类，是没有地址的</p>
+<p>那么<code>self</code>到底指代的是谁？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def song(one):</span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line">    def sing(self,one):</span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">A.sing(a,&#x27;hello&#x27;)</span><br><span class="line">a.sing(&#x27;hello&#x27;)</span><br><span class="line"></span><br><span class="line">结果是：</span><br><span class="line">hello</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p>从这个例子中你就可以发现，实际上 <code>a.sing(“hello”)</code> 等价于<code> A.sing(a,“hello”)</code>，而self就是实例a自己,而且<strong>self也可以用别的单词代替</strong>,只不过大家都约定俗成使用self</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A.sing(&#x27;hello&#x27;)</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line"></span><br><span class="line">TypeError: sing() missing 1 required positional argument: &#x27;one&#x27;</span><br></pre></td></tr></table></figure>
+<p>可以看到，少给了一个参数，没有给‘one’赋值，‘hello’被赋给了self，这也很好理解，下面就有点意思了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a.song(&#x27;hello&#x27;)</span><br><span class="line"></span><br><span class="line">结果:</span><br><span class="line"></span><br><span class="line">TypeError: song() takes 1 positional argument but 2 were given</span><br></pre></td></tr></table></figure>
+<p>可以看到提示，<code>song()</code>只接收一个参数，但是却给了2个参数。但是我们只传了一个参数啊，这是因为，python会把实例a当成第一个参数，‘hello’才是第二个参数，类似于<code>A.song(a,&#39;hello&#39;)</code>。不信？不信我们再写一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def song(one,two):</span><br><span class="line"></span><br><span class="line">        print(one)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.song(&#x27;hello&#x27;)</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">结果:</span><br><span class="line"></span><br><span class="line">&lt;__main__.A object at 0x000001C72D8AB160&gt;</span><br><span class="line">&lt;__main__.A object at 0x000001C72D8AB160&gt;</span><br></pre></td></tr></table></figure>
+<p>可以看到，函数song是打印one这个参数，而one是实例a，因此打印出来了这个实例a的地址</p>
+<p>通过这段分析，我们简单的知道了，类中的方法第一个参数必须是 self ，不然实例无法正确调用类中的方法，也就是说，如果方法中第一个参数不是 self(广义的)，那么这个方法是没有任何价值的，因为实例无法调用它，一个无法被调用的方法真不知道有什么用。</p>
+<p>参数前面的self呢?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">x=6</span><br><span class="line"></span><br><span class="line">class A():</span><br><span class="line"></span><br><span class="line">    def sing(self):</span><br><span class="line">        self.x=10</span><br><span class="line"></span><br><span class="line">    def mutl(self):</span><br><span class="line">        y=10*x</span><br><span class="line">        print(y)</span><br><span class="line"></span><br><span class="line">a=A()  </span><br><span class="line">a.mutl()</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">60</span><br></pre></td></tr></table></figure>
+<p>结果是60，而不是100，为什么不调用类内部的 x 参数而跑去调用类外的 x 呢？还是那个问题，self 到底指代的是谁，self 就是 a 本身，那么问题就很明显了，mutl() 方法中的 x 前面没有加 self 所以他调用的不是实例(注意这里说的是实例，而不是类)自身的参数</p>
+<p>到这里我想你大概明白了，参数前面有self和没self的区别了，简单说，带self的参数是人家实例自身的，不带self的，爱谁谁，实例不管。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://m.py.cn/faq/python/11804.html">https://m.py.cn/faq/python/11804.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/http%E5%AD%A6%E4%B9%A0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/24/http%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">http学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-24 08:48:43" itemprop="dateCreated datePublished" datetime="2019-10-24T08:48:43+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/10/24/http%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="http学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTTP-是不保存状态的协议"><a href="#HTTP-是不保存状态的协议" class="headerlink" title="HTTP 是不保存状态的协议"></a>HTTP 是不保存状态的协议</h1><p>HTTP 是一种不保存状态，即无状态（stateless）协议。HTTP 协议自身不对请求和响应之间的通信状态进行保存。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。</p>
+<p>使用HTTP协议，每当有新的请求发送时，就会有对应的新响应产生。协议本身并不保留之前一切的请求或响应报文的信息。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把HTTP协议设计成如此简单的</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/10/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">双系统安装</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 09:19:58" itemprop="dateCreated datePublished" datetime="2019-10-10T09:19:58+08:00">2019-10-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ubuntu/" itemprop="url" rel="index"><span itemprop="name">ubuntu</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/10/10/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" class="leancloud_visitors" data-flag-title="双系统安装">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>参考文献：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014422976/article/details/80393841">https://blog.csdn.net/u014422976/article/details/80393841</a></p>
+<h1 id="正式安装教程"><a href="#正式安装教程" class="headerlink" title="正式安装教程"></a>正式安装教程</h1><blockquote>
+<p>首先下载ubuntu，当前时间选择的是ubuntu 18.04.3，也就是目前的最稳定的最新版本，下载地址 <a target="_blank" rel="noopener" href="https://ubuntu.com/download/desktop">https://ubuntu.com/download/desktop</a></p>
+</blockquote>
+<blockquote>
+<p>然后制作u盘启动盘，在制作过程中，本来想使用UltraISO制作，后来上网发现UltraISO制作ubuntu 18.04.3会出现问题，建议使用Universal USB Installer。这里的下载连接：<a target="_blank" rel="noopener" href="https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/">https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/</a></p>
+</blockquote>
+<blockquote>
+<p>给安装ubuntu分配一个空间，好像是需要安装在windows的所在盘中，我也就是在C盘进行空间分配。具体：快捷键“win+X”-&gt;“磁盘管理”-&gt;“压缩卷”</p>
+</blockquote>
+<blockquote>
+<p>正式安装ubuntu。关闭计算机，插入已经做成启动盘的U盘，进入Boot menu选择界面，选择“Istall Ubuntu”，图形化的安装界面，软件暂时不要安装，继续，当出现要手动分盘符的时候，请选择“其它选项”</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/17/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">正则表达式</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-17 09:44:21" itemprop="dateCreated datePublished" datetime="2019-09-17T09:44:21+08:00">2019-09-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/09/17/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="leancloud_visitors" data-flag-title="正则表达式">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>看到一个比较好的网站，记录一下</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md">https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/16/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">爬虫基础</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 20:26:00" itemprop="dateCreated datePublished" datetime="2019-09-16T20:26:00+08:00">2019-09-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/09/16/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" class="leancloud_visitors" data-flag-title="爬虫基础">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="scrapy安装"><a href="#scrapy安装" class="headerlink" title="scrapy安装"></a>scrapy安装</h1><p>Scrapy是一个基于Twisted框架的使用python的开源网络爬虫框架</p>
+<p>使用pip安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure>
+
+<p>确认是否安装成功,在pyhton环境中，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line">&gt;&gt;&gt; scrapy.version_info</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>使用<code>scrapy startproject</code>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject example</span><br></pre></td></tr></table></figure>
+<h1 id="scrapy框架"><a href="#scrapy框架" class="headerlink" title="scrapy框架"></a>scrapy框架</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g78imf5vi7j31550pwq53.jpg" alt="捕获.PNG"></p>
+<p>首先，了解一下Scrapy框架的各个组件</p>
+<ul>
+<li>ENGINE：引擎，框架的核心，其他所有组件在其控制下协同工作，是内部组件</li>
+<li>SCHEDULER：调度器，负责对SPIDER提交的下载请求进行调度，是内部组件</li>
+<li>DOWNLOADER：下载器，负责下载页面（发送HTTP请求&#x2F;接收HTTP请求），是内部组件</li>
+<li>SPIDER：爬虫，负责提取页面中的数据，并产生对新页面的下载请求，需要用户实现</li>
+<li>MIDDLEWARE：中间件，负责对Request对象和Response对象进行处理，是可选组件</li>
+<li>ITEM PIPELINE：数据管道，负责对爬取到的数据进行处理，是可选组件</li>
+</ul>
+<p>我们来说明一下流程：</p>
+<blockquote>
+<ol>
+<li>ENGINE从SPIDER拿到需要爬虫的Requests</li>
+<li>ENGINE会在SCHEDULER里面对Requests进行调度，然后还会向SCHEDULER请求下一个要爬虫的Requests（也就是即将要爬虫的Requests）</li>
+<li>SCHEDULER会将下一个要爬虫的Requests返回给ENGINE</li>
+<li>ENGINE会将这个Requests传递给DOWNLOADER，其中需要经过DOWNLOADER的MIDDLEWARE（在process_request()中）</li>
+<li>一旦DOWNLOADER下载好了页面，DOWNLOADER会把相应的Response返回给ENGINE，同样需要经过中间件（在process_response()中）</li>
+<li>ENGINE接收到从DOWNLOADER发过来的Response后，会发送给Spider用于处理，中间会经过Spider Middleware (在process_spider_input()中).</li>
+<li>Spider会处理从ENGINE返回回来的Response，然后将爬下来的数据和新的Requests再次发送给ENGINE。中间会经过Spider Middleware (在process_spider_output()中).</li>
+<li>ENGINE会将处理好的Items发送给Item PIPELINE，然后将新的Requests发送给SCHEDULER，并向SCHEDULER请求下一个要爬虫的Request</li>
+<li>一直这么重复，直到SCHEDULER中没有剩余的Requests</li>
+</ol>
+</blockquote>
+<h1 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h1><p>当你在爬网页的时候，会经常需要从HTML中提取数据，也有一些现成的python库完成这些，比如BeautifulSoup和lxml。</p>
+<p>Scrapy有自己的一套机制来提取数据，叫做Selector，通过<code>Xpath</code>或者<code>CSS</code>来选择数据</p>
+<p>Xpath是一种在XML中选择nodes的语言，而CSS是将style应用到HTML文本的语言。</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>Response对象通过<code>.selector</code>属性可以返回一个Selector对象<br>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.selector.xpath(&#x27;//span/text()&#x27;).get()</span><br><span class="line">&#x27;good&#x27;</span><br></pre></td></tr></table></figure>
+<p>由于我们会大量的使用<code>Xpath</code>和<code>CSS</code>，因此可以简化成<code>response.xpath()</code>和<code>response.css()</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//span/text()&#x27;).get()</span><br><span class="line">&#x27;good&#x27;</span><br><span class="line">&gt;&gt;&gt; response.css(&#x27;span::text&#x27;).get()</span><br><span class="line">&#x27;good&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>通常我们都是使用上面的两种情况，如果要直接创建Selector的话，可以使用下面：</p>
+<p>使用text创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from scrapy.selector import Selector</span><br><span class="line">&gt;&gt;&gt; body = &#x27;&lt;html&gt;&lt;body&gt;&lt;span&gt;good&lt;/span&gt;&lt;/body&gt;&lt;/html&gt;&#x27;</span><br><span class="line">&gt;&gt;&gt; Selector(text=body).xpath(&#x27;//span/text()&#x27;).get()</span><br><span class="line">&#x27;good&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>使用response创建：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from scrapy.selector import Selector</span><br><span class="line">&gt;&gt;&gt; from scrapy.http import HtmlResponse</span><br><span class="line">&gt;&gt;&gt; response = HtmlResponse(url=&#x27;http://example.com&#x27;, body=body)</span><br><span class="line">&gt;&gt;&gt; Selector(response=response).xpath(&#x27;//span/text()&#x27;).get()</span><br><span class="line">&#x27;good&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="使用Selector"><a href="#使用Selector" class="headerlink" title="使用Selector"></a>使用Selector</h2><p>我们先贴出整个HTML代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"> &lt;head&gt;</span><br><span class="line">  &lt;base href=&#x27;http://example.com/&#x27; /&gt;</span><br><span class="line">  &lt;title&gt;Example website&lt;/title&gt;</span><br><span class="line"> &lt;/head&gt;</span><br><span class="line"> &lt;body&gt;</span><br><span class="line">  &lt;div id=&#x27;images&#x27;&gt;</span><br><span class="line">   &lt;a href=&#x27;image1.html&#x27;&gt;Name: My image 1 &lt;br /&gt;&lt;img src=&#x27;image1_thumb.jpg&#x27; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&#x27;image2.html&#x27;&gt;Name: My image 2 &lt;br /&gt;&lt;img src=&#x27;image2_thumb.jpg&#x27; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&#x27;image3.html&#x27;&gt;Name: My image 3 &lt;br /&gt;&lt;img src=&#x27;image3_thumb.jpg&#x27; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&#x27;image4.html&#x27;&gt;Name: My image 4 &lt;br /&gt;&lt;img src=&#x27;image4_thumb.jpg&#x27; /&gt;&lt;/a&gt;</span><br><span class="line">   &lt;a href=&#x27;image5.html&#x27;&gt;Name: My image 5 &lt;br /&gt;&lt;img src=&#x27;image5_thumb.jpg&#x27; /&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"> &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>让我们来学习selector</p>
+<p>选择title标签里面的text</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> response.xpath(&#x27;//title/text()&#x27;)</span><br><span class="line">[&lt;Selector xpath=&#x27;//title/text()&#x27; data=&#x27;Example website&#x27;&gt;]</span><br></pre></td></tr></table></figure>
+<p>为了能够得到文本数据，必须使用selector的<code>.get()</code>或者<code>.getall()</code>方法，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//title/text()&#x27;).getall()</span><br><span class="line">[&#x27;Example website&#x27;]</span><br><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//title/text()&#x27;).get()</span><br><span class="line">&#x27;Example website&#x27;</span><br></pre></td></tr></table></figure>
+<p>可以看出，<code>.get()</code>只会返回一个结果，如果有好几个结果的话，则会返回第一个；而<code>.getall()</code>会返回一个结果的list。</p>
+<p>通常，使用CSS3 pseudo-elements，CSS Selector可以选择text或者attribute的node</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&#x27;title::text&#x27;).get()</span><br><span class="line">&#x27;Example website&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出，<code>.xpath()</code>和<code>.css()</code>方法会返回一个SelectorList，里面包括了一些新的Selector，因此，我们可以连着使用，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&#x27;img&#x27;).xpath(&#x27;@src&#x27;).getall()</span><br><span class="line">[&#x27;image1_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image2_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image3_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image4_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image5_thumb.jpg&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>如果你只是想获取匹配到的元素中的第一个的话，可以使用selector的<code>.get()</code>（或者<code>.extract_first()</code>）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//div[@id=&quot;images&quot;]/a/text()&#x27;).get()</span><br><span class="line">&#x27;Name: My image 1 </span><br></pre></td></tr></table></figure>
+<p>如果没有匹配的话，则会返回<code>None</code>。我们还可以使用其他的来代替这个返回的None值，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//div[@id=&quot;not-exists&quot;]/text()&#x27;).get(default=&#x27;not-found&#x27;)</span><br><span class="line">&#x27;not-found&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>除了上面使用xpath的<code>@src</code>来获得属性之外，还可以使用<code>Selector</code>的<code>.attrib</code>，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [img.attrib[&#x27;src&#x27;] for img in response.css(&#x27;img&#x27;)]</span><br><span class="line">[&#x27;image1_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image2_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image3_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image4_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image5_thumb.jpg&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>SelectorList还可以直接使用<code>.attrib</code>，不过只是返回第一个匹配的元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&#x27;img&#x27;).attrib[&#x27;src&#x27;]</span><br><span class="line">&#x27;image1_thumb.jpg&#x27;</span><br></pre></td></tr></table></figure>
+<p>当只有一个结果的时候，这种还是比较实用的，比如：，这时候只有一个结果与之匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&#x27;base&#x27;).attrib[&#x27;href&#x27;]</span><br><span class="line">&#x27;http://example.com/&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<p>现在，我们想获得一些base URL和一些图片的链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//base/@href&#x27;).get()</span><br><span class="line">&#x27;http://example.com/&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&#x27;base::attr(href)&#x27;).get()</span><br><span class="line">&#x27;http://example.com/&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&#x27;base&#x27;).attrib[&#x27;href&#x27;]</span><br><span class="line">&#x27;http://example.com/&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//a[contains(@href, &quot;image&quot;)]/@href&#x27;).getall()</span><br><span class="line">[&#x27;image1.html&#x27;,</span><br><span class="line"> &#x27;image2.html&#x27;,</span><br><span class="line"> &#x27;image3.html&#x27;,</span><br><span class="line"> &#x27;image4.html&#x27;,</span><br><span class="line"> &#x27;image5.html&#x27;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&#x27;a[href*=image]::attr(href)&#x27;).getall()</span><br><span class="line">[&#x27;image1.html&#x27;,</span><br><span class="line"> &#x27;image2.html&#x27;,</span><br><span class="line"> &#x27;image3.html&#x27;,</span><br><span class="line"> &#x27;image4.html&#x27;,</span><br><span class="line"> &#x27;image5.html&#x27;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.xpath(&#x27;//a[contains(@href, &quot;image&quot;)]/img/@src&#x27;).getall()</span><br><span class="line">[&#x27;image1_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image2_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image3_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image4_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image5_thumb.jpg&#x27;]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; response.css(&#x27;a[href*=image] img::attr(src)&#x27;).getall()</span><br><span class="line">[&#x27;image1_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image2_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image3_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image4_thumb.jpg&#x27;,</span><br><span class="line"> &#x27;image5_thumb.jpg&#x27;]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于CSS Selectors，如果要选择text node的话，使用<code>::text</code>；如果要选择属性值的话，使用<code>::attr(name)</code>,其中name是你想获得的值的属性名</p>
+<p>选择<code>&lt;title&gt;</code>元素下的text node</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; response.css(&#x27;title::text&#x27;).get()</span><br><span class="line">&#x27;Example website&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot; aria-label&#x3D;&quot;上一页&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot; aria-label&#x3D;&quot;下一页&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,23 +1,1205 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="MPLS L2VPN提供基于MPLS网络的二层VPN服务，包括点到点的VPWS业务（Virtual Private Wire Service）跟点到多点的VPLS业务（Virtual Private LAN Service） 简介 MPLS L2VPN就是在MPLS网络上透明传递用户的二层数据。从用户的角度来看，这个MPLS网络就是一个二层的交换网络，通过这个网络，可以在不同站点之间建立二层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二层VPN">
+<meta property="og:url" content="http://yoursite.com/2020/08/31/%E4%BA%8C%E5%B1%82VPN/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="MPLS L2VPN提供基于MPLS网络的二层VPN服务，包括点到点的VPWS业务（Virtual Private Wire Service）跟点到多点的VPLS业务（Virtual Private LAN Service） 简介 MPLS L2VPN就是在MPLS网络上透明传递用户的二层数据。从用户的角度来看，这个MPLS网络就是一个二层的交换网络，通过这个网络，可以在不同站点之间建立二层">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pfws5u8j31810je7fn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9phz8sg5j30zy0bgq98.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pmfnnvpj31ac08sdjo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gia20woay1j30wt07xdgk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gia44kmgwrj30x109g3za.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gia45j344ej30vs08vwf9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gia46vkjmej30wg0bvq3u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gilo6nv22oj30rt07aq5v.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gimg08533gj30z40iuwoh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9q1b3vzmj314e0j7k38.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sctbxn7j312p0fyjxu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sfozbwpj30yq0jzwmz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sk3h7khj30tj0d8n48.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gimhjbge83j30wi0jfjxa.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gimhjqd5jcj30g90it0u8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gimhw2iexjj30wo0h70vv.jpg">
+<meta property="article:published_time" content="2020-08-31T00:43:18.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="VPN">
+<meta property="article:tag" content="数通">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pfws5u8j31810je7fn.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/08/31/%E4%BA%8C%E5%B1%82VPN/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>二层VPN | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/31/%E4%BA%8C%E5%B1%82VPN/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二层VPN
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-31 08:43:18" itemprop="dateCreated datePublished" datetime="2020-08-31T08:43:18+08:00">2020-08-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">数通</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/08/31/%E4%BA%8C%E5%B1%82VPN/" class="leancloud_visitors" data-flag-title="二层VPN">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+
+<p>MPLS L2VPN提供基于MPLS网络的二层VPN服务，包括<strong>点到点的VPWS业务</strong>（Virtual Private Wire Service）跟<strong>点到多点的VPLS业务</strong>（Virtual Private LAN Service）</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pfws5u8j31810je7fn.jpg" alt="捕获.PNG"></p>
+<p>MPLS L2VPN就是在MPLS网络上透明传递用户的二层数据。从用户的角度来看，这个MPLS网络就是一个二层的交换网络，通过这个网络，可以在不同站点之间建立二层的连接</p>
+<h1 id="VPWS"><a href="#VPWS" class="headerlink" title="VPWS"></a>VPWS</h1><h2 id="VPWS基本架构"><a href="#VPWS基本架构" class="headerlink" title="VPWS基本架构"></a>VPWS基本架构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9phz8sg5j30zy0bgq98.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>接入电路AC（Attachment Circuit）：一条连接CE和PE的独立的链路或电路。AC接口可以是物理接口或逻辑接口。</li>
+<li>虚电路VC（Virtual Circuit）：两个PE节点之间的一种逻辑连接。</li>
+<li>隧道Tunnel（MPLS Tunnel）：用于在PE之间透明地传输用户数据。</li>
+</ul>
+<blockquote>
+<p>VC提供用户二层数据穿越运营商骨干网络的通道，可以将其简单地理解为连接两个AC接口虚拟线路（点到点连接），将两条用户侧的AC“短接”起来。因此在MPLS L2VPN的实现中，VC又被称为PW（Pseudo Wire，伪线）。</p>
+</blockquote>
+<h2 id="VPWS-报文发送过程"><a href="#VPWS-报文发送过程" class="headerlink" title="VPWS 报文发送过程"></a>VPWS 报文发送过程</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9pmfnnvpj31ac08sdjo.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>MPLS L2VPN通过标签栈实现用户报文在MPLS网络中的透明传送</li>
+<li>外层标签（称为Tunnel标签）用于将报文从一个PE传递到另一个PE。</li>
+<li>内层标签（在MPLS L2VPN中称为VC标签）用于区分不同VPN中的不同连接，接收方PE根据VC标签决定将报文转发给哪个CE（哪个AC接口）。</li>
+</ul>
+<blockquote>
+<p>华为查询方式：</p>
+<p>display mpls l2vc interface XXX ：能查询内层VC标签，查询到VC tunnel下的tunnel id</p>
+<p>display tunnel-info tunnel-id X ： 能查询出接口、外层标签</p>
+</blockquote>
+<h2 id="VPWS实现方式"><a href="#VPWS实现方式" class="headerlink" title="VPWS实现方式"></a>VPWS实现方式</h2><h3 id="Martini"><a href="#Martini" class="headerlink" title="Martini"></a>Martini</h3><p>Martini是基于LDP的，Martini方式使用两层标签，内层标签是采用扩展的LDP作为信令进行交互。</p>
+<p>PE之间建立LDP的remote session，PE为CE之间的每条连接分配一个VC标签。二层VPN信息将携带着VC标签，通过LDP建立的LSP转发到remote session的对端PE。</p>
+<p>在Martini方式中，两个CE间的VC Type + VC ID来识别一个VC。同一个VC Type的所有VC中，其VC ID必须在整个MPLS网络中唯一。</p>
+<ul>
+<li>VC-Type：表明VC的封装类型，例如ATM、VLAN或PPP。</li>
+<li>VC-ID：标识VC。相同VC-Type的所有VC，其VC-ID必须在整个MPLS网络中唯一。</li>
+</ul>
+<h3 id="Martini的标签协商-VLL技术"><a href="#Martini的标签协商-VLL技术" class="headerlink" title="Martini的标签协商-VLL技术"></a>Martini的标签协商-VLL技术</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia20woay1j30wt07xdgk.jpg" alt="捕获.PNG"></p>
+<p>在PE1上配置：</p>
+<p>首先在PE之间配置 mpls ldp remote 会话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mpls ldp remote-peer PE2</span><br><span class="line">    remote ip 3.0.0.42</span><br></pre></td></tr></table></figure>
+<p>之后在PE1接入CE的接口上创建L2VPN连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpls l2vc 3.0.0.42 1001</span><br></pre></td></tr></table></figure>
+
+<p>同样的，在PE2上配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mpls ldp remote-peer PE1</span><br><span class="line">    remote ip 3.0.0.44</span><br><span class="line"></span><br><span class="line">mpls l2vc 3.0.0.45 1001</span><br></pre></td></tr></table></figure>
+
+
+<p>这样，PE1和PE2之间就建立了一条VC（也就是PW），VC_ID为1001</p>
+<p>之后，先在PE1上的GE子接口上绑定L2VC，之后PE1会为该VC分配一个内层标签140288，放入mapping消息中，并发送request和mapping消息给PE2，由于PE2并没有配置L2VC，所以将不做回应</p>
+<p>然后，在PE2上的GE子接口上配置L2VC，此时PE2会为该VC分配一个标签140290，将这个标签放在mapping消息中，并发送mapping和request报文给PE1。PE1接收到PE2发送过来的request和mapping消息后，作出反应，将自己分配的标签140288放 入mapping消息中，并发送mapping消息给PE2，再检查PE2发过来的mapping消息发现VC信息符合，便将mapping里面的标签140290放入本地，作为PE1的Remote Label，并使本地的VC状态up，如下图示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia44kmgwrj30x109g3za.jpg" alt="捕获.PNG"></p>
+<p>PE2接收到PE1端过来的mapping报文，比较之后发现VC信息相符，则将mapping中的标签140288放入自己本地，作为PE2的Remote Label，将VC的状态改为UP，此时VC建立完毕，如上图示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia45j344ej30vs08vwf9.jpg" alt="捕获.PNG"></p>
+<h3 id="Martini的转发过程"><a href="#Martini的转发过程" class="headerlink" title="Martini的转发过程"></a>Martini的转发过程</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gia46vkjmej30wg0bvq3u.jpg" alt="捕获.PNG"></p>
+<p>报文从CE1到达PE1，根据接口转发表查得公网标签（1027）和VC标签(140290)，打上标签从出接口转发出去。倒数第二跳的时候弹出标签，在PE2上查找VC标签对应的出接口，弹出私网标签，转发到CE2。</p>
+<h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Display mpls ldp session</span><br><span class="line"></span><br><span class="line">Display mpls ldp peer</span><br><span class="line"></span><br><span class="line">Display mpls l2vc brief</span><br><span class="line"></span><br><span class="line">Display mpls l2vc interface xxxxxxx</span><br><span class="line"></span><br><span class="line">display tunnel-info tunnel-id xxx</span><br><span class="line"></span><br><span class="line">display mpls l2vc vc-id</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Kompella"><a href="#Kompella" class="headerlink" title="Kompella"></a>Kompella</h3><p>Kompella是另一种VLL技术的主流模式，与MPLS L3VPN很相似，特别是CE、PE、ROUTE-TARGET、RD、SITE的定义以及用途</p>
+<p>区别是kompella传送的是二层信息，而MPLS BGP VPN传送的是三层路由信息，为此kompella进行了相应的BGP NLRI扩展</p>
+<p>Kompella方式采取标签块的方式，一次为多个连接分配标签。用户可以指定一个本地CE的范围（CE range），表明这个CE能与多少个CE建立连接。系统会一次为这个CE分配一个标签块，标签块的大小等于CE range。这种方式允许用户为VPN分配一些额外的标签，留待以后使用。这样会造成标签资源的浪费，但是同时带来一个很大的好处：减少VPN部署和扩容时的配置工作量。</p>
+<h4 id="标签块"><a href="#标签块" class="headerlink" title="标签块"></a>标签块</h4><ul>
+<li>Kompella方式采用标签块（Label Block）分配标签，一次为多个连接分配标签。</li>
+</ul>
+<p>标签块的三要素：</p>
+<ul>
+<li>标签块的起始标签LB（Label Base）：由系统分配，表明该标签块的起始标签。</li>
+<li>标签块的大小LR（Label Range）：用户可以指定一个本地CE的范围（CE range），表明这个CE能与多少个CE建立连接。系统一次为CE分配一个大小等于CE range的标签块。</li>
+<li>偏移量LO（Label-block Offset）：标签不够用时，为了不破坏原有的VC连接，需要给CE分配一个新的标签块。多个标签之间的关系通过LO来定义，标志前面所有已分配的标签块大小的总数。</li>
+</ul>
+<h4 id="配置VC连接"><a href="#配置VC连接" class="headerlink" title="配置VC连接"></a>配置VC连接</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gilo6nv22oj30rt07aq5v.jpg" alt="捕获.PNG"></p>
+<p>进入MPLS-L2VPN视图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpls l2vpn l2vpn-name</span><br></pre></td></tr></table></figure>
+<p>创建CE，并进入MPLS-L2VPN-CE视图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ce ce-name id ce-id [range ce-range] [default-offset ce-offset ]</span><br><span class="line"># ce-name ： 在当前PE的当前VPN上指定CE名称</span><br><span class="line"># id ce-id : VPN内CE的ID值 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>为CE创建连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">connection [ ce-offset id ] interface interface-type interface-number [ tunnel-policy policy-name ] [ raw | tagged ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ce-offset id：与L2VPN相连的对端CE的ID。</span><br><span class="line"># interface interface-type interface-number ： 与CE相连的接口，其封装格式必须与所属VPN一致。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Kompella-1"><a href="#Kompella-1" class="headerlink" title="Kompella"></a>Kompella</h4><p>从图中可以看到，CE1与 CE3和CE13 都是点到点的连接，PE1会分配两个标签块，一个是用来与CE1建立连接的，一个是用来与CE13建立连接的，同样，PE2也给CE3分配了标签块，PE3给CE13分配了标签块<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gimg08533gj30z40iuwoh.jpg" alt="捕获.PNG"></p>
+<h1 id="VPLS"><a href="#VPLS" class="headerlink" title="VPLS"></a>VPLS</h1><h2 id="VPLS基本结构"><a href="#VPLS基本结构" class="headerlink" title="VPLS基本结构"></a>VPLS基本结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9q1b3vzmj314e0j7k38.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>PW（Pseudo-Wire）：伪线。PW是VPLS中两个PE间的虚拟逻辑连接，在两个PE之间传输用户数据。</li>
+<li>VSI（Virtual Switch Instance）：虚拟交换实例。每个VSI提供单独的VPLS服务。通过VSI，可以将VPLS的实际接入链路映射到各条虚链接上。</li>
+<li>AC（Attachment Circuit）：接入线路。指CE与PE的连接，在L2VPN中，CE通过AC接入到PE。</li>
+<li>Tunnel（Network Tunnel）：隧道。用于承载PW，一条隧道上可以承载多条PW，一般情况下为MPLS隧道。隧道是一条本地PE与对端PE之间的直连通道，完成PE之间的数据透传。</li>
+</ul>
+<h2 id="VPLS基本工作原理"><a href="#VPLS基本工作原理" class="headerlink" title="VPLS基本工作原理"></a>VPLS基本工作原理</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sctbxn7j312p0fyjxu.jpg" alt="捕获.PNG"></p>
+<p>可以将每个VSI看作一台独立的交换机。PE连 接CE的端口（AC接口）作为交换机的端口，而连接各个PE的PW就是交换机的内部交叉电路。</p>
+<h2 id="VPLS与普通L2VPN的区别"><a href="#VPLS与普通L2VPN的区别" class="headerlink" title="VPLS与普通L2VPN的区别"></a>VPLS与普通L2VPN的区别</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sfozbwpj30yq0jzwmz.jpg" alt="捕获.PNG"></p>
+<h2 id="VPLS基本拓扑"><a href="#VPLS基本拓扑" class="headerlink" title="VPLS基本拓扑"></a>VPLS基本拓扑</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gi9sk3h7khj30tj0d8n48.jpg" alt="捕获.PNG"></p>
+<p>同一个VSI中各个PE间必须建立<strong>全连接</strong>的PW，同时配置“水平分割”策略（无需配置，产品缺省），即如果PE收到远端PE发来的广播流量，它只向同一VPLS的所有AC端口转发流量，不向其他PE转发 。PE间全连接和水平分割一起保证了VPLS转发的可达性和无环路。</p>
+<h2 id="VPLS控制平面"><a href="#VPLS控制平面" class="headerlink" title="VPLS控制平面"></a>VPLS控制平面</h2><p>华为产品支持使用LDP或BGP实现VPLS的控制平面的功能，分别称为Martini方式的VPLS和Kompella方式的VPLS。</p>
+<h3 id="Martini方式的VPLS"><a href="#Martini方式的VPLS" class="headerlink" title="Martini方式的VPLS"></a>Martini方式的VPLS</h3><p>采用LDP作为信令，需要手工指定PE的各对等体，由于同一VPLS中各PE之间需要建立全连接，每当有新的PE加入时，所有相关PE上都修改配置，导致可扩展性较差。但是PW实际是点到点链路，使用LDP进行PW的建立、维护和拆除更为有效。</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个名称为company1的Martini方式VPLS的VSI，配置当前VSI实例的ID为1。</span><br><span class="line">&lt;HUAWEI&gt; system-view</span><br><span class="line">[HUAWEI] mpls lsr-id 1.1.1.1 </span><br><span class="line">[HUAWEI] mpls</span><br><span class="line">[HUAWEI-mpls] quit</span><br><span class="line">[HUAWEI] mpls l2vpn</span><br><span class="line">[HUAWEI-l2vpn] quit</span><br><span class="line">[HUAWEI] vsi company1 static</span><br><span class="line">[HUAWEI-vsi-company1] pwsignal ldp</span><br><span class="line">[HUAWEI-vsi-company1-ldp] vsi-id 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置VSI对等体，建立与一个或多个对端PE的PW连接</span><br><span class="line"># peer peer-address [ negotiation-vc-id vc-id ] pw pw-name</span><br><span class="line"># negotiation-vc-id vc-id ： 虚电路的唯一标识，一般用于两端VSI ID不同但要求互通的情况，参数vc-id不能与本端其他VSI配置的VSI ID相同，到同一个Peer的negotiate-vc-id指定的VC ID也不能相同</span><br><span class="line"># pw pw-name ： PW的名称，用于标识该PW，PW名称要求在同一VSI下唯一，在不同VSI下PW名称可以相同。</span><br><span class="line"></span><br><span class="line">&lt;HUAWEI&gt; system-view</span><br><span class="line">[HUAWEI] vsi aa static</span><br><span class="line">[HUAWEI-vsi-aa] pwsignal ldp</span><br><span class="line">[HUAWEI-vsi-aa-ldp] vsi-id 1</span><br><span class="line">[HUAWEI-vsi-aa-ldp] peer 1.1.1.1</span><br><span class="line">[HUAWEI-vsi-aa-ldp] peer 1.1.1.1 pw pw1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># l2 binding命令用于将二层接口绑定到VSI实例</span><br><span class="line"># l2 binding vsi vsi-name [ access-port ]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gimhjbge83j30wi0jfjxa.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gimhjqd5jcj30g90it0u8.jpg" alt="捕获.PNG"></p>
+<h3 id="Kompella方式的VPLS"><a href="#Kompella方式的VPLS" class="headerlink" title="Kompella方式的VPLS"></a>Kompella方式的VPLS</h3><p>采用BGP作为信令，可以通过配置VPN Target实现VPLS成员的自动发现，增加PE或删除PE时，所需的额外操作很少，因而具有较好的扩展性。</p>
+<h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个名称为company2的Komeplla方式VPLS的VSI</span><br><span class="line"></span><br><span class="line">[HUAWEI] vsi company2 auto</span><br><span class="line">[HUAWEI-vsi-company2] pwsignal bgp</span><br><span class="line"></span><br><span class="line">route-distinguisher route-distinguisher 配置VSI的RD</span><br><span class="line">vpn-target vpn-target&amp;&lt;1-16&gt; [ both | export-extcommunity | import-extcommunity ] 配置VSI的VPN-Target</span><br><span class="line"></span><br><span class="line"># 配置Site连接</span><br><span class="line">site site-id [ range site-range ] [ default-offset &#123; 0 | 1 &#125; ] ]</span><br><span class="line"></span><br><span class="line"># 配置接口绑定VSI</span><br><span class="line">l2 binding vsi vsi-name</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gimhw2iexjj30wo0h70vv.jpg" alt="捕获.PNG"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VPN/" rel="tag"># VPN</a>
+          
+            <a href="/tags/%E6%95%B0%E9%80%9A/" rel="tag"># 数通</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/04/QoS/" rel="next" title="QoS">
+                <i class="fa fa-chevron-left"></i> QoS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/26/git-for-windows-%E9%95%9C%E5%83%8F%E5%9C%B0%E5%9D%80/" rel="prev" title="git for windows 镜像地址">
+                git for windows 镜像地址 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPWS"><span class="nav-number">2.</span> <span class="nav-text">VPWS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VPWS%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">VPWS基本架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPWS-%E6%8A%A5%E6%96%87%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">VPWS 报文发送过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPWS%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">VPWS实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Martini"><span class="nav-number">2.3.1.</span> <span class="nav-text">Martini</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Martini%E7%9A%84%E6%A0%87%E7%AD%BE%E5%8D%8F%E5%95%86-VLL%E6%8A%80%E6%9C%AF"><span class="nav-number">2.3.2.</span> <span class="nav-text">Martini的标签协商-VLL技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Martini%E7%9A%84%E8%BD%AC%E5%8F%91%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.3.</span> <span class="nav-text">Martini的转发过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4"><span class="nav-number">2.3.4.</span> <span class="nav-text">一些命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kompella"><span class="nav-number">2.3.5.</span> <span class="nav-text">Kompella</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E5%9D%97"><span class="nav-number">2.3.5.1.</span> <span class="nav-text">标签块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEVC%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.5.2.</span> <span class="nav-text">配置VC连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kompella-1"><span class="nav-number">2.3.5.3.</span> <span class="nav-text">Kompella</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPLS"><span class="nav-number">3.</span> <span class="nav-text">VPLS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VPLS%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">VPLS基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPLS%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">VPLS基本工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPLS%E4%B8%8E%E6%99%AE%E9%80%9AL2VPN%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.3.</span> <span class="nav-text">VPLS与普通L2VPN的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPLS%E5%9F%BA%E6%9C%AC%E6%8B%93%E6%89%91"><span class="nav-number">3.4.</span> <span class="nav-text">VPLS基本拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPLS%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">3.5.</span> <span class="nav-text">VPLS控制平面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Martini%E6%96%B9%E5%BC%8F%E7%9A%84VPLS"><span class="nav-number">3.5.1.</span> <span class="nav-text">Martini方式的VPLS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kompella%E6%96%B9%E5%BC%8F%E7%9A%84VPLS"><span class="nav-number">3.5.2.</span> <span class="nav-text">Kompella方式的VPLS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">配置</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

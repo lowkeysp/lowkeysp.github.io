@@ -1,23 +1,3509 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="lowkeysp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lowkeysp&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="lowkeysp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/page/5/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/MPLS-LDP%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/07/MPLS-LDP%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">MPLS LDP的配置实现</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-07 15:05:32" itemprop="dateCreated datePublished" datetime="2020-04-07T15:05:32+08:00">2020-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/04/07/MPLS-LDP%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0/" class="leancloud_visitors" data-flag-title="MPLS LDP的配置实现">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="LDP的基础配置案例1"><a href="#LDP的基础配置案例1" class="headerlink" title="LDP的基础配置案例1"></a>LDP的基础配置案例1</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl7xclzuij30m90ae40z.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl7zyed8aj30p80c8gpd.jpg" alt="捕获.PNG"></p>
+<h2 id="配置检查"><a href="#配置检查" class="headerlink" title="配置检查"></a>配置检查</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl8j1a2atj30iq08imzj.jpg" alt="捕获.PNG"></p>
+<h1 id="使用MPLS解决BGP路由黑洞问题"><a href="#使用MPLS解决BGP路由黑洞问题" class="headerlink" title="使用MPLS解决BGP路由黑洞问题"></a>使用MPLS解决BGP路由黑洞问题</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl99ojar1j30ow0d0grl.jpg" alt="捕获.PNG"></p>
+<h2 id="BGP路由黑洞问题"><a href="#BGP路由黑洞问题" class="headerlink" title="BGP路由黑洞问题"></a>BGP路由黑洞问题</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl9b8jv1aj30kx0biq5m.jpg" alt="捕获.PNG"></p>
+<h2 id="解决方案：激活MPLS及LDP"><a href="#解决方案：激活MPLS及LDP" class="headerlink" title="解决方案：激活MPLS及LDP"></a>解决方案：激活MPLS及LDP</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl9imvs33j30p90cq44l.jpg" alt="捕获.PNG"></p>
+<p>需要注意的是，下一跳4.4.4.4的路由只能迭代到R2，并不会迭代到LSP，因此，需要使用’route recursive-lookup tunnel’</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdl9lnzxx5j30nv0cndkz.jpg" alt="捕获.PNG"></p>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
+<li><p>配置设备的LDP传输地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Quidway-if] mpls ldp transport-address intf.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>缺省情况下，公网的LDP传输地址等于节点的LSR-ID，私网的传输地址等于接口的主IP地址</p>
+</li>
+<li><p>配置LSP建立的触发策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Quidway-if] lsp-trigger &#123;all|host|ip-prefix ip-prefix-name | none&#125;</span><br></pre></td></tr></table></figure>
+<p>缺省情况下，触发策略为host，即32位地址的主机IP路由（不包括接口的32位地址的主机IP路由）触发建立LSP，其他的触发策略如下：</p>
+<blockquote>
+<ul>
+<li>如果触发为all，则所有静态路由和IGP路由触发建立LSP。BGP公网路由不能触发建立LSP</li>
+<li>如果触发策略为ip-prefix，则只有通过IP地址前缀列表过滤的FEC项能够触发建立LSP</li>
+<li>如果触发策略为none，则不触发建立LSP</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>host:意思就是如果直连的主机IP地址是32位的，则为这个IP路由建立起一个LSP</p>
+<ul>
+<li>配置LDP标签策略<br>一般情况下，LSR会向其上游和下游LDP对等体都分配标签，从而提高了LDP LSP的收敛速度。但是接收所有的标签映射，或者向所有对等体发送标签映射会导致大量LSP的建立，造成资源的浪费。为了减少LSP的数量，节省内存，可配置LDP水平分割策略</li>
+<li>配置LDP水平分割策略<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Quidway-mpls-ldp] outbound peer &#123;peer-id | all&#125; split-horizon</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>为LDP对等体配置水平分割策略，即控制LSR只向其上游LDP对等体分配标签。缺省情况下，没有为LDP对等体配置水平分割策略，即LSR会向其上游和下游LDP对等体都分配标签</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/LDP%E6%A0%87%E7%AD%BE%E5%88%86%E5%8F%91%E5%8D%8F%E8%AE%AE/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/01/LDP%E6%A0%87%E7%AD%BE%E5%88%86%E5%8F%91%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">LDP标签分发协议</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-01 16:52:03" itemprop="dateCreated datePublished" datetime="2020-04-01T16:52:03+08:00">2020-04-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/04/01/LDP%E6%A0%87%E7%AD%BE%E5%88%86%E5%8F%91%E5%8D%8F%E8%AE%AE/" class="leancloud_visitors" data-flag-title="LDP标签分发协议">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="LDP标签分发协议"><a href="#LDP标签分发协议" class="headerlink" title="LDP标签分发协议"></a>LDP标签分发协议</h1><p>LDP是专门为标签发布而制定的协议。LDP根据IGP，BGP路由信息通过逐跳的方式建立LSP</p>
+<h2 id="LDP协议概述"><a href="#LDP协议概述" class="headerlink" title="LDP协议概述"></a>LDP协议概述</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdegydx4clj30iv06t76x.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>LDP（Label Distribution Protocol，标签分发协议）是一种标签分发协议，广泛应用于MPLS网络，具有配置简单，可提供路由拓扑驱动建立LSP、支持大容量LSP等优点</li>
+<li>LDP是MPLS的一种控制协议。LDP通过Hello报文发现邻居，并基于TCP建立邻居间的会话</li>
+<li>LDP能够动态地为FEC分配标签，并建立LSP（Label Switched Path，标签交换路径）</li>
+</ul>
+<h2 id="LDP对等体及LDP会话"><a href="#LDP对等体及LDP会话" class="headerlink" title="LDP对等体及LDP会话"></a>LDP对等体及LDP会话</h2><h3 id="LDP对等体"><a href="#LDP对等体" class="headerlink" title="LDP对等体"></a>LDP对等体</h3><ul>
+<li>LDO对等体是指相互之间存在LDP会话，使用LDP来交换标签映射信息的两个LSR。LDP对等体通过它们之间的LDP会话获得对方的标签映射。LDP对等体也称为LDP邻居</li>
+</ul>
+<h3 id="LDP会话"><a href="#LDP会话" class="headerlink" title="LDP会话"></a>LDP会话</h3><ul>
+<li>本地LDP会话（Local LDP Session）：建立会话的两个LSR之间是直连的</li>
+<li>远程LDP会话（Remote LDP Session）：建立会话的两个LSR之间可以是直连的，也可以是非直连的。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdeh5l8u2vj30jp05i3zg.jpg" alt="捕获.PNG"></p>
+<h2 id="LDP报文类型"><a href="#LDP报文类型" class="headerlink" title="LDP报文类型"></a>LDP报文类型</h2><p>LDP协议主要使用四类报文：</p>
+<ul>
+<li>发现（Discovery）报文：用于通告和维护网络中LSR的存在，如Hello报文</li>
+<li>会话（Session）报文：用于建立，维护和终止LDP会对等体之间的会话，如Initialization报文，Keepalive报文</li>
+<li>通告（Advertisement）报文；用于创建，改变和删除FEC的标签映射</li>
+<li>通知（Notification）报文：用于提供建议性的报文和差错通知</li>
+</ul>
+<p>为了保证LDP报文的可靠发送，除了Discovery报文使用UDP传输外，LDP的其他三种报文都使用TCP传输</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="LSR-ID"><a href="#LSR-ID" class="headerlink" title="LSR ID"></a>LSR ID</h3><ul>
+<li>每一台运行MPLS的LSR必须拥有一个域内唯一的LSR ID</li>
+<li>在华为设备上激活MPLS能力hi前，必须为设备配置MPLS ID（使用全局配置命令 mpls lsr-id）</li>
+<li>LSR ID长度为32bit，与IPv4地址的格式相同</li>
+<li>通常情况下，我们会选择设备的某个Loopback接口地址作为LSR ID</li>
+</ul>
+<h3 id="LDP-ID"><a href="#LDP-ID" class="headerlink" title="LDP ID"></a>LDP ID</h3><ul>
+<li>每一台运行了LDP的LSR除了必须拥有LSR ID，，还必须拥有LDP ID</li>
+<li>LDP ID的长度是48bit，由32bit的LSR ID与16bit的标签空间标识符（Label Space ID）构成</li>
+<li>LDP ID以“LSR ID：标签空间标识”的形式呈现。例如：2.2.2.2：0</li>
+<li>标签空间标识一般存在两种形态：</li>
+<li><ul>
+<li>值为0，标识基于设备（或基于平台）的标签空间</li>
+</ul>
+</li>
+<li><ul>
+<li>值为1：标识基于接口的标签空间</li>
+</ul>
+</li>
+</ul>
+<h3 id="传输地址"><a href="#传输地址" class="headerlink" title="传输地址"></a>传输地址</h3><ul>
+<li>两台LSR之间在建立LDP会话之前，需要先建立TCP连接，以便进行LDP协议报文的交换</li>
+<li>互为邻居的LSR需基于双方的传输地址（Transport Address）建立TCP连接</li>
+<li>在LDP Hello报文中，包含设备的传输地址，LSR通过Hello报文知晓邻居的传输地址</li>
+<li>在使用Hello报文发现邻居并且知道了对方的传输地址后，邻居之间就会开始尝试TCP三次握手（基于传输地址），并且交互LDP的初始化报文，标签映射报文等，这些报文都使用双方的传输地址作为源，目的IP地址</li>
+<li>正如以上所说，传输地址会被用来与邻居建立TCP连接，因此LSR必须拥有到达邻居的传输地址的路由</li>
+<li>缺省情况下，公网的LDP传输地址等于设备的LSR ID，私网的传输地址等于接口的主IP地址</li>
+<li>在接口视图下，使用<code>mpls ldp transport-address</code>命令，可以修改传输地址</li>
+</ul>
+<h3 id="本地LDP会话建立过程1：邻居发现与TCP连接建立"><a href="#本地LDP会话建立过程1：邻居发现与TCP连接建立" class="headerlink" title="本地LDP会话建立过程1：邻居发现与TCP连接建立"></a>本地LDP会话建立过程1：邻居发现与TCP连接建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgm15ft6rj30os0ccwka.jpg" alt="捕获.PNG"></p>
+<p>R1发出的Hello报文<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgm6cmvp6j30kd0bkwia.jpg" alt="捕获.PNG"></p>
+<h3 id="本地LDP会话建立过程2：LDP会话建立过程"><a href="#本地LDP会话建立过程2：LDP会话建立过程" class="headerlink" title="本地LDP会话建立过程2：LDP会话建立过程"></a>本地LDP会话建立过程2：LDP会话建立过程</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgm7b77cmj30o80c9jwl.jpg" alt="捕获.PNG"></p>
+<p>R2发出来的Initialization报文</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgna0cqujj30m90cj79q.jpg" alt="捕获.PNG"></p>
+<h3 id="LDP标签通告过程"><a href="#LDP标签通告过程" class="headerlink" title="LDP标签通告过程"></a>LDP标签通告过程</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnbgc6lzj30p30cf0xe.jpg" alt="捕获.PNG"></p>
+<h3 id="LDP会话状态查看（简要信息）"><a href="#LDP会话状态查看（简要信息）" class="headerlink" title="LDP会话状态查看（简要信息）"></a>LDP会话状态查看（简要信息）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgndlk4qfj30n80cgaet.jpg" alt="捕获.PNG"></p>
+<h3 id="LDP会话状态查看（详细信息）"><a href="#LDP会话状态查看（详细信息）" class="headerlink" title="LDP会话状态查看（详细信息）"></a>LDP会话状态查看（详细信息）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnfbsv6xj30np0cp42a.jpg" alt="捕获.PNG"></p>
+<h3 id="LDP邻居查看（简要信息）"><a href="#LDP邻居查看（简要信息）" class="headerlink" title="LDP邻居查看（简要信息）"></a>LDP邻居查看（简要信息）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnh0oqt1j30nq0c1dkl.jpg" alt="捕获.PNG"></p>
+<p>DiscoverySource表示是哪个端口发现的这个邻居</p>
+<h3 id="LDP邻居查看（详细信息）"><a href="#LDP邻居查看（详细信息）" class="headerlink" title="LDP邻居查看（详细信息）"></a>LDP邻居查看（详细信息）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgniev61pj30nj0cetbw.jpg" alt="捕获.PNG"></p>
+<h3 id="LDP状态机（RFC5036）"><a href="#LDP状态机（RFC5036）" class="headerlink" title="LDP状态机（RFC5036）"></a>LDP状态机（RFC5036）</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnj9h0t9j30lv0cftbt.jpg" alt="捕获.PNG"></p>
+<h2 id="LSR的缺省行为"><a href="#LSR的缺省行为" class="headerlink" title="LSR的缺省行为"></a>LSR的缺省行为</h2><p>在华为设备上激活MPLS与LDP后，缺省情况如下：</p>
+<ul>
+<li>Transit LSR只有收到下游（DownStream）的标签映射报文，才会向上游（UpStream）分发标签</li>
+<li>对于从邻居LSR收到的标签映射，无论邻居LSR是不是自己的下一跳都会保留下来</li>
+</ul>
+<h2 id="LDP基本过程"><a href="#LDP基本过程" class="headerlink" title="LDP基本过程"></a>LDP基本过程</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnt0de8oj30p20cqjvw.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgns5jyuwj30ot0c80xh.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnunc9d2j30pi0d242u.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgntt0xmyj30ot0d50x2.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgnxiib82j30os0cgjvy.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgny96lslj30p60d5djv.jpg" alt="捕获.PNG"></p>
+<p>R1的NHLFE里面的Push表示动作，这是压入标签的意思。R1的FIB表的Tunnel-ID表示对应的NHLFE要做的动作是什么</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgo0y6fduj30pc0crwkg.jpg" alt="捕获.PNG"></p>
+<h2 id="在MPLS中，运行LDP协议的LSR的操作小结"><a href="#在MPLS中，运行LDP协议的LSR的操作小结" class="headerlink" title="在MPLS中，运行LDP协议的LSR的操作小结"></a>在MPLS中，运行LDP协议的LSR的操作小结</h2><ul>
+<li>LSR首先通过运行IGP协议（例如OSPF，ISIS）来构建路由表，FIB表</li>
+<li>LDP根据相应的模式，为路由表中的路由前缀（FEC）分配标签</li>
+<li>LDP根据相应的模式，将自己为路由前缀分配的标签，通过LDP标签映射报文通告给LDP邻居</li>
+<li>LSR将自己为路由前缀分配的标签，以及LDP邻居为改路由前缀通告的标签存储起来，并形成关联</li>
+<li>当LSR转发到达目的网络的标签报文时，所使用的出站标签总是下游LDP邻居所通告的标签，此处所指的下游邻居，是设备的路由表中到达该目的网络的下一跳设备</li>
+</ul>
+<h1 id="PHP特性"><a href="#PHP特性" class="headerlink" title="PHP特性"></a>PHP特性</h1><h2 id="R3没有使用PHP特性之前"><a href="#R3没有使用PHP特性之前" class="headerlink" title="R3没有使用PHP特性之前"></a>R3没有使用PHP特性之前</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgoa6casoj30mz0cewik.jpg" alt="捕获.PNG"></p>
+<h2 id="PHP特性-1"><a href="#PHP特性-1" class="headerlink" title="PHP特性"></a>PHP特性</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgoby96o4j30o20cj7a1.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgog0blryj30p20cr0y4.jpg" alt="捕获.PNG"></p>
+<h2 id="显式空标签（应用背景）"><a href="#显式空标签（应用背景）" class="headerlink" title="显式空标签（应用背景）"></a>显式空标签（应用背景）</h2><p>如果使用隐性标签的话，会损失一些信息，比如在标签头里面，不光只有标签值，还有比如QoS信息，如果在R3就跳出了，那么就损失了QoS信息<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgohe2mabj30nq0a9die.jpg" alt="捕获.PNG"></p>
+<h1 id="显式空标签"><a href="#显式空标签" class="headerlink" title="显式空标签"></a>显式空标签</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdgokl26lzj30nj0c3td7.jpg" alt="捕获.PNG"></p>
+<h1 id="label-advertise命令小结"><a href="#label-advertise命令小结" class="headerlink" title="label advertise命令小结"></a>label advertise命令小结</h1><ul>
+<li>在MPLS视图下，执行命令<code>label advertise (explicit-null | implicit-null | non-null)</code>，配置向倒数第二跳分配的标签</li>
+<li>根据参数不同，可以配置Egress向倒数第二跳分配不同的标签</li>
+<li><ul>
+<li>缺省情况下是implicit-null，表示支持PHP。Egress向倒数第二跳节点分配隐式空标签，值为3</li>
+</ul>
+</li>
+<li><ul>
+<li>explicit-null，表示不支持PHP。Egress向倒数第二跳节点分配显式空标签，值为0。当需要支持MPLS属性时，可以选用explicit-null</li>
+</ul>
+</li>
+<li><ul>
+<li>non-null，表示不支持PHP。Egress向倒数第二跳节点分配正常标签，即分配的标签值不小于16</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/MPLS%E6%A6%82%E8%BF%B0%E4%B8%8E%E9%9D%99%E6%80%81LSP/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/01/MPLS%E6%A6%82%E8%BF%B0%E4%B8%8E%E9%9D%99%E6%80%81LSP/" class="post-title-link" itemprop="url">MPLS概述与静态LSP</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-01 14:01:34" itemprop="dateCreated datePublished" datetime="2020-04-01T14:01:34+08:00">2020-04-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MPLS/" itemprop="url" rel="index"><span itemprop="name">MPLS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/04/01/MPLS%E6%A6%82%E8%BF%B0%E4%B8%8E%E9%9D%99%E6%80%81LSP/" class="leancloud_visitors" data-flag-title="MPLS概述与静态LSP">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="MPLS的概述"><a href="#MPLS的概述" class="headerlink" title="MPLS的概述"></a>MPLS的概述</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8kaupm0j30nj0c5dje.jpg" alt="捕获.PNG"></p>
+<p>在IP报文前面会增加一个标签</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8mfirq5j30n50cpn2w.jpg" alt="捕获.PNG"></p>
+<h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8pnqnyjj30mj07ijtj.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>LSR（Label Switch Router，标签交换路由器）：支持MPLS的路由器（实际上也指支持MPLS的交换机或其他网络设备），该设备能够根据报文的MPLS标签头部对其尽情转发（例如图中的R1，R2及R3）</li>
+<li>MPLS域（Domain）：一系列连续的LSR构成了一个MPLS域，如上图所示</li>
+<li>LER（Label Edge Router）：位于MPLS域边缘，连接其他网络的LSR，例如图中的R1，R3</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gde8vdorowj30ja06e0ue.jpg" alt="捕获.PNG"></p>
+<ul>
+<li><p>LSP（Label Switched Path，标签交换路径）：是标签报文穿越MPLS网络到达目的地所走的路径</p>
+</li>
+<li><p>LSP实际上是一种类似Tunnel的概念，LSP的建立过程实际上也是报文转发路径中，沿途设备关于特定FEC的标签的确定过程</p>
+</li>
+<li><p>LSP可以通过手工的方式建立（静态LSP），或者通过标签分发协议自动建立（动态LSP）</p>
+</li>
+<li><p>LSP是单向的，如图所示</p>
+</li>
+<li><p>LSP的入口LSR被称为Ingress LSR（入站LSR）</p>
+</li>
+<li><p>位于LSP中间的LSR被称为Transit LSR（中转LSR）</p>
+</li>
+<li><p>LSP的出口LSR被称为Egress LSR（出站LSR）</p>
+</li>
+<li><p>Ingress LSR及Egress LSR都是LER</p>
+</li>
+<li><p>上图来说，R1是Ingress LSR，R2是Transit LSR，R3是Egress LSR，一条LSP可以有0个，1个或多个Transit LSR，但有且只有一个Ingress LSR和一个Egress LSR</p>
+</li>
+<li><p>FEC（Forwarding Equivalence Class，转发等价类）是在转发过程中具有相同处理方式和处理待遇的数据流，可通过IP地址，隧道，Cos等方式来标识一个FEC。例如，在传统的采用最长匹配算法的IP转发中，到同一条路由的所有报文就是一个转发等价类</p>
+</li>
+<li><p>通常在一台设备上，对于一个FEC分配相同的标签</p>
+</li>
+<li><p>属于一个FEC的流量具有相同的转发方式，转发路径和转发待遇。但是并不是所有拥有相同标签的报文都属于一个FEC，因为这些报文的EXP值可能不相同，执行方式可能不同。</p>
+</li>
+<li><p>决定报文属于哪一个FEC的设备是Ingress LSR，因为是它对报文进行分类和压入标签。</p>
+</li>
+</ul>
+<h2 id="MPLS架构"><a href="#MPLS架构" class="headerlink" title="MPLS架构"></a>MPLS架构</h2><h3 id="控制平面（Control-Plane）"><a href="#控制平面（Control-Plane）" class="headerlink" title="控制平面（Control Plane）"></a>控制平面（Control Plane）</h3><ul>
+<li>控制平面是无连接的，主要功能是负责产生和维护路由信息以及标签信息</li>
+<li>控制平面IP路由协议（IP Routing Protocol）模块用来传递路由信息，生成路由信息表；标签分发协议（Label Distribution Protocol）模块用来完成标签信息的交换，建立标签转发路径</li>
+<li>路由信息表RIB（Routing Information Base）：由IP路由协议（IP Routing Protocol）生成，用于选择路由</li>
+<li>标签分发协议LDP（Label Distribution Protocol）：负责标签的分配，标签转发信息表的建立，标签交换路径的建立，拆除等工作</li>
+<li>标签信息表LIB（Label Information Base）：由标签分发协议生成，用于管理标签信息</li>
+</ul>
+<h3 id="数据平面（Data-plane）"><a href="#数据平面（Data-plane）" class="headerlink" title="数据平面（Data plane）"></a>数据平面（Data plane）</h3><ul>
+<li>数据平面也称为转发平面，是面向连接的，主要功能是负责普通IP报文的转发以及带MPLS标签报文的转发。</li>
+<li>数据平面包括IP转发信息表（Forwarding Information Base）和标签转发信息表（Label Forwarding Information Base），当收到普通IP报文时，如果需要按照标签转发，根据标签转发表转发，如果需要转发到IP网络，则去掉标签后根据IP转发表转发</li>
+<li>转发信息表FIB（Forwarding Information Base）：从RIB提取必要的路由信息生成，负责普通IP报文的转发</li>
+<li>标签转发信息表LFIB（Label Forwarding Information Base）：简称标签转发表，由标签分发协议在LSR上建立LFIB，负责带MPLS标签报文的转发</li>
+</ul>
+<h2 id="MPLS标签结构"><a href="#MPLS标签结构" class="headerlink" title="MPLS标签结构"></a>MPLS标签结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdeaygxyxbj30mk0ca41x.jpg" alt="捕获.PNG"></p>
+<p>对于 BoS，靠近IP头部的是栈底，靠近二层帧头的是栈顶</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebdexmbyj30m10bawhz.jpg" alt="捕获.PNG"></p>
+<h3 id="标签空间"><a href="#标签空间" class="headerlink" title="标签空间"></a>标签空间</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebgdyzrwj30pa0cugqo.jpg" alt="捕获.PNG"></p>
+<h3 id="MPLS标签的处理"><a href="#MPLS标签的处理" class="headerlink" title="MPLS标签的处理"></a>MPLS标签的处理</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebi65455j30oq0akn1e.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebiq2700j30mh0cbwh9.jpg" alt="捕获.PNG"></p>
+<h3 id="LSP的建立"><a href="#LSP的建立" class="headerlink" title="LSP的建立"></a>LSP的建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebkcuu4fj30o10d00yb.jpg" alt="捕获.PNG"></p>
+<h3 id="静态LSP"><a href="#静态LSP" class="headerlink" title="静态LSP"></a>静态LSP</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebqcc3baj30nz06z419.jpg" alt="捕获.PNG"></p>
+<h3 id="静态LSP的建立"><a href="#静态LSP的建立" class="headerlink" title="静态LSP的建立"></a>静态LSP的建立</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebs6pjz4j30nu0cowjx.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-1-部署路由"><a href="#静态LSP的建立Step-1-部署路由" class="headerlink" title="静态LSP的建立Step 1 部署路由"></a>静态LSP的建立Step 1 部署路由</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebud5ssuj30o40bg78e.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-2-在设备上激活MPLS"><a href="#静态LSP的建立Step-2-在设备上激活MPLS" class="headerlink" title="静态LSP的建立Step 2  在设备上激活MPLS"></a>静态LSP的建立Step 2  在设备上激活MPLS</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdebxwnxsej30m70bsjwb.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-3-配置静态LSP"><a href="#静态LSP的建立Step-3-配置静态LSP" class="headerlink" title="静态LSP的建立Step 3  配置静态LSP"></a>静态LSP的建立Step 3  配置静态LSP</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec0515pmj30nz0cojvd.jpg" alt="捕获.PNG"></p>
+<p>注：1to4是自己起的名字 4.4.4.0 24是目的地址和掩码 nexthop是下一跳，需要注意的是，你的目的地址&#x2F;掩码和下一跳必须和路由表中一致</p>
+<p>反向：<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec3kn42vj30o60cqjvd.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP的建立Step-34-查看与验证"><a href="#静态LSP的建立Step-34-查看与验证" class="headerlink" title="静态LSP的建立Step 34  查看与验证"></a>静态LSP的建立Step 34  查看与验证</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec4wuzcxj30nv0c8q7c.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec67fdc2j30nx0cqn1c.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec6ur9foj30ne0cidjl.jpg" alt="捕获.PNG"></p>
+<h4 id="静态LSP配置注意事项"><a href="#静态LSP配置注意事项" class="headerlink" title="静态LSP配置注意事项"></a>静态LSP配置注意事项</h4><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdec7ej06zj30me0chgp5.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/BGP%E7%9A%84%E9%80%89%E8%B7%AF%E8%A7%84%E5%88%99/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/03/14/BGP%E7%9A%84%E9%80%89%E8%B7%AF%E8%A7%84%E5%88%99/" class="post-title-link" itemprop="url">BGP的选路规则</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-14 19:49:03" itemprop="dateCreated datePublished" datetime="2020-03-14T19:49:03+08:00">2020-03-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/03/14/BGP%E7%9A%84%E9%80%89%E8%B7%AF%E8%A7%84%E5%88%99/" class="leancloud_visitors" data-flag-title="BGP的选路规则">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>BGP的选路规则与BGP路径属性及路由策略息息相关，它们使得BGP拥有了强大的路由操控能力。</p>
+<p>在BGP路由表中的路由必须首先是可用的（Valid），可盈的路由表项行首存在“*”号，可用意味着该BGP路由的Next_Hop是路由可达的。如果BGP路由不可用，则不会被优选</p>
+<h1 id="优选规则概览"><a href="#优选规则概览" class="headerlink" title="优选规则概览"></a>优选规则概览</h1><p>不同的厂商在优选规则上存在细微差异</p>
+<ol>
+<li>优先具有最大Preferred-Value的路由</li>
+<li>优选具有最大Local-Preference的路由</li>
+<li>优选起源于本地的路由</li>
+<li>优选AS_PATH最短的路由</li>
+<li>Origin（IGP &gt; EGP &gt; Incomplete）</li>
+<li>优选MED最小的路由</li>
+<li>优选EBGP对等体所通告的路由</li>
+<li>优选到Next_Hop的IGP度量值最小的路由</li>
+<li>BGP路由分载分担</li>
+<li>优选Cluster_List最短的路由</li>
+<li>优选Router-ID最小的BGP对等体发来的路由</li>
+<li>优选Peer-IP地址最小的对等体发来的路由</li>
+</ol>
+<h1 id="优先具有最大Preferred-Value的路由"><a href="#优先具有最大Preferred-Value的路由" class="headerlink" title="优先具有最大Preferred-Value的路由"></a>优先具有最大Preferred-Value的路由</h1><ul>
+<li>华为私有的路径属性，相当于路由的权重值，取值范围：0~65535；该值越大，则路由越优先。</li>
+<li>Preferred-Value只能在路由器本地配置，而且只影响本设备的路由优选。该属性不会传播给任何BGP对等体。</li>
+<li>路由器本地始发的BGO路由默认的Preferred-Value未0，从其他BGP对等体学习到的路由默认Preferred-Value也为0</li>
+</ul>
+<h2 id="修改从特定对等体收到的“所有路由”的Preferred-Value"><a href="#修改从特定对等体收到的“所有路由”的Preferred-Value" class="headerlink" title="修改从特定对等体收到的“所有路由”的Preferred-Value"></a>修改从特定对等体收到的“所有路由”的Preferred-Value</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzey8xj2j30lb0d043f.jpg" alt="捕获.PNG"></p>
+<h2 id="使用route-policy修改Preferred-Value"><a href="#使用route-policy修改Preferred-Value" class="headerlink" title="使用route-policy修改Preferred-Value"></a>使用route-policy修改Preferred-Value</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzgn89abj30mh0ctteh.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzl8tvmlj30nk0bfwiq.jpg" alt="捕获.PNG"></p>
+<h1 id="优选具有最大Local-Preference的路由"><a href="#优选具有最大Local-Preference的路由" class="headerlink" title="优选具有最大Local-Preference的路由"></a>优选具有最大Local-Preference的路由</h1><h2 id="通过route-policy修改Local-Preference"><a href="#通过route-policy修改Local-Preference" class="headerlink" title="通过route-policy修改Local-Preference"></a>通过route-policy修改Local-Preference</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdbzt045mbj30mf0ccgr0.jpg" alt="捕获.PNG"></p>
+<h1 id="优选起源于本地的路由"><a href="#优选起源于本地的路由" class="headerlink" title="优选起源于本地的路由"></a>优选起源于本地的路由</h1><ul>
+<li>在其他条件相同的情况，优先本地生成的路由（本地生成的路由优先级高于从邻居学来的路由）</li>
+<li>本地生成的路由包括通过network或import-route命令引入的路由，手工汇总路由和自动汇总路由。这些本地生成的路由之间的优选如下：<blockquote>
+<ol>
+<li>优先汇总路由（汇总路由优先级高于非汇总路由）</li>
+<li>通过aggregate命令生成的手动汇总路由的优先级高于通过summary automatic命令生成的自动汇总路由</li>
+<li>通过network命令引入的路由优先级高于import-route命令引入的路由</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h1 id="优选AS-PATH最短的路由"><a href="#优选AS-PATH最短的路由" class="headerlink" title="优选AS_PATH最短的路由"></a>优选AS_PATH最短的路由</h1><h2 id="通过route-policy修改AS-PATH属性"><a href="#通过route-policy修改AS-PATH属性" class="headerlink" title="通过route-policy修改AS_PATH属性"></a>通过route-policy修改AS_PATH属性</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc07n8d36j30n20cqwk9.jpg" alt="捕获.PNG"></p>
+<p>由于AS_PATH属性对于防环有着重要的作用，因此AS_PATH这个属性尽量不要多修改</p>
+<ul>
+<li><p>使用route-policy修改BGP路由的AS_PATH:</p>
+<blockquote>
+<ul>
+<li>apply as-path XXX additive   在已有AS_PATH基础上追加XXX</li>
+<li>apply as-path XXX overwrite   将已有AS_PATH值替换（覆盖）成XXX</li>
+<li>apply as-path none overwrite   清空路由的AS_PATH属性</li>
+</ul>
+</blockquote>
+</li>
+<li><p>使用route-policy修改BGP路由的AS_PATH时，可以在EBGP对等体之间改变EBGP路由的AS_PATH属性，从而影响BGP路由的优选，在华为路由器上，在IBGP对等体之间，也可以使用route-policy修改BGP路由的AS_PATH。无论哪种场景，改变BGP路由的AS_PATH都必须十分谨慎。</p>
+</li>
+<li><p>Bestroute as-path-ignore命令用来配置BGP在选择最优路径时忽略AS路径属性。配置该命令后，BGP将不比较AS_PATH路径的长度。缺省情况下，长度更小者优</p>
+</li>
+</ul>
+<h2 id="AS-PATH选路规则扩展1"><a href="#AS-PATH选路规则扩展1" class="headerlink" title="AS_PATH选路规则扩展1"></a>AS_PATH选路规则扩展1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0lktnzjj30ov0brdln.jpg" alt="捕获.PNG"></p>
+<p>其中，{100，200}是一个AS_SET，长度为1.</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0o1tu89j30nl0bx0xl.jpg" alt="捕获.PNG"></p>
+<h2 id="AS-PATH选路规则扩展2"><a href="#AS-PATH选路规则扩展2" class="headerlink" title="AS_PATH选路规则扩展2"></a>AS_PATH选路规则扩展2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0omz13vj30nt0cwn0z.jpg" alt="捕获.PNG"></p>
+<h1 id="Origin（IGP-gt-EGP-gt-Incomplete）"><a href="#Origin（IGP-gt-EGP-gt-Incomplete）" class="headerlink" title="Origin（IGP &gt; EGP &gt; Incomplete）"></a>Origin（IGP &gt; EGP &gt; Incomplete）</h1><ul>
+<li>igp：通过BGP network的路由，也就是起源于IGP的路由，Origin为igp。因为BGP network必须保证该网络在路由表中</li>
+<li>egp：如果BGP路由是由EGP这种早期的协议重发布来的，那么origin是egp</li>
+<li>incomplete：通过import命令，从其他协议引入到BGP的路由，其origin为incomplete（确定该路由来源的信息不完全）</li>
+</ul>
+<h2 id="使用route-policy修改路由Origin属性值"><a href="#使用route-policy修改路由Origin属性值" class="headerlink" title="使用route-policy修改路由Origin属性值"></a>使用route-policy修改路由Origin属性值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc0wq2s0aj30gp09bdje.jpg" alt="捕获.PNG"></p>
+<h1 id="优选MED最小的路由"><a href="#优选MED最小的路由" class="headerlink" title="优选MED最小的路由"></a>优选MED最小的路由</h1><ul>
+<li>MED（Multi Exit Discriminator）是可选非传递属性，是一种度量值，用于向外部对等体指出进入本AS的首选路径，即当进入本AS的入口有多个时，AS可以使用MED动态地影响其他AS选择进入地路径</li>
+<li>MED属性值越小则BGP路径越优</li>
+<li>MED主要用于在AS之间影响BGP的选路。MED被传递给EBGP对等体后，对等体在其AS内传递路由时，携带该MED值，但将路由传递给其EBGP对等体时，缺省不会携带MED属性</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc11bpkmnj30nc06kjv0.jpg" alt="捕获.PNG"></p>
+<h2 id="使用route-policy修改路由的MED值"><a href="#使用route-policy修改路由的MED值" class="headerlink" title="使用route-policy修改路由的MED值"></a>使用route-policy修改路由的MED值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1byqrwsj30lz0cbag0.jpg" alt="捕获.PNG"></p>
+<p><strong>（上图其实有一个问题，就是MED值通常只比较来自同一AS的情况）</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1d7sfhjj30nz0b2grk.jpg" alt="捕获.PNG"></p>
+<h1 id="优选EBGP对等体所通告的路由（相对于IBGP对等体）"><a href="#优选EBGP对等体所通告的路由（相对于IBGP对等体）" class="headerlink" title="优选EBGP对等体所通告的路由（相对于IBGP对等体）"></a>优选EBGP对等体所通告的路由（相对于IBGP对等体）</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1gr50hhj30oe0bsdkr.jpg" alt="捕获.PNG"></p>
+<h1 id="优选到Next-Hop的IGP度量值最小的路由"><a href="#优选到Next-Hop的IGP度量值最小的路由" class="headerlink" title="优选到Next_Hop的IGP度量值最小的路由"></a>优选到Next_Hop的IGP度量值最小的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1mzq100j30ov0bntde.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc1rfpdl4j30oe0byn1t.jpg" alt="捕获.PNG"></p>
+<p>R5学到的这两条BGP路由的next-hop都是3.3.3.3,因此比较next-hop的IGP cost值是没有意义的，是无法做出比较的，只能根据后面的选路规则来比较</p>
+<h1 id="BGP路由分载分担"><a href="#BGP路由分载分担" class="headerlink" title="BGP路由分载分担"></a>BGP路由分载分担</h1><h2 id="没有配置-BGP路由负载分担时"><a href="#没有配置-BGP路由负载分担时" class="headerlink" title="没有配置 BGP路由负载分担时"></a>没有配置 BGP路由负载分担时</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc2z0k9dfj30nt0cjq7s.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>在大型网络中，到达同一目的地通常会存在多条有效BGP路由，设备只会优选一条最优的BGP路由，将改路由加载到路由表中使用，并且只将最优路由发布给对等体，这一特点往往会造成很多流量负载不均衡的情况。通过配置BGP负载分担，可以使得设备同时将多条等代价的BGP路由加载到路由表，实现流量负载均衡，减少网络拥塞。</li>
+<li>值得注意的是，尽管配置了BGP负载分担，设备依然只会在多条到达同一目的地的BGP路由中优选一条路由，并只将这条路由通告给其他对等体</li>
+<li>形成BGP等价负载分担的条件是“BGP路由优选规则”的1至8条规则中需要比较的属性完全相同，例如相同的Preferred_Value，Local_Preference,AS_PATH,MED,Origin,到达Next_Hop的IGP度量值，路由类型（IBGP，EBGP）等</li>
+<li>如果实现了BGP负载分担，则不论是否配置了peer next-hop-local命令，本地设备向IBGP对等体组发布路由时都先将下一跳地址改变为自身地址。</li>
+<li>在公网中到达同一目的地的路由形成负载分担时，系统会首先判断最佳路由的类型。若最优路由为IBGP路由则只是IBGP路由参与负载分担，若最优路由为EBGP路由则只是EBGP路由参加负载分担。即公网中到达同一目的地的IBGP和EBGP路由不能形成负载分担</li>
+<li>如果到达目的地址存在多条路由，但是这些路由分别经过了不同的AS缺省情况下，这些路由不能形成负载分担，如果用户需要这些路由参与负载分担，就可以执行load-balancing as-path-ignore命令。配置load-balancing as-path-ignore命令后会改变路由参与负载分担的条件，路由形成负载分担时不再比较AS_PATH属性，配置时需要慎重考虑</li>
+<li>load-balancing as-path-ignore命令和bestroute as-path-ignore命令互斥，不能同时使能</li>
+</ul>
+<h2 id="配置了BGP路由负载分担之后1"><a href="#配置了BGP路由负载分担之后1" class="headerlink" title="配置了BGP路由负载分担之后1"></a>配置了BGP路由负载分担之后1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3jlw20sj30oa0cmtg2.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3me9uozj30nq0cm0xi.jpg" alt="捕获.PNG"></p>
+<h2 id="配置了BGP路由负载分担之后2"><a href="#配置了BGP路由负载分担之后2" class="headerlink" title="配置了BGP路由负载分担之后2"></a>配置了BGP路由负载分担之后2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3n6dq3hj30nb0cbgqk.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3nyz4alj30n10ctaet.jpg" alt="捕获.PNG"></p>
+<h1 id="优选Cluster-List最短的路由"><a href="#优选Cluster-List最短的路由" class="headerlink" title="优选Cluster_List最短的路由"></a>优选Cluster_List最短的路由</h1><h2 id="优选Cluster-List最短的路由-案例1"><a href="#优选Cluster-List最短的路由-案例1" class="headerlink" title="优选Cluster_List最短的路由 案例1"></a>优选Cluster_List最短的路由 案例1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3qfwy3kj30nz0cnaeq.jpg" alt="捕获.PNG"></p>
+<h2 id="优选Cluster-List最短的路由-案例2"><a href="#优选Cluster-List最短的路由-案例2" class="headerlink" title="优选Cluster_List最短的路由 案例2"></a>优选Cluster_List最短的路由 案例2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc3zpkcstj30p90b7n15.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc40xoj22j30jz0cf0wa.jpg" alt="捕获.PNG"></p>
+<h1 id="优选Router-ID最小的BGP对等体发来的路由"><a href="#优选Router-ID最小的BGP对等体发来的路由" class="headerlink" title="优选Router-ID最小的BGP对等体发来的路由"></a>优选Router-ID最小的BGP对等体发来的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc42eica2j30lt0ckq6l.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc45ka84lj30oe0bxjwp.jpg" alt="捕获.PNG"></p>
+<h1 id="优选Peer-IP地址最小的对等体发来的路由"><a href="#优选Peer-IP地址最小的对等体发来的路由" class="headerlink" title="优选Peer-IP地址最小的对等体发来的路由"></a>优选Peer-IP地址最小的对等体发来的路由</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gdc4fsbfq4j30o60cojy9.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">BGP的路由策略</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-12 10:28:48" itemprop="dateCreated datePublished" datetime="2020-03-12T10:28:48+08:00">2020-03-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" class="leancloud_visitors" data-flag-title="BGP的路由策略">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="BGP路由自动汇总"><a href="#BGP路由自动汇总" class="headerlink" title="BGP路由自动汇总"></a>BGP路由自动汇总</h1><ul>
+<li>BGP支持路由自动汇总功能，该功能缺省关闭，可以在BGP配置视图中使用’summary automatic’命令开启</li>
+<li>BGP路由自动汇总功能只对本地采用’import-route’命令注入的BGP路由有效</li>
+<li>开启该功能后，’import-route’注入的BGP路由会按主类网络进行汇总（按照IP地址所属类别的缺省网络掩码进行计算），所产生的汇总路由会发布到BGP中，而明细路由则会被抑制</li>
+<li>BGP路由自动汇总功能对汇总路由的把控较差，只能够将路由汇总成主类网络路由，无法做到精细化的掩码控制</li>
+</ul>
+<blockquote>
+<p>主类网络解释：</p>
+<p>192.168.1.0&#x2F;24， 这是一个C类网络（&#x2F;24），则主类网络是（192.168.1.0&#x2F;24）</p>
+<p>172.16.1.0&#x2F;24，这是一个B类网络（&#x2F;16），则主类网络是（172.16.0.0&#x2F;16）</p>
+<p>10.1.1.0&#x2F;30，这是一个A类网络（&#x2F;8），则主类网络是（10.0.0.0&#x2F;8）</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqy6c45jdj30ld0c4n15.jpg" alt="捕获.PNG"></p>
+<h1 id="BGP手工路由汇总"><a href="#BGP手工路由汇总" class="headerlink" title="BGP手工路由汇总"></a>BGP手工路由汇总</h1><p>BGP存在两种手工汇总方案</p>
+<p>方案一：（非主流）</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcr9nan9txj30hk08q773.jpg" alt="捕获.PNG"></p>
+<p>方案二：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcr9poh79xj30is07m0us.jpg" alt="捕获.PNG"></p>
+<h2 id="aggregate"><a href="#aggregate" class="headerlink" title="aggregate"></a>aggregate</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrfxm14cmj30gs08vdj4.jpg" alt="捕获.PNG"></p>
+<p>由于汇总路由不带任何路径属性，那么将汇总路由传递给R1或者R2时，有可能会产生路由环路</p>
+<h2 id="aggregate-detail-suppressed"><a href="#aggregate-detail-suppressed" class="headerlink" title="aggregate detail-suppressed"></a>aggregate detail-suppressed</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrfz20msxj30m00axgq8.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrg1is1z6j30lh0bmael.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrg2d55hgj30lo0c5af2.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrg3b17qsj30o30bxgss.jpg" alt="捕获.PNG"></p>
+<h2 id="aggregate-detail-suppressed-as-set"><a href="#aggregate-detail-suppressed-as-set" class="headerlink" title="aggregate detail-suppressed as-set"></a>aggregate detail-suppressed as-set</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrg4zkexvj30le0bln2h.jpg" alt="捕获.PNG"></p>
+<p>加了as-set会防止环路，AS_PATH是 300，{100，200}</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrg7jw3phj30og0c0q7u.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrga5bsb6j30nf0brtd6.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrgaufj9xj30ma0bw426.jpg" alt="捕获.PNG"></p>
+<h2 id="aggregate-suppress-policy"><a href="#aggregate-suppress-policy" class="headerlink" title="aggregate suppress-policy"></a>aggregate suppress-policy</h2><p>aggregate detail-suppressed 是一刀切的做法，也就是把所有的明细路由都抑制掉，而suppress-policy则是选择性的抑制某些路由</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrgch456rj30m30bnjvq.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>Aggregate命令的suppress-policy关键字用于通告汇总路由以及选定的明细路由（或者说只抑制特定的明细路由）</li>
+<li>如果在aggregate命令后关联datail-suppressed关键字，则所有明细都将被抑制，如果需要在产生汇总路由的同时通告特定的明细路由，则可关联suppress-policy关键字，在其后调用定义好的route-policy，被route-policy permit的路由将被过滤，其他路由被放行</li>
+<li>抑制列表虽然调用route-policy，但route-policy只用于匹配（if-match），不能用于设置属性（不能用apply命令）</li>
+</ul>
+<h2 id="aggregate-attribute-policy"><a href="#aggregate-attribute-policy" class="headerlink" title="aggregate attribute-policy"></a>aggregate attribute-policy</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrgmd2w8mj30m30c6n1a.jpg" alt="捕获.PNG"></p>
+<h2 id="aggregate-origin-policy"><a href="#aggregate-origin-policy" class="headerlink" title="aggregate origin-policy"></a>aggregate origin-policy</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrgueek9kj30ns0bw78f.jpg" alt="捕获.PNG"></p>
+<ul>
+<li><p>Origin-policy关键字可调用一个已经定义好的route-policy，在该route-policy中使用if-match语句匹配明细路由。如此一来，aggregate命令产生的汇总路由相当于是为上述明细路由而产生，只要这些明细路由中，至少有一条路由处于活跃状态，那么汇总路由就会被通告，如果route-policy所匹配的所有明细路由都失效，那么汇总路由也随之消失。</p>
+</li>
+<li><p>需注意，’aggregate 172.16.0.0 16 detail-suppressed origin-policy ori’这条命令产生的汇总路由172.16.0.0&#x2F;16是与ori中所匹配的路由强关联的，如果存在172.16.0.0&#x2F;16的一些子网，而这些子网并没有被ori所匹配，那么这些子网将被认为与汇总路由172.16.0.0&#x2F;16的生成无关（即使从IP角度，它们确实是该汇总路由的子网），因此在本例中即使使用了detail-suppressed关键字，却并没有抑制掉172.16.0.0&#x2F;24及172.16.11.0&#x2F;24这两条明细路由</p>
+</li>
+</ul>
+<p>（如果只是’aggregate 172.16.0.0 16 detail-suppressed’，那么对这四条路由都有效，只有这四条明细路由都失效了，汇总路由才失效，否则，只要还有一条生效，汇总路由都还存在）</p>
+<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p> 原子字符：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.    匹配任何单个的字符，包括空格</span><br><span class="line">^     一个字符串的开始</span><br><span class="line">$     一个字符串的结束</span><br><span class="line">_     下划线，匹配任意的一个分隔符，如^,$,空格,tab,逗号,&#123;,&#125;</span><br><span class="line">|     管道符，逻辑或</span><br><span class="line">\     转义符，用来将紧跟其后的控制字符转变为普通字符 </span><br></pre></td></tr></table></figure>
+
+
+<p>乘法字符：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*    匹配前面字符0次或多次出现</span><br><span class="line">+    匹配前面字符1次或多次出现</span><br><span class="line">？   匹配前面字符的0次或1次出现</span><br></pre></td></tr></table></figure>
+
+<p>范围字符：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]    表示一个范围，只匹配包含在范围内的字符之一。可以在一个[]的开始使用^来排除范围内的所有字符，也可以使用短横线-来指定一个区间</span><br></pre></td></tr></table></figure>
+
+<h1 id="as-path-filter"><a href="#as-path-filter" class="headerlink" title="as-path-filter"></a>as-path-filter</h1><p>使用正则表达式匹配AS_PATH</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrhsv72wzj30f409b77j.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrhtte4loj30ka09q0u6.jpg" alt="捕获.PNG"></p>
+<p>其中，443是一个正则表达式</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrhvwdqzgj30hn09dtb1.jpg" alt="捕获.PNG"></p>
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><p>配置as-path-filter</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Router] ip as-path-filter 1 &#123;permit|deny&#125; regex</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Router-bgp] peer xxxx as-path-filter 1 (import|export)</span><br></pre></td></tr></table></figure>
+<p>关键as-path-filter到BGP Peer，起到路由过滤作用</p>
+<h2 id="as-path-filter验证及查看"><a href="#as-path-filter验证及查看" class="headerlink" title="as-path-filter验证及查看"></a>as-path-filter验证及查看</h2><p>查看配置的as-path access-list</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Router]display ip as-path-filter</span><br></pre></td></tr></table></figure>
+
+<p>显示BGP表中所有AS_PATH被该正则表达式匹配的路由,可用来验证正则表达式写的对不对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Router] display bgp routing-table regular-expression</span><br></pre></td></tr></table></figure>
+
+<p>显示BGP表中所有被该as-path-filter匹配的路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Router] display bgp routing-table as-path-filter</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="使用as-path-filter匹配路由"><a href="#使用as-path-filter匹配路由" class="headerlink" title="使用as-path-filter匹配路由"></a>使用as-path-filter匹配路由</h2><p>应用1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip as-path-filter 1 permit ^100$</span><br><span class="line"></span><br><span class="line">bgp 300</span><br><span class="line">    peer 10.1.34.4 as-path-filter 1 export</span><br></pre></td></tr></table></figure>
+
+<p>应用2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ip as-path-filter 1 permit ^100$</span><br><span class="line"></span><br><span class="line">route-policy RP permit node 10</span><br><span class="line">    if-match as-path-filter 1</span><br><span class="line">    apply local-preference 100</span><br><span class="line"></span><br><span class="line">bgp 300</span><br><span class="line">    peer 10.1.34.4 route-policy RP import</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置实例1"><a href="#配置实例1" class="headerlink" title="配置实例1"></a>配置实例1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrib2ahehj30mm09pae2.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip as-path-filter 1 permit .* 表示匹配任何，加起来就是拒绝600后还得匹配任意，不然都拒绝了</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置实例2"><a href="#配置实例2" class="headerlink" title="配置实例2"></a>配置实例2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcrid1hku1j30mc0awn2l.jpg" alt="捕获.PNG"></p>
+<p>其中，需要增加一个node 20.不然的话node 10只是匹配了起始是600的，其他的路由默认是deny的，所以增加了一个空的node 20，默认都是允许的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer 10.1.23.3 advertise-community</span><br></pre></td></tr></table></figure>
+<p>表示要发送这个community属性 否则默认是不发送的，因为你在route-policy的时候 将community设置了no-export。但是你是想让R3不发送，所以得加这条命令</p>
+<h1 id="Community"><a href="#Community" class="headerlink" title="Community"></a>Community</h1><h2 id="为BGP路由设置Community"><a href="#为BGP路由设置Community" class="headerlink" title="为BGP路由设置Community"></a>为BGP路由设置Community</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctn7vf2r5j30hk0bc43u.jpg" alt="捕获.PNG"></p>
+<p>每一跳都需要配置’advertise-community’，否则community属性不会跟着路由传过去</p>
+<h2 id="为BGP路由追加Community"><a href="#为BGP路由追加Community" class="headerlink" title="为BGP路由追加Community"></a>为BGP路由追加Community</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctnjpc7s5j30hz0amafd.jpg" alt="捕获.PNG"></p>
+<p>一个路由可以携带多个community属性值，</p>
+<h2 id="使用ip-community-filter匹配community属性"><a href="#使用ip-community-filter匹配community属性" class="headerlink" title="使用ip community-filter匹配community属性"></a>使用ip community-filter匹配community属性</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctnq3jc39j30it0awq69.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcto0r0gu8j30i1088q4w.jpg" alt="捕获.PNG"></p>
+<h2 id="使用ip-community-filter匹配团体属性（严格匹配）"><a href="#使用ip-community-filter匹配团体属性（严格匹配）" class="headerlink" title="使用ip community-filter匹配团体属性（严格匹配）"></a>使用ip community-filter匹配团体属性（严格匹配）</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcto30mwxnj30it096412.jpg" alt="捕获.PNG"></p>
+<h2 id="删除一个community值"><a href="#删除一个community值" class="headerlink" title="删除一个community值"></a>删除一个community值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcto5ap81qj30j50b6ae2.jpg" alt="捕获.PNG"></p>
+<h2 id="删除多个community值"><a href="#删除多个community值" class="headerlink" title="删除多个community值"></a>删除多个community值</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcto8ir9s0j30he0b342i.jpg" alt="捕获.PNG"></p>
+<h1 id="ip-prefix"><a href="#ip-prefix" class="headerlink" title="ip-prefix"></a>ip-prefix</h1><h2 id="在BGP中使用IP-Prefix进行路由过滤-示例1"><a href="#在BGP中使用IP-Prefix进行路由过滤-示例1" class="headerlink" title="在BGP中使用IP-Prefix进行路由过滤 示例1"></a>在BGP中使用IP-Prefix进行路由过滤 示例1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctoi7p48sj30hu0akwgw.jpg" alt="捕获.PNG"></p>
+<h2 id="在BGP中使用IP-Prefix进行路由过滤-示例2"><a href="#在BGP中使用IP-Prefix进行路由过滤-示例2" class="headerlink" title="在BGP中使用IP-Prefix进行路由过滤 示例2"></a>在BGP中使用IP-Prefix进行路由过滤 示例2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctojgqh0pj30i20amjtu.jpg" alt="捕获.PNG"></p>
+<h1 id="Filter-Policy"><a href="#Filter-Policy" class="headerlink" title="Filter-Policy"></a>Filter-Policy</h1><h2 id="Filter-Policy配置示例1"><a href="#Filter-Policy配置示例1" class="headerlink" title="Filter-Policy配置示例1"></a>Filter-Policy配置示例1</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctokoxchpj30gx0ar40w.jpg" alt="捕获.PNG"></p>
+<h2 id="Filter-Policy配置示例2"><a href="#Filter-Policy配置示例2" class="headerlink" title="Filter-Policy配置示例2"></a>Filter-Policy配置示例2</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctomka2p8j30gy0apgnx.jpg" alt="捕获.PNG"></p>
+<h2 id="Filter-Policy配置示例2-关联协议来源"><a href="#Filter-Policy配置示例2-关联协议来源" class="headerlink" title="Filter-Policy配置示例2 关联协议来源"></a>Filter-Policy配置示例2 关联协议来源</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctoo0fannj30il0b5gob.jpg" alt="捕获.PNG"></p>
+<p><code>filter-policy ip-prefix 2 export direct</code>指的是将直连路由export出去，所要所用的过滤策略</p>
+<h1 id="route-policy"><a href="#route-policy" class="headerlink" title="route-policy"></a>route-policy</h1><h2 id="Network命令关联route-policy"><a href="#Network命令关联route-policy" class="headerlink" title="Network命令关联route-policy"></a>Network命令关联route-policy</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctowgafldj30mk0arq6t.jpg" alt="捕获.PNG"></p>
+<h2 id="Peer命令关联route-policy"><a href="#Peer命令关联route-policy" class="headerlink" title="Peer命令关联route-policy"></a>Peer命令关联route-policy</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctozfo2bsj30mc0avn17.jpg" alt="捕获.PNG"></p>
+<h2 id="使用route-policy过滤路由"><a href="#使用route-policy过滤路由" class="headerlink" title="使用route-policy过滤路由"></a>使用route-policy过滤路由</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctp0aqtx3j30mq0af771.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">BGP的路径属性</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-11 11:21:59" itemprop="dateCreated datePublished" datetime="2020-03-11T11:21:59+08:00">2020-03-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/" class="leancloud_visitors" data-flag-title="BGP的路径属性">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="属性分类"><a href="#属性分类" class="headerlink" title="属性分类"></a>属性分类</h1><h2 id="公认属性-well-known"><a href="#公认属性-well-known" class="headerlink" title="公认属性 well-known"></a>公认属性 well-known</h2><ul>
+<li>公认必遵属性（Well-Known mandatory）<blockquote>
+<p>所有的BGP实现都必须能识别，且在update报文中必须携带的属性，如Origin，As-Path，Next-hop</p>
+</blockquote>
+</li>
+<li>公认自由决定属性（Well-Known discretionary）<blockquote>
+<p>所有的BGP实现都必须能识别，但不要求必须包含在update报文中，如Local-Preference，ATOMIC_Aggregate</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="可选属性-Optical"><a href="#可选属性-Optical" class="headerlink" title="可选属性 Optical"></a>可选属性 Optical</h2><ul>
+<li>可选传递的 (Optical transitive）<blockquote>
+<p>可以不支持该属性，但即使不支持也应当接受包含该属性的路由并传递给其他对等体，如Community，Aggregator</p>
+</blockquote>
+</li>
+<li>可选非传递的（optical non-transitive）<blockquote>
+<p>可以不支持该属性，不识别的BGP进程忽略包含这个属性的更新消息并且不传递给其他BGP对等体，如MED，Originator_ID,Cluster_ID,*pre_value</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq03bvwtgj30i30bf782.jpg" alt="捕获.PNG"></p>
+<p>BGP路由前缀指的就是目的地址，如果多个目的地址的路径属性是一样的话，则可以使用一个update报文，BGP路径前缀可以包括好多个目的地址</p>
+<h1 id="Preferred-Value"><a href="#Preferred-Value" class="headerlink" title="Preferred_Value"></a>Preferred_Value</h1><ul>
+<li>华为BGP私有路径属性，取值范围：0~65535；越大越优先</li>
+<li>在路由器本地配置，只对本路由器有效，不会传播给任何BGP对等体。</li>
+<li>本地始发的路由器默认Preferred_Value为0，从其他对等体学到的路由缺省值也是0</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0amg13zj30fb084mz4.jpg" alt="捕获.PNG"></p>
+<p>R1和R3都给R2宣告了这条路由，但是在宣告的update报文当中，是不携带Preferred_Value属性的，也就是R2都默认为R1和R3的Preferred_Value是0.然后，你可以在R2上对Preferred_Value上进行修改，从而手动优选走R1的路由，当然，这个值也只在R2上有效</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0gfo6iyj30js08b761.jpg" alt="捕获.PNG"></p>
+<h1 id="Local-Preference"><a href="#Local-Preference" class="headerlink" title="Local_Preference"></a>Local_Preference</h1><ul>
+<li>本地优先级，公认自决属性，用于告诉AS中的路由器，哪条路径是离开AS的首先路径</li>
+<li>Local_Preference越大则路径越优，缺省Local_Preference值为100</li>
+<li>只能发送给IBGP对等体，而不能传递给EBGP对等体</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0kj270xj30g806vmyq.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq0mhpikgj30j7091dhk.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>Local_Preference属性只能在IBGP对等体之间传递（除非部署了路由策略否则该属性值在IBGP对等体传递过程中不会丢失），不能在EBGP对等体之间传递</li>
+<li>如果从EBBGP对等体收到的路由携带了Local_Preference,则会触发Notifacation报文；但是可以在AS边界路由器上使用import方向的策略来修改Local_Preference属性</li>
+<li>路由器network及重发布到BGP的路由，Local_Preference的缺省值为100，使用<code>bgp default local-preference</code>命令可修改缺省Local_Preference值</li>
+<li>BGP路由器在向其EBGP对等体发送BGP路由时，不能携带Local_Preference属性，但是对方会在本地为这条路由赋一个缺省Local_Preference也就是100，然后再将属性传递给自己的IBGP对等体</li>
+</ul>
+<h1 id="AS-PATH"><a href="#AS-PATH" class="headerlink" title="AS_PATH"></a>AS_PATH</h1><ul>
+<li>AS_PATH是公认必遵属性，是BGP路由传递过程中所经过的AS号的列表</li>
+<li>AS_PATH可用于确保路由再EBGP对等体之间传递时的无环，另外也作为路由优选的依据之一。</li>
+<li>BGP路由被通告给EBGP对等体时会再AS_PATH中追加上本地的AS号，通告给IBGP邻居时不修改AS_PATH</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq184x5s5j30hy04z0ud.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1b5qfjbj30gr0b9adj.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1pwst8pj30ji09u76f.jpg" alt="捕获.PNG"></p>
+<p>{100，200}是AS_SET，是无序的,长度是1；300与{100，200}是AS_SEQ，是有序的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1u7qfgvj30k60d5n4e.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq1wz1br4j30ka0ac0x0.jpg" alt="捕获.PNG"></p>
+<h1 id="ORIGIN"><a href="#ORIGIN" class="headerlink" title="ORIGIN"></a>ORIGIN</h1><p>公认必遵属性</p>
+<ul>
+<li>IGP：标记为i，通过BGP network的路由，也就是起源于IGP的路由，因为BGP network必须保证该网络在路由表中</li>
+<li>EGP: 标记为e，是由EGP这种早期的协议重发布而来</li>
+<li>Incomplete: 标记为？，是从其他渠道学习到的，路由来源不完全（确认该路由来源的信息不完全，重发布的路由，import-route）</li>
+</ul>
+<h1 id="MED"><a href="#MED" class="headerlink" title="MED"></a>MED</h1><ul>
+<li>MED(Multi Exit Discriminator)是可选非传递属性，是一种度量值，用于向外部对等体指出进入AS的首选路径，即当入口有多个时，AS可以使用MED动态地影响其他AS如何进入地路径</li>
+<li>MED属性值越小则BGP路径越优</li>
+<li>MED主要用于在AS之间影响BGP的选路。MED被传递给EBGP对等体后，对等体在其AS内传递路由时，携带该MED值，但不会将该MED值传递给下一个AS。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcq34dpo6vj30nl06g0wr.jpg" alt="捕获.PNG"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>缺省情况下，只比较来自同一对等体AS的BGP路由的MED值，也就是说如果去往同一个目的地的两条路由来自不同的AS，则不进行MED值得比较。</li>
+<li>MED只在直接相邻得AS间影响业务量，而不会跨AS传递</li>
+<li>一台BGP路由器将路由通告给EBGP对等体时，是否携带MED属性，需要根据以下条件进行判断（不对EBGP对等体使用策略得情况下）：</li>
+<li><ul>
+<li>如果该BGP路由是本地始发（本地通过network或import-route命令引入）的，则缺省携带MED属性发送给EBGP对等体</li>
+</ul>
+</li>
+<li><ul>
+<li>如果该BGP路由是从其他BGP对等体学习过来的，那么将该路由通告给EBGP对等体时不携带MED。</li>
+</ul>
+</li>
+<li>在IBGP对等体之间传递路由时，MED值会被保留并且传递，除非部署了策略，否则MED值在传递过程中不发生改变也不会丢失。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbihr3twj30np0ccjvo.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbmt3atlj30od0bygq0.jpg" alt="捕获.PNG"></p>
+<h1 id="Next-Hop"><a href="#Next-Hop" class="headerlink" title="Next_Hop"></a>Next_Hop</h1><p>该属性是一个公认必遵属性，用于指定到达目标网络的下一跳地址。</p>
+<ul>
+<li>当路由器学习到BGP路由时，需对BGP路由的Next_Hop属性值进行检查，该属性值（IP地址）必须在本地路由可达，如果不可达，则这条BGP路由不可用。</li>
+<li>在EBGP及IBGP对等体的场景中，Next_Hop的缺省操作是存在差异的。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqbwhsq1qj30nt0ae0v8.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqby8053qj30nx0bgaec.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqc1a9e5fj30mm0b10wl.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqc2n6kqlj30lq0cf77l.jpg" alt="捕获.PNG"></p>
+<p>中间是一个交换机</p>
+<p>上图的操作是BGP做了一个优化，也就是这三个路由器通过交换机连接，是在同一个网段的。按照通常情况下，A会把BGP路由传递给C，并且下一跳改成自己的地址，这样，C要访问的B的话得先通过A，再通过B。会发现经过A是多此一举，因为C明明可以直接访问B，因此，如果A发现Next_Hop地址值和要更新的EBGP对等体同属于一个网段的话，则Next_Hop不发生变化</p>
+<h1 id="Community"><a href="#Community" class="headerlink" title="Community"></a>Community</h1><p>有了community属性值，可以为不同种类的路由打上不同的community属性值，这些属性值会随着BGP路由更新给其他AS，路由器只需要根据Community属性值来执行差异化的策略即可而不用去关心具体的路由前缀</p>
+<ul>
+<li>该属性是可选传递属性，是一种路由标记，用于简化路由策略的执行</li>
+<li>可以将某些路由分配一个特定的community属性值，之后就可以根据community值而不是网络号&#x2F;掩码信息来抓取路由并执行相应的策略了。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcjnq94xj30fp06babj.jpg" alt="捕获.PNG"></p>
+<h2 id="Community属性值"><a href="#Community属性值" class="headerlink" title="Community属性值"></a>Community属性值</h2><ul>
+<li>Community属性值长度为32个比特，也就是四个字节。通常使用两种形式呈现，一是十进制的整数格式，二是十六进制的AA:NN格式，其中AA表示AS号，NN是自定义的编号</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcra8kvhj30mc07s0uj.jpg" alt="捕获.PNG"></p>
+<h3 id="no-advertise"><a href="#no-advertise" class="headerlink" title="no-advertise"></a>no-advertise</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcsi3qlnj30jl0aj0vs.jpg" alt="捕获.PNG"></p>
+<h3 id="no-export"><a href="#no-export" class="headerlink" title="no-export"></a>no-export</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqct6ndfvj30lk0apgp4.jpg" alt="捕获.PNG"></p>
+<h3 id="no-export-subconfed"><a href="#no-export-subconfed" class="headerlink" title="no-export-subconfed"></a>no-export-subconfed</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqcvtd3uzj30lk0apgp4.jpg" alt="捕获.PNG"></p>
+<h1 id="Atomic-Aggregate及aggregator"><a href="#Atomic-Aggregate及aggregator" class="headerlink" title="Atomic_Aggregate及aggregator"></a>Atomic_Aggregate及aggregator</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqd1400xyj30ki0a30vy.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcqd3ponokj30iy09tn06.jpg" alt="捕获.PNG"></p>
+<p>表明你的汇总路由的路由器和AS，Atomic_Aggregate只是做了一个标记，说明这个是一个汇总路由</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">路由策略</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-27 18:16:03" itemprop="dateCreated datePublished" datetime="2020-02-27T18:16:03+08:00">2020-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" class="leancloud_visitors" data-flag-title="路由策略">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="route-policy"><a href="#route-policy" class="headerlink" title="route-policy"></a>route-policy</h1><ul>
+<li>route-policy 包含一个或者多个“节点Node”的列表</li>
+<li>路由重分发期间可以关联route-policy进行路由过滤或执行策略</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb4y5srpyj30co095jtg.jpg" alt="捕获.PNG"></p>
+<p>逐级向下对比，匹配每一个if-match语句。如果都满足，则执行apply语句，否则进入下一个node</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>创建route-policy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[huawei]route-policy name (permit|deny) node node数</span><br><span class="line"></span><br><span class="line">&gt; permit 指定节点的匹配模式为允许，当路由项通过该节点的过滤后，将执行该节点的apply子句，不进入下一个节点的过滤；如果路由项没有通过该节点过滤，将进入下一个节点继续过滤</span><br><span class="line"></span><br><span class="line">&gt; deny 指定节点的匹配模式为拒绝。这时apply子句不会被执行。当路由项满足该节点的所有if-match子句时，将被拒绝通过该节点，不进入下一个节点；如果路由项不满足该节点的任何if-match子句，将进入下一个节点继续过滤</span><br><span class="line"></span><br><span class="line">默认所有未匹配的路由将被拒绝通过route-policy。如果route-policy中定义了一个以上的节点，则各节点中至少应该有一个节点的匹配模式permit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>配置if-match子句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[huawei-route-policy] if-match ?</span><br><span class="line"></span><br><span class="line">&gt; acl           匹配acl</span><br><span class="line">&gt; cost          匹配路由信息的cost</span><br><span class="line">&gt; interface     匹配路由信息的出接口</span><br><span class="line">&gt; ip(next-hop|route-source|group-address) 匹配Ipv4的路由信息（下一跳，源地址或组播组地址）</span><br><span class="line">&gt; ip-prefix     匹配前缀列表</span><br><span class="line">&gt; route-type    匹配各类型路由信息</span><br><span class="line">&gt; tag           匹配路由信息的标记域</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; 对于同一个Route-policy节点，命令if-match acl和if-match ip-prefix 不能同时配置，后配置的命令会覆盖先配置的命令</span><br><span class="line">&gt; 对于同一个Route-policy节点,在匹配的过程中，各个if-match子句间是“与”的关系，即路由信息必须同时满足所有匹配条件，才可以执行apply子句。但命令if-match route-type和if-match interface 除外，这两个命令的各自if-match子句间是“或”的关系，与其他命令的if-match子句间仍是“与”的关系</span><br><span class="line">&gt; 如不指定if-match子句，则所有路由信息都会通过该节点的过滤</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<p>配置apply子句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[huawei-route-policy]apply ?</span><br><span class="line"></span><br><span class="line">&gt; cost        设置路由的cost值</span><br><span class="line">&gt; cost-type(type-1|type-2)   设置ospf的开销类型</span><br><span class="line">&gt; ip-address next-hop 设置ipv4路由信息的下一跳地址</span><br><span class="line">&gt; preference  设置路由协议的优先级</span><br><span class="line">&gt; tag          设置路由信息的标记域</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gce9h42s7lj30ek08877o.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[R1] acl 2000</span><br><span class="line">[R1-acl-basic-2000] rule permit source 172.16.1.0 0.0.0.0</span><br><span class="line"></span><br><span class="line">#这条命令需要注意的是，后面的0.0.0.0是反向掩码，由于我们是想过滤出172.16.1.0/24，但是ACL只能匹配网络号，不能匹配掩码，因此后面是0.0.0.0而不是0.0.0.255。这是因为首先ACL不能匹配掩码，不能搞混，再有，0.0.0.255表示我对最后八位不关心，因此会导致172.16.1.1,172.16.1.155等网络号也匹配进来，因此不对。但是由于只是匹配网络号，不匹配掩码，导致不能过滤出172.16.1.0/30等掩码不同的。**总结就是ACL只能匹配网络号**</span><br><span class="line"></span><br><span class="line">[R1] route-policy RP permit node 10</span><br><span class="line">[R1-route-policy] if-match acl 2000</span><br><span class="line">[R1-route-policy] apply cost 20</span><br><span class="line"></span><br><span class="line">[R1] ospf 1</span><br><span class="line">[R1-ospf-1] import-route direct route-policy RP</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么是ACL？</p>
+<p>ACL是访问控制列表。访问控制列表使用包过滤技术，在路由器上读取第三层及第四层包头中的信息如源地址，目的地址，源端口，目的端口等，根据预先定义好的规则对包进行过滤，从而达到访问控制的目的</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcea8qu09uj30i00adn08.jpg" alt="捕获.PNG"></p>
+<p>解决方案：</p>
+<p>修改cost值</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcehqhfk7wj30ii0as78c.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[R1]acl 2001</span><br><span class="line">[R1-acl-basic-2001]rule permit source 10.0.1.0 0</span><br><span class="line"></span><br><span class="line">[R1]acl 2002</span><br><span class="line">[R1-acl-basic-2002]rule permit source 10.0.2.0 0</span><br><span class="line"></span><br><span class="line">[R1]route-policy hice permit node 10</span><br><span class="line">[R1-route-policy] if-match acl 2001</span><br><span class="line">[R1-route-policy] apply cost 10</span><br><span class="line"></span><br><span class="line">[R1]route-policy hice permit node 20</span><br><span class="line">[R1-route-policy] if-match acl 2002</span><br><span class="line">[R1-route-policy] apply cost 20</span><br><span class="line"></span><br><span class="line">[R1]ospf 1</span><br><span class="line">[R1-ospf-1] import-route static route-policy hcie</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[R2]acl 2001</span><br><span class="line">[R2-acl-basic-2001]rule permit source 10.0.1.0 0</span><br><span class="line"></span><br><span class="line">[R2]acl 2002</span><br><span class="line">[R2-acl-basic-2002]rule permit source 10.0.2.0 0</span><br><span class="line"></span><br><span class="line">[R2]route-policy hice permit node 10</span><br><span class="line">[R2-route-policy] if-match acl 2001</span><br><span class="line">[R2-route-policy] apply cost 20</span><br><span class="line"></span><br><span class="line">[R2]route-policy hice permit node 20</span><br><span class="line">[R2-route-policy] if-match acl 2002</span><br><span class="line">[R2-route-policy] apply cost 10</span><br><span class="line"></span><br><span class="line">[R2]ospf 1</span><br><span class="line">[R2-ospf-1] import-route static route-policy hcie</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="ip-prefix"><a href="#ip-prefix" class="headerlink" title="ip-prefix"></a>ip-prefix</h1><h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><p>ACL的短板在于只能匹配网络号，不能匹配掩码</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gceiq24vujj30gf0ar7ae.jpg" alt="捕获.PNG"></p>
+<p>其中，192.168.0.0&#x2F;16是汇总路由，192.168.0.0&#x2F;24是明细路由<br>这时候，使用ACL就无法实现</p>
+<p>IP-Prefix List(IP前缀列表)是一个常用的路由匹配工具，相比于ACL，它的可控性更强，更为灵活</p>
+<p>IP-Prefix List不仅仅能匹配路由条目中的网络号，还能匹配网络掩码（也就是前缀长度），增强了路由匹配的精确度</p>
+<p>每个IP-Prefix List包含一条或多条语句，每条语句都有自己的序列号，按序号从小到大的顺序排列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]ip ip-prefix hcnp index 10 permit 192.168.4.0 24</span><br><span class="line"></span><br><span class="line"># 192.168.4.0 是网络号</span><br><span class="line"># 24是掩码长度</span><br><span class="line">也就是只有192.168.4.0/24才能匹配</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]ip ip-prefix hcie index 10 permit 102.168.0.0 16 greater-equal 24 less-equal 24</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># greater-equal 24 less-equal 24 表示（可选）指定掩码长度的匹配范围</span><br><span class="line"></span><br><span class="line"># 这里的16表示掩码长度，具体点：如果指定掩码长度匹配范围确定之后，这里的16表示网络号的前16位必须一样，也就是 192.168这16位必须一样</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 如果只配置了greater-equal，则掩码长度范围需在greater-equal-value和32之间</span><br><span class="line"></span><br><span class="line"># 如果只配置了less-equal，则掩码长度范围需在mask-length和less-equal-value之间 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[huawei]ip ip-prefix abcd index 10 permit 1.0.0.0 8</span><br><span class="line">[huawei]ip ip-prefix abcd index 20 permit 2.0.0.0 8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在匹配过程中，系统按索引号升序依次检查各个表项，只要有一个表项满足条件，就认为通过该过滤列表，不再去匹配其他表项</span><br><span class="line"></span><br><span class="line">默认所有未匹配的路由将被拒绝通过过滤列表，如果所有表项都配置成deny模式，则任何路由都不能通过该路由列表。因此，需要在多条deny模式的表项后定义一条permit 0.0.0.0 0 less-equal 32表项，允许其他所有IPv4路由信息通过</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">匹配某条特定路由：192.168.1.0 / 24</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix1 192.168.1.0 24</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">匹配默认路由</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix2 permit 0.0.0.0 0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">匹配所有主机路由</span><br><span class="line"></span><br><span class="line"># 掩码等于32 那就是主机了  0表示网络号不关心</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix3 permit 0.0.0.0 0 greater-equal 32</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">匹配所有路由</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix4 permit 0.0.0.0 0 less-equal 32</span><br></pre></td></tr></table></figure>
+
+
+<p>匹配以下路由（用最精确最简洁的方式）：</p>
+<ul>
+<li>192.168.4.0 &#x2F;24</li>
+<li>192.168.5.0 &#x2F;24</li>
+<li>192.168.6.0 &#x2F;24</li>
+<li>192.168.7.0 &#x2F;24</li>
+</ul>
+<p>写成二进制形式</p>
+<p>4： 00000100</p>
+<p>5： 00000101</p>
+<p>6： 00000110</p>
+<p>7： 00000111</p>
+<p>16+6 &#x3D; 22是相同的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip ip-prefix abcd permit 192.168.4.0 22 greater-equal 24 less-equal 24  </span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcejtgajzvj30i10beafn.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">R2:</span><br><span class="line"></span><br><span class="line">ip ip-prefix 1 permit 192.168.0.0 16</span><br><span class="line"></span><br><span class="line">route-policy RP permit node 10</span><br><span class="line">    if-match ip-prefix 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ospf 1</span><br><span class="line">    import-route rip route-policy RP</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="filter-policy"><a href="#filter-policy" class="headerlink" title="filter-policy"></a>filter-policy</h1><ul>
+<li>用于控制路由更新，接收的一个工具</li>
+<li>只能过滤路由信息，无法过滤LSA（如链路状态协议，OSPF等）</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcekpo926ej30ef0a2gq7.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[R2] ip ip-prefix 1 deny 192.168.3.0 24</span><br><span class="line">[R2] ip ip-prefix 1 permit 0.0.0.0 0 less-equal 32</span><br><span class="line">[R2] rip</span><br><span class="line">[R2-rip-1] filter-policy ip-prefix 1 export [g 0/0/1]</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcekwmmcqpj30ei09qgpg.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R1</span><br><span class="line"></span><br><span class="line">[R1] ip ip-prefix 1 deny 192168.3.0 24</span><br><span class="line">[R1] ip ip-prefix 1 permit 0.0.0.0 0 less-equal 32</span><br><span class="line">[R1] rip</span><br><span class="line">[R1-rip-1] import-route direct</span><br><span class="line">[R1-rip-1] filter-policy ip-prefix 1 export direct </span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcel1370gtj30jo0d9n4u.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[R2] ip ip-prefix 1 deny 192.168.3.0 24</span><br><span class="line">[R2] ip ip-prefix 1 permit 0.0.0.0 0 less-equal 32</span><br><span class="line">[R2] rip</span><br><span class="line">[R2-rip-1] filter-policy ip-prefix 1 import [g 0/0/0]</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcel6taj17j30jp0cyjxk.jpg" alt="捕获.PNG"></p>
+<p>而上一个例子，R3是学不到路由的，但是在这个OSPF例子中，R3是能学到路由的。就是因为距离矢量协议在路由器之间传递的是路由信息，而链路状态协议传递的是LSA，不是路由信息。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcelgd81qcj30j20b9tf1.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%E9%87%8D%E5%8F%91%E5%B8%83/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/27/%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%E9%87%8D%E5%8F%91%E5%B8%83/" class="post-title-link" itemprop="url">路由协议重发布</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-27 15:34:31" itemprop="dateCreated datePublished" datetime="2020-02-27T15:34:31+08:00">2020-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%87%8D%E5%8F%91%E5%B8%83/" itemprop="url" rel="index"><span itemprop="name">重发布</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/27/%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%E9%87%8D%E5%8F%91%E5%B8%83/" class="leancloud_visitors" data-flag-title="路由协议重发布">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>路由重发布（redistribution）是指在路由协议域的边界设备上将路由信息从一个路由协议导入到另一个路由协议的过程</p>
+<p>路由重发布（路由引入）是有方向性的</p>
+<p>只有存在于路由表中的路由才能够被执行路由重发布。</p>
+<h2 id="路由重发布需要注意的点："><a href="#路由重发布需要注意的点：" class="headerlink" title="路由重发布需要注意的点："></a>路由重发布需要注意的点：</h2><ul>
+<li>路由优先级</li>
+<li>路由倒灌问题</li>
+<li>路由信息不兼容(度量值信息不一致)</li>
+<li>收敛时间不一致（不同路由协议的收敛速度不同）</li>
+<li>度量值</li>
+</ul>
+<h2 id="路由优先级"><a href="#路由优先级" class="headerlink" title="路由优先级"></a>路由优先级</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb0mdni7rj30a80a442b.jpg" alt="捕获.PNG"></p>
+<p>R2和R3接收到了R1的路由信息，然后R2进行一个路由重发布，把BGP路由引入到OSPF协议当中去，那么传给了R4，R4通过OSPF协议又转发给了R3。<br>那么R3接收到了两条相同的路由，只不过一个是BGP，一个是OSPF，那么R3如何做出选择？这就涉及到了路由优先级。</p>
+<p>比如OSPF路由优先级高于IBGP，那么R3产生次优路径，去往1.1.1.1&#x2F;32数据流走R4-R2-R1，绕远路了（可以通过修改优先级解决）</p>
+<p>华为定义的优先级（每个厂家不一样）<br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb10mntjtj30au08gt9n.jpg" alt="捕获.PNG"></p>
+<h2 id="路由倒灌问题"><a href="#路由倒灌问题" class="headerlink" title="路由倒灌问题"></a>路由倒灌问题</h2><p>上图，如果R3部署了双向路由重发布，则将导致路由1.1.1.1&#x2F;32倒灌会BGP</p>
+<p>解决：</p>
+<blockquote>
+<p>1）修改优先级</p>
+</blockquote>
+<blockquote>
+<p>2）在R2上进行BGP到OSPF的路由重发布时，将发布进OSPF的路由设置相应的tag值，随后在R3上针对该tag值进一步部署路由过滤，调整优先级，基于重路由的路由策略等。</p>
+</blockquote>
+<h2 id="Metric问题"><a href="#Metric问题" class="headerlink" title="Metric问题"></a>Metric问题</h2><p>OSPF的路由metric是基于接口开销，与接口的带宽有关</p>
+<p>RIP路由的metric值是基于跳数</p>
+<p>那么在不同协议之间进行import-route的话，就需要关注metric的问题</p>
+<p>解决：</p>
+<ul>
+<li>在特定协议中使用相关命令修改种子度量值（在向路由协议重发布路由时，使用的初始度量值叫种子度量值）。例如在ospf和rip中使用default-cost命令</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import-route 命令</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="OSPF与RIP的互重发布"><a href="#OSPF与RIP的互重发布" class="headerlink" title="OSPF与RIP的互重发布"></a>OSPF与RIP的互重发布</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb1jzm0s2j30i507rgol.jpg" alt="捕获.PNG"></p>
+<p>RIP和OSPF假设都配置好了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">R2</span><br><span class="line"></span><br><span class="line">进入到RIP进程</span><br><span class="line">import-route ospf 1 cost 8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">进入到ospf进程</span><br><span class="line">import-route rip cost 1 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="OSPF-import-直连路由"><a href="#OSPF-import-直连路由" class="headerlink" title="OSPF import 直连路由"></a>OSPF import 直连路由</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2f0462xj30hs0a7n2l.jpg" alt="捕获.PNG"></p>
+<p>注意，R3的直连接口并没有运行ospf</p>
+<h2 id="OSPF-import-静态路由"><a href="#OSPF-import-静态路由" class="headerlink" title="OSPF import 静态路由"></a>OSPF import 静态路由</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb2g33yz3j30gx0ccwkd.jpg" alt="捕获.PNG"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/VLAN%E9%97%B4%E8%B7%AF%E7%94%B1%E4%BA%92%E9%80%9A/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/26/VLAN%E9%97%B4%E8%B7%AF%E7%94%B1%E4%BA%92%E9%80%9A/" class="post-title-link" itemprop="url">VLAN间路由互通</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-26 17:46:27" itemprop="dateCreated datePublished" datetime="2020-02-26T17:46:27+08:00">2020-02-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/26/VLAN%E9%97%B4%E8%B7%AF%E7%94%B1%E4%BA%92%E9%80%9A/" class="leancloud_visitors" data-flag-title="VLAN间路由互通">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><p>VLAN是广播域。通常两个广播域之间是由路由器连接。广播域之间来往的数据包都是由路由器中继的。因此，VLAN间的通信也需要路由器提供中继服务，这被称作VLAN间路由</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>按照使用路由器采用中继的思想，如果使用物理接口的话，那么有几个VLAN，就需要占用几个路由器的物理接口，但这是不现实的，因为路由器的物理接口资源是非常宝贵的。</p>
+<p>因此，提出了子接口的概念</p>
+<h2 id="通过子接口实现VLAN间路由"><a href="#通过子接口实现VLAN间路由" class="headerlink" title="通过子接口实现VLAN间路由"></a>通过子接口实现VLAN间路由</h2><p>在路由器以太网接口上进行“子接口”的划分，与交换机的Trunk链路对接</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcard6588tj30gc07hq5e.jpg" alt="捕获.PNG"></p>
+<p>子接口是在物理接口之上创建的，而且是逻辑接口，且可以配置IP地址，需要指定接口对应的VLAN ID。如图中的GE0&#x2F;0&#x2F;0.1和GE0&#x2F;0&#x2F;0.2等</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcarimck47j30i00aw42a.jpg" alt="捕获.PNG"></p>
+<p><code>arp broadcast enable</code>可配可不配</p>
+<p>这些配置需要在逻辑接口下完成配置 </p>
+<p>路由器还可以由防火墙代替</p>
+<p>问题：</p>
+<ul>
+<li>交换机和路由器之间的链路的拥塞可能会比较严重</li>
+</ul>
+<h2 id="通过vlanif接口实现VLAN间路由"><a href="#通过vlanif接口实现VLAN间路由" class="headerlink" title="通过vlanif接口实现VLAN间路由"></a>通过vlanif接口实现VLAN间路由</h2><h3 id="什么是VLAN-IF接口"><a href="#什么是VLAN-IF接口" class="headerlink" title="什么是VLAN IF接口"></a>什么是VLAN IF接口</h3><p>VLAN IF是Vlan interface的简称。是一个三层交换机的概念，该交换机是有路由模块的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcas1353v4j30g50ahq6n.jpg" alt="捕获.PNG"></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcasm5nz0oj307c09g3zo.jpg" alt="捕获.PNG"></p>
+<p>在交换机上，除了需要在和PC连接的两个物理接口上进行配置之外，不需要配置另一个接口了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vlan batch 10 20</span><br><span class="line"># int g0/0/1 </span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 10</span><br><span class="line">  int g 0/0/2</span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 20    </span><br></pre></td></tr></table></figure>
+<p>还需要配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface   vlanif 10</span><br><span class="line">    ip address 192.168.10.254 24</span><br><span class="line">interface vlanif 20</span><br><span class="line">    ip address 192.168.20.254 24</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcataaaljfj30f108ndhq.jpg" alt="捕获.PNG"></p>
+<p>接入层交换机配置(没有路由模块)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vlan batch 10 20</span><br><span class="line"># int g0/0/1 </span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 10</span><br><span class="line">  int g 0/0/2</span><br><span class="line">    port link-type access</span><br><span class="line">    port default vlan 20  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  int g0/0/22</span><br><span class="line">    port link-type trunk</span><br><span class="line">    prot allow-pass vlan 10 20</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>核心交换机配置（有路由模块）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  int g0/0/22</span><br><span class="line">    port link-type trunk</span><br><span class="line">    prot allow-pass vlan 10 20</span><br><span class="line"></span><br><span class="line">  interface   vlanif 10</span><br><span class="line">    ip address 192.168.10.254 24</span><br><span class="line">  interface vlanif 20</span><br><span class="line">    ip address 192.168.20.254 24</span><br><span class="line"></span><br><span class="line"># 核心交换机要和路由器通信，那么可以把路由器当作一个终端，配置成vlan id为99的</span><br><span class="line"></span><br><span class="line">vlan 99</span><br><span class="line"> int g0/0/24</span><br><span class="line"> port link-type access</span><br><span class="line"> port default vlan 99</span><br><span class="line"></span><br><span class="line">interface   vlanif 99</span><br><span class="line">  ip address 192.168.99.1 24</span><br></pre></td></tr></table></figure>
+<p>路由器配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int g 0/0/0</span><br><span class="line">  ip address 192.168.99.2 24</span><br><span class="line"></span><br><span class="line">ip route-static 192.168.10.0 24 192.168.99.1</span><br><span class="line">ip route-static 192.168.200.0 24 192.168.99.1</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcats0fb0qj30fu0aowhb.jpg" alt="捕获.PNG"></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av37573316/?spm_id_from=333.788.videocard.0">https://www.bilibili.com/video/av37573316/?spm_id_from=333.788.videocard.0</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/%E4%BA%8C%E5%B1%82%E4%BA%A4%E6%8D%A2%E5%8E%9F%E7%90%86/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/26/%E4%BA%8C%E5%B1%82%E4%BA%A4%E6%8D%A2%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">二层交换原理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-26 09:24:10" itemprop="dateCreated datePublished" datetime="2020-02-26T09:24:10+08:00">2020-02-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/26/%E4%BA%8C%E5%B1%82%E4%BA%A4%E6%8D%A2%E5%8E%9F%E7%90%86/" class="leancloud_visitors" data-flag-title="二层交换原理">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="二层交换机功能"><a href="#二层交换机功能" class="headerlink" title="二层交换机功能"></a>二层交换机功能</h1><ul>
+<li>维护MAC地址表，MAC寻址</li>
+<li>数据帧的转发及过滤</li>
+<li>二层环路避免及冗余性支持</li>
+</ul>
+<h1 id="MAC地址及MAC地址表"><a href="#MAC地址及MAC地址表" class="headerlink" title="MAC地址及MAC地址表"></a>MAC地址及MAC地址表</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k670ugij30hw08ewig.jpg" alt="捕获.PNG"></p>
+<p>二层交换是不会查看三层报文的，并不会关心源和目的的IP地址，只会根据MAC地址进行寻址。而且二层交换机是透传的。</p>
+<h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9k83bmw0j30h508wwgr.jpg" alt="捕获.PNG"></p>
+<h2 id="寻址过程"><a href="#寻址过程" class="headerlink" title="寻址过程"></a>寻址过程</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kesvvr9j30g609mjtp.jpg" alt="捕获.PNG"></p>
+<p>至于PC1是如何拿到PC4的MAC地址的，是通过ARP协议。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kfv5uuoj30fr09vwh7.jpg" alt="捕获.PNG"></p>
+<p>3）查找MAC地址表，发现没有匹配表项</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9khvzedsj30fy09v41g.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kj65v1fj30go0a9why.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kjrq6rxj30gf09lju8.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kkkdiojj30gu0aftc3.jpg" alt="捕获.PNG"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kl71jwij30go0a9tbw.jpg" alt="捕获.PNG"></p>
+<h1 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h1><h2 id="为什么需要VLAN"><a href="#为什么需要VLAN" class="headerlink" title="为什么需要VLAN"></a>为什么需要VLAN</h2><p>在上述进行寻址的过程中，发现了一个问题–泛洪。大量的泛洪会给非目的交换机带来很大额外的负担。</p>
+<ul>
+<li>整台交换机的所有端口均属于同一个广播域</li>
+<li>网络中的设备有可能被大量的广播损耗资源</li>
+<li>无法根据业务需求灵活的规划网络结构</li>
+</ul>
+<p>因此，VLAN可以解决这一问题</p>
+<p>通过将交换机的端口划入特定的VLAN，可以起到隔离广播域的作用</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9kw8509jj30cz0amq7g.jpg" alt="捕获.PNG"></p>
+<ul>
+<li>一个VLAN中所有设备都是在同一广播域内，不同的VLAN为不同的广播域</li>
+<li>VLAN之间相互隔离，广播不能跨越VLAN传播，因此不同VLAN之间的设备一般无法访问，不同VLAN之间需要通过三层设备实现相互通信。</li>
+<li>一个VLAN一般为一个逻辑子网，由被配置为此VLAN成员的设备组成。</li>
+<li>VLAN中成员多基于交换机的端口分配，划分VLAN就是对交换机的接口划分</li>
+<li>VLAN工作于OSI参考模型的二层。</li>
+<li>VLAN是二层交换机的一个非常根本的工作机制</li>
+</ul>
+<h1 id="接口类型"><a href="#接口类型" class="headerlink" title="接口类型"></a>接口类型</h1><ul>
+<li>Access</li>
+<li>Trunk</li>
+<li>Hybrid</li>
+</ul>
+<h2 id="Access"><a href="#Access" class="headerlink" title="Access"></a>Access</h2><p>一般用于连接主机的端口，access端口只能属于一个VLAN</p>
+<ul>
+<li>这些端口都用于直连终端，他们被配置为Access类型</li>
+<li>Access 接口常用于连接PC，服务器或者其他终端，或路由器等设备</li>
+<li>Access接口只能加入一个VLAN，一旦加入特定VLAN后，该接口所连接的设备也就加入了该VLAN（默认缺失情况下为VLAN1）</li>
+</ul>
+<p>Access接口收到帧：</p>
+<ul>
+<li>如果该帧不带tag，则接收帧并打上端口的pvid</li>
+<li>如果该帧携带tag，则当vlan ID与所属VLAN ID相同时，接收该报文，否则丢弃</li>
+</ul>
+<p>Access接口发送帧：</p>
+<ul>
+<li>剥离802.1Q tag header,发出的帧为普通以太网帧</li>
+</ul>
+<h2 id="Trunk"><a href="#Trunk" class="headerlink" title="Trunk"></a>Trunk</h2><p>一般用于交换机之间连接的端口，trunk端口可以属于多个VLAN，可以接受和发送多个VLAN的报文</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9lejthu5j30i708p42c.jpg" alt="捕获.PNG"></p>
+<p>Trunk接口之间使用<strong>802.1Q标准</strong>进行通信</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gc9lt7i8naj30go0ay0us.jpg" alt="捕获.PNG"></p>
+<p>上面的是原始的数据帧，下面的是打了tag标签的数据帧。</p>
+<p>如果是在一个交换机里面同一个VLAN里，比如上图的VLAN10，那么原始数据帧在进入到交换机时，会打上一个标签，但是在转发出交换机时，会摘掉这个标签，变成原始数据帧。但是，如果是要通过不同的交换机，也就是要经过Trunk接口时，这个数据帧的标签是不会取掉的，只有快到终端设备上时，才能取掉</p>
+<p>Trunk接口收到帧：</p>
+<ul>
+<li>如果数据不带tag，则打上接口pvid，若pvid在允许通过的vlan id 列表里，则接收该报文。若pvid不在允许通过的vlan id列表里，则丢弃该报文</li>
+</ul>
+<p>Trunk接口发送帧</p>
+<ul>
+<li>若vlan id与接口pvid相同，且该vlan在allow-pass vlan列表中，则去掉 tag，发送数据帧</li>
+<li>若vlan id与接口pvid不同，且该vlan在allow-pass vlan列表中，则保持原有Tag，发送该tag的数据帧</li>
+</ul>
+<h2 id="Hybrid"><a href="#Hybrid" class="headerlink" title="Hybrid"></a>Hybrid</h2><p>可以用于交换机之间的连接，也可以用于接用户的计算机。hybrid接口可以属于多个vlan，可以接收和发送多个vlan的报文</p>
+<h2 id="端口的缺省ID（PVID）"><a href="#端口的缺省ID（PVID）" class="headerlink" title="端口的缺省ID（PVID）"></a>端口的缺省ID（PVID）</h2><p>一个端口可以属于多个VLAN，但是只能有一个PVID,收到一个不带tag头的数据包时，会打上PVID所表示的VLAN号，视同该VLAN的数据包处理。（如果一个数据帧没有标签，则会打上这个默认标签）</p>
+<ul>
+<li>每个ACCESS,TRUNK,HYBRID,QINQ类型的端口都可以配置一个缺省VLAN（PVID：Port Default VLAN ID），表示端口所属的VLAN</li>
+<li>对于Access类型端口，PVID的数值表示当前所属的VLAN。</li>
+<li>对于Trunk，Hybrid类型端口，由于Hybrid类型端口和Trunk类型端口允许多个VLAN数据帧通过，也可以理解为这两种类型的端口属于多个VLAN，所以需要配置PVID。</li>
+<li>PVID，在缺省情况下为VLAN 1.</li>
+</ul>
+<h1 id="VLAN的基本配置"><a href="#VLAN的基本配置" class="headerlink" title="VLAN的基本配置"></a>VLAN的基本配置</h1><p>在交换机上创建VLAN并进入VLAN视图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vlan 10</span><br><span class="line"># 也可以批量创建  vlan batch 10 20...</span><br></pre></td></tr></table></figure>
+<p>件发给特定的接口配置为access，trunk等类型，并加入vlan</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[huawei]interface GigabitEthernet 0/0/1</span><br><span class="line">[huawei-GigabitEthernet 0/0/1] port link-type access</span><br><span class="line"># access类型</span><br><span class="line">[huawei-GigabitEthernet 0/0/1] port default vlan 10</span><br><span class="line"></span><br><span class="line">#trunk类型</span><br><span class="line">[huawei-GigabitEthernet 0/0/1] port trunk allow-pass vlan 10 20 99</span><br></pre></td></tr></table></figure>
+
+<p>配置trunk接口的pvid</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[huawei-GigabitEthernet 0/0/1] port trunk pvid vlan 99</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>参考：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av37784983?from=search&seid=8009006989023028859">https://www.bilibili.com/video/av37784983?from=search&amp;seid=8009006989023028859</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot; aria-label&#x3D;&quot;上一页&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot; aria-label&#x3D;&quot;下一页&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

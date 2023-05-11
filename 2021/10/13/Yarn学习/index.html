@@ -1,23 +1,1171 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Yarn的基本架构由Resource Manager，Node Manager，Application Master，Container组成  Yarn调度器FIFO调度器FIFO调度器将应用放置在一个队列中，然后按照提交的顺序（先进先出）运行应用。首先为队列中第一个应用的请求分配资源，第一个应用的请求被满足后再依次为队列中下一个应用服务。 FIFO调度器的优点是：简单易懂，不需要任何配置。但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yarn学习">
+<meta property="og:url" content="http://yoursite.com/2021/10/13/Yarn%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="Yarn的基本架构由Resource Manager，Node Manager，Application Master，Container组成  Yarn调度器FIFO调度器FIFO调度器将应用放置在一个队列中，然后按照提交的顺序（先进先出）运行应用。首先为队列中第一个应用的请求分配资源，第一个应用的请求被满足后再依次为队列中下一个应用服务。 FIFO调度器的优点是：简单易懂，不需要任何配置。但">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gvdilz0e48j61h30r5at402.jpg">
+<meta property="article:published_time" content="2021-10-13T03:07:49.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gvdilz0e48j61h30r5at402.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2021/10/13/Yarn%E5%AD%A6%E4%B9%A0/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Yarn学习 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/13/Yarn%E5%AD%A6%E4%B9%A0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Yarn学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-13 11:07:49" itemprop="dateCreated datePublished" datetime="2021-10-13T11:07:49+08:00">2021-10-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2021/10/13/Yarn%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="Yarn学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="Yarn的基本架构"><a href="#Yarn的基本架构" class="headerlink" title="Yarn的基本架构"></a>Yarn的基本架构</h1><p>由Resource Manager，Node Manager，Application Master，Container组成</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gvdilz0e48j61h30r5at402.jpg" alt="捕获.PNG"></p>
+<h1 id="Yarn调度器"><a href="#Yarn调度器" class="headerlink" title="Yarn调度器"></a>Yarn调度器</h1><h2 id="FIFO调度器"><a href="#FIFO调度器" class="headerlink" title="FIFO调度器"></a>FIFO调度器</h2><p>FIFO调度器将应用放置在一个队列中，然后按照提交的顺序（先进先出）运行应用。首先为队列中第一个应用的请求分配资源，第一个应用的请求被满足后再依次为队列中下一个应用服务。</p>
+<p>FIFO调度器的优点是：简单易懂，不需要任何配置。但是不适合共享集群。大的应用会占用集群中的所有资源，所以每个应用必须等待直到轮到自己运行。在一个共享集群中，更适合容量调度器和公平调度器。这两种调度器都允许长时间运行的作业能够及时完成，同时也允许正在进行较小临时查询的用户能够在合理时间内得到返回结果。</p>
+<h2 id="容量调度器"><a href="#容量调度器" class="headerlink" title="容量调度器"></a>容量调度器</h2><p>Hadoop默认是容量调度器</p>
+<p>容量调度器允许多个组织共享一个hadoop集群，每个组织可以分配到全部集群资源的一部分。每个组织被配置一个专门的队列，每个队列被配置为可以使用一定的集群资源。队列还可以进一步按照层次划分，这样每个组织内的不同用户能供共享该组织队列所分配的资源。在一个队列里，使用FIFO调度策略进行调度。</p>
+<p>单个作业所使用的资源不会超过其队列容量。然而，如果一个队列中有多个作业，并且队列资源不够的话，如果仍有可用的空闲资源，那么容量调度器可能会将空余的资源分配给队列中的作业，哪怕这会超出队列容量，这称为“弹性队列”</p>
+<p>正常操作时，容量调度器不会通过强行中止来抢占容器，因此，如果一个队列一开始资源够用，然后随着需求增长，资源开始不够用时，那么这个队列就只能等着其他队列释放容器资源。缓解这种情况的方法是：对队列设置一个最大容量限制，这样这个队列就不会过多侵占其他队列的容量了。</p>
+<h2 id="公平调度器"><a href="#公平调度器" class="headerlink" title="公平调度器"></a>公平调度器</h2><p>公平调度器旨在为所有运行的应用公平分配资源。包括同一个队列中的应用实现资源公平共享，多个队列间实现公平共享。</p>
+<p>如何在队列之间公平共享？想象两个用户A和B，分别拥有自己的队列。A启动一个作业，在B没有需求时，A会分配到全部可用资源；当A的作业仍在运行时B启动一个作业，一段时间后，每个作业都用到了一半的集群资源。这时，如果B启动第二个作业且其他作业仍在运行，那么第二个作业将和B的其他作业（这里是第一个）共享资源，因此B的每个作业将占用四分之一的集群资源，而A仍继续占用一半的集群资源。</p>
+<h1 id="Yarn常用命令"><a href="#Yarn常用命令" class="headerlink" title="Yarn常用命令"></a>Yarn常用命令</h1><ul>
+<li><p>展示运行中任务的详细信息<br><code>yarn application-list</code></p>
+</li>
+<li><p>筛选出某个状态的任务<br><code>yarn application-list-appStates</code> </p>
+</li>
+<li><p>kill某一个任务<br><code>yarn application -kill &lt;applicationId&gt;</code></p>
+</li>
+<li><p>查看applicationd的logs<br><code>yarn logs-applicationId &lt;applicationId&gt;</code></p>
+</li>
+<li><p>查看Container日志<br><code>yarn logs-applicationId &lt;applicationId&gt; -containerId &lt;containerId&gt;</code></p>
+</li>
+<li><p>查看尝试运行的任务<br><code>yarn applicationattempt -list &lt;applicationId&gt;</code></p>
+</li>
+<li><p>查看application所用的容器<br><code>yarn container -list &lt;applicationattemptId&gt;</code></p>
+</li>
+<li><p>打印Container状态<br><code>yarn container -status &lt;ContainerId&gt;</code></p>
+</li>
+<li><p>列出所有节点<br><code>yarn node -list all</code></p>
+</li>
+<li><p>yarn rmadmin 刷新配置,在运行时如果对队列配置文件有更改时，可用这个命令刷新配置<br><code>yarn rmadmin -refreshQueues</code></p>
+</li>
+<li><p>yarn queue状态<br><code>yarn queue -status default</code></p>
+</li>
+</ul>
+<h1 id="Yarn生产环境核心配置参数"><a href="#Yarn生产环境核心配置参数" class="headerlink" title="Yarn生产环境核心配置参数"></a>Yarn生产环境核心配置参数</h1><h2 id="ResourceManager"><a href="#ResourceManager" class="headerlink" title="ResourceManager"></a>ResourceManager</h2><ul>
+<li><code>yarn.resourcemanager.scheduler.class</code>：配置调度器，默认容量调度器</li>
+<li><code>yarn.resourcemanager.scheduler.client.thread-count</code>：ResourceManager处理调度器请求的线程数量，默认50</li>
+</ul>
+<h2 id="NodeManager"><a href="#NodeManager" class="headerlink" title="NodeManager"></a>NodeManager</h2><ul>
+<li><code>yarn.nodemanager.resource.detect-hardware-capabilities</code>：是否让yarn自己检测硬件进行配置，默认false</li>
+<li><code>yarn.nodemanager.resource.count-logical-processors-as-cores</code>：是否将虚拟核数当作cpu核数，默认false</li>
+<li><code>yarn.nodemanager.resource.pcores-vcores-multiplier</code>：虚拟核数和物理核数乘数，例如：4核8线程，该参数应该设置为2，默认为1</li>
+<li><code>yarn.nodemanager.resource.memory-mb</code>：NodeManager使用内存，默认8G</li>
+<li><code>yarn.nodemanager.resource.system-reserved-memory-mb</code>：NodeManager为系统保留多少内存，跟上面的参数配置一个即可</li>
+<li><code>yarn.nodemanager.resource.cpu-vcores</code>：NodeManager使用CPU核数，默认8个</li>
+<li><code>yarn.nodemanager.resource.pmem-check-enabled</code>：是否开启物理内存检查限制container，默认打开</li>
+<li><code>yarn.nodemanager.resource.vmem-check-enabled</code>：是否开启虚拟内存检查限制container，默认打开</li>
+<li><code>yarn.nodemanager.resource.vmem-pmem-ratio</code>：虚拟内存物理内存比例，默认2.1</li>
+</ul>
+<h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><ul>
+<li><code>yarn.scheduler.minimum-allocation-mb</code>：容器最小内存，默认1G</li>
+<li><code>yarn.scheduler.maximum-allocation-mb</code>: 容器最大内存，默认8G</li>
+<li><code>yarn.scheduler.minimum-allocation-vcores</code>: 容器最小CPU核数，默认1个</li>
+<li><code>yarn.scheduler.maximum-allocation-vcores</code>：容器默认最大CPU核数，默认4个</li>
+</ul>
+<h2 id="配置实例"><a href="#配置实例" class="headerlink" title="配置实例"></a>配置实例</h2><p>在yarn-site.xml文件中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 选择调度器，默认容量调度器，中小型用容量调度器，大型用公平调度器 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>The class to use as the resource scheduler.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--ResourceManager处理调度器请求的线程数量，默认50；通常不能超过 N * M ，其中N为机器数量，M为线程数量，比如3台机器数量，4个线程数量，则不能超过12，默认不要超过8，因为机器还可能运行其他程序  --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Number of threads to handle scheduler interface.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.client.thread-count<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>50<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 是否让yarn自动检测硬件进行配置，默认是false。如果该节点有很多其他应用程序，建议手动配置，如果没有其他应用程序，可以采用自动 --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Enable auto-detection of node capabilities such as</span><br><span class="line">    memory and CPU.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.detect-hardware-capabilities<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 是否将虚拟核数当作cpu核数，默认false --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Flag to determine if logical processors(such as</span><br><span class="line">    hyperthreads) should be counted as cores. Only applicable on Linux</span><br><span class="line">    when yarn.nodemanager.resource.cpu-vcores is set to -1 and</span><br><span class="line">    yarn.nodemanager.resource.detect-hardware-capabilities is true.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.count-logical-processors-as-cores<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 虚拟核数和物理核数乘数，例如：4核8线程，默认为1 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Multiplier to determine how to convert phyiscal cores to</span><br><span class="line">    vcores. This value is used if yarn.nodemanager.resource.cpu-vcores</span><br><span class="line">    is set to -1(which implies auto-calculate vcores) and</span><br><span class="line">    yarn.nodemanager.resource.detect-hardware-capabilities is set to true. The</span><br><span class="line">    number of vcores will be calculated as</span><br><span class="line">    number of CPUs * multiplier.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.pcores-vcores-multiplier<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- NodeManager使用内存,需要根据机器内存进行调整，默认是8G，即8192MB--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Amount of physical memory, in MB, that can be allocated </span><br><span class="line">    for containers. If set to -1 and</span><br><span class="line">    yarn.nodemanager.resource.detect-hardware-capabilities is true, it is</span><br><span class="line">    automatically calculated(in case of Windows and Linux).</span><br><span class="line">    In other cases, the default is 8192MB.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.memory-mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>-1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- NodeManager使用CPU核数，默认8个 --&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Number of vcores that can be allocated</span><br><span class="line">    for containers. This is used by the RM scheduler when allocating</span><br><span class="line">    resources for containers. This is not used to limit the number of</span><br><span class="line">    CPUs used by YARN containers. If it is set to -1 and</span><br><span class="line">    yarn.nodemanager.resource.detect-hardware-capabilities is true, it is</span><br><span class="line">    automatically determined from the hardware in case of Windows and Linux.</span><br><span class="line">    In other cases, number of vcores is 8 by default.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.cpu-vcores<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>-1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 容器最小内存，默认1G--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>The minimum allocation for every container request at the RM</span><br><span class="line">    in MBs. Memory requests lower than this will be set to the value of this</span><br><span class="line">    property. Additionally, a node manager that is configured to have less memory</span><br><span class="line">    than this value will be shut down by the resource manager.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.minimum-allocation-mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 容器最大内存，默认8G  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>The maximum allocation for every container request at the RM</span><br><span class="line">    in MBs. Memory requests higher than this will throw an</span><br><span class="line">    InvalidResourceRequestException.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.maximum-allocation-mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>8192<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 容器最小CPU核数，默认1个 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>The minimum allocation for every container request at the RM</span><br><span class="line">    in terms of virtual CPU cores. Requests lower than this will be set to the</span><br><span class="line">    value of this property. Additionally, a node manager that is configured to</span><br><span class="line">    have fewer virtual cores than this value will be shut down by the resource</span><br><span class="line">    manager.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.minimum-allocation-vcores<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 容器默认最大CPU核数，默认4个 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>The maximum allocation for every container request at the RM</span><br><span class="line">    in terms of virtual CPU cores. Requests higher than this will throw an</span><br><span class="line">    InvalidResourceRequestException.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.maximum-allocation-vcores<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>4<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="配置容量调度器的队列以及优先级"><a href="#配置容量调度器的队列以及优先级" class="headerlink" title="配置容量调度器的队列以及优先级"></a>配置容量调度器的队列以及优先级</h1><p>需求：假如要有两个队列，default和hive队列。其中，default队列占总内存40%，最大资源容量占总资源60%，hive队列占总内存的60%，最大资源容量占总资源80%。并且，hive的优先级比default队列的优先级高</p>
+<p>在capacity-scheduler.xml中配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 指定多队列，增加hive队列 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.queues<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>default,hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The queues at the this level (root is the root queue).</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--  配置default队列为40，hive队列为60--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.capacity<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>40<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Default queue target capacity.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.capacity<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>60<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Default queue target capacity.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--  向该队列提交任务时，能占用这个队列资源的百分比，比如为1，则可以全部占用，如0.5，则用户只能占用这个队列的50%--&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.user-limit-factor<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      Default queue user limit a percentage from 0.0 to 1.0.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.user-limit-factor<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      Default queue user limit a percentage from 0.0 to 1.0.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 队列最大可以占用的资源容量，default是60%，hive是80%--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.maximum-capacity<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>60<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The maximum capacity of the default queue. </span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.maximum-capacity<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>80<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The maximum capacity of the default queue. </span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 要将队列设置成运行状态--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.state<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>RUNNING<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The state of the default queue. State can be one of RUNNING or STOPPED.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.state<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>RUNNING<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The state of the default queue. State can be one of RUNNING or STOPPED.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 设置哪些用户可以提交任务到队列，*表示所有用户，--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.acl_submit_applications<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The ACL of who can submit jobs to the default queue.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.acl_submit_applications<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The ACL of who can submit jobs to the default queue.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 对队列的操作权限--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.acl_administer_queue<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The ACL of who can administer jobs on the default queue.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.acl_administer_queue<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The ACL of who can administer jobs on the default queue.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置优先级--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.acl_application_max_priority<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The ACL of who can submit applications with configured priority.</span><br><span class="line">      For e.g, [user=&#123;name&#125; group=&#123;name&#125; max_priority=&#123;priority&#125; default_priority=&#123;priority&#125;]</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 任务最大的生存周期，如果超过这个时间，则会kill掉这个任务--&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.maximum-application-lifetime</span><br><span class="line">     <span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>-1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">        Maximum lifetime of an application which is submitted to a queue</span><br><span class="line">        in seconds. Any value less than or equal to zero will be considered as</span><br><span class="line">        disabled.</span><br><span class="line">        This will be a hard time limit for all applications in this</span><br><span class="line">        queue. If positive value is configured then any application submitted</span><br><span class="line">        to this queue will be killed after exceeds the configured lifetime.</span><br><span class="line">        User can also specify lifetime per application basis in</span><br><span class="line">        application submission context. But user lifetime will be</span><br><span class="line">        overridden if it exceeds queue maximum lifetime. It is point-in-time</span><br><span class="line">        configuration.</span><br><span class="line">        Note : Configuring too low value will result in killing application</span><br><span class="line">        sooner. This feature is applicable only for leaf queue.</span><br><span class="line">     <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.maximum-application-lifetime</span><br><span class="line">     <span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>-1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">        Maximum lifetime of an application which is submitted to a queue</span><br><span class="line">        in seconds. Any value less than or equal to zero will be considered as</span><br><span class="line">        disabled.</span><br><span class="line">        This will be a hard time limit for all applications in this</span><br><span class="line">        queue. If positive value is configured then any application submitted</span><br><span class="line">        to this queue will be killed after exceeds the configured lifetime.</span><br><span class="line">        User can also specify lifetime per application basis in</span><br><span class="line">        application submission context. But user lifetime will be</span><br><span class="line">        overridden if it exceeds queue maximum lifetime. It is point-in-time</span><br><span class="line">        configuration.</span><br><span class="line">        Note : Configuring too low value will result in killing application</span><br><span class="line">        sooner. This feature is applicable only for leaf queue.</span><br><span class="line">     <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 任务默认的生命周期 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.default.default-application-lifetime</span><br><span class="line">     <span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>-1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">        Default lifetime of an application which is submitted to a queue</span><br><span class="line">        in seconds. Any value less than or equal to zero will be considered as</span><br><span class="line">        disabled.</span><br><span class="line">        If the user has not submitted application with lifetime value then this</span><br><span class="line">        value will be taken. It is point-in-time configuration.</span><br><span class="line">        Note : Default lifetime can&#x27;t exceed maximum lifetime. This feature is</span><br><span class="line">        applicable only for leaf queue.</span><br><span class="line">     <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.capacity.root.hive.default-application-lifetime</span><br><span class="line">     <span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>-1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">        Default lifetime of an application which is submitted to a queue</span><br><span class="line">        in seconds. Any value less than or equal to zero will be considered as</span><br><span class="line">        disabled.</span><br><span class="line">        If the user has not submitted application with lifetime value then this</span><br><span class="line">        value will be taken. It is point-in-time configuration.</span><br><span class="line">        Note : Default lifetime can&#x27;t exceed maximum lifetime. This feature is</span><br><span class="line">        applicable only for leaf queue.</span><br><span class="line">     <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="任务优先级"><a href="#任务优先级" class="headerlink" title="任务优先级"></a>任务优先级</h1><p>修改yarn-site.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 表示设置了5个优先级 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.cluster.max-application-priority<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>5<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>则再提交新任务时，可以明确优先级</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hadoop jar jar包 wordcount -D mapreduce.job.priority=5 ... ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果修改正在运行的任务的优先级，可使用下面的命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn application -appID appID -updatePriority 5</span><br></pre></td></tr></table></figure>
+
+<h1 id="公平调度器配置"><a href="#公平调度器配置" class="headerlink" title="公平调度器配置"></a>公平调度器配置</h1><p>配置涉及两个文件，yarn-site.xml和fair-scheduler.xml</p>
+<p>首先，需要配置yarn-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 设置要使用公平调度器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 指明公平调度器队列所使用的配置文件位置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.fair.allocation.file<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/module/hadoop-3.3.1/etc/hadoop/fair-scheduler.xml<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 是否要开启队列间资源抢占，默认false--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.fair.preemption<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>配置fair-scheduler.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allocations</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 单个队列中Application Master占用资源的最大比例，取值0-1，企业一般配置0.1--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">queueMaxAMShareDefault</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">queueMaxAMShareDefault</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--单个队列最大资源的默认值 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">queueMaxResourcesDefault</span>&gt;</span>4096mb,4vcores<span class="tag">&lt;/<span class="name">queueMaxResourcesDefault</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 增加一个队列--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">queue</span> <span class="attr">name</span>=<span class="string">&quot;production&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  队列最小资源 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">minResources</span>&gt;</span>1024 mb, 10 vcores<span class="tag">&lt;/<span class="name">minResources</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 队列最大资源 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maxResources</span>&gt;</span>5120 mb, 20 vcores<span class="tag">&lt;/<span class="name">maxResources</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 队列中同时运行的应用数，默认50，根据线程数配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maxRunningApps</span>&gt;</span>50<span class="tag">&lt;/<span class="name">maxRunningApps</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 队列中Application Master占用资源的最大比例--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maxAMShare</span>&gt;</span>0.5<span class="tag">&lt;/<span class="name">maxAMShare</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 该队列资源权重，默认为1--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">weight</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">weight</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 队列内部的资源分配策略，“fifo”/“fair”/“drf” --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">schedulingPolicy</span>&gt;</span>fair<span class="tag">&lt;/<span class="name">schedulingPolicy</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">queue</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">queue</span> <span class="attr">name</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">weight</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">weight</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">schedulingPolicy</span>&gt;</span>drf<span class="tag">&lt;/<span class="name">schedulingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aclSubmitApps</span>&gt;</span>*<span class="tag">&lt;/<span class="name">aclSubmitApps</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aclAdministerApps</span>&gt;</span>*<span class="tag">&lt;/<span class="name">aclAdministerApps</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">queue</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认队列的策略，如果上面没有指定的话，则会设置成这个策略--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">defaultQueueSchedulingPolicy</span>&gt;</span>fair<span class="tag">&lt;/<span class="name">defaultQueueSchedulingPolicy</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 告诉调度器进来的任务应该如何分配到不同的队列中 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">queuePlacementPolicy</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 如果create设置为true，则当任务指定的队列不存在时，会自动创建一个队列，默认是true，一般可设置成false--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">&quot;specified&quot;</span> <span class="attr">create</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 比如提交到root.group.username队列，如果root.group不存在，不允许自动创建，如果root.group.username不存在，允许自动创建--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">&quot;nestedUserQueue&quot;</span> <span class="attr">create</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">&quot;primaryGroup&quot;</span> <span class="attr">create</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 最后一个规则必须为reject或者default，Reject表示拒绝，default表示会把任务提交到default队列中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">&quot;reject&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">queuePlacementPolicy</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">allocations</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>提交任务的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar jar包 类名 -D  mapreduce.job.queuename=root.development</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Tool接口"><a href="#Tool接口" class="headerlink" title="Tool接口"></a>Tool接口</h1><p>使用传统的driver代码创建mapreduce任务时，配置一般都是写死的。如果你需要更改一些配置的话，还需要更改代码，重新生成jar包，重新部署等。而如果使用Tool接口则可以避免这些，下面我们来看如何使用</p>
+<p>下面通过不使用Tool接口和使用Tool接口进行比较</p>
+<p>不使用Tool接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ToolMapReduce</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Create configuration</span></span><br><span class="line">        <span class="type">Configuration</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Configuration</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Create job</span></span><br><span class="line">        <span class="type">Job</span> <span class="variable">job</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Job</span>(conf, <span class="string">&quot;Tool Job&quot;</span>);</span><br><span class="line">        job.setJarByClass(ToolMapReduce.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Setup MapReduce job</span></span><br><span class="line">        job.setMapperClass(Mapper.class);</span><br><span class="line">        job.setReducerClass(Reducer.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Set only 1 reduce task</span></span><br><span class="line">        job.setNumReduceTasks(<span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Specify key / value</span></span><br><span class="line">        job.setOutputKeyClass(LongWritable.class);</span><br><span class="line">        job.setOutputValueClass(Text.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Input</span></span><br><span class="line">        FileInputFormat.addInputPath(job, <span class="keyword">new</span> <span class="title class_">Path</span>(args[<span class="number">0</span>]));</span><br><span class="line">        job.setInputFormatClass(TextInputFormat.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Output</span></span><br><span class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> <span class="title class_">Path</span>(args[<span class="number">1</span>]));</span><br><span class="line">        job.setOutputFormatClass(TextOutputFormat.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Execute job</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">code</span> <span class="operator">=</span> job.waitForCompletion(<span class="literal">true</span>) ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">        System.exit(code);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>则上面的mapreduce任务需要通过下面命令执行，只能使用两个参数，inputPath和outputPath，在代码中分别位于index[0]和index[1],</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar /path/to/My/jar.jar com.wordpress.hadoopi.ToolMapReduce /input/path /output/path</span><br></pre></td></tr></table></figure>
+<p>在这种情况下，reducers的数量是写死的，在代码中写死的，只能是1，不能通过命令行更改</p>
+<p>而如果我们使用Tool接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.Tool;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.ToolRunner;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ToolMapReduce</span> <span class="keyword">extends</span> <span class="title class_">Configured</span> <span class="keyword">implements</span> <span class="title class_">Tool</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> ToolRunner.run(<span class="keyword">new</span> <span class="title class_">Configuration</span>(), <span class="keyword">new</span> <span class="title class_">ToolMapReduce</span>(), args);</span><br><span class="line">        System.exit(res);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">run</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// When implementing tool</span></span><br><span class="line">        <span class="type">Configuration</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="built_in">this</span>.getConf();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Create job</span></span><br><span class="line">        <span class="type">Job</span> <span class="variable">job</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Job</span>(conf, <span class="string">&quot;Tool Job&quot;</span>);</span><br><span class="line">        job.setJarByClass(ToolMapReduce.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Setup MapReduce job</span></span><br><span class="line">        <span class="comment">// Do not specify the number of Reducer</span></span><br><span class="line">        job.setMapperClass(Mapper.class);</span><br><span class="line">        job.setReducerClass(Reducer.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Specify key / value</span></span><br><span class="line">        job.setOutputKeyClass(LongWritable.class);</span><br><span class="line">        job.setOutputValueClass(Text.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Input</span></span><br><span class="line">        FileInputFormat.addInputPath(job, <span class="keyword">new</span> <span class="title class_">Path</span>(args[<span class="number">0</span>]));</span><br><span class="line">        job.setInputFormatClass(TextInputFormat.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Output</span></span><br><span class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> <span class="title class_">Path</span>(args[<span class="number">1</span>]));</span><br><span class="line">        job.setOutputFormatClass(TextOutputFormat.class);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Execute job and return status</span></span><br><span class="line">        <span class="keyword">return</span> job.waitForCompletion(<span class="literal">true</span>) ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ToolsRunner通过它的静态的run方法执行mapreduce任务。在这个例子里，可以通过使用”-D”选项指定reducer的数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar /path/to/My/jar.jar com.wordpress.hadoopi.ToolMapReduce -D mapred.reduce.tasks=1 /input/path /output/path</span><br></pre></td></tr></table></figure>
+
+<p>GenericOptionParser可以将generic Tool option和真实的任务参数区分开，不管提供多少个generic option，inputPath和outputPath变量仍然在index[0]和index<a href="%E6%8C%87%E7%9A%84%E6%98%AF%E5%9C%A8run%E6%96%B9%E6%B3%95%E7%9A%84args%E6%95%B0%E7%BB%84%E4%B8%AD">1</a>，其中，ToolRunner方法中其实使用了GenericOptionParser。</p>
+<p>-D 后面可以配置各种配置，<br>比如，<code>conf.set(&quot;my.dummy.configuration&quot;,&quot;foobar&quot;)</code>，变成<code>-D my.dummy.configuration=foobar</code>。</p>
+<p>当想把一个jar文件提交到一个远程的hadoop server时，需要在driver代码中指定以下配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Configuration</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Configuration</span>();</span><br><span class="line">conf.set(<span class="string">&quot;mapred.job.tracker&quot;</span>, <span class="string">&quot;myserver.com:8021&quot;</span>);</span><br><span class="line">conf.set(<span class="string">&quot;fs.default.name&quot;</span>, <span class="string">&quot;hdfs://myserver.com:8020&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>如果用tool接口，则需要借助<code>-fs</code>和<code>-jt</code>，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar myjar.jar com.wordpress.hadoopi.ToolMapReduce -fs hdfs://myserver.com:8020 -jt myserver.com:8021</span><br></pre></td></tr></table></figure>
+
+<p>Options that are supported by ToolRunner through GenericOptionsParser are as follows-</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-conf &lt;configuration file&gt;– Specify an application configuration file. So you can prepare an XML file and set it using -conf option that way you can set many properties at once.</span><br><span class="line"></span><br><span class="line">-D &lt;property&gt;=&lt;value&gt;– Sets value for given property. Specifying a property with -D option will override any property with the same name in the configuration file or with in the driver code.</span><br><span class="line"></span><br><span class="line">-fs &lt;file:///&gt; or &lt;hdfs://namenode:port&gt;– This generic option is used to specify default filesystem URL to use. Overrides ‘fs.defaultFS’ property from configurations.</span><br><span class="line"></span><br><span class="line">-jt &lt;local&gt; or &lt;resourcemanager:port&gt;– Used to set YARN ResourceManager.</span><br><span class="line"></span><br><span class="line">-files &lt;comma separated list of files&gt;– Specify comma separated files to be copied to the map reduce cluster. Applies only to job. If you want to add a file to distributed cache then rather than hardcoding it with in your driver code by using job.addCacheFile() method you can specify it using -files generic option.</span><br><span class="line"></span><br><span class="line">-libjars &lt;comma seperated list of jars&gt;– Specify comma separated jar files to include in the classpath. Applies only to job. If you want to add a jar to distributed cache then rather than hardcoding it with in your driver by using job.addFileToClassPath() method you can specify it using -libjars generic option.</span><br><span class="line"></span><br><span class="line">-archives &lt;comma separated list of archives&gt;– Specify comma separated archives to be unarchived on the compute machines. Applies only to job. If you want to add an archived file (zip, tar and tgz/tar.gz files) then rather than hard coding it with in your driver by using job.addCacheArchive() method you can specify it using -libjars generic option.</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/22/Maven%E5%AD%A6%E4%B9%A0/" rel="next" title="Maven学习">
+                <i class="fa fa-chevron-left"></i> Maven学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/18/HDFS%E8%B0%83%E4%BC%98/" rel="prev" title="HDFS调优">
+                HDFS调优 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Yarn%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">Yarn的基本架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Yarn%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">Yarn调度器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FIFO%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">FIFO调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E9%87%8F%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">容量调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">公平调度器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Yarn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">Yarn常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Yarn%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">Yarn生产环境核心配置参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ResourceManager"><span class="nav-number">4.1.</span> <span class="nav-text">ResourceManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeManager"><span class="nav-number">4.2.</span> <span class="nav-text">NodeManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container"><span class="nav-number">4.3.</span> <span class="nav-text">Container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.4.</span> <span class="nav-text">配置实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%B9%E9%87%8F%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E9%98%9F%E5%88%97%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">5.</span> <span class="nav-text">配置容量调度器的队列以及优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">6.</span> <span class="nav-text">任务优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E8%B0%83%E5%BA%A6%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">公平调度器配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tool%E6%8E%A5%E5%8F%A3"><span class="nav-number">8.</span> <span class="nav-text">Tool接口</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

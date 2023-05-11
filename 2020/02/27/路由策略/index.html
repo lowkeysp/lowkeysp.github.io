@@ -1,23 +1,1199 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="route-policy route-policy 包含一个或者多个“节点Node”的列表 路由重分发期间可以关联route-policy进行路由过滤或执行策略   逐级向下对比，匹配每一个if-match语句。如果都满足，则执行apply语句，否则进入下一个node 配置创建route-policy 12345678[huawei]route-policy name (permit|deny">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路由策略">
+<meta property="og:url" content="http://yoursite.com/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="route-policy route-policy 包含一个或者多个“节点Node”的列表 路由重分发期间可以关联route-policy进行路由过滤或执行策略   逐级向下对比，匹配每一个if-match语句。如果都满足，则执行apply语句，否则进入下一个node 配置创建route-policy 12345678[huawei]route-policy name (permit|deny">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb4y5srpyj30co095jtg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gce9h42s7lj30ek08877o.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcea8qu09uj30i00adn08.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcehqhfk7wj30ii0as78c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gceiq24vujj30gf0ar7ae.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcejtgajzvj30i10beafn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcekpo926ej30ef0a2gq7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcekwmmcqpj30ei09qgpg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcel1370gtj30jo0d9n4u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcel6taj17j30jp0cyjxk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcelgd81qcj30j20b9tf1.jpg">
+<meta property="article:published_time" content="2020-02-27T10:16:03.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.451Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="数据">
+<meta property="article:tag" content="策略">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcb4y5srpyj30co095jtg.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>路由策略 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">路由策略
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-27 18:16:03" itemprop="dateCreated datePublished" datetime="2020-02-27T18:16:03+08:00">2020-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/02/27/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" class="leancloud_visitors" data-flag-title="路由策略">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="route-policy"><a href="#route-policy" class="headerlink" title="route-policy"></a>route-policy</h1><ul>
+<li>route-policy 包含一个或者多个“节点Node”的列表</li>
+<li>路由重分发期间可以关联route-policy进行路由过滤或执行策略</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcb4y5srpyj30co095jtg.jpg" alt="捕获.PNG"></p>
+<p>逐级向下对比，匹配每一个if-match语句。如果都满足，则执行apply语句，否则进入下一个node</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>创建route-policy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[huawei]route-policy name (permit|deny) node node数</span><br><span class="line"></span><br><span class="line">&gt; permit 指定节点的匹配模式为允许，当路由项通过该节点的过滤后，将执行该节点的apply子句，不进入下一个节点的过滤；如果路由项没有通过该节点过滤，将进入下一个节点继续过滤</span><br><span class="line"></span><br><span class="line">&gt; deny 指定节点的匹配模式为拒绝。这时apply子句不会被执行。当路由项满足该节点的所有if-match子句时，将被拒绝通过该节点，不进入下一个节点；如果路由项不满足该节点的任何if-match子句，将进入下一个节点继续过滤</span><br><span class="line"></span><br><span class="line">默认所有未匹配的路由将被拒绝通过route-policy。如果route-policy中定义了一个以上的节点，则各节点中至少应该有一个节点的匹配模式permit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>配置if-match子句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[huawei-route-policy] if-match ?</span><br><span class="line"></span><br><span class="line">&gt; acl           匹配acl</span><br><span class="line">&gt; cost          匹配路由信息的cost</span><br><span class="line">&gt; interface     匹配路由信息的出接口</span><br><span class="line">&gt; ip(next-hop|route-source|group-address) 匹配Ipv4的路由信息（下一跳，源地址或组播组地址）</span><br><span class="line">&gt; ip-prefix     匹配前缀列表</span><br><span class="line">&gt; route-type    匹配各类型路由信息</span><br><span class="line">&gt; tag           匹配路由信息的标记域</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; 对于同一个Route-policy节点，命令if-match acl和if-match ip-prefix 不能同时配置，后配置的命令会覆盖先配置的命令</span><br><span class="line">&gt; 对于同一个Route-policy节点,在匹配的过程中，各个if-match子句间是“与”的关系，即路由信息必须同时满足所有匹配条件，才可以执行apply子句。但命令if-match route-type和if-match interface 除外，这两个命令的各自if-match子句间是“或”的关系，与其他命令的if-match子句间仍是“与”的关系</span><br><span class="line">&gt; 如不指定if-match子句，则所有路由信息都会通过该节点的过滤</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<p>配置apply子句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[huawei-route-policy]apply ?</span><br><span class="line"></span><br><span class="line">&gt; cost        设置路由的cost值</span><br><span class="line">&gt; cost-type(type-1|type-2)   设置ospf的开销类型</span><br><span class="line">&gt; ip-address next-hop 设置ipv4路由信息的下一跳地址</span><br><span class="line">&gt; preference  设置路由协议的优先级</span><br><span class="line">&gt; tag          设置路由信息的标记域</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gce9h42s7lj30ek08877o.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[R1] acl 2000</span><br><span class="line">[R1-acl-basic-2000] rule permit source 172.16.1.0 0.0.0.0</span><br><span class="line"></span><br><span class="line">#这条命令需要注意的是，后面的0.0.0.0是反向掩码，由于我们是想过滤出172.16.1.0/24，但是ACL只能匹配网络号，不能匹配掩码，因此后面是0.0.0.0而不是0.0.0.255。这是因为首先ACL不能匹配掩码，不能搞混，再有，0.0.0.255表示我对最后八位不关心，因此会导致172.16.1.1,172.16.1.155等网络号也匹配进来，因此不对。但是由于只是匹配网络号，不匹配掩码，导致不能过滤出172.16.1.0/30等掩码不同的。**总结就是ACL只能匹配网络号**</span><br><span class="line"></span><br><span class="line">[R1] route-policy RP permit node 10</span><br><span class="line">[R1-route-policy] if-match acl 2000</span><br><span class="line">[R1-route-policy] apply cost 20</span><br><span class="line"></span><br><span class="line">[R1] ospf 1</span><br><span class="line">[R1-ospf-1] import-route direct route-policy RP</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么是ACL？</p>
+<p>ACL是访问控制列表。访问控制列表使用包过滤技术，在路由器上读取第三层及第四层包头中的信息如源地址，目的地址，源端口，目的端口等，根据预先定义好的规则对包进行过滤，从而达到访问控制的目的</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcea8qu09uj30i00adn08.jpg" alt="捕获.PNG"></p>
+<p>解决方案：</p>
+<p>修改cost值</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcehqhfk7wj30ii0as78c.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[R1]acl 2001</span><br><span class="line">[R1-acl-basic-2001]rule permit source 10.0.1.0 0</span><br><span class="line"></span><br><span class="line">[R1]acl 2002</span><br><span class="line">[R1-acl-basic-2002]rule permit source 10.0.2.0 0</span><br><span class="line"></span><br><span class="line">[R1]route-policy hice permit node 10</span><br><span class="line">[R1-route-policy] if-match acl 2001</span><br><span class="line">[R1-route-policy] apply cost 10</span><br><span class="line"></span><br><span class="line">[R1]route-policy hice permit node 20</span><br><span class="line">[R1-route-policy] if-match acl 2002</span><br><span class="line">[R1-route-policy] apply cost 20</span><br><span class="line"></span><br><span class="line">[R1]ospf 1</span><br><span class="line">[R1-ospf-1] import-route static route-policy hcie</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[R2]acl 2001</span><br><span class="line">[R2-acl-basic-2001]rule permit source 10.0.1.0 0</span><br><span class="line"></span><br><span class="line">[R2]acl 2002</span><br><span class="line">[R2-acl-basic-2002]rule permit source 10.0.2.0 0</span><br><span class="line"></span><br><span class="line">[R2]route-policy hice permit node 10</span><br><span class="line">[R2-route-policy] if-match acl 2001</span><br><span class="line">[R2-route-policy] apply cost 20</span><br><span class="line"></span><br><span class="line">[R2]route-policy hice permit node 20</span><br><span class="line">[R2-route-policy] if-match acl 2002</span><br><span class="line">[R2-route-policy] apply cost 10</span><br><span class="line"></span><br><span class="line">[R2]ospf 1</span><br><span class="line">[R2-ospf-1] import-route static route-policy hcie</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="ip-prefix"><a href="#ip-prefix" class="headerlink" title="ip-prefix"></a>ip-prefix</h1><h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><p>ACL的短板在于只能匹配网络号，不能匹配掩码</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gceiq24vujj30gf0ar7ae.jpg" alt="捕获.PNG"></p>
+<p>其中，192.168.0.0&#x2F;16是汇总路由，192.168.0.0&#x2F;24是明细路由<br>这时候，使用ACL就无法实现</p>
+<p>IP-Prefix List(IP前缀列表)是一个常用的路由匹配工具，相比于ACL，它的可控性更强，更为灵活</p>
+<p>IP-Prefix List不仅仅能匹配路由条目中的网络号，还能匹配网络掩码（也就是前缀长度），增强了路由匹配的精确度</p>
+<p>每个IP-Prefix List包含一条或多条语句，每条语句都有自己的序列号，按序号从小到大的顺序排列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]ip ip-prefix hcnp index 10 permit 192.168.4.0 24</span><br><span class="line"></span><br><span class="line"># 192.168.4.0 是网络号</span><br><span class="line"># 24是掩码长度</span><br><span class="line">也就是只有192.168.4.0/24才能匹配</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]ip ip-prefix hcie index 10 permit 102.168.0.0 16 greater-equal 24 less-equal 24</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># greater-equal 24 less-equal 24 表示（可选）指定掩码长度的匹配范围</span><br><span class="line"></span><br><span class="line"># 这里的16表示掩码长度，具体点：如果指定掩码长度匹配范围确定之后，这里的16表示网络号的前16位必须一样，也就是 192.168这16位必须一样</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 如果只配置了greater-equal，则掩码长度范围需在greater-equal-value和32之间</span><br><span class="line"></span><br><span class="line"># 如果只配置了less-equal，则掩码长度范围需在mask-length和less-equal-value之间 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[huawei]ip ip-prefix abcd index 10 permit 1.0.0.0 8</span><br><span class="line">[huawei]ip ip-prefix abcd index 20 permit 2.0.0.0 8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在匹配过程中，系统按索引号升序依次检查各个表项，只要有一个表项满足条件，就认为通过该过滤列表，不再去匹配其他表项</span><br><span class="line"></span><br><span class="line">默认所有未匹配的路由将被拒绝通过过滤列表，如果所有表项都配置成deny模式，则任何路由都不能通过该路由列表。因此，需要在多条deny模式的表项后定义一条permit 0.0.0.0 0 less-equal 32表项，允许其他所有IPv4路由信息通过</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">匹配某条特定路由：192.168.1.0 / 24</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix1 192.168.1.0 24</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">匹配默认路由</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix2 permit 0.0.0.0 0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">匹配所有主机路由</span><br><span class="line"></span><br><span class="line"># 掩码等于32 那就是主机了  0表示网络号不关心</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix3 permit 0.0.0.0 0 greater-equal 32</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">匹配所有路由</span><br><span class="line"></span><br><span class="line">ip ip-prefix ipprefix4 permit 0.0.0.0 0 less-equal 32</span><br></pre></td></tr></table></figure>
+
+
+<p>匹配以下路由（用最精确最简洁的方式）：</p>
+<ul>
+<li>192.168.4.0 &#x2F;24</li>
+<li>192.168.5.0 &#x2F;24</li>
+<li>192.168.6.0 &#x2F;24</li>
+<li>192.168.7.0 &#x2F;24</li>
+</ul>
+<p>写成二进制形式</p>
+<p>4： 00000100</p>
+<p>5： 00000101</p>
+<p>6： 00000110</p>
+<p>7： 00000111</p>
+<p>16+6 &#x3D; 22是相同的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip ip-prefix abcd permit 192.168.4.0 22 greater-equal 24 less-equal 24  </span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcejtgajzvj30i10beafn.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">R2:</span><br><span class="line"></span><br><span class="line">ip ip-prefix 1 permit 192.168.0.0 16</span><br><span class="line"></span><br><span class="line">route-policy RP permit node 10</span><br><span class="line">    if-match ip-prefix 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ospf 1</span><br><span class="line">    import-route rip route-policy RP</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="filter-policy"><a href="#filter-policy" class="headerlink" title="filter-policy"></a>filter-policy</h1><ul>
+<li>用于控制路由更新，接收的一个工具</li>
+<li>只能过滤路由信息，无法过滤LSA（如链路状态协议，OSPF等）</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcekpo926ej30ef0a2gq7.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[R2] ip ip-prefix 1 deny 192.168.3.0 24</span><br><span class="line">[R2] ip ip-prefix 1 permit 0.0.0.0 0 less-equal 32</span><br><span class="line">[R2] rip</span><br><span class="line">[R2-rip-1] filter-policy ip-prefix 1 export [g 0/0/1]</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcekwmmcqpj30ei09qgpg.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R1</span><br><span class="line"></span><br><span class="line">[R1] ip ip-prefix 1 deny 192168.3.0 24</span><br><span class="line">[R1] ip ip-prefix 1 permit 0.0.0.0 0 less-equal 32</span><br><span class="line">[R1] rip</span><br><span class="line">[R1-rip-1] import-route direct</span><br><span class="line">[R1-rip-1] filter-policy ip-prefix 1 export direct </span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcel1370gtj30jo0d9n4u.jpg" alt="捕获.PNG"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[R2] ip ip-prefix 1 deny 192.168.3.0 24</span><br><span class="line">[R2] ip ip-prefix 1 permit 0.0.0.0 0 less-equal 32</span><br><span class="line">[R2] rip</span><br><span class="line">[R2-rip-1] filter-policy ip-prefix 1 import [g 0/0/0]</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcel6taj17j30jp0cyjxk.jpg" alt="捕获.PNG"></p>
+<p>而上一个例子，R3是学不到路由的，但是在这个OSPF例子中，R3是能学到路由的。就是因为距离矢量协议在路由器之间传递的是路由信息，而链路状态协议传递的是LSA，不是路由信息。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gcelgd81qcj30j20b9tf1.jpg" alt="捕获.PNG"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE/" rel="tag"># 数据</a>
+          
+            <a href="/tags/%E7%AD%96%E7%95%A5/" rel="tag"># 策略</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/27/%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%E9%87%8D%E5%8F%91%E5%B8%83/" rel="next" title="路由协议重发布">
+                <i class="fa fa-chevron-left"></i> 路由协议重发布
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/" rel="prev" title="BGP的路径属性">
+                BGP的路径属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#route-policy"><span class="nav-number">1.</span> <span class="nav-text">route-policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ip-prefix"><span class="nav-number">2.</span> <span class="nav-text">ip-prefix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="nav-number">2.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">2.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filter-policy"><span class="nav-number">3.</span> <span class="nav-text">filter-policy</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

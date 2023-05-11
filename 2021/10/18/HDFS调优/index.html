@@ -1,23 +1,1369 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="NameNode和DataNnode内存分配在Hadoop3.X版本中，NameNode和DataNode的内存默认是自动分配的 hadoop-env.sh文件中有 123456789101112131415161718# 如果没有default，则JVM会根据机器内存情况自动分配# 并且，也说明了进程会优先使用各自在_OPT的值# The maximum amount of heap to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS调优">
+<meta property="og:url" content="http://yoursite.com/2021/10/18/HDFS%E8%B0%83%E4%BC%98/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="NameNode和DataNnode内存分配在Hadoop3.X版本中，NameNode和DataNode的内存默认是自动分配的 hadoop-env.sh文件中有 123456789101112131415161718# 如果没有default，则JVM会根据机器内存情况自动分配# 并且，也说明了进程会优先使用各自在_OPT的值# The maximum amount of heap to">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-18T02:46:29.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2021/10/18/HDFS%E8%B0%83%E4%BC%98/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HDFS调优 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/18/HDFS%E8%B0%83%E4%BC%98/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HDFS调优
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-18 10:46:29" itemprop="dateCreated datePublished" datetime="2021-10-18T10:46:29+08:00">2021-10-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2021/10/18/HDFS%E8%B0%83%E4%BC%98/" class="leancloud_visitors" data-flag-title="HDFS调优">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="NameNode和DataNnode内存分配"><a href="#NameNode和DataNnode内存分配" class="headerlink" title="NameNode和DataNnode内存分配"></a>NameNode和DataNnode内存分配</h1><p>在Hadoop3.X版本中，NameNode和DataNode的内存默认是自动分配的</p>
+<p><code>hadoop-env.sh</code>文件中有</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果没有default，则JVM会根据机器内存情况自动分配</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">并且，也说明了进程会优先使用各自在_OPT的值</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The maximum amount of heap to use (Java -Xmx).  If no unit</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">is provided, it will be converted to MB.  Daemons will</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">prefer any Xmx setting <span class="keyword">in</span> their respective _OPT variable.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">There is no default; the JVM will autoscale based upon machine</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">memory size.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HADOOP_HEAPSIZE_MAX=</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The minimum amount of heap to use (Java -Xms).  If no unit</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">is provided, it will be converted to MB.  Daemons will</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">prefer any Xms setting <span class="keyword">in</span> their respective _OPT variable.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">There is no default; the JVM will autoscale based upon machine</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">memory size.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HADOOP_HEAPSIZE_MIN=</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通常，NameNode和DataNode的内存值不采用自动分配，而是根据实际情况手动分配</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置JVM选项，这些设置将会被添加到HADOOP_OPTS变量中，而且会覆盖，选择default那一个进行添加</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Specify the JVM options to be used when starting the NameNode.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">These options will be appended to the options specified as HADOOP_OPTS</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">and therefore may override any similar flags <span class="built_in">set</span> <span class="keyword">in</span> HADOOP_OPTS</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># a) Set JMX options</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HDFS_NAMENODE_OPTS=<span class="string">&quot;-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1026&quot;</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># b) Set garbage collection logs</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HDFS_NAMENODE_OPTS=<span class="string">&quot;<span class="variable">$&#123;HADOOP_GC_SETTINGS&#125;</span> -Xloggc:<span class="variable">$&#123;HADOOP_LOG_DIR&#125;</span>/gc-rm.log-<span class="subst">$(date +&#x27;%Y%m%d%H%M&#x27;)</span>&quot;</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># c) ... or set them directly</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HDFS_NAMENODE_OPTS=<span class="string">&quot;-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:<span class="variable">$&#123;HADOOP_LOG_DIR&#125;</span>/gc-rm.log-<span class="subst">$(date +&#x27;%Y%m%d%H%M&#x27;)</span>&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">this is the default:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HDFS_NAMENODE_OPTS=<span class="string">&quot;-Dhadoop.security.logger=INFO,RFAS&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置NAMENODE的内存为1G</span></span><br><span class="line">export HDFS_NAMENODE_OPTS=&quot;-Dhadoop.security.logger=INFO,RFAS -Xmx1024m&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">DATANODE的设置一样</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">DataNode specific parameters</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Specify the JVM options to be used when starting the DataNode.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">These options will be appended to the options specified as HADOOP_OPTS</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">and therefore may override any similar flags <span class="built_in">set</span> <span class="keyword">in</span> HADOOP_OPTS</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># This is the default:</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> HDFS_DATANODE_OPTS=<span class="string">&quot;-Dhadoop.security.logger=ERROR,RFAS&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置DATANODE的内存为1G</span></span><br><span class="line">export HDFS_DATANODE_OPTS=&quot;-Dhadoop.security.logger=ERROR,RFAS -Xmx1024&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以通过命令<code>jmap -heap 进程号</code>查看内存使用情况，其中进程号可通过jps查看NameNode或者DataNode的进程。</p>
+<h1 id="NameNode心跳并发配置"><a href="#NameNode心跳并发配置" class="headerlink" title="NameNode心跳并发配置"></a>NameNode心跳并发配置</h1><p>NameNode有一个工作线程池，用来处理不同DataNode的并发心跳以及客户端并发的元数据操作<br><code>hdfs-site.xml</code>中配置如下，默认是10，经验设置:20*LOG(#cluster size)，其中#cluster size为机器台数。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.handler.count<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>10<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>The number of server threads for the namenode.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="回收站配置"><a href="#回收站配置" class="headerlink" title="回收站配置"></a>回收站配置</h1><p>开启回收站功能，可以将删除的文件在不超时的情况下，恢复原数据，起到防止误删除，备份等作用</p>
+<ul>
+<li>fs.trash.interval表示设置文件的存活时间，默认为0，即禁止。</li>
+<li>fs.trash.checkpoint.interval：检查回收站的间隔时间，如果该值为0，则该值设置和fs.trash.interval的值一致。</li>
+</ul>
+<p><code>core-site.xml</code>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.trash.interval<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Number of minutes after which the checkpoint gets deleted. If zero, the trash feature is disabled. This option may be configured both on the server and the client. If trash is disabled server side then the client side configuration is checked. If trash is enabled on the server side then the value configured on the server is used and the client configuration value is ignored.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.trash.checkpoint.interval<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Number of minutes between trash checkpoints. Should be smaller or equal to fs.trash.interval. If zero, the value is set to the value of fs.trash.interval. Every time the checkpointer runs it creates a new checkpoint out of current and removes checkpoints created more than fs.trash.interval minutes ago.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>回收站在HDFS集群中的路径：~&#x2F;.Trash</p>
+<p>通过网页删除的文件不会进入到回收站</p>
+<p>通过程序删除的文件不会进入回收站，需要调用<code>moveToTrash()</code>才进入回收站</p>
+<p>只有在命令行利用<code>hadoop fs -rm</code>命令删除的文件才会进入到回收站，如果想恢复的话，就把回收站的文件<code>hadoop fs -mv</code>到其他地方即可。</p>
+<h1 id="HDFS压测"><a href="#HDFS压测" class="headerlink" title="HDFS压测"></a>HDFS压测</h1><p>HDFS的读写性能主要受网络和磁盘影响比较大</p>
+<h2 id="测试HDFS写性能"><a href="#测试HDFS写性能" class="headerlink" title="测试HDFS写性能"></a>测试HDFS写性能</h2><p>假设有三台服务器，每台服务器4核，则测试为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar /opt/module/hadoop-3.3.1/share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-3.3.1-tests.jar TestDFSIO -write -nrFiles 10 -fileSize 128MB</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>表示10个文件，每个文件128MB，写操作。</p>
+<p>通常测试文件个数&#x3D;集群CPU总核数-1。而且-nrFiles的数值也是mapTask的数量。</p>
+<p>程序跑完之后，会有以下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Number of files:10     文件个数</span><br><span class="line">Total MBytes processed:1280   文件总大小</span><br><span class="line">Throughput mb/sec:1.61    总吞吐量：（所有文件数量）/（总时间）</span><br><span class="line">Average IO ratemb/sec: 1.9    （map1平均速度+...+map10平均速度）/ 10</span><br><span class="line">IO rate std deviation: 0.76    IO的方差</span><br><span class="line">Test exec time sec: 133.05     总的执行时间</span><br></pre></td></tr></table></figure>
+
+<p>测试结果分析：</p>
+<p>如果副本1就在集群的机器1上，则一共参与测试的文件就为：10个文件 * 2个副本 &#x3D; 20个文件，2个副本的原因为：副本1本来就在机器1上，只是机器2和机器3需要副本。</p>
+<p>如果Throughput mb&#x2F;sec:1.61，则实测速度为：1.61 * 20个文件 &#x3D; 32 M&#x2F;s，如果三台服务器的带宽都为12.5M&#x2F;s，则总带宽为：12.5+12.5+12.5 &#x3D; 37.5M&#x2F;s，则三台服务器的网络资源大体上都已经用满</p>
+<p>如果文件在客户端，并不在这三台服务器上，则一共参与测试的文件就为：10个文件*3个副本 &#x3D; 30个文件。后续计算跟上面一致</p>
+<p>如果实测速度远小于网络，并且实测速度不能满足工作需求，则可以考虑采用固态硬盘或者增加硬盘个数</p>
+<h2 id="测试HDFS读性能"><a href="#测试HDFS读性能" class="headerlink" title="测试HDFS读性能"></a>测试HDFS读性能</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar /opt/module/hadoop-3.3.1/share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-3.3.1-tests.jar TestDFSIO -read -nrFiles 3 -fileSize 128MB</span><br></pre></td></tr></table></figure>
+
+<p>读数据并不会每个机器都读一遍，而是采用“就近原则”，选择最近的机器将文件读下来。如果客户端就在集群机器1上，则会出现不占用网络资源，读取速度比网络资源快的情况</p>
+<h1 id="DataNode配置多目录"><a href="#DataNode配置多目录" class="headerlink" title="DataNode配置多目录"></a>DataNode配置多目录</h1><p>DataNode可以配置成多个目录，每个目录存储的数据不一样（数据不是副本）</p>
+<p><code>hdfs-site.xml</code>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>file://$&#123;hadoop.tmp.dir&#125;/dfs/data1,file://$&#123;hadoop.tmp.dir&#125;/dfs/data2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Determines where on the local filesystem an DFS data node should store its blocks. If this is a comma-delimited list of directories, then data will be stored in all named directories, typically on different devices. Directories that do not exist are ignored.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="磁盘间数据均衡"><a href="#磁盘间数据均衡" class="headerlink" title="磁盘间数据均衡"></a>磁盘间数据均衡</h1><p>生产环境，由于硬盘空间不足，往往需要增加一块硬盘，刚加载的硬盘没有数据时，可以执行磁盘数据均衡命令（hadoop3.x特性）</p>
+<p>生成均衡计划</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs diskbalancer -plan 机器地址</span><br></pre></td></tr></table></figure>
+
+<p>执行均衡计划</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs diskbalancer -execute 机器地址.plan.json</span><br></pre></td></tr></table></figure>
+
+<p>查看当前均衡任务执行情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs diskbalancer -query 机器地址</span><br></pre></td></tr></table></figure>
+
+<p>取消均衡任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs diskbalancer -cancel 机器地址.plan.json</span><br></pre></td></tr></table></figure>
+
+<h1 id="HDFS集群扩容以及缩容"><a href="#HDFS集群扩容以及缩容" class="headerlink" title="HDFS集群扩容以及缩容"></a>HDFS集群扩容以及缩容</h1><h2 id="白名单和黑名单创建"><a href="#白名单和黑名单创建" class="headerlink" title="白名单和黑名单创建"></a>白名单和黑名单创建</h2><p>可以在白名单中配置ip地址，在白名单中的ip地址所代表的node可以用来存储数据，否则不能进行存储数据</p>
+<p>黑名单中配置ip地址，表示不能用来存储数据。</p>
+<p>配置如下：</p>
+<ul>
+<li>在NameNode节点的<code>/opt/module/hadoop-3.3.1/etc/hadoop</code>目录下创建whitelist和blacklist</li>
+<li>在<code>hdfs-site.xml</code>配置文件中，指定白黑名单地址<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.hosts<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/module/hadoop-3.3.1/etc/hadoop/whitelist<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>白名单<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.hosts.exclude<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/module/hadoop-3.3.1/etc/hadoop/blacklist<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>黑名单<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>第一次添加白名单和黑名单需要重启集群，如果不是第一次，则只需要刷新NameNode即可，<code>hdfs dfsadmin -refreshNodes</code></li>
+</ul>
+<h1 id="节点间的数据均衡"><a href="#节点间的数据均衡" class="headerlink" title="节点间的数据均衡"></a>节点间的数据均衡</h1><ul>
+<li>开启数据均衡<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-balancer.sh -threshold 10</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，-threshold 10表示集群中各个节点的磁盘空间利用率相差不超过10%</span></span><br></pre></td></tr></table></figure></li>
+<li>关闭数据均衡<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/stop-balancer.sh</span><br></pre></td></tr></table></figure>
+由于HDFS需要启动单独的Rebalance Server来执行Rebalance操作，所以尽量不要在NameNode上执行start-balancer.sh命令，而是找一台比较空闲的机器</li>
+</ul>
+<h1 id="纠删码原理"><a href="#纠删码原理" class="headerlink" title="纠删码原理"></a>纠删码原理</h1><h2 id="纠删码介绍"><a href="#纠删码介绍" class="headerlink" title="纠删码介绍"></a>纠删码介绍</h2><p>HDFS(Hadoop Distributed File System)为了保证数据的可靠性默认数据存储策略是3副本，即在写入数据的时候，会占用该数据大小3倍的空间。这样就造成了大量的空间浪费。对此，HDFS引入在RAID磁盘阵列中已应用成熟的技术：EC（Erasure Coding，纠删码）。</p>
+<p>EC的原理就是，通过将1个文件打散成很小的数据块（如128k、256k、1M等），然后将这些数据块打散存储于多个DN中，然后在另外的若干个DN中存储EC编解码算法生成的校验块。如果某个存储文件块的DN不可用后，将可以通过其他DN中存储的数据块和校验块反向计算出来这个丢失的数据块。</p>
+<h2 id="EC策略说明"><a href="#EC策略说明" class="headerlink" title="EC策略说明"></a>EC策略说明</h2><p>不同的EC编解码算法、数据块大小、数据块和校验块个数，可以构成不同的EC策略。下面以RS-6-3-1024k这种策略说明下EC策略的定义：</p>
+<ul>
+<li>使用RS（Reed Solomon）编解码算法</li>
+<li>有6个原始数据块分别存储在6个DN节点，3个校验块分别存储在3个DN节点上</li>
+<li>最大可以容忍3个块丢失的异常情况</li>
+<li>每个文件块的大小为1024k（即1MB）</li>
+<li>如果使用该EC策略存储的文件为100MB，则写入DataNode中的总数据量为(1+3&#x2F;6) * 100MB&#x3D;150MB。其中:数据块总大小为文件大小100MB;校验块总大小为3&#x2F;6 * 100MB&#x3D;50MB</li>
+</ul>
+<p>使用EC存储后，可以在提供相同可靠性的前提下，节省大量的存储空间。例如，要达到3副本相同的可靠性，仅需要1.5倍的原文件大小即可，从而节约一半的存储空间（原先需要3倍的原文件大小）</p>
+<p>HDFS引入了EC特性后，在减少磁盘使用量时，当然也引入了一些问题与限制：</p>
+<ul>
+<li>文件在存储时被打散到多个DN中，文件读取不再有“本地读”的概念，导致了数据失去亲和性，引发了非常严重的数据倾斜</li>
+<li>写入文件时，都需要计算（生成校验块、或通过校验块校验），这会消耗更多CPU，使复杂度增高</li>
+<li>在DN节点不可用时，需要通过计算得到缺失的数据块，这会消耗更多CPU，使复杂度增高、异常恢复时间更长</li>
+<li>客户端在读写文件时，需要同时连接所有涉及的DN读写数据块和校验块</li>
+<li>因为实现的原因，目前不支持2个基本的FileSystem接口：append()、truncate()，调用会直接抛异常。不同EC策略的文件的concat()，也会抛错</li>
+</ul>
+<p>针对这些限制和问题，我们可以得出，该特性适用于一次写入大量数据的场景，不适用于以下的场景</p>
+<ul>
+<li>大量小文件</li>
+<li>打开后长期持续写入的文件</li>
+<li>需要调用append()或truncate()接口修改的文件</li>
+<li>相比副本存储，EC存储对系统有如下影响：</li>
+<li>NameNode、DataNode、客户端都需要消耗更多的CPU、内存、网络资源。</li>
+<li>DataNode异常后，需要更长时间来恢复该DataNode上的数据，同时也会降低相关文件的读取性能。</li>
+<li>针对这些影响，在准备使用EC的集群上，建议根据业务负载进行如下操作：</li>
+<li>调大NameNode、DataNode的“GC_OPTS”中内存参数（主要是-Xmx的值）。</li>
+<li>调大HDFS客户端及依赖于HDFS的上层组件的内存参数。</li>
+<li>调大DataNode的数据连接线程数参数“dfs.datanode.max.transfer.threads”</li>
+</ul>
+<h2 id="EC相关命令"><a href="#EC相关命令" class="headerlink" title="EC相关命令"></a>EC相关命令</h2><p>列出当前集群中所有支持的EC编解码算法,<code>hdfs ec -listCodecs</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -listCodecs</span><br><span class="line">Erasure Coding Codecs: Codec [Coder List]</span><br><span class="line">RS [RS_NATIVE, RS_JAVA]</span><br><span class="line">RS-LEGACY [RS-LEGACY_JAVA]</span><br><span class="line">XOR [XOR_NATIVE, XOR_JAVA]</span><br></pre></td></tr></table></figure>
+
+<p>列出当前集群中所有的EC策略,<code>hdfs ec -listPolicies</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -listPolicies</span><br><span class="line">Erasure Coding Policies:</span><br><span class="line">ErasureCodingPolicy=[Name=RS-10-4-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=10, numParityUnits=4]],</span><br><span class="line">CellSize=1048576, Id=5], State=DISABLED</span><br><span class="line">ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]],</span><br><span class="line">CellSize=1048576, Id=2], State=DISABLED</span><br><span class="line">ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]],</span><br><span class="line">CellSize=1048576, Id=1], State=ENABLED</span><br><span class="line">ErasureCodingPolicy=[Name=RS-LEGACY-6-3-1024k, Schema=[ECSchema=[Codec=rs-legacy, numDataUnits=6, numParityUnits=3]],</span><br><span class="line">CellSize=1048576, Id=3], State=DISABLED</span><br><span class="line">ErasureCodingPolicy=[Name=XOR-2-1-1024k, Schema=[ECSchema=[Codec=xor, numDataUnits=2, numParityUnits=1]],</span><br><span class="line">CellSize=1048576, Id=4], State=ENABLED</span><br></pre></td></tr></table></figure>
+
+<p>启用指定的EC策略,<code>hdfs ec -enablePolicy -policy &lt;policyName&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -enablePolicy -policy RS-3-2-1024kErasure coding policy RS-3-2-1024k is enabled</span><br></pre></td></tr></table></figure>
+
+<p><strong>只有启用（ENABLED）状态的EC策略，才能设置给目录</strong></p>
+<p>停用指定的EC策略,<code>hdfs ec -disablePolicy -policy &lt;policyName&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -disablePolicy -policy RS-3-2-1024kErasure coding policy RS-3-2-1024k is disabled</span><br></pre></td></tr></table></figure>
+
+<p>新增自定义EC策略<code>hdfs ec -addPolicies -policyFile &lt;配置文件路径&gt;</code>,需要先编写自定义EC策略的配置文件（可以参考 &lt;HDFS客户端安装目录&gt;&#x2F;HDFS&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;user_ec_policies.xml.template 样例来编写）,自定义添加的EC策略，默认是停用（DISABLED）状态的，需要启用后才能使用,样例内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">configuration</span>&gt;</span> </span><br><span class="line"> <span class="comment">&lt;!-- The version of EC policy XML file format, it must be an integer --&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">layoutversion</span>&gt;</span>1<span class="tag">&lt;/<span class="name">layoutversion</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">schemas</span>&gt;</span> </span><br><span class="line">   <span class="comment">&lt;!-- schema id is only used to reference internally in this document --&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">schema</span> <span class="attr">id</span>=<span class="string">&quot;XORk2m1&quot;</span>&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- The combination of codec, k, m and options as the schema ID, defines </span></span><br><span class="line"><span class="comment">      a unique schema, for example &#x27;xor-2-1&#x27;. schema ID is case insensitive --&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- codec with this specific name should exist already in this system --&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">codec</span>&gt;</span>xor<span class="tag">&lt;/<span class="name">codec</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">k</span>&gt;</span>2<span class="tag">&lt;/<span class="name">k</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">m</span>&gt;</span>1<span class="tag">&lt;/<span class="name">m</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">options</span>&gt;</span> <span class="tag">&lt;/<span class="name">options</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;/<span class="name">schema</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">schema</span> <span class="attr">id</span>=<span class="string">&quot;RSk12m4&quot;</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">codec</span>&gt;</span>rs<span class="tag">&lt;/<span class="name">codec</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">k</span>&gt;</span>12<span class="tag">&lt;/<span class="name">k</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">m</span>&gt;</span>4<span class="tag">&lt;/<span class="name">m</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">options</span>&gt;</span> <span class="tag">&lt;/<span class="name">options</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;/<span class="name">schema</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">schema</span> <span class="attr">id</span>=<span class="string">&quot;RS-legacyk12m4&quot;</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">codec</span>&gt;</span>rs-legacy<span class="tag">&lt;/<span class="name">codec</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">k</span>&gt;</span>12<span class="tag">&lt;/<span class="name">k</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">m</span>&gt;</span>4<span class="tag">&lt;/<span class="name">m</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">options</span>&gt;</span> <span class="tag">&lt;/<span class="name">options</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;/<span class="name">schema</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">schemas</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">policies</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">policy</span>&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- the combination of schema ID and cellsize(in unit k) defines a unique </span></span><br><span class="line"><span class="comment">      policy, for example &#x27;xor-2-1-256k&#x27;, case insensitive --&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- schema is referred by its id --&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">schema</span>&gt;</span>XORk2m1<span class="tag">&lt;/<span class="name">schema</span>&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- cellsize must be an positive integer multiple of 1024(1k) --&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- maximum cellsize is defined by &#x27;dfs.namenode.ec.policies.max.cellsize&#x27; property --&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">cellsize</span>&gt;</span>131072<span class="tag">&lt;/<span class="name">cellsize</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;/<span class="name">policy</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">policy</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">schema</span>&gt;</span>RS-legacyk12m4<span class="tag">&lt;/<span class="name">schema</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">cellsize</span>&gt;</span>262144<span class="tag">&lt;/<span class="name">cellsize</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;/<span class="name">policy</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">policies</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>删除指定的EC策略<code>hdfs ec -removePolicy -policy &lt;policy&gt;</code>,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -removePolicy -policy XOR-2-1-128kErasure coding policy XOR-2-1-128k is removed</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>设置目录的EC策略<code>hdfs ec -setPolicy -path &lt;path&gt; [-policy &lt;policy&gt;] [-replicate]</code>,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -setPolicy -path /test -policy RS-6-3-1024k</span><br><span class="line">Set RS-6-3-1024k erasure coding policy on /test</span><br><span class="line">Warning: setting erasure coding policy on a non-empty directory will not automatically convert existing files to</span><br><span class="line">RS-6-3-1024k erasure coding policy</span><br></pre></td></tr></table></figure>
+<ul>
+<li>给一个目录设置EC策略后，该目录下已有文件将不受影响（存储方式不变），而新创建的文件将按照设置的EC策略来存储;</li>
+<li>-replicate参数，用来给目录设置3副本存储策略，而非EC策略;</li>
+<li>-replicate 和 -policy <policyName>不能同时使用</li>
+</ul>
+<p>获取指定目录的EC策略,<code>hdfs ec -getPolicy -path &lt;path&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@10-219-254-200 ~]#hdfs ec -getPolicy -path /test RS-6-3-1024k</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>取消指定目录的EC策略<code>hdfs ec -unsetPolicy -path &lt;path&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@10-219-254-200 ~]#hdfs ec -unsetPolicy -path /test</span><br><span class="line">Unset erasure coding policy from /test</span><br><span class="line">Warning: unsetting erasure coding policy on a non-empty directory will not automatically convert existing files to</span><br><span class="line">replicated data.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当一个目录被取消EC策略后，如果其父目录有EC策略，则将继承其父目录的EC策略</li>
+</ul>
+<h2 id="EC与三副本转换"><a href="#EC与三副本转换" class="headerlink" title="EC与三副本转换"></a>EC与三副本转换</h2><p>如果Distcp的源文件有EC文件时，需要针对不同的需求，添加不同的参数：</p>
+<ul>
+<li>如果在拷贝过程中，保持文件的EC策略，需要在Distcp时加入参数：“-preserveec”。</li>
+<li>如果不需要保持源文件的EC策略，而按照目的目录的EC策略（或副本策略）来将文件重写到目的目录，则需要在Distcp时加入参数：“-skipcrccheck”。</li>
+</ul>
+<p>如果不加这两个参数之一，则不同EC策略的文件，会因为其校验值不同而导致Distcp任务失败。</p>
+<h3 id="副本文件转换成EC文件"><a href="#副本文件转换成EC文件" class="headerlink" title="副本文件转换成EC文件"></a>副本文件转换成EC文件</h3><p>此处以把“&#x2F;src”目录下的所有文件全部文件转换为“RS-6-3-1024k”策略的EC文件为例。</p>
+<ul>
+<li><p>1、创建一个临时目录（如“&#x2F;tmp&#x2F;convert_tmp_dir”，必须是不存在的目录），用于临时存储转换完成的数据。</p>
+<p>  <code>hdfs dfs -mkdir /tmp/convert_tmp_dir</code></p>
+</li>
+<li><p>2、启用EC策略“ RS-6-3-1024k”（如果已启用，可以跳过此步骤）。</p>
+<p>  <code>hdfs ec -enablePolicy -policy RS-6-3-1024k</code></p>
+</li>
+<li><p>3、设置“&#x2F;tmp&#x2F;convert_tmp_dir”的EC策略为“RS-6-3-1024k”。</p>
+<p>  <code>hdfs ec -setPolicy -path /tmp/convert_tmp_dir -policy RS-6-3-1024k</code></p>
+</li>
+<li><p>4、使用Distcp拷贝文件，此时所有文件会按照“RS-6-3-1024k”策略写入临时目录。</p>
+<p>  <code>hadoop distcp -numListstatusThreads 40 -update -delete -skipcrccheck  /src /tmp/convert_tmp_dir</code></p>
+</li>
+<li><p>5、移动“&#x2F;src”为“&#x2F;src-to-delete”。</p>
+<p>  <code>hdfs dfs -mv /src /src-to-delete</code></p>
+</li>
+<li><p>6、移动“&#x2F;tmp&#x2F;convert_tmp_dir”为“&#x2F;src”。</p>
+<p>  <code>hdfs dfs -mv /tmp/convert_tmp_dir /src</code></p>
+</li>
+<li><p>7、删除“&#x2F;src-to-delete”。</p>
+<p>  <code>hdfs dfs -rm -r -f /src-to-delete</code></p>
+</li>
+</ul>
+<h3 id="EC文件转换成副本文件"><a href="#EC文件转换成副本文件" class="headerlink" title="EC文件转换成副本文件"></a>EC文件转换成副本文件</h3><p>此处以把“&#x2F;src”目录下的所有文件全部文件转换为副本文件为例。</p>
+<ul>
+<li><p>1、创建一个临时目录（如“&#x2F;tmp&#x2F;convert_tmp_dir”，必须是不存在的目录），用于临时存储转换完成的数据。</p>
+<p>  <code>hdfs dfs -mkdir /tmp/convert_tmp_dir</code></p>
+</li>
+<li><p>2、设置“&#x2F;tmp&#x2F;convert_tmp_dir”为副本策略。</p>
+<p>  <code>hdfs ec -setPolicy -path /tmp/convert_tmp_dir -replicate</code></p>
+</li>
+<li><p>3、使用Distcp拷贝文件，此时所有文件会按照副本策略写入临时目录。</p>
+<p>  <code>hadoop distcp -numListstatusThreads 40 -update -delete -skipcrccheck  /src /tmp/convert_tmp_dir</code></p>
+</li>
+<li><p>4、移动“&#x2F;src”为“&#x2F;src-to-delete”。</p>
+<p>  <code>hdfs dfs -mv /src /src-to-delete</code></p>
+</li>
+<li><p>5、移动“&#x2F;tmp&#x2F;convert_tmp_dir”为“&#x2F;src”。</p>
+<p>  <code>hdfs dfs -mv /tmp/convert_tmp_dir /src</code></p>
+</li>
+<li><p>6、删除“&#x2F;src-to-delete”。</p>
+<p>  <code>hdfs dfs -rm -r -f /src-to-delete</code></p>
+</li>
+</ul>
+<h1 id="异构存储"><a href="#异构存储" class="headerlink" title="异构存储"></a>异构存储</h1><h2 id="异构存储类型"><a href="#异构存储类型" class="headerlink" title="异构存储类型"></a>异构存储类型</h2><ul>
+<li>RAM_DISK：内存，当之无愧是最快的，但官方有句提醒：We have observed that the latency overhead from network replication negates the benefits of writing to memory. 也就是说因为网络的延迟抵消写入内存带给我们的速度。经过测试的实际情况是，这种配置方式和SSD可能差不了太多。</li>
+<li>SSD：固态磁盘，主要用来存储热数据，即访问频繁的数据。</li>
+<li>DISK：普通的磁盘，例如，SATA盘。</li>
+<li>ARCHIVE：是一种支持PB级的高容量存储，主要用于归档数据使用，有很小的计算能力，而我们所谓的冷数据适合使用archive存储类型。</li>
+</ul>
+<h2 id="异构存储策略"><a href="#异构存储策略" class="headerlink" title="异构存储策略"></a>异构存储策略</h2><table>
+<thead>
+<tr>
+<th>策略ID</th>
+<th>策略名称</th>
+<th>副本分布</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>15</td>
+<td>Lazy_Persist</td>
+<td>RAM_DISK:1,DISK:n-1</td>
+<td>一个副本保存在RAM_DISK中，其余保存在磁盘中</td>
+</tr>
+<tr>
+<td>12</td>
+<td>ALL_SSD</td>
+<td>SSD:n</td>
+<td>所有副本保存在SSD中</td>
+</tr>
+<tr>
+<td>10</td>
+<td>One_SSD</td>
+<td>SSD:1,DISK:n-1</td>
+<td>一个副本保存在SSD中，其余保存在磁盘中</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Hot</td>
+<td>DISK:n</td>
+<td>所有副本保存在磁盘中，默认策略</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Warm</td>
+<td>DISK:1,ARCHIVE:n-1</td>
+<td>一个副本保存在磁盘中，其余保存在归档存储中</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cold</td>
+<td>ARCHIVE:n</td>
+<td>所有副本保存在归档存储中</td>
+</tr>
+</tbody></table>
+<h2 id="shell命令"><a href="#shell命令" class="headerlink" title="shell命令"></a>shell命令</h2><ul>
+<li>查看当前有哪些存储策略可以用<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hdfs storagepolicies –listPolicies</span><br><span class="line">Block Storage Policies:</span><br><span class="line">    BlockStoragePolicy&#123;COLD:2, storageTypes=[ARCHIVE], creationFallbacks=[], replicationFallbacks=[]&#125;</span><br><span class="line">    BlockStoragePolicy&#123;WARM:5, storageTypes=[DISK, ARCHIVE], creationFallbacks=[DISK, ARCHIVE], replicationFallbacks=[DISK, ARCHIVE]&#125;</span><br><span class="line">    BlockStoragePolicy&#123;HOT:7, storageTypes=[DISK], creationFallbacks=[], replicationFallbacks=[ARCHIVE]&#125;</span><br><span class="line">    BlockStoragePolicy&#123;ONE_SSD:10, storageTypes=[SSD, DISK], creationFallbacks=[SSD, DISK], replicationFallbacks=[SSD, DISK]&#125;</span><br><span class="line">    BlockStoragePolicy&#123;ALL_SSD:12, storageTypes=[SSD], creationFallbacks=[DISK], replicationFallbacks=[DISK]&#125;</span><br><span class="line">    BlockStoragePolicy&#123;LAZY_PERSIST:15, storageTypes=[RAM_DISK, DISK], creationFallbacks=[DISK], replicationFallbacks=[DISK]&#125;</span><br></pre></td></tr></table></figure></li>
+<li>指定路径的储存策略 文件目录均可<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs storagepolicies -setStoragePolicy -path /xxxx -policy ONE_SSD</span><br></pre></td></tr></table></figure></li>
+<li>获取指定路径的存储策略<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs storagepolicies -getStoragePolicy -path /xxxx</span><br></pre></td></tr></table></figure></li>
+<li>取消存储策略<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs storagepolicies -unsetStoragePolicy -path /xxxx</span><br></pre></td></tr></table></figure></li>
+<li>MOVER定期扫描HDFS文件，检查文件的存放是否符合它自身的存储策略。如果数据块不符合自己的策略，它会把数据移动到该去的地方<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hdfs mover [-p &lt;files/dirs&gt; | -f &lt;local file name&gt;]</span><br><span class="line">-p  指定要迁移的文件/目录，多个以空格分隔</span><br><span class="line">​</span><br><span class="line">-f  指定本地一个文件路径，该文件列出了需要迁移的文件或者目录（一个一行）</span><br><span class="line">​</span><br><span class="line">如果不指定参数，那么就移动根目录。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置异构存储"><a href="#配置异构存储" class="headerlink" title="配置异构存储"></a>配置异构存储</h2><p>在hdfs-site.xml 的配置属性dfs.datanode.data.dir 中进行本地对应存储目录的设置，同时带上一个存储类型标签,声明此目录用的是哪种类型的存储介质，存储标签有<code>[SSD] [DISK] [ARCHIVE] [RAM_DISK]</code>这4种中的任何一种，如果目录前没有带上,则默认是DISK类型</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 此参数用于启用或禁用异构存储策略，其默认值为&quot;true&quot;,即允许用户更改文件和目录的存储策略</span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.storage.policy.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"># 此参数表示用，分隔的目录列表，用来存储hdfs的数据，对于HDFS存储策略，应使用相应的存储类型</span><br><span class="line">#（[SSD] / [DISK] / [ARCHIVE] / [RAM_DISK]）标记目录。如果不加存储类型，则默认为[DISK]类型</span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>[SSD]file:///hdfsdata/ssd0,[SSD]file:///hdfsdata/ssd1,file:///hdfsdata/sata0,</span><br><span class="line">file:///hdfsdata/sata1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h1><p>安全模式是NameNode的维护状态，在安全模式下，文件系统只能read-only，不能删除，复制，修改数据块。</p>
+<p>当NameNode启动时，会自动进入安全模式，在安全模式下，会执行以下任务：</p>
+<ul>
+<li>NameNode reads the FsImage and EditLog from disk, applies all the transactions from the EditLog to the in-memory representation of the FsImage, and flushes out this new version into a new FsImage on disk. （NameNode在加载镜像文件和编辑日志期间处于安全模式）</li>
+<li>Receive block reports from the DataNodes in the cluster（接收DataNodes注册期间处于安全模式）</li>
+</ul>
+<p>在安全模式下，当你执行写操作时，会抛出异常“SafeModeException”，并说明：Name node is in safe mode。</p>
+<p>离开安全模式的条件：</p>
+<ul>
+<li>NameNode首先需要确认（现有的副本数&#x2F;总的副本数 &gt; threshold-pct),比如系统有1000个副本，NameNode启动后，通过各个DataNode上报，发现丢了10个副本，只有990个副本了，则这个数就为0.99,threshold-pct可以在<code>hdfs-site.xml</code>文件中配置<code>dfs.namenode.safemode.threshold-pct</code>，默认0.999f。</li>
+<li>threshold满足后，还需要有一个稳定时间，过了这个时间，才能真正离开安全模式，该时间仍可在<code>hdfs-site.xml</code>文件中<code>dfs.namenode.safemode.extension</code>配置，默认是30000，即30秒。</li>
+</ul>
+<h2 id="安全模式命令行"><a href="#安全模式命令行" class="headerlink" title="安全模式命令行"></a>安全模式命令行</h2><ul>
+<li>进入安全模式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -safemode enter</span><br></pre></td></tr></table></figure></li>
+<li>退出安全模式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -safemode leave</span><br></pre></td></tr></table></figure></li>
+<li>获得安全模式状态<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -safemode get</span><br></pre></td></tr></table></figure></li>
+<li>If you want any file operation command to block till HDFS exists safemode<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -safemode wait</span><br></pre></td></tr></table></figure></li>
+<li>强制退出安全模式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -safemode forceExit</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>当如果磁盘损坏导致threshold-pct达不到要求，从而一直处于安全模式后，该如何处理？</p>
+<p>如果数据比较重要的话，需要找专人进行磁盘修复</p>
+<p>如果数据不重要且不能恢复的话，则可以先用命令行退出安全模式，然后再把系统检测出来的丢失的数据删除即可。</p>
+<h1 id="磁盘读写性能"><a href="#磁盘读写性能" class="headerlink" title="磁盘读写性能"></a>磁盘读写性能</h1><p>可用<code>fio</code>命令检测磁盘的读写性能是否处于正常状态</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://linux.cn/article-9912-1.html">https://linux.cn/article-9912-1.html</a></p>
+<h1 id="小文件"><a href="#小文件" class="headerlink" title="小文件"></a>小文件</h1><p>小文件一般指的是明显小于HDFS块大小（默认是128M）的文件。</p>
+<p>HDFS中的文件、目录、块信息等都会以对象的形式存储在NameNode内存中，每一个对象大概占用150byte，因此，如果小文件过多，则会占用大量的NameNode内存。举个例子，假如有10000000个文件，每个文件用一个block，则NameNode需要使用3G内存存储这些对象信息。这样namenode内存容量严重制约了集群的扩展。其次，访问大量小文件速度远远小于访问几个大文件。HDFS最初是为流式访问大文件开发的，如果访问大量小文件，需要不断的从一个datanode跳到另一个datanode，严重影响性能。最后，处理大量小文件速度远远小于处理同等大小的大文件的速度。每一个小文件要占用一个slot，而task启动将耗费大量时间甚至大部分时间都耗费在启动task和释放task上。</p>
+<p>Hadoop自带的解决小文件的方法有：Hadoop Archives (HAR files) ，Sequence Files，HBase。</p>
+<p>Hadoop Archive或者HAR，是一个高效地将小文件放入HDFS块中的文件存档工具，它能够将多个小文件打包成一个HAR文件，这样在减少namenode内存使用的同时，仍然允许对文件进行透明的访问。</p>
+<p>HAR的操作：</p>
+<ul>
+<li>比如将<code>/foo/bar</code>下的所有小文件存档成到<code>/outputdir/</code>，并命名为<code>zoo.har</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop archive -archiveName zoo.har -p /foo/bar /outputdir</span><br></pre></td></tr></table></figure></li>
+<li>查看HAR文件存档中的文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls har://outputdir/zoo.har</span><br></pre></td></tr></table></figure></li>
+<li>解压HAR文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -cp har://outputdir/zoo.har/* /</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>使用HAR时需要两点，第一，对小文件进行存档后，原文件并不会自动被删除，需要用户自己删除；第二，创建HAR文件的过程实际上是在运行一个mapreduce作业，因而需要有一个hadoop集群运行此命令</p>
+<p>此外，HAR还有一些缺陷：第一，一旦创建，Archives便不可改变。要增加或移除里面的文件，必须重新创建归档文件。第二，要归档的文件名中不能有空格，否则会抛出异常，可以将空格用其他符号替换(使用-Dhar.space.replacement.enable&#x3D;true 和-Dhar.space.replacement参数)。</p>
+<h1 id="distcp命令实现两个Apache-Hadoop之间的数据迁移"><a href="#distcp命令实现两个Apache-Hadoop之间的数据迁移" class="headerlink" title="distcp命令实现两个Apache Hadoop之间的数据迁移"></a>distcp命令实现两个Apache Hadoop之间的数据迁移</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash$ hadoop distcp hdfs://nn1:8020/foo/bar \</span><br><span class="line">                    hdfs://nn2:8020/bar/foo</span><br></pre></td></tr></table></figure>
+<p>这条命令会把nn1集群的&#x2F;foo&#x2F;bar目录下的所有文件或目录名展开并存储到一个临时文件中，这些文件内容的拷贝工作被分配给多个map任务， 然后每个TaskTracker分别执行从nn1到nn2的拷贝操作。注意DistCp使用绝对路径进行操作。</p>
+<p>命令行中可以指定多个源目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash$ hadoop distcp hdfs://nn1:8020/foo/a \</span><br><span class="line">                    hdfs://nn1:8020/foo/b \</span><br><span class="line">                    hdfs://nn2:8020/bar/foo</span><br></pre></td></tr></table></figure>
+<p>或者使用-f选项，从文件里获得多个源：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash$ hadoop distcp -f hdfs://nn1:8020/srclist \</span><br><span class="line">                       hdfs://nn2:8020/bar/foo</span><br></pre></td></tr></table></figure>
+<p>其中srclist 的内容是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs://nn1:8020/foo/a</span><br><span class="line">hdfs://nn1:8020/foo/b</span><br></pre></td></tr></table></figure>
+
+<h1 id="Uber模式"><a href="#Uber模式" class="headerlink" title="Uber模式"></a>Uber模式</h1><p>当MapReduce任务提交后，ResourceManager会创建一个container，开启ApplicationMaster进程（对于MapReduce来说，ApplicationMaster就是MRAppMaster）。ApplicationMaster会获取输入切片的个数，并基于此，以及配置，决定开启多少个mapTask和reduceTask.</p>
+<p>如果不开启Uber模式，则mapTask和reduceTask也会分别创建container，运行各自的进行。而如果开启了Uber模式，所有的mapTasks和reduceTasks将会在ApplicationMaster所在的container中运行，也就是说整个MR作业运行的过程只会启动ApplicationMaster container，因为不需要启动mapper 和 reducer containers.</p>
+<p>启用uber模式的要求非常严格，代码如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">isUber = uberEnabled &amp;&amp; smallNumMapTasks &amp;&amp; smallNumReduceTasks</span><br><span class="line">    &amp;&amp; smallInput &amp;&amp; smallMemory &amp;&amp; smallCpu </span><br><span class="line">    &amp;&amp; notChainJob &amp;&amp; isValidUberMaxReduces;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>uberEnabled：其实就是 mapreduce.job.ubertask.enable 参数的值，默认情况下为 false ；也就是说默认情况不启用Uber模式</li>
+<li>smallNumMapTasks：启用Uber模式的作业Map的个数必须小于等于 mapreduce.job.ubertask.maxmaps 参数的值，该值默认为9；也计算说，在默认情况下，如果你想启用Uber模式，作业的Map个数必须小于10</li>
+<li>smallNumReduceTasks：同理，Uber模式的作业Reduce的个数必须小于等于mapreduce.job.ubertask.maxreduces，该值默认为1；也计算说，在默认情况下，如果你想启用Uber模式，作业的Reduce个数必须小于等于1</li>
+<li>smallInput：不是任何作业都适合启用Uber模式的，输入数据的大小必须小于等于 mapreduce.job.ubertask.maxbytes 参数的值，默认情况是HDFS一个文件块大小</li>
+<li>smallMemory：因为作业是在AM所在的container中运行，所以要求我们设置的Map内存（mapreduce.map.memory.mb）和Reduce内存（mapreduce.reduce.memory.mb）必须小于等于 AM所在容器内存大小设置（yarn.app.mapreduce.am.resource.mb）</li>
+<li>smallCpu：同理，Map配置的vcores（mapreduce.map.cpu.vcores）个数和 Reduce配置的vcores（mapreduce.reduce.cpu.vcores）个数也必须小于等于AM所在容器vcores个数的设置（yarn.app.mapreduce.am.resource.cpu-vcores）</li>
+<li>notChainJob：此外，处理数据的Map class（mapreduce.job.map.class）和Reduce class（mapreduce.job.reduce.class）必须不是 ChainMapper 或 ChainReducer 才行；</li>
+<li>isValidUberMaxReduces：目前仅当Reduce的个数小于等于1的作业才能启用Uber模式。</li>
+</ul>
+<p>这些参数在<code>mapred-site.xml</code>中可设置</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/10/13/Yarn%E5%AD%A6%E4%B9%A0/" rel="next" title="Yarn学习">
+                <i class="fa fa-chevron-left"></i> Yarn学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/25/Spring-IOC/" rel="prev" title="Spring IOC">
+                Spring IOC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NameNode%E5%92%8CDataNnode%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">NameNode和DataNnode内存分配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NameNode%E5%BF%83%E8%B7%B3%E5%B9%B6%E5%8F%91%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">NameNode心跳并发配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E6%94%B6%E7%AB%99%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">回收站配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HDFS%E5%8E%8B%E6%B5%8B"><span class="nav-number">4.</span> <span class="nav-text">HDFS压测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95HDFS%E5%86%99%E6%80%A7%E8%83%BD"><span class="nav-number">4.1.</span> <span class="nav-text">测试HDFS写性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95HDFS%E8%AF%BB%E6%80%A7%E8%83%BD"><span class="nav-number">4.2.</span> <span class="nav-text">测试HDFS读性能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DataNode%E9%85%8D%E7%BD%AE%E5%A4%9A%E7%9B%AE%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">DataNode配置多目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E9%97%B4%E6%95%B0%E6%8D%AE%E5%9D%87%E8%A1%A1"><span class="nav-number">6.</span> <span class="nav-text">磁盘间数据均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HDFS%E9%9B%86%E7%BE%A4%E6%89%A9%E5%AE%B9%E4%BB%A5%E5%8F%8A%E7%BC%A9%E5%AE%B9"><span class="nav-number">7.</span> <span class="nav-text">HDFS集群扩容以及缩容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BD%E5%90%8D%E5%8D%95%E5%92%8C%E9%BB%91%E5%90%8D%E5%8D%95%E5%88%9B%E5%BB%BA"><span class="nav-number">7.1.</span> <span class="nav-text">白名单和黑名单创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E5%9D%87%E8%A1%A1"><span class="nav-number">8.</span> <span class="nav-text">节点间的数据均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A0%E5%88%A0%E7%A0%81%E5%8E%9F%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">纠删码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A0%E5%88%A0%E7%A0%81%E4%BB%8B%E7%BB%8D"><span class="nav-number">9.1.</span> <span class="nav-text">纠删码介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EC%E7%AD%96%E7%95%A5%E8%AF%B4%E6%98%8E"><span class="nav-number">9.2.</span> <span class="nav-text">EC策略说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EC%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">9.3.</span> <span class="nav-text">EC相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EC%E4%B8%8E%E4%B8%89%E5%89%AF%E6%9C%AC%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.4.</span> <span class="nav-text">EC与三副本转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AF%E6%9C%AC%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E6%88%90EC%E6%96%87%E4%BB%B6"><span class="nav-number">9.4.1.</span> <span class="nav-text">副本文件转换成EC文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EC%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E5%89%AF%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="nav-number">9.4.2.</span> <span class="nav-text">EC文件转换成副本文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8"><span class="nav-number">10.</span> <span class="nav-text">异构存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">10.1.</span> <span class="nav-text">异构存储类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8%E7%AD%96%E7%95%A5"><span class="nav-number">10.2.</span> <span class="nav-text">异构存储策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell%E5%91%BD%E4%BB%A4"><span class="nav-number">10.3.</span> <span class="nav-text">shell命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8"><span class="nav-number">10.4.</span> <span class="nav-text">配置异构存储</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">11.</span> <span class="nav-text">安全模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">11.1.</span> <span class="nav-text">安全模式命令行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99%E6%80%A7%E8%83%BD"><span class="nav-number">12.</span> <span class="nav-text">磁盘读写性能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E6%96%87%E4%BB%B6"><span class="nav-number">13.</span> <span class="nav-text">小文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#distcp%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%A4%E4%B8%AAApache-Hadoop%E4%B9%8B%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB"><span class="nav-number">14.</span> <span class="nav-text">distcp命令实现两个Apache Hadoop之间的数据迁移</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Uber%E6%A8%A1%E5%BC%8F"><span class="nav-number">15.</span> <span class="nav-text">Uber模式</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

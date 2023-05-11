@@ -1,23 +1,1204 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Hadoop基本框架HDFSHDFS是Hadoop Distributed File System(分布式文件系统)  HDFS采用master&#x2F;slave架构。 一个HDFS集群是由一个Namenode和一定数目的Datanodes组成。 Namenode是一个中心服务器，负责管理文件系统的名字空间(namespace)以及客户端对文件的访问 集群中的Datanode一般是一个节点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop基本框架学习">
+<meta property="og:url" content="http://yoursite.com/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="Hadoop基本框架HDFSHDFS是Hadoop Distributed File System(分布式文件系统)  HDFS采用master&#x2F;slave架构。 一个HDFS集群是由一个Namenode和一定数目的Datanodes组成。 Namenode是一个中心服务器，负责管理文件系统的名字空间(namespace)以及客户端对文件的访问 集群中的Datanode一般是一个节点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gruj58bijpj60pw0h4q3e02.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1grum00cmedj30l30gctim.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1grunnt7wi6j30dv0fvq7s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gruo2838tdj30gk0c7dlq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gruofr52ipj30kw0f0qbs.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1grunu6spixj30f70e4tbz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1grunuxvflij30er0d9mzi.jpg">
+<meta property="article:published_time" content="2021-06-08T09:13:11.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="hadoop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gruj58bijpj60pw0h4q3e02.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>hadoop基本框架学习 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hadoop基本框架学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-06-08 17:13:11" itemprop="dateCreated datePublished" datetime="2021-06-08T17:13:11+08:00">2021-06-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hadoop/" itemprop="url" rel="index"><span itemprop="name">hadoop</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="hadoop基本框架学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="Hadoop基本框架"><a href="#Hadoop基本框架" class="headerlink" title="Hadoop基本框架"></a>Hadoop基本框架</h1><h1 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h1><p>HDFS是Hadoop Distributed File System(分布式文件系统)</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gruj58bijpj60pw0h4q3e02.jpg" alt="捕获.PNG"></p>
+<p>HDFS采用master&#x2F;slave架构。</p>
+<p>一个HDFS集群是由一个Namenode和一定数目的Datanodes组成。</p>
+<p>Namenode是一个中心服务器，负责管理文件系统的名字空间(namespace)以及客户端对文件的访问</p>
+<p>集群中的Datanode一般是一个节点一个，负责管理它所在节点上的存储</p>
+<p>HDFS暴露了文件系统的名字空间，用户能够以文件的形式在上面存储数据。从内部看，一个文件其实被分成一个或多个数据块，这些块存储在一组Datanode上。Namenode执行文件系统的名字空间操作，比如打开、关闭、重命名文件或目录。它也负责确定数据块到具体Datanode节点的映射。Datanode负责处理文件系统客户端的读写请求。在Namenode的统一调度下进行数据块的创建、删除和复制。</p>
+<p>一个典型的<strong>部署场景</strong>是一台机器上只运行一个Namenode实例，而集群中的其它机器分别运行一个Datanode实例。这种架构并不排斥在一台机器上运行多个Datanode，只不过这样的情况比较少见。</p>
+<p>集群中单一Namenode的结构大大简化了系统的架构。Namenode是所有HDFS元数据的仲裁者和管理者，这样，用户数据永远不会流过Namenode。</p>
+<p>HDFS支持传统的层次型文件组织结构。用户或者应用程序可以创建目录，然后将文件保存在这些目录里。文件系统名字空间的层次结构和大多数现有的文件系统类似：用户可以创建、删除、移动或重命名文件。</p>
+<p>Namenode负责维护文件系统的名字空间，任何对文件系统名字空间或属性的修改都将被Namenode记录下来。应用程序可以设置HDFS保存的文件的副本数目。文件副本的数目称为文件的副本系数，这个信息也是由Namenode保存的。</p>
+<p>HDFS被设计成能够在一个大集群中跨机器可靠地存储超大文件。它将每个文件存储成一系列的数据块，除了最后一个，所有的数据块都是同样大小的。为了容错，文件的所有数据块都会有副本。每个文件的数据块大小和副本系数都是可配置的。应用程序可以指定某个文件的副本数目。副本系数可以在文件创建的时候指定，也可以在之后改变。HDFS中的文件都是一次性写入的，并且严格要求在任何时候只能有一个写入者。</p>
+<p>Namenode全权管理数据块的复制，它周期性地从集群中的每个Datanode接收心跳信号和块状态报告(Blockreport)。接收到心跳信号意味着该Datanode节点工作正常。块状态报告包含了一个该Datanode上所有数据块的列表。</p>
+<h1 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h1><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1grum00cmedj30l30gctim.jpg" alt="捕获.PNG"></p>
+<h2 id="ResourceManager-全局资源管理和任务调度"><a href="#ResourceManager-全局资源管理和任务调度" class="headerlink" title="ResourceManager: 全局资源管理和任务调度"></a>ResourceManager: 全局资源管理和任务调度</h2><p>负责全局的资源管理和任务调度，把整个集群当成计算资源池，只关注分配，不管应用，且不负责容错</p>
+<h3 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h3><p>以前资源是每个节点分成一个个的Map slot和Reduce slot，现在是一个个Container，每个Container可以根据需要运行ApplicationMaster、Map、Reduce或者任意的程序</p>
+<p>以前的资源分配是静态的，目前是动态的，资源利用率更高</p>
+<p>Container是资源申请的单位，一个资源申请格式：<code>&lt;resource-name, priority, resource-requirement, number-of-containers&gt;, resource-name</code>：主机名、机架名或*（代表任意机器）, resource-requirement：目前只支持CPU和内存</p>
+<p>用户提交作业到ResourceManager，然后在某个NodeManager上分配一个Container来运行ApplicationMaster，ApplicationMaster再根据自身程序需要向ResourceManager申请资源</p>
+<p>YARN有一套Container的生命周期管理机制，而ApplicationMaster和其Container之间的管理是应用程序自己定义的</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1grunnt7wi6j30dv0fvq7s.jpg" alt="捕获.PNG"></p>
+<h3 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h3><p>只关注资源的使用情况，根据需求合理分配资源</p>
+<p>Scheluer可以根据申请的需要，在特定的机器上申请特定的资源（ApplicationMaster负责申请资源时的数据本地化的考虑，ResourceManager将尽量满足其申请需求，在指定的机器上分配Container，从而减少数据移动）</p>
+<h3 id="内部结构"><a href="#内部结构" class="headerlink" title="内部结构"></a>内部结构</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gruo2838tdj30gk0c7dlq.jpg" alt="捕获.PNG"></p>
+<ul>
+<li><p>Client Service: 应用提交、终止、输出信息（应用、队列、集群等的状态信息）</p>
+</li>
+<li><p>Adaminstration Service: 队列、节点、Client权限管理</p>
+</li>
+<li><p>ApplicationMasterService: 注册、终止ApplicationMaster, 获取ApplicationMaster的资源申请或取消的请求，并将其异步地传给Scheduler, 单线程处理</p>
+</li>
+<li><p>ApplicationMaster Liveliness Monitor: 接收ApplicationMaster的心跳消息，如果某个ApplicationMaster在一定时间内没有发送心跳，则被任务失效，其资源将会被回收，然后ResourceManager会重新分配一个ApplicationMaster运行该应用（默认尝试2次）</p>
+</li>
+<li><p>Resource Tracker Service: 注册节点, 接收各注册节点的心跳消息</p>
+</li>
+<li><p>NodeManagers Liveliness Monitor: 监控每个节点的心跳消息，如果长时间没有收到心跳消息，则认为该节点无效, 同时所有在该节点上的Container都标记成无效，也不会调度任务到该节点运行</p>
+</li>
+<li><p>ApplicationManager: 管理应用程序，记录和管理已完成的应用</p>
+</li>
+<li><p>ApplicationMaster Launcher: 一个应用提交后，负责与NodeManager交互，分配Container并加载ApplicationMaster，也负责终止或销毁</p>
+</li>
+<li><p>YarnScheduler: 资源调度分配， 有FIFO(with Priority)，Fair，Capacity方式</p>
+</li>
+<li><p>ContainerAllocationExpirer: 管理已分配但没有启用的Container，超过一定时间则将其回收</p>
+</li>
+</ul>
+<h2 id="NodeManager-单个节点的资源管理和监控"><a href="#NodeManager-单个节点的资源管理和监控" class="headerlink" title="NodeManager: 单个节点的资源管理和监控"></a>NodeManager: 单个节点的资源管理和监控</h2><p>Node节点下的Container管理</p>
+<p>启动时向ResourceManager注册并定时发送心跳消息，等待ResourceManager的指令</p>
+<p>监控Container的运行，维护Container的生命周期，监控Container的资源使用情况</p>
+<p>启动或停止Container，管理任务运行时的依赖包（根据ApplicationMaster的需要，启动Container之前将需要的程序及其依赖包、配置文件等拷贝到本地）</p>
+<h3 id="内部结构-1"><a href="#内部结构-1" class="headerlink" title="内部结构"></a>内部结构</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gruofr52ipj30kw0f0qbs.jpg" alt="捕获.PNG"></p>
+<ul>
+<li><p>NodeStatusUpdater: 启动向ResourceManager注册，报告该节点的可用资源情况，通信的端口和后续状态的维护</p>
+</li>
+<li><p>ContainerManager: 接收RPC请求（启动、停止），资源本地化（下载应用需要的资源到本地，根据需要共享这些资源）</p>
+</li>
+</ul>
+<p>PUBLIC: &#x2F;filecache</p>
+<p>PRIVATE: &#x2F;usercache&#x2F;&#x2F;filecache</p>
+<p>APPLICATION: &#x2F;usercache&#x2F;&#x2F;appcache&#x2F;&#x2F;（在程序完成后会被删除）</p>
+<ul>
+<li>ContainersLauncher: 加载或终止Container</li>
+<li>ContainerMonitor: 监控Container的运行和资源使用情况</li>
+<li>ContainerExecutor: 和底层操作系统交互，加载要运行的程序</li>
+</ul>
+<h2 id="ApplicationMaster-单个作业的资源管理和任务监控"><a href="#ApplicationMaster-单个作业的资源管理和任务监控" class="headerlink" title="ApplicationMaster: 单个作业的资源管理和任务监控"></a>ApplicationMaster: 单个作业的资源管理和任务监控</h2><p>具体功能描述：</p>
+<ul>
+<li>计算应用的资源需求，资源可以是静态或动态计算的，静态的一般是Client申请时就指定了，动态则需要ApplicationMaster根据应用的运行状态来决定</li>
+<li>根据数据来申请对应位置的资源（Data Locality）</li>
+<li>向ResourceManager申请资源，与NodeManager交互进行程序的运行和监控，监控申请的资源的使用情况，监控作业进度</li>
+<li>跟踪任务状态和进度，定时向ResourceManager发送心跳消息，报告资源的使用情况和应用的进度信息</li>
+<li>负责本作业内的任务的容错</li>
+</ul>
+<p>ApplicationMaster可以是用任何语言编写的程序，它和ResourceManager和NodeManager之间是通过ProtocolBuf交互，以前是一个全局的JobTracker负责的，现在每个作业都一个，可伸缩性更强，至少不会因为作业太多，造成JobTracker瓶颈。同时将作业的逻辑放到一个独立的ApplicationMaster中，使得灵活性更加高，每个作业都可以有自己的处理方式，不用绑定到MapReduce的处理模式上</p>
+<h3 id="如何计算资源需求"><a href="#如何计算资源需求" class="headerlink" title="如何计算资源需求"></a>如何计算资源需求</h3><p>一般的MapReduce是根据block数量来定Map和Reduce的计算数量，然后一般的Map或Reduce就占用一个Container</p>
+<h3 id="如何发现数据的本地化"><a href="#如何发现数据的本地化" class="headerlink" title="如何发现数据的本地化"></a>如何发现数据的本地化</h3><p>数据本地化是通过HDFS的block分片信息获取的</p>
+<h2 id="Container-资源申请的单位和任务运行的容器"><a href="#Container-资源申请的单位和任务运行的容器" class="headerlink" title="Container: 资源申请的单位和任务运行的容器"></a>Container: 资源申请的单位和任务运行的容器</h2><ul>
+<li>基本的资源单位（CPU、内存等）</li>
+<li>Container可以加载任意程序，而且不限于Java</li>
+<li>一个Node可以包含多个Container，也可以是一个大的Container</li>
+<li>ApplicationMaster可以根据需要，动态申请和释放Container</li>
+</ul>
+<h2 id="YARN基本流程"><a href="#YARN基本流程" class="headerlink" title="YARN基本流程"></a>YARN基本流程</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1grunu6spixj30f70e4tbz.jpg" alt="捕获.PNG"></p>
+<ol>
+<li>Job submission</li>
+</ol>
+<p>从ResourceManager 中获取一个Application ID 检查作业输出配置，计算输入分片 拷贝作业资源（job jar、配置文件、分片信息）到 HDFS，以便后面任务的执行</p>
+<ol start="2">
+<li>Job initialization</li>
+</ol>
+<p>ResourceManager 将作业递交给 Scheduler（有很多调度算法，一般是根据优先级）Scheduler 为作业分配一个 Container，ResourceManager 就加载一个 application master process 并交给 NodeManager。</p>
+<p>管理 ApplicationMaster 主要是创建一系列的监控进程来跟踪作业的进度，同时获取输入分片，为每一个分片创建一个 Map task 和相应的 reduce task Application Master 还决定如何运行作业，如果作业很小（可配置），则直接在同一个 JVM 下运行</p>
+<ol start="3">
+<li>Task assignment</li>
+</ol>
+<p>ApplicationMaster 向 Resource Manager 申请资源（一个个的Container，指定任务分配的资源要求）一般是根据 data locality 来分配资源</p>
+<ol start="4">
+<li>Task execution</li>
+</ol>
+<p>ApplicationMaster 根据 ResourceManager 的分配情况，在对应的 NodeManager 中启动 Container 从 HDFS 中读取任务所需资源（job jar，配置文件等），然后执行该任务</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1grunuxvflij30er0d9mzi.jpg" alt="捕获.PNG"></p>
+<ol start="5">
+<li>Progress and status update</li>
+</ol>
+<p>定时将任务的进度和状态报告给 ApplicationMaster Client 定时向 ApplicationMaster 获取整个任务的进度和状态</p>
+<ol start="6">
+<li>Job completion</li>
+</ol>
+<p>Client定时检查整个作业是否完成 作业完成后，会清空临时文件、目录等</p>
+<h1 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h1>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/08/python%E5%B0%86word%E8%BD%AC%E6%8D%A2%E4%B8%BApdf/" rel="next" title="python将word转换为pdf">
+                <i class="fa fa-chevron-left"></i> python将word转换为pdf
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/27/ubuntu%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-xshell%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86ubuntu/" rel="prev" title="ubuntu设置静态ip-xshell远程登陆ubuntu">
+                ubuntu设置静态ip-xshell远程登陆ubuntu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">Hadoop基本框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HDFS"><span class="nav-number">2.</span> <span class="nav-text">HDFS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YARN"><span class="nav-number">3.</span> <span class="nav-text">YARN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ResourceManager-%E5%85%A8%E5%B1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%92%8C%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">ResourceManager: 全局资源管理和任务调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">资源管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6"><span class="nav-number">3.1.2.</span> <span class="nav-text">任务调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.3.</span> <span class="nav-text">内部结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeManager-%E5%8D%95%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%92%8C%E7%9B%91%E6%8E%A7"><span class="nav-number">3.2.</span> <span class="nav-text">NodeManager: 单个节点的资源管理和监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">内部结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationMaster-%E5%8D%95%E4%B8%AA%E4%BD%9C%E4%B8%9A%E7%9A%84%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%92%8C%E4%BB%BB%E5%8A%A1%E7%9B%91%E6%8E%A7"><span class="nav-number">3.3.</span> <span class="nav-text">ApplicationMaster: 单个作业的资源管理和任务监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E9%9C%80%E6%B1%82"><span class="nav-number">3.3.1.</span> <span class="nav-text">如何计算资源需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%8F%91%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96"><span class="nav-number">3.3.2.</span> <span class="nav-text">如何发现数据的本地化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container-%E8%B5%84%E6%BA%90%E7%94%B3%E8%AF%B7%E7%9A%84%E5%8D%95%E4%BD%8D%E5%92%8C%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">Container: 资源申请的单位和任务运行的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YARN%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">3.5.</span> <span class="nav-text">YARN基本流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MapReduce"><span class="nav-number">4.</span> <span class="nav-text">MapReduce</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

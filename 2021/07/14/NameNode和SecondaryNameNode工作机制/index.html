@@ -1,23 +1,1106 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="NameNode，SecondaryNameNode工作机制NameNode的数据文件如下，目录为&#x2F;opt&#x2F;module&#x2F;hadoop-3.3.1&#x2F;data&#x2F;dfs&#x2F;name&#x2F;current 123456789101112131415161718192021lowkeysp-00@lowkeysp-01:&#x2F;opt&#x2F;module&#x2F;hadoop-3.3.1&#x2F;data&#x2F;dfs&#x2F;name&#x2F;curren">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NameNode，SecondaryNameNode，DataNode工作机制">
+<meta property="og:url" content="http://yoursite.com/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="NameNode，SecondaryNameNode工作机制NameNode的数据文件如下，目录为&#x2F;opt&#x2F;module&#x2F;hadoop-3.3.1&#x2F;data&#x2F;dfs&#x2F;name&#x2F;current 123456789101112131415161718192021lowkeysp-00@lowkeysp-01:&#x2F;opt&#x2F;module&#x2F;hadoop-3.3.1&#x2F;data&#x2F;dfs&#x2F;name&#x2F;curren">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-14T06:27:52.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>NameNode，SecondaryNameNode，DataNode工作机制 | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NameNode，SecondaryNameNode，DataNode工作机制
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-07-14 14:27:52" itemprop="dateCreated datePublished" datetime="2021-07-14T14:27:52+08:00">2021-07-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="leancloud_visitors" data-flag-title="NameNode，SecondaryNameNode，DataNode工作机制">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="NameNode，SecondaryNameNode工作机制"><a href="#NameNode，SecondaryNameNode工作机制" class="headerlink" title="NameNode，SecondaryNameNode工作机制"></a>NameNode，SecondaryNameNode工作机制</h1><p>NameNode的数据文件如下，目录为<code>/opt/module/hadoop-3.3.1/data/dfs/name/current</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">lowkeysp-00@lowkeysp-01:/opt/module/hadoop-3.3.1/data/dfs/name/current$ ll</span><br><span class="line">总用量 4180</span><br><span class="line">drwx------ 2 lowkeysp-00 lowkeysp-00    4096 7月   4 23:18 ./</span><br><span class="line">drwxrwxr-x 3 lowkeysp-00 lowkeysp-00    4096 7月   4 23:37 ../</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   3 23:07 edits_0000000000000000001-0000000000000000002</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    7056 7月   4 00:07 edits_0000000000000000003-0000000000000000066</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 00:20 edits_0000000000000000067-0000000000000000117</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 20:12 edits_0000000000000000118-0000000000000000169</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00   23867 7月   4 21:26 edits_0000000000000000170-0000000000000000340</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   4 22:26 edits_0000000000000000341-0000000000000000342</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 22:53 edits_0000000000000000343-0000000000000000440</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   4 23:18 edits_0000000000000000441-0000000000000000442</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 23:18 edits_inprogress_0000000000000000443</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    4771 7月   4 22:26 fsimage_0000000000000000342</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      62 7月   4 22:26 fsimage_0000000000000000342.md5</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    5702 7月   4 23:18 fsimage_0000000000000000442</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      62 7月   4 23:18 fsimage_0000000000000000442.md5</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00       4 7月   4 23:18 seen_txid</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00     212 7月   4 19:48 VERSION</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>SecondaryNameNode的数据文件如下,目录为:<code>/opt/module/hadoop-3.3.1/data/dfs/namesecondary/current</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">lowkeysp-00@lowkeysp-04:/opt/module/hadoop-3.3.1/data/dfs/namesecondary/current$ ll</span><br><span class="line">总用量 2128</span><br><span class="line">drwxrwxr-x 2 lowkeysp-00 lowkeysp-00    4096 7月   4 23:18 ./</span><br><span class="line">drwxrwxr-x 3 lowkeysp-00 lowkeysp-00    4096 7月   4 23:37 ../</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   3 23:07 edits_0000000000000000001-0000000000000000002</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    7056 7月   4 00:07 edits_0000000000000000003-0000000000000000066</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 21:26 edits_0000000000000000118-0000000000000000169</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00   23867 7月   4 21:26 edits_0000000000000000170-0000000000000000340</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   4 22:26 edits_0000000000000000341-0000000000000000342</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 23:18 edits_0000000000000000343-0000000000000000440</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   4 23:18 edits_0000000000000000441-0000000000000000442</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    4771 7月   4 23:18 fsimage_0000000000000000342</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      62 7月   4 23:18 fsimage_0000000000000000342.md5</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    5702 7月   4 23:18 fsimage_0000000000000000442</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      62 7月   4 23:18 fsimage_0000000000000000442.md5</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00     212 7月   4 23:18 VERSION</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，NameNode有如下文件：<code>edits_</code>,<code>edits_inprogress_</code>,<code>fsimage_</code>,SecondaryNameNode有如下文件：<code>edits_</code>,<code>fsimage_</code></p>
+<p>NameNode的元数据存储在内存中，为了防止断电导致内存中的数据丢失，在磁盘中备份了元数据，叫做<code>fsimage</code>。当内存中的元数据更新时，如果同时更新fsimage，会导致效率低下，如果不更新，则会发生不一致问题。为解决这一问题，引入了<code>Edits</code>文件。该文件只进行追加操作，效率很高。每当元数据有更新或者添加元数据时，修改内存中的元数据并追加到Edits文件中，这样，即使断电，仍可通过Fsimage和Edits合并，合成元数据</p>
+<p>具体工作机制如下：</p>
+<ul>
+<li><p>1）第一次启动NameNode格式化后，会创建<code>Fsimage</code>文件和<code>seen_txid</code>文件，其中Fsimage是HDFS系统的元数据的一个永久性的检查点，记录着整个文件目录结构以及文件每个数据块所在的节点位置，seen_txid文件记录了正在执行的事务id，初始化时为0。</p>
+</li>
+<li><p>2）当进行文件操作后，NameNode会生成<code>edits_</code>和<code>edits_inprogress_</code>文件，该文件存放了HDFS文件系统的所有更新操作。HDFS每个操作都会产生一个事务id，<code>edits_0000000000000000001-0000000000000000002</code>表示这里面记录了两个事务操作，<code>edits_inprogress_0000000000000000443</code>表示这个文件正在被编辑，且下一个事务id应该从443开始，此时seen_txid的内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lowkeysp-00@lowkeysp-01:/opt/module/hadoop-3.3.1/data/dfs/name/current$ cat seen_txid </span><br><span class="line">443</span><br></pre></td></tr></table></figure></li>
+<li><p>3)当每次NameNode启动时，内存会加载Fsimage和edits文件，保证内存中的元数据是最新的。比如将fsimage_0000000000000000442和edits_inprogress_0000000000000000443进行合并（edits_inprogress_0000000000000000443需先变成edits_00000XX，fsimage_0000000000000000442表示已经合并到442了，不会再跟1-442的edits进行合并了），然后跟发当对HDFS文件系统进行操作时，NameNode并不会直接更新fsimage，而是把该次操作先记录到edits文件中，然后再更新内存中的元数据。</p>
+</li>
+<li><p>4）SecondaryNameNode会去协助NameNode合并Fsimage和edits，而不用等到每次NameNode启动时再合并，CheckPoint的触发条件有两个：<br>1、SecondaryNameNode会定期询问NameNode是否需要合并，默认定时时间是1小时；2、NameNode中的edits数据满了，默认是100万条操作</p>
+</li>
+<li><p>5）如果NameNode同意合并，则NameNode滚动正在写的edits日志，即将edits_inprogress_文件变成edits_000000XX文件，比如，edits_inprogress_0000000000000000443变成edits_0000000000000000443，之后再生成edits_inprogress_0000000000000000444用于接受合并过程中对HDFS文件系统的操作。</p>
+</li>
+<li><p>6）将edits_文件和fsimage文件拷贝到SecondaryNameNode，SecondaryNameNode加载到内存中进行合并，生成fsimage.chkpoint。再将fsimage.chkpoint送回NameNode，NameNode将fsimage.chkpoint重新命名为fsimage</p>
+</li>
+</ul>
+<p>一小时合并一次文件，hdfs-default.xml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.namenode.checkpoint.period&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;3600s&lt;/value&gt;</span><br><span class="line">&lt;/property</span><br></pre></td></tr></table></figure>
+
+<p>操作100万次就认为满了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;property&gt; </span><br><span class="line">    &lt;name&gt;dfs.namenode.checkpoint.txns&lt;/name&gt; </span><br><span class="line">    &lt;value&gt;1000000&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;操作动作次数&lt;/description&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/property&gt;</span><br><span class="line"> </span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.namenode.checkpoint.check.period&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;60s&lt;/value&gt;</span><br><span class="line">    &lt;description&gt; 1分钟检查一次操作次数&lt;/description&gt;</span><br><span class="line"> &lt;/property&gt;   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查看Fsimage"><a href="#查看Fsimage" class="headerlink" title="查看Fsimage"></a>查看Fsimage</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br></pre></td><td class="code"><pre><span class="line">hdfs oiv : apply the offline fsimage viewer to an fsimage</span><br><span class="line"></span><br><span class="line">基本语法：</span><br><span class="line">hdfs oiv -p 转换后的文件类型 -i 镜像文件 -o 转换后文件输出路径</span><br><span class="line"></span><br><span class="line">lowkeysp-00@lowkeysp-01:/opt/module/hadoop-3.3.1/data/dfs/name/current$ hdfs oiv -p xml -i fsimage_0000000000000000342 -o ~/fsimage.xml</span><br><span class="line">2021-07-14 15:44:26,738 INFO offlineImageViewer.FSImageHandler: Loading 5 strings</span><br><span class="line">2021-07-14 15:44:26,800 INFO namenode.FSDirectory: GLOBAL serial map: bits=29 maxEntries=536870911</span><br><span class="line">2021-07-14 15:44:26,800 INFO namenode.FSDirectory: USER serial map: bits=24 maxEntries=16777215</span><br><span class="line">2021-07-14 15:44:26,800 INFO namenode.FSDirectory: GROUP serial map: bits=24 maxEntries=16777215</span><br><span class="line">2021-07-14 15:44:26,800 INFO namenode.FSDirectory: XATTR serial map: bits=24 maxEntries=16777215</span><br><span class="line"></span><br><span class="line">查看fsimage.xml，里面存储了文件目录的信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">lowkeysp-00@lowkeysp-01:~$ cat fsimage.xml </span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;fsimage&gt;&lt;version&gt;&lt;layoutVersion&gt;-66&lt;/layoutVersion&gt;&lt;onDiskVersion&gt;1&lt;/onDiskVersion&gt;&lt;oivRevision&gt;a3b9c37a397ad4188041dd80621bdeefc46885f2&lt;/oivRevision&gt;&lt;/version&gt;</span><br><span class="line">&lt;NameSection&gt;&lt;namespaceId&gt;159680868&lt;/namespaceId&gt;&lt;genstampV1&gt;1000&lt;/genstampV1&gt;&lt;genstampV2&gt;1045&lt;/genstampV2&gt;&lt;genstampV1Limit&gt;0&lt;/genstampV1Limit&gt;&lt;lastAllocatedBlockId&gt;1073741869&lt;/lastAllocatedBlockId&gt;&lt;txid&gt;342&lt;/txid&gt;&lt;/NameSection&gt;</span><br><span class="line">&lt;ErasureCodingSection&gt;</span><br><span class="line">&lt;erasureCodingPolicy&gt;</span><br><span class="line">&lt;policyId&gt;1&lt;/policyId&gt;&lt;policyName&gt;RS-6-3-1024k&lt;/policyName&gt;&lt;cellSize&gt;1048576&lt;/cellSize&gt;&lt;policyState&gt;DISABLED&lt;/policyState&gt;&lt;ecSchema&gt;</span><br><span class="line">&lt;codecName&gt;rs&lt;/codecName&gt;&lt;dataUnits&gt;6&lt;/dataUnits&gt;&lt;parityUnits&gt;3&lt;/parityUnits&gt;&lt;/ecSchema&gt;</span><br><span class="line">&lt;/erasureCodingPolicy&gt;</span><br><span class="line"></span><br><span class="line">&lt;erasureCodingPolicy&gt;</span><br><span class="line">&lt;policyId&gt;2&lt;/policyId&gt;&lt;policyName&gt;RS-3-2-1024k&lt;/policyName&gt;&lt;cellSize&gt;1048576&lt;/cellSize&gt;&lt;policyState&gt;DISABLED&lt;/policyState&gt;&lt;ecSchema&gt;</span><br><span class="line">&lt;codecName&gt;rs&lt;/codecName&gt;&lt;dataUnits&gt;3&lt;/dataUnits&gt;&lt;parityUnits&gt;2&lt;/parityUnits&gt;&lt;/ecSchema&gt;</span><br><span class="line">&lt;/erasureCodingPolicy&gt;</span><br><span class="line"></span><br><span class="line">&lt;erasureCodingPolicy&gt;</span><br><span class="line">&lt;policyId&gt;3&lt;/policyId&gt;&lt;policyName&gt;RS-LEGACY-6-3-1024k&lt;/policyName&gt;&lt;cellSize&gt;1048576&lt;/cellSize&gt;&lt;policyState&gt;DISABLED&lt;/policyState&gt;&lt;ecSchema&gt;</span><br><span class="line">&lt;codecName&gt;rs-legacy&lt;/codecName&gt;&lt;dataUnits&gt;6&lt;/dataUnits&gt;&lt;parityUnits&gt;3&lt;/parityUnits&gt;&lt;/ecSchema&gt;</span><br><span class="line">&lt;/erasureCodingPolicy&gt;</span><br><span class="line"></span><br><span class="line">&lt;erasureCodingPolicy&gt;</span><br><span class="line">&lt;policyId&gt;4&lt;/policyId&gt;&lt;policyName&gt;XOR-2-1-1024k&lt;/policyName&gt;&lt;cellSize&gt;1048576&lt;/cellSize&gt;&lt;policyState&gt;DISABLED&lt;/policyState&gt;&lt;ecSchema&gt;</span><br><span class="line">&lt;codecName&gt;xor&lt;/codecName&gt;&lt;dataUnits&gt;2&lt;/dataUnits&gt;&lt;parityUnits&gt;1&lt;/parityUnits&gt;&lt;/ecSchema&gt;</span><br><span class="line">&lt;/erasureCodingPolicy&gt;</span><br><span class="line"></span><br><span class="line">&lt;erasureCodingPolicy&gt;</span><br><span class="line">&lt;policyId&gt;5&lt;/policyId&gt;&lt;policyName&gt;RS-10-4-1024k&lt;/policyName&gt;&lt;cellSize&gt;1048576&lt;/cellSize&gt;&lt;policyState&gt;DISABLED&lt;/policyState&gt;&lt;ecSchema&gt;</span><br><span class="line">&lt;codecName&gt;rs&lt;/codecName&gt;&lt;dataUnits&gt;10&lt;/dataUnits&gt;&lt;parityUnits&gt;4&lt;/parityUnits&gt;&lt;/ecSchema&gt;</span><br><span class="line">&lt;/erasureCodingPolicy&gt;</span><br><span class="line"></span><br><span class="line">&lt;/ErasureCodingSection&gt;</span><br><span class="line"></span><br><span class="line">&lt;INodeSection&gt;&lt;lastInodeId&gt;16468&lt;/lastInodeId&gt;&lt;numInodes&gt;56&lt;/numInodes&gt;&lt;inode&gt;&lt;id&gt;16385&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;&lt;/name&gt;&lt;mtime&gt;1625403554362&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0755&lt;/permission&gt;&lt;nsquota&gt;9223372036854775807&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16386&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;wcinput&lt;/name&gt;&lt;mtime&gt;1625326637268&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0755&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16387&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;aa.txt&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625326637243&lt;/mtime&gt;&lt;atime&gt;1625403562205&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741825&lt;/id&gt;&lt;genstamp&gt;1001&lt;/genstamp&gt;&lt;numBytes&gt;16&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16388&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;tmp&lt;/name&gt;&lt;mtime&gt;1625327231227&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16389&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;hadoop-yarn&lt;/name&gt;&lt;mtime&gt;1625327231227&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16390&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;staging&lt;/name&gt;&lt;mtime&gt;1625401809698&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16391&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;lowkeysp-00&lt;/name&gt;&lt;mtime&gt;1625327231227&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16392&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;.staging&lt;/name&gt;&lt;mtime&gt;1625403573223&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16393&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;job_1625325609725_0001&lt;/name&gt;&lt;mtime&gt;1625327231876&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;xattrs&gt;&lt;xattr&gt;&lt;ns&gt;SYSTEM&lt;/ns&gt;&lt;name&gt;hdfs.erasurecoding.policy&lt;/name&gt;&lt;val&gt;\0000;\0000;\0000;\000b;replication&lt;/val&gt;&lt;/xattr&gt;&lt;/xattrs&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16394&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.jar&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625327231734&lt;/mtime&gt;&lt;atime&gt;1625327231531&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741826&lt;/id&gt;&lt;genstamp&gt;1002&lt;/genstamp&gt;&lt;numBytes&gt;280989&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16395&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.split&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625327231847&lt;/mtime&gt;&lt;atime&gt;1625327231805&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741827&lt;/id&gt;&lt;genstamp&gt;1003&lt;/genstamp&gt;&lt;numBytes&gt;111&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16396&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.splitmetainfo&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625327231865&lt;/mtime&gt;&lt;atime&gt;1625327231849&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741828&lt;/id&gt;&lt;genstamp&gt;1004&lt;/genstamp&gt;&lt;numBytes&gt;25&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16397&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625327232112&lt;/mtime&gt;&lt;atime&gt;1625327231876&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741829&lt;/id&gt;&lt;genstamp&gt;1005&lt;/genstamp&gt;&lt;numBytes&gt;232955&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16398&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;job_1625325609725_0002&lt;/name&gt;&lt;mtime&gt;1625327630899&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;xattrs&gt;&lt;xattr&gt;&lt;ns&gt;SYSTEM&lt;/ns&gt;&lt;name&gt;hdfs.erasurecoding.policy&lt;/name&gt;&lt;val&gt;\0000;\0000;\0000;\000b;replication&lt;/val&gt;&lt;/xattr&gt;&lt;/xattrs&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16399&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.jar&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625327630390&lt;/mtime&gt;&lt;atime&gt;1625327630268&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741830&lt;/id&gt;&lt;genstamp&gt;1006&lt;/genstamp&gt;&lt;numBytes&gt;280989&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16400&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.split&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625327630466&lt;/mtime&gt;&lt;atime&gt;1625327630440&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741831&lt;/id&gt;&lt;genstamp&gt;1007&lt;/genstamp&gt;&lt;numBytes&gt;111&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16401&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.splitmetainfo&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625327630891&lt;/mtime&gt;&lt;atime&gt;1625327630469&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741832&lt;/id&gt;&lt;genstamp&gt;1008&lt;/genstamp&gt;&lt;numBytes&gt;25&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16402&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625327631080&lt;/mtime&gt;&lt;atime&gt;1625327630899&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741833&lt;/id&gt;&lt;genstamp&gt;1009&lt;/genstamp&gt;&lt;numBytes&gt;232955&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16403&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;job_1625325609725_0003&lt;/name&gt;&lt;mtime&gt;1625328819000&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;xattrs&gt;&lt;xattr&gt;&lt;ns&gt;SYSTEM&lt;/ns&gt;&lt;name&gt;hdfs.erasurecoding.policy&lt;/name&gt;&lt;val&gt;\0000;\0000;\0000;\000b;replication&lt;/val&gt;&lt;/xattr&gt;&lt;/xattrs&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16404&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.jar&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625328818879&lt;/mtime&gt;&lt;atime&gt;1625328818762&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741834&lt;/id&gt;&lt;genstamp&gt;1010&lt;/genstamp&gt;&lt;numBytes&gt;280989&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16405&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.split&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625328818971&lt;/mtime&gt;&lt;atime&gt;1625328818940&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741835&lt;/id&gt;&lt;genstamp&gt;1011&lt;/genstamp&gt;&lt;numBytes&gt;111&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16406&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.splitmetainfo&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625328818994&lt;/mtime&gt;&lt;atime&gt;1625328818973&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741836&lt;/id&gt;&lt;genstamp&gt;1012&lt;/genstamp&gt;&lt;numBytes&gt;25&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16407&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625328819158&lt;/mtime&gt;&lt;atime&gt;1625328819000&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741837&lt;/id&gt;&lt;genstamp&gt;1013&lt;/genstamp&gt;&lt;numBytes&gt;232955&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16408&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;job_1625325609725_0004&lt;/name&gt;&lt;mtime&gt;1625329238333&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;xattrs&gt;&lt;xattr&gt;&lt;ns&gt;SYSTEM&lt;/ns&gt;&lt;name&gt;hdfs.erasurecoding.policy&lt;/name&gt;&lt;val&gt;\0000;\0000;\0000;\000b;replication&lt;/val&gt;&lt;/xattr&gt;&lt;/xattrs&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16409&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.jar&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625329238191&lt;/mtime&gt;&lt;atime&gt;1625329238067&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741838&lt;/id&gt;&lt;genstamp&gt;1014&lt;/genstamp&gt;&lt;numBytes&gt;280989&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16410&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.split&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625329238292&lt;/mtime&gt;&lt;atime&gt;1625329238260&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741839&lt;/id&gt;&lt;genstamp&gt;1015&lt;/genstamp&gt;&lt;numBytes&gt;111&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16411&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.splitmetainfo&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625329238322&lt;/mtime&gt;&lt;atime&gt;1625329238295&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741840&lt;/id&gt;&lt;genstamp&gt;1016&lt;/genstamp&gt;&lt;numBytes&gt;25&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16412&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625329238551&lt;/mtime&gt;&lt;atime&gt;1625329238333&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741841&lt;/id&gt;&lt;genstamp&gt;1017&lt;/genstamp&gt;&lt;numBytes&gt;232946&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16413&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;job_1625399359435_0001&lt;/name&gt;&lt;mtime&gt;1625399632503&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;xattrs&gt;&lt;xattr&gt;&lt;ns&gt;SYSTEM&lt;/ns&gt;&lt;name&gt;hdfs.erasurecoding.policy&lt;/name&gt;&lt;val&gt;\0000;\0000;\0000;\000b;replication&lt;/val&gt;&lt;/xattr&gt;&lt;/xattrs&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16414&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.jar&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625399632357&lt;/mtime&gt;&lt;atime&gt;1625399631694&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741842&lt;/id&gt;&lt;genstamp&gt;1018&lt;/genstamp&gt;&lt;numBytes&gt;280989&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16415&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.split&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625399632464&lt;/mtime&gt;&lt;atime&gt;1625399632433&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741843&lt;/id&gt;&lt;genstamp&gt;1019&lt;/genstamp&gt;&lt;numBytes&gt;111&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16416&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.splitmetainfo&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625399632492&lt;/mtime&gt;&lt;atime&gt;1625399632467&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741844&lt;/id&gt;&lt;genstamp&gt;1020&lt;/genstamp&gt;&lt;numBytes&gt;25&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16417&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625399632781&lt;/mtime&gt;&lt;atime&gt;1625399632503&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741845&lt;/id&gt;&lt;genstamp&gt;1021&lt;/genstamp&gt;&lt;numBytes&gt;232946&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16418&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;job_1625399359435_0002&lt;/name&gt;&lt;mtime&gt;1625400724265&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0700&lt;/permission&gt;&lt;xattrs&gt;&lt;xattr&gt;&lt;ns&gt;SYSTEM&lt;/ns&gt;&lt;name&gt;hdfs.erasurecoding.policy&lt;/name&gt;&lt;val&gt;\0000;\0000;\0000;\000b;replication&lt;/val&gt;&lt;/xattr&gt;&lt;/xattrs&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16419&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.jar&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625400724160&lt;/mtime&gt;&lt;atime&gt;1625400724058&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741846&lt;/id&gt;&lt;genstamp&gt;1022&lt;/genstamp&gt;&lt;numBytes&gt;280989&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16420&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.split&lt;/name&gt;&lt;replication&gt;10&lt;/replication&gt;&lt;mtime&gt;1625400724235&lt;/mtime&gt;&lt;atime&gt;1625400724209&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741847&lt;/id&gt;&lt;genstamp&gt;1023&lt;/genstamp&gt;&lt;numBytes&gt;111&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16421&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.splitmetainfo&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625400724259&lt;/mtime&gt;&lt;atime&gt;1625400724237&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741848&lt;/id&gt;&lt;genstamp&gt;1024&lt;/genstamp&gt;&lt;numBytes&gt;25&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16422&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625400724414&lt;/mtime&gt;&lt;atime&gt;1625400724265&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741849&lt;/id&gt;&lt;genstamp&gt;1025&lt;/genstamp&gt;&lt;numBytes&gt;232949&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16428&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;history&lt;/name&gt;&lt;mtime&gt;1625403447744&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0755&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16429&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;done_intermediate&lt;/name&gt;&lt;mtime&gt;1625401809712&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:1777&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16430&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;lowkeysp-00&lt;/name&gt;&lt;mtime&gt;1625403581266&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16431&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;wcoutput&lt;/name&gt;&lt;mtime&gt;1625401824315&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0755&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16438&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;part-r-00000&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625401824131&lt;/mtime&gt;&lt;atime&gt;1625401823963&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741856&lt;/id&gt;&lt;genstamp&gt;1032&lt;/genstamp&gt;&lt;numBytes&gt;17&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16440&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;_SUCCESS&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625401824318&lt;/mtime&gt;&lt;atime&gt;1625401824315&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16443&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job_1625401657661_0001-1625401805929-lowkeysp%2D00-word+count-1625401824326-1-1-SUCCEEDED-default-1625401812270.jhist&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625401824458&lt;/mtime&gt;&lt;atime&gt;1625401824421&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741858&lt;/id&gt;&lt;genstamp&gt;1034&lt;/genstamp&gt;&lt;numBytes&gt;22779&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16444&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job_1625401657661_0001_conf.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625401824534&lt;/mtime&gt;&lt;atime&gt;1625401824472&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741859&lt;/id&gt;&lt;genstamp&gt;1035&lt;/genstamp&gt;&lt;numBytes&gt;269287&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16445&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;done&lt;/name&gt;&lt;mtime&gt;1625403581238&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16452&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;output&lt;/name&gt;&lt;mtime&gt;1625403571872&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0755&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16458&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;part-r-00000&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625403571673&lt;/mtime&gt;&lt;atime&gt;1625403571442&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741866&lt;/id&gt;&lt;genstamp&gt;1042&lt;/genstamp&gt;&lt;numBytes&gt;17&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16460&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;_SUCCESS&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625403571876&lt;/mtime&gt;&lt;atime&gt;1625403571872&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0644&lt;/permission&gt;&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16463&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job_1625403367618_0001-1625403546921-lowkeysp%2D00-word+count-1625403571935-1-1-SUCCEEDED-default-1625403554384.jhist&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625403572069&lt;/mtime&gt;&lt;atime&gt;1625403572023&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741868&lt;/id&gt;&lt;genstamp&gt;1044&lt;/genstamp&gt;&lt;numBytes&gt;22782&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16464&lt;/id&gt;&lt;type&gt;FILE&lt;/type&gt;&lt;name&gt;job_1625403367618_0001_conf.xml&lt;/name&gt;&lt;replication&gt;3&lt;/replication&gt;&lt;mtime&gt;1625403572142&lt;/mtime&gt;&lt;atime&gt;1625403572091&lt;/atime&gt;&lt;preferredBlockSize&gt;134217728&lt;/preferredBlockSize&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;blocks&gt;&lt;block&gt;&lt;id&gt;1073741869&lt;/id&gt;&lt;genstamp&gt;1045&lt;/genstamp&gt;&lt;numBytes&gt;269289&lt;/numBytes&gt;&lt;/block&gt;</span><br><span class="line">&lt;/blocks&gt;</span><br><span class="line">&lt;storagePolicyId&gt;0&lt;/storagePolicyId&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16465&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;2021&lt;/name&gt;&lt;mtime&gt;1625403581238&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16466&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;07&lt;/name&gt;&lt;mtime&gt;1625403581238&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16467&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;04&lt;/name&gt;&lt;mtime&gt;1625403581238&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;inode&gt;&lt;id&gt;16468&lt;/id&gt;&lt;type&gt;DIRECTORY&lt;/type&gt;&lt;name&gt;000000&lt;/name&gt;&lt;mtime&gt;1625403581266&lt;/mtime&gt;&lt;permission&gt;lowkeysp-00:supergroup:0770&lt;/permission&gt;&lt;nsquota&gt;-1&lt;/nsquota&gt;&lt;dsquota&gt;-1&lt;/dsquota&gt;&lt;/inode&gt;</span><br><span class="line">&lt;/INodeSection&gt;</span><br><span class="line">&lt;INodeReferenceSection&gt;&lt;/INodeReferenceSection&gt;&lt;SnapshotSection&gt;&lt;snapshotCounter&gt;0&lt;/snapshotCounter&gt;&lt;numSnapshots&gt;0&lt;/numSnapshots&gt;&lt;/SnapshotSection&gt;</span><br><span class="line">&lt;INodeDirectorySection&gt;&lt;directory&gt;&lt;parent&gt;16385&lt;/parent&gt;&lt;child&gt;16452&lt;/child&gt;&lt;child&gt;16388&lt;/child&gt;&lt;child&gt;16386&lt;/child&gt;&lt;child&gt;16431&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16386&lt;/parent&gt;&lt;child&gt;16387&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16388&lt;/parent&gt;&lt;child&gt;16389&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16389&lt;/parent&gt;&lt;child&gt;16390&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16390&lt;/parent&gt;&lt;child&gt;16428&lt;/child&gt;&lt;child&gt;16391&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16391&lt;/parent&gt;&lt;child&gt;16392&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16392&lt;/parent&gt;&lt;child&gt;16393&lt;/child&gt;&lt;child&gt;16398&lt;/child&gt;&lt;child&gt;16403&lt;/child&gt;&lt;child&gt;16408&lt;/child&gt;&lt;child&gt;16413&lt;/child&gt;&lt;child&gt;16418&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16393&lt;/parent&gt;&lt;child&gt;16394&lt;/child&gt;&lt;child&gt;16395&lt;/child&gt;&lt;child&gt;16396&lt;/child&gt;&lt;child&gt;16397&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16398&lt;/parent&gt;&lt;child&gt;16399&lt;/child&gt;&lt;child&gt;16400&lt;/child&gt;&lt;child&gt;16401&lt;/child&gt;&lt;child&gt;16402&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16403&lt;/parent&gt;&lt;child&gt;16404&lt;/child&gt;&lt;child&gt;16405&lt;/child&gt;&lt;child&gt;16406&lt;/child&gt;&lt;child&gt;16407&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16408&lt;/parent&gt;&lt;child&gt;16409&lt;/child&gt;&lt;child&gt;16410&lt;/child&gt;&lt;child&gt;16411&lt;/child&gt;&lt;child&gt;16412&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16413&lt;/parent&gt;&lt;child&gt;16414&lt;/child&gt;&lt;child&gt;16415&lt;/child&gt;&lt;child&gt;16416&lt;/child&gt;&lt;child&gt;16417&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16418&lt;/parent&gt;&lt;child&gt;16419&lt;/child&gt;&lt;child&gt;16420&lt;/child&gt;&lt;child&gt;16421&lt;/child&gt;&lt;child&gt;16422&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16428&lt;/parent&gt;&lt;child&gt;16445&lt;/child&gt;&lt;child&gt;16429&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16429&lt;/parent&gt;&lt;child&gt;16430&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16431&lt;/parent&gt;&lt;child&gt;16440&lt;/child&gt;&lt;child&gt;16438&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16445&lt;/parent&gt;&lt;child&gt;16465&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16452&lt;/parent&gt;&lt;child&gt;16460&lt;/child&gt;&lt;child&gt;16458&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16465&lt;/parent&gt;&lt;child&gt;16466&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16466&lt;/parent&gt;&lt;child&gt;16467&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16467&lt;/parent&gt;&lt;child&gt;16468&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;directory&gt;&lt;parent&gt;16468&lt;/parent&gt;&lt;child&gt;16443&lt;/child&gt;&lt;child&gt;16444&lt;/child&gt;&lt;child&gt;16463&lt;/child&gt;&lt;child&gt;16464&lt;/child&gt;&lt;/directory&gt;</span><br><span class="line">&lt;/INodeDirectorySection&gt;</span><br><span class="line">&lt;FileUnderConstructionSection&gt;&lt;/FileUnderConstructionSection&gt;</span><br><span class="line">&lt;SecretManagerSection&gt;&lt;currentId&gt;0&lt;/currentId&gt;&lt;tokenSequenceNumber&gt;0&lt;/tokenSequenceNumber&gt;&lt;numDelegationKeys&gt;0&lt;/numDelegationKeys&gt;&lt;numTokens&gt;0&lt;/numTokens&gt;&lt;/SecretManagerSection&gt;&lt;CacheManagerSection&gt;&lt;nextDirectiveId&gt;1&lt;/nextDirectiveId&gt;&lt;numDirectives&gt;0&lt;/numDirectives&gt;&lt;numPools&gt;0&lt;/numPools&gt;&lt;/CacheManagerSection&gt;</span><br><span class="line">&lt;/fsimage&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="查看edits文件"><a href="#查看edits文件" class="headerlink" title="查看edits文件"></a>查看edits文件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hdfs oev -p 转换后文件类型 -i 编辑日志 -o 转换后文件输出路径</span><br><span class="line"></span><br><span class="line"> hdfs oev -p xml -i edits_0000000000000000001-0000000000000000002 -o ~/edit_1.xml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="DataNode工作机制"><a href="#DataNode工作机制" class="headerlink" title="DataNode工作机制"></a>DataNode工作机制</h1><p>一个数据块在DataNode上以文字形式存储在磁盘上，包括两个文件，一个是数据本身，<code>.meta</code>包含数据的长度，块数据的校验和，时间戳</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lowkeysp-00@lowkeysp-01:/opt/module/hadoop-3.3.1/data/dfs/data/current/BP-725394105-127.0.1.1-1625319364440/current/finalized/subdir0/subdir0$ ll</span><br><span class="line">总用量 4240</span><br><span class="line">drwxrwxr-x 2 lowkeysp-00 lowkeysp-00   4096 7月   4 22:53 ./</span><br><span class="line">drwxrwxr-x 3 lowkeysp-00 lowkeysp-00   4096 7月   3 23:37 ../</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00     16 7月   3 23:37 blk_1073741825</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00     11 7月   3 23:37 blk_1073741825_1001.meta</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 280989 7月   3 23:47 blk_1073741826</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00   2203 7月   3 23:47 blk_1073741826_1002.meta</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>1）DataNode启动后向NameNode注册，通过后，周期性（6小时）向NameNode上报所有块信息<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.blockreport.intervalMsec&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;21600000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt; </span><br></pre></td></tr></table></figure>
+DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点块信息的时间间隔也是6小时<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.datanode.directoryscan.interval&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;21600s&lt;/value&gt;</span><br><span class="line">&lt;/property&gt; </span><br></pre></td></tr></table></figure></li>
+<li>2)心跳是每3秒一次，告诉NameNode还活着，心跳返回的结果会包括NameNode给该DataNode的命令结果。如果超过10分钟+30s心跳没有收到某个DataNode的心跳，则认为该节点不可用。</li>
+</ul>
+<p> 超时10分钟的计算：<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TimeOut = 2 * dfs.namenode.heartbeat.recheck-interval + 10 * dfs.heartbeat.interval</span><br><span class="line"></span><br><span class="line">dfs.namenode.heartbeat.recheck-interval 默认是5分钟，dfs.heartbeat.interval默认是3秒</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/07/HDFS%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/" rel="next" title="HDFS读写数据">
+                <i class="fa fa-chevron-left"></i> HDFS读写数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/15/MapReduce%E5%AD%A6%E4%B9%A0/" rel="prev" title="MapReduce学习">
+                MapReduce学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NameNode%EF%BC%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">NameNode，SecondaryNameNode工作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BFsimage"><span class="nav-number">1.1.</span> <span class="nav-text">查看Fsimage</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bedits%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">查看edits文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DataNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">DataNode工作机制</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

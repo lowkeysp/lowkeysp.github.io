@@ -1,23 +1,3230 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="lowkeysp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lowkeysp&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/page/7/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="lowkeysp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/page/7/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/10/SDH%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/10/SDH%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">SDH故障处理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 09:20:41" itemprop="dateCreated datePublished" datetime="2019-09-10T09:20:41+08:00">2019-09-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SDH/" itemprop="url" rel="index"><span itemprop="name">SDH</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/09/10/SDH%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/" class="leancloud_visitors" data-flag-title="SDH故障处理">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>本章的SDH故障处理主要是以华为为基础的</p>
+<h1 id="R-LOS"><a href="#R-LOS" class="headerlink" title="R_LOS"></a>R_LOS</h1><h2 id="告警名称或故障现象"><a href="#告警名称或故障现象" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>R_LOS告警表示接受线路侧信号丢失（Receive loss of signal）,为紧急告警</p>
+<h2 id="告警产生原因"><a href="#告警产生原因" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>断纤</li>
+<li>线路损耗过大</li>
+<li>本板接受方向故障</li>
+<li>对端站发送部分故障，线路发送失败</li>
+<li>对端站交叉时钟板故障或不在位</li>
+</ul>
+<h2 id="告警处理方法"><a href="#告警处理方法" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<ol>
+<li>现场用光功率计检测告警单板的接受光功率是否正常，如果光功率接受正常，则转至步骤8</li>
+<li>检查光缆是否有故障，排除光缆故障后，查看告警是否排除</li>
+<li>清洁本站尾纤接口和线路板接受光口，查看告警是否排除</li>
+<li>检查本站的法兰盘和光衰减器是否连接正确，光衰减器的衰减值是否过大。正确使用法兰盘和光衰减器后，查看告警是否排除。</li>
+<li>用光功率计检查对端站的发射功率是否正常，如果发射功率不正常，更换线路板</li>
+<li>如果发射功率正常，清洁对端站的尾纤接头，查看告警是否排除</li>
+<li>检查对端站的法兰盘和光衰减器是否连接正确，光衰减器的衰减值是否过大。正确使用法兰盘和光衰减器后，查看告警是否排除。</li>
+<li>更换本站上报告警的线路板，查看告警是否排除</li>
+<li>更换对端站上报告警的线路板，查看告警是否排除</li>
+</ol>
+</blockquote>
+<h1 id="R-LOF-R-OOF"><a href="#R-LOF-R-OOF" class="headerlink" title="R_LOF,R_OOF"></a>R_LOF,R_OOF</h1><h2 id="告警名称或故障现象-1"><a href="#告警名称或故障现象-1" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p> R_LOF告警表示接收线路侧帧丢失（Receive loss of frame），为紧急告警</p>
+<h2 id="告警产生原因-1"><a href="#告警产生原因-1" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>接受信号衰减过大</li>
+<li>对端站发送信号无帧结构</li>
+<li>本板接收方向故障</li>
+</ul>
+<h2 id="告警处理方法-1"><a href="#告警处理方法-1" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<ol>
+<li>在网管上查看是否有高级别的R_LOS告警，优先处理这些高级别告警后，查看告警是否排除</li>
+<li>检测告警单板的接受光功率是否正常，如果光功率接受正常，则转至步骤9。如果收光不正常，让现场定位衰耗点在机房内还是在线路上，如果在线路上，转至步骤8</li>
+<li>清洁本站尾纤接口和线路板接受光口，查看告警是否排除</li>
+<li>检查本站的法兰盘和光衰减器是否连接正确，光衰减器的衰减值是否过大。正确使用法兰盘和光衰减器后，查看告警是否排除。</li>
+<li>检查对端站的发射功率是否正常，如果发射功率不正常，更换线路板</li>
+<li>如果发射功率正常，清洁对端站的尾纤接头，查看告警是否排除</li>
+<li>检查对端站的法兰盘和光衰减器是否连接正确，光衰减器的衰减值是否过大。正确使用法兰盘和光衰减器后，查看告警是否排除。</li>
+<li>检查光缆是否有故障，排除光缆故障后，查看告警是否排除</li>
+<li>更换本站上报告警的线路板，查看告警是否排除</li>
+<li>更换对端站上报告警的线路板，查看告警是否排除</li>
+</ol>
+</blockquote>
+<h1 id="MS-AIS"><a href="#MS-AIS" class="headerlink" title="MS_AIS"></a>MS_AIS</h1><h2 id="告警名称或故障现象-2"><a href="#告警名称或故障现象-2" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>MS_AIS告警表示复用段告警指示（Multiplex section alarm indication）</p>
+<h2 id="告警产生原因-2"><a href="#告警产生原因-2" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>对端站发送MS_AIS信号</li>
+<li>对端站时钟板故障</li>
+<li>本板接收部分故障</li>
+</ul>
+<h2 id="告警处理方法-2"><a href="#告警处理方法-2" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<ol>
+<li>在网管上查看是否有高级别的R_LOS,R_LOF告警，优先处理这些高级别告警后，查看告警是否排除</li>
+<li>检测告警单板的接收光功率是否正常</li>
+<li>用尾纤在本端和对端光口上作内环回，查看告警是否消失，如果不消失，继续下面步骤定位</li>
+<li>复位，更换本站线路板，查看告警是否消除</li>
+<li>复位，更换对端站线路板，查看告警是否消除</li>
+</ol>
+</blockquote>
+<h1 id="IN-PWR-LOW-IN-PWR-ABN-IN-PWR-FAIL"><a href="#IN-PWR-LOW-IN-PWR-ABN-IN-PWR-FAIL" class="headerlink" title="IN_PWR_LOW,IN_PWR_ABN,IN_PWR_FAIL"></a>IN_PWR_LOW,IN_PWR_ABN,IN_PWR_FAIL</h1><h2 id="告警名称或故障现象-3"><a href="#告警名称或故障现象-3" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>光功率过低，过高，异常</p>
+<h2 id="告警产生原因-3"><a href="#告警产生原因-3" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>光纤链接器污损</li>
+<li>尾纤弯曲度过大，损坏或者老化</li>
+<li>本站单板的接收光口加了过大的光衰减器</li>
+<li>光信号在传输过程中衰减过大，没有得到足够的光放大补偿</li>
+<li>对端站单板的发送光口添加了过大的光衰减器或者光发送模块故障，导致对端站单板发送光功率过低</li>
+<li>本站单板故障</li>
+</ul>
+<h2 id="告警处理方法-3"><a href="#告警处理方法-3" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<ol>
+<li>收光功率高的可以直接加衰耗来处理</li>
+<li>对收光功率低的，异常的，利用OTDR测试光缆是否有异常损耗</li>
+<li>使用光功率计测试本站单板的输入光功率是否在正常范围内</li>
+<li>如果测试结果处于正常接收范围内，但上报的性能值不正确，可能是本站单板故障，更换故障单板</li>
+<li>如果测试结果比较低，则检查光纤连接器，如果有污损，清洁或者更换光纤连接器</li>
+<li>如果告警没有消除，检查尾纤，如果尾纤弯曲度过大，损坏或者老化，调整尾纤或者更换尾纤</li>
+<li>如果告警没有清清除，查询对端站单板输出光功率性能值和相关告警，如果查询到的性能不符合指标值，例如出现了TF告警，则是光模块故障，更换对端站单板</li>
+</ol>
+</blockquote>
+<h1 id="B1-EXC-B1-SD-B2-EXC-B2-SD"><a href="#B1-EXC-B1-SD-B2-EXC-B2-SD" class="headerlink" title="B1_EXC,B1_SD,B2_EXC,B2_SD"></a>B1_EXC,B1_SD,B2_EXC,B2_SD</h1><h2 id="告警名称或故障现象-4"><a href="#告警名称或故障现象-4" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>误码越限告警，即单板接收到的SDH帧信号质量劣化</p>
+<h2 id="告警产生原因-4"><a href="#告警产生原因-4" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>接收信号衰减过大，光纤或连接器不清洁</li>
+<li>对端站发送部分故障</li>
+<li>本站接收部分故障</li>
+</ul>
+<h2 id="告警处理方法-4"><a href="#告警处理方法-4" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<ol>
+<li>通过T2000查询光口的接收光功率是否在正常范围内，如果本站单板接收光功率过低，则按照IN_PWR_LOW的处理步骤清除告警</li>
+<li>光功率正常但仍有误码，让现场维护人员用尾纤对单板做自环，如果仍有误码，更换单板。如果误码消失，让对端设备的现场维护人员用尾纤对单板作自环，有误码则更换单板</li>
+<li>如果两端自环无误码，解除换回有误码，检查尾纤，如果尾纤弯曲度过大，损坏或者老化，调整尾纤或者更换尾纤</li>
+</ol>
+</blockquote>
+<h1 id="MS-REI"><a href="#MS-REI" class="headerlink" title="MS_REI"></a>MS_REI</h1><h2 id="告警名称或故障现象-5"><a href="#告警名称或故障现象-5" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>MS_REI告警表示复用段远端误码指示</p>
+<h2 id="告警产生原因-5"><a href="#告警产生原因-5" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><p>对端站接收到B2误码</p>
+<h2 id="告警处理方法-5"><a href="#告警处理方法-5" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><p>检查对端是否存在误码，按告警B1_EXC,B1_SD,B2_EXC,B2_SD处理方法处理</p>
+<h1 id="TD，TF，LSR-WILL-DIE"><a href="#TD，TF，LSR-WILL-DIE" class="headerlink" title="TD，TF，LSR_WILL_DIE"></a>TD，TF，LSR_WILL_DIE</h1><h2 id="告警名称或故障现象-6"><a href="#告警名称或故障现象-6" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>激光器故障</p>
+<h2 id="告警产生原因-6"><a href="#告警产生原因-6" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><p>激光器故障</p>
+<h2 id="告警处理方法-6"><a href="#告警处理方法-6" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><p>更换故障板卡</p>
+<h1 id="NESTATE-INSTALL"><a href="#NESTATE-INSTALL" class="headerlink" title="NESTATE_INSTALL"></a>NESTATE_INSTALL</h1><h2 id="告警名称或故障现象-7"><a href="#告警名称或故障现象-7" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>网元处于安装状态，网元未配置数据告警</p>
+<h2 id="告警产生原因-7"><a href="#告警产生原因-7" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><p>网元处于安装状态，网元未配置数据告警</p>
+<h2 id="告警处理方法-7"><a href="#告警处理方法-7" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><p>派室专业室处理</p>
+<h1 id="COMMUN-FAIL"><a href="#COMMUN-FAIL" class="headerlink" title="COMMUN_FAIL"></a>COMMUN_FAIL</h1><h2 id="告警名称或故障现象-8"><a href="#告警名称或故障现象-8" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>单板串口通信失败</p>
+<h2 id="告警产生原因-8"><a href="#告警产生原因-8" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><p>单板故障</p>
+<h2 id="告警处理方法-8"><a href="#告警处理方法-8" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<p>看该告警的参数，如果参数显示是本单板故障，可通过现场检查本单板运行灯，拔插单板，更换单板来排除故障；如果参数显示是其他单板故障，则对参数显示的单板检查运行灯，拔插单板，更换单板来排除故障；如果显示是网线问题，则需要对网线进行检查，更换。由于涉及到参数，建议联系专业室或现场厂家督导处理</p>
+</blockquote>
+<h1 id="FAN-FAIL"><a href="#FAN-FAIL" class="headerlink" title="FAN_FAIL"></a>FAN_FAIL</h1><h2 id="告警名称或故障现象-9"><a href="#告警名称或故障现象-9" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>风扇故障</p>
+<h2 id="告警产生原因-9"><a href="#告警产生原因-9" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>误报告警</li>
+<li>风扇失败</li>
+</ul>
+<h2 id="告警处理方法-9"><a href="#告警处理方法-9" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<p>让现场检查风扇运行情况，如果风扇有异常，更换故障风扇</p>
+</blockquote>
+<h1 id="APS-FAIL"><a href="#APS-FAIL" class="headerlink" title="APS_FAIL"></a>APS_FAIL</h1><h2 id="告警名称或故障现象-10"><a href="#告警名称或故障现象-10" class="headerlink" title="告警名称或故障现象"></a>告警名称或故障现象</h2><p>APS_FAIL告警表示保护倒换失败指示</p>
+<h2 id="告警产生原因-10"><a href="#告警产生原因-10" class="headerlink" title="告警产生原因"></a>告警产生原因</h2><ul>
+<li>节点的复用段保护参数设置错误</li>
+<li>节点的复用段保护参数丢失</li>
+</ul>
+<h2 id="告警处理方法-10"><a href="#告警处理方法-10" class="headerlink" title="告警处理方法"></a>告警处理方法</h2><blockquote>
+<p>派单给专业室处理</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/Git%E5%AD%A6%E4%B9%A0/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/28/Git%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Git学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-28 22:31:34" itemprop="dateCreated datePublished" datetime="2019-08-28T22:31:34+08:00">2019-08-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/28/Git%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="Git学习">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h1><p>版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
+<p>创建版本库非常简单，创建一个空目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir learngit</span><br><span class="line">cd learngit</span><br></pre></td></tr></table></figure>
+<p>之后，通过git init命令把这个目录变成Git可以管理的仓库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
+<ul>
+<li>如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。</li>
+</ul>
+<h1 id="把文件添加到版本库"><a href="#把文件添加到版本库" class="headerlink" title="把文件添加到版本库"></a>把文件添加到版本库</h1><p>使用命令<code>git add</code>告诉git,把文件添加到仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>之后，使用命令<code>git commit</code>告诉Git，把文件提交到仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;wrote a readme file&quot;</span><br></pre></td></tr></table></figure>
+<p>简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
+<p>为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add file1.txt</span><br><span class="line">git add file2.txt file3.txt</span><br><span class="line">git commit -m &quot;add 3 files.&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><p>对于上面的命令的深入理解，我们需要介绍一下工作区和暂存区</p>
+<h3 id="工作区（Working-Directory）"><a href="#工作区（Working-Directory）" class="headerlink" title="工作区（Working Directory）"></a>工作区（Working Directory）</h3><p>就是你在电脑里能看到的目录，比如learngit文件夹就是一个工作区</p>
+<h3 id="版本库（Repository）"><a href="#版本库（Repository）" class="headerlink" title="版本库（Repository）"></a>版本库（Repository）</h3><p>工作区有一个隐藏目录<code>.git</code>，这个不算工作区，而是Git的版本库。</p>
+<h3 id="暂存区（stage）"><a href="#暂存区（stage）" class="headerlink" title="暂存区（stage）"></a>暂存区（stage）</h3><p>Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支<code>master</code>，以及指向<code>master</code>的一个指针叫<code>HEAD</code>。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g67191721tj30kh0argo6.jpg"></p>
+<p>从上面可以知道，把文件往Git版本库里添加的时候，是分两步执行的</p>
+<ul>
+<li>第一步用<code>git add</code>把文件添加进去，实际上就是把文件修改添加到暂存区；</li>
+<li>第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。</li>
+</ul>
+<p>需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。</p>
+<h1 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h1><p>使用<code>git log</code>命令可以查看从最近到最远的提交日志。</p>
+<p>如果嫌输出信息太多，可以试试加上<code>--pretty=oneline</code>参数</p>
+<p>从日志中可以看到一大串类似<code>1094adb...</code>·的是<code>commit id</code>（版本号），这是由一个SHA1计算出来的一个非常大的数字，用十六进制表示</p>
+<p>回退的方式也很简单</p>
+<p>首先，Git需要知道当前版本是哪个版本，在Git中，用HEAD表示当前版本。上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个^比较容易数不过来，所以写成<code>HEAD~100</code>。</p>
+<p>所以，回退版本使用命令<code>git reset</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+
+<p>回退到上一个版本后，如果还想再回去，比较困难，但是还是有办法的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到你想回去的版本的<code>commit id</code>，输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit id</span><br></pre></td></tr></table></figure>
+<p>Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向另一个版本。然后顺便把工作区的文件更新了。所以你让HEAD指向哪个版本号，你就把当前版本定位在哪。</p>
+<p>最坏的情况，假如你回退到了某个版本，关掉了电脑，第二天早上就后悔了，想恢复到新版本怎么办？找不到新版本的<code>commit id</code>怎么办？</p>
+<p>在Git中，总是有后悔药可以吃的。使用<code>git reflog</code>。这个命令用来记录你的每一次命令，因此，使用这个命令之后，就可以找到你最新版本的<code>commit id</code>了</p>
+<h1 id="查看工作区和版本库里面最新版本的区别"><a href="#查看工作区和版本库里面最新版本的区别" class="headerlink" title="查看工作区和版本库里面最新版本的区别"></a>查看工作区和版本库里面最新版本的区别</h1><p>比如查看工作区和版本库最新版本的xxx.txt的文件的区别，使用下面的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD -- xxx.txt</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h1><h2 id="当只是在工作区修改，还没有add到暂存区时"><a href="#当只是在工作区修改，还没有add到暂存区时" class="headerlink" title="当只是在工作区修改，还没有add到暂存区时"></a>当只是在工作区修改，还没有add到暂存区时</h2><p>你可以首先使用<code>git status</code>，可以发现，提示我们在工作区有文件修改。其中，有两句话，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">(use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br></pre></td></tr></table></figure>
+
+<p>第二句话就是说明 可以使用<code>git checkout -- &lt;file&gt;</code>来抛弃工作区修改的部分</p>
+<p>命令<code>git checkout -- readme.txt</code>意思就是，把<code>readme.txt</code>文件在工作区的修改全部撤销，这里有两种情况：</p>
+<ul>
+<li>一种是<code>readme.txt</code>自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</li>
+<li>一种是<code>readme.txt</code>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</li>
+</ul>
+<p>总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</p>
+<p><code>git checkout -- file</code>命令中的<code>--</code>很重要，没有<code>--</code>，就变成了“切换到另一个分支”的命令</p>
+<h2 id="当你add到暂存区，还没有commit时"><a href="#当你add到暂存区，还没有commit时" class="headerlink" title="当你add到暂存区，还没有commit时"></a>当你add到暂存区，还没有commit时</h2><p>同样，使用<code>git status</code>查看， 发现修改只是添加到了暂存区，还没有提交，提示了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage</span><br></pre></td></tr></table></figure>
+<p>Git告诉我们，可以使用命令<code>git reset HEAD &lt;file&gt;</code>把暂存区的修改撤销掉（unstage），重新放回工作区</p>
+<p><code>git reset</code>命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用<code>HEAD</code>时，表示最新的版本</p>
+<p>这时候，只是回退到了工作区，如果你还想丢弃工作区的修改，参考上一小节</p>
+<h2 id="当commit后"><a href="#当commit后" class="headerlink" title="当commit后"></a>当commit后</h2><p>这时候，可以使用版本回退，参考前面所讲的版本回退内容</p>
+<h1 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h1><p>在git中，删除也是一个修改操作</p>
+<p>当我们add一个文件并commit后，我们在工作区删除掉这个文件通常使用的命令是<code>rm fileName</code>。这时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，<code>git status</code>命令会立刻告诉你哪些文件被删除了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	deleted:    test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>如果你真的想从版本库中删除文件，则可以使用<code>git rm</code>删掉，并且<code>git commit</code></p>
+<p>如果你是手误删错的话，则可以使用下面的命令把误删的文件恢复到最新版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout</span><br></pre></td></tr></table></figure>
+
+<p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+<h1 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h1><ul>
+<li>首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库</li>
+<li>在Repository name填入项目名称，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库</li>
+</ul>
+<p>创建成功后，该github仓库是空的。GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后把本地仓库的内容推送到GitHub仓库。</p>
+<p>如果我们有本地仓库了，则根据GitHub的提示，在本地仓库下运行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:你的github账户名/仓库名.git</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。</p>
+</blockquote>
+<p>之后就可以把本地仓库的所有内容推送到远程库中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>把本地库的内容推送到远程，用<code>git push</code>命令，实际上是把当前分支<code>master</code>推送到远程。</p>
+<p>由于远程库是空的，我们第一次推送<code>master</code>分支时，加上了<code>-u</code>参数，Git不但会把本地的<code>master</code>分支内容推送的远程新的<code>master</code>分支，还会把本地的<code>master</code>分支和远程的<code>master</code>分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>从现在起，只要本地作了提交，就可以通过命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>把本地<code>master</code>分支的最新修改推送至GitHub</p>
+<h1 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h1><p>现在，假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。</p>
+<p>我们假设已经创建好远程仓库，则使用命令<code>git clone</code>克隆一个本地库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:你的github账户名/仓库名称.git</span><br></pre></td></tr></table></figure>
+
+<p>Git支持多种协议，包括<code>https</code>，但通过<code>ssh</code>支持的原生<code>git</code>协议速度最快。</p>
+<h1 id="创建和合并分支"><a href="#创建和合并分支" class="headerlink" title="创建和合并分支"></a>创建和合并分支</h1><p>在默认一条分支的时候，Git通常将这条分支叫做<code>master</code>分支，<code>HEAD</code>严格来说不是指向提交，而是指向<code>master</code>，<code>master</code>才是指向提交的，所以，<code>HEAD</code>指向的就是当前分支。</p>
+<p>一开始的时候，<code>master</code>分支是一条线，Git用<code>master</code>指向最新的提交，再用<code>HEAD</code>指向<code>master</code>，就能确定当前分支，以及当前分支的提交点：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6dequsw09j30ln09e0t4.jpg"></p>
+<p>每次提交，<code>master</code>分支都会向前移动一步，这样，随着你不断提交，<code>master</code>分支的线也越来越长。</p>
+<p>当我们创建新的分支，例如<code>dev</code>时，Git新建了一个指针叫<code>dev</code>，指向<code>master</code>相同的提交，再把<code>HEAD</code>指向<code>dev</code>，就表示当前分支在<code>dev</code>上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建dev分支，并切换到dev分支上</span><br><span class="line">git checkout -b dev</span><br><span class="line"># 这里git checkout命令加上-b参数表示创建并切换，相当于下面两条命令：</span><br><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6desio31mj30n80dhdgf.jpg"></p>
+<p>Git创建一个分支很快，因为除了增加一个dev指针，改改HEAD的指向，工作区的文件都没有任何变化！</p>
+<p>可以使用<code>git branch</code>命令查看当前分支<br><code>git branch</code>命令会列出所有分支，当前分支前面会标一个<code>*</code>号。</p>
+<p>从现在开始，对工作区的修改和提交就是针对<code>dev</code>分支了，比如新提交一次后，<code>dev</code>指针往前移动一步，而<code>master</code>指针不变：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6detptnx9j30u30d2wf5.jpg"></p>
+<p>假如我们在<code>dev</code>上的工作完成了，就可以把<code>dev</code>合并到<code>master</code>上。具体做法就是直接把<code>master</code>指向<code>dev</code>的当前提交，就完成了合并：</p>
+<ul>
+<li>首先切回到master分支<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure></li>
+<li>然后把<code>dev</code>分支的工作成果合并到master分支上：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+<code>git merge</code>命令用于合并指定分支到当前分支。注意到输出的信息中的Fast-forward信息，Git告诉我们，这次合并是“快进模式”，也就是直接把master指向dev的当前提交，所以合并速度非常快。当然，也不是每次合并都能Fast-forward</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6dev8izvej30pv0d7dgh.jpg"></p>
+<p>合并完分支后，甚至可以删除<code>dev</code>分支。删除<code>dev</code>分支就是把<code>dev</code>指针给删掉，删掉后，我们就剩下了一条<code>master</code>分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d dev</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6dew4geplj30nx09nmxk.jpg"></p>
+<h1 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h1><p>有时候，当我们合并分支的时候，会出现冲突，在冲突的文件里，Git会用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容</p>
+<p>必须手动修改冲突后再提交。</p>
+<p>使用带参数的<code>git log</code>也可以看到分支合并的情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --pretty=oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+
+<p>合并分支后，可以选择删除分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名称</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。用git log –graph命令可以看到分支合并图。</p>
+</blockquote>
+<h1 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a>分支管理策略</h1><p>通常，合并分支时，如果可能，Git会用<code>Fast forward</code>模式，但这种模式下，删除分支后，会丢掉分支信息。</p>
+<p>如果要强制禁用<code>Fast forward</code>模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。</p>
+<p>具体的命令如下,在合并的时候使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --no-ff -m &quot;commit的内容&quot; dev</span><br></pre></td></tr></table></figure>
+<p><code>--no-ff</code>参数，表示禁用<code>Fast forward</code>。<br>因为本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去</p>
+<p>可以看到，不使用<code>Fast forward</code>模式，<code>merge</code>后就像这样：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6dfx0z2myj30t80exwff.jpg"></p>
+<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
+<ul>
+<li><code>master</code>分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；</li>
+<li>那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；</li>
+<li>你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6dfz5a4fzj30v90883zo.jpg"></p>
+<h1 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h1><p>当你遇到一个bug时，需要去修复，很自然地，会想到通过创建一个bug分支去修复它，但是这时候你正在<code>dev</code>分支上进行的工作还没有提交，并不是你不想提交，而是工作只进行到一半，还没法提交。这时候，可以使用git提供的<code>stash</code>功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+<p>现在，用<code>git status</code>查看工作区，就是干净的.</p>
+<p>首先确定要在哪个分支上修复bug，假定需要在<code>master</code>分支上修复，就从<code>master</code>创建临时分支</p>
+<p>当修复完之后，切换到<code>master</code>分支，并完成合并，然后删除临时bug分支</p>
+<p>修复完成bug后，我们回到<code>dev</code>分支，发现工作区是干净的，这时候使用<code>git stash list</code>命令查看，</p>
+<p>工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：</p>
+<ul>
+<li>一是用<code>git stash apply</code>恢复，但是恢复后，stash内容并不删除，你需要用<code>git stash drop</code>来删除；</li>
+<li>另一种方式是用git stash pop，恢复的同时把stash内容也删了：</li>
+</ul>
+<p>使用上面的任意一个后，就恢复了现场，再次使用<code>git stash list</code>，就看不到任何stash的内容了</p>
+<p>你可以多次stash，恢复的时候，先用<code>git stash list</code>查看，然后恢复指定的stash，用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply stash@&#123;0&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在master分支上修复了bug后，我们要想一想，dev分支是早期从master分支分出来的，所以，这个bug其实在当前dev分支上也存在。</p>
+<p>同样的bug，要在dev上修复，我们可以使用Git提供的<code>cherry-pick</code>命令,让我们能复制一个特定的提交(也就是修改bug的提交)到当前分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick commit_id</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h1><p>每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。</p>
+<p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
+<h1 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h1><p>当从远程仓库克隆时，Git自动把本地的<code>master</code>分支和远程的<code>master</code>分支对应起来了，并且，远程仓库的默认名称是<code>origin</code></p>
+<p>查看远程库的信息，使用<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote</span><br></pre></td></tr></table></figure><br>或者加上 -v显示更加详细的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<p>上面显示了可以抓取和推送的<code>origin</code>的地址。如果没有推送权限，就看不到push的地址。</p>
+<h2 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h2><p>推送分支，就是把该分支上的所有本地提交推送到远程库。推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：</p>
+<p>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>这个<code>master</code>指的是本地的分支</p>
+<p>如果要推送其他分支的话，也就是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
+
+<p>但是，并不是一定要把本地分支往远程推送，那么，哪些分支需要推送，哪些不需要呢？</p>
+<ul>
+<li><code>master</code>分支是主分支，因此要时刻与远程同步</li>
+<li><code>dev</code>分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；</li>
+<li><code>bug</code>分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；</li>
+<li><code>feature</code>分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。</li>
+</ul>
+<h2 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h2><p>可以使用clone命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone github地址</span><br></pre></td></tr></table></figure>
+<p>默认情况下，只能看到本地的<code>master</code>，如果你想在<code>dev</code>分支上开发的话，则必须创建远程origin的dev分支到本地，使用下面的命令创建本地dev分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev origin/dev</span><br></pre></td></tr></table></figure>
+
+<p>多人工作模式下在推送的时候可能会发生冲突，通常是这样来处理的</p>
+<ul>
+<li>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</li>
+<li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并;如果<code>git pull</code>提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to &lt;branch-name&gt;   origin/&lt;branch-name&gt;</code></li>
+<li>如果合并有冲突，则解决冲突，解决的方法和分支管理中的解决冲突完全一样,解决后，提交，再push：</li>
+</ul>
+<p>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致；</p>
+<p>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream    branch-name   origin/branch-name</code>；</p>
+<h1 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h1><p>标签就是tag，tag就是一个让人容易记住的有意义的名字，它跟某个commit绑在一起</p>
+<p>使用下面的命令就可以打标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0</span><br></pre></td></tr></table></figure>
+<p>默认标签是打在最新提交的commit上的.</p>
+<p>如果想对历史的某个commit打标签的话，只需要找到那个commit就可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+
+<p>然后打上标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v0.9 commit_id</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<p>可以查看tag</p>
+<p>可以用<code>git show &lt;tagname&gt;</code>查看标签信息</p>
+<p>还可以创建带有说明的标签，用<code>-a</code>指定标签名，<code>-m</code>指定说明文字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a 标签名 -m &quot;说明文字&quot; commit_id</span><br></pre></td></tr></table></figure>
+
+<p>如果想要删除标签，使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d tagname</span><br></pre></td></tr></table></figure>
+
+<p>因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除</p>
+<p>如果要推送某个标签到远程,使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或者，一次性推送全部尚未推送到远程的本地标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+
+<p>如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d tagname</span><br></pre></td></tr></table></figure>
+
+<p>从远程删除。删除命令也是push,但是格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/&lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/%E5%8D%95%E7%AB%AF%E5%80%92%E6%8D%A2%E4%B8%8E%E5%8F%8C%E7%AB%AF%E5%80%92%E6%8D%A2/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/16/%E5%8D%95%E7%AB%AF%E5%80%92%E6%8D%A2%E4%B8%8E%E5%8F%8C%E7%AB%AF%E5%80%92%E6%8D%A2/" class="post-title-link" itemprop="url">单端倒换与双端倒换</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-16 09:56:32" itemprop="dateCreated datePublished" datetime="2019-08-16T09:56:32+08:00">2019-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/16/%E5%8D%95%E7%AB%AF%E5%80%92%E6%8D%A2%E4%B8%8E%E5%8F%8C%E7%AB%AF%E5%80%92%E6%8D%A2/" class="leancloud_visitors" data-flag-title="单端倒换与双端倒换">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="单端倒换"><a href="#单端倒换" class="headerlink" title="单端倒换"></a>单端倒换</h1><p>当一个方向的通道故障后，只倒换受影响的方向，另一个方向保持不变，继续从原通道选收业务。</p>
+<p>每个方向独立倒换，不会相互影响。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61acxcn4wj30dc07yt94.jpg"></p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>执行机制简单；不需要协议；倒换速度快。</p>
+<h1 id="双端倒换"><a href="#双端倒换" class="headerlink" title="双端倒换"></a>双端倒换</h1><p>当一个方向的通道故障后，不管另外一个方向有没有故障，两个方向均进行倒换。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61advye6zj30em07t3z1.jpg"></p>
+<h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><p>没有业务会在网络上的故障区域传输，相应故障就能够在不触发更多保护倒换的前提下修复。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/1-1%E4%BF%9D%E6%8A%A4%E4%B8%8E1-1%E4%BF%9D%E6%8A%A4/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/16/1-1%E4%BF%9D%E6%8A%A4%E4%B8%8E1-1%E4%BF%9D%E6%8A%A4/" class="post-title-link" itemprop="url">1+1保护与1:1保护</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-16 09:47:09" itemprop="dateCreated datePublished" datetime="2019-08-16T09:47:09+08:00">2019-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/16/1-1%E4%BF%9D%E6%8A%A4%E4%B8%8E1-1%E4%BF%9D%E6%8A%A4/" class="leancloud_visitors" data-flag-title="1+1保护与1:1保护">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="1-1保护"><a href="#1-1保护" class="headerlink" title="1+1保护"></a>1+1保护</h1><p>每一条主通道都有一条专有的备通道为其提供保护。<br>发送端在主备通道上同时发送数据，正常情况下，接收端选收主用通道上的业务。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a5do9mnj30iy07k0tg.jpg"></p>
+<p>在主通道异常时，接收端根据通道状态及外部命令选择备通道的数据，使得业务得以恢复。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a7xn6pbj30is08vwf9.jpg"></p>
+<h1 id="1：1保护"><a href="#1：1保护" class="headerlink" title="1：1保护"></a>1：1保护</h1><p>主备通道一一对应，相互保护。但是，业务并不是在主备通道同时传输。<br>发端在主通道上发主用业务，在备通道上发额外业务（低级别业务）。收端从主通道收主用业务，从备通道收额外业务。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a77t7y6j30id0800tf.jpg"></p>
+<p>当主通道出现故障，发端将主用业务发到备通道上，收端将从备通道选收主用业务。此时，额外业务被终结，主用业务传输得到恢复。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g61a8jequ0j30i7089my0.jpg"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/%E5%85%89%E4%BA%A4%E5%8F%89%E4%B8%8E%E7%94%B5%E4%BA%A4%E5%8F%89/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/16/%E5%85%89%E4%BA%A4%E5%8F%89%E4%B8%8E%E7%94%B5%E4%BA%A4%E5%8F%89/" class="post-title-link" itemprop="url">光交叉与电交叉</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-16 09:30:59" itemprop="dateCreated datePublished" datetime="2019-08-16T09:30:59+08:00">2019-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/16/%E5%85%89%E4%BA%A4%E5%8F%89%E4%B8%8E%E7%94%B5%E4%BA%A4%E5%8F%89/" class="leancloud_visitors" data-flag-title="光交叉与电交叉">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>传统的WDM系统中，信号的路径确定以后，若要修改，必须到站点内进行硬件安装和光纤连接，费时费力。OTN网络采用了电层调度和光层调度，有了这2项技术，维护人员在控制中心就可以远程调控信号的传输路径。</p>
+<h1 id="电层调度"><a href="#电层调度" class="headerlink" title="电层调度"></a>电层调度</h1><p>实现电信号的交叉调度。调度的核心单元是交叉板，调度的颗粒为ODUk（k&#x3D;1,2(e),3,4,flex)。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g619o5xuxpj30lt07ugn6.jpg"></p>
+<ul>
+<li>业务由支路板接入，经交叉板调度到线路板，在线路板内封装映射成为一个OTU 信号，传输到波分侧。</li>
+<li>电层调度可以将不同大小的业务颗粒，调度到一起，封装到一个波长输出。多个业务共享带宽，大大提高了业务的利用率。</li>
+</ul>
+<h1 id="光层调度"><a href="#光层调度" class="headerlink" title="光层调度"></a>光层调度</h1><p>光信号传输路线的灵活选择就是光层调度，实现光信号的交叉调度。调度的核心单元是ROADM单板，调度的单位为λ。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g619q2zlhrj30ms09rgng.jpg"></p>
+<ul>
+<li>ROADM单板接收到OTU光信号后，通过创建内部光交叉路径，将信号输出至指定的出口，每个出口对应不同的线路。</li>
+<li>操作人员可以在网管上创建、修改光交叉路径，从而控制光信号的传输。</li>
+<li>配合ASON技术，可以自动完成线路的检测和调整，保证业务的正常传输。</li>
+</ul>
+<p><strong>电层调度与光层调度相互配合创建了OTN网络中的调度枢纽，可以远程控制信号的传输路径，实现信号的灵活调度。</strong></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/22_guangdianjiaocha.html">http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/22_guangdianjiaocha.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/%E5%BD%A9%E5%85%89%E5%92%8C%E9%BB%91%E7%99%BD%E5%85%89/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/16/%E5%BD%A9%E5%85%89%E5%92%8C%E9%BB%91%E7%99%BD%E5%85%89/" class="post-title-link" itemprop="url">彩光和黑白光</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-16 09:04:03" itemprop="dateCreated datePublished" datetime="2019-08-16T09:04:03+08:00">2019-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/16/%E5%BD%A9%E5%85%89%E5%92%8C%E9%BB%91%E7%99%BD%E5%85%89/" class="leancloud_visitors" data-flag-title="彩光和黑白光">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h1 id="认识光"><a href="#认识光" class="headerlink" title="认识光"></a>认识光</h1><p>WDM系统使用的光属于不可见光，位于近红外区域，波长范围：1260 ~ 1611 nm </p>
+<p>禁止用眼直接观察光口，避免激光伤害眼睛。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g618vtkbj6j30kq09r756.jpg"></p>
+<h1 id="彩光与黑白光"><a href="#彩光与黑白光" class="headerlink" title="彩光与黑白光"></a>彩光与黑白光</h1><p>WDM系统采用的光都具有标准波长。</p>
+<p>为了区别于SDH等系统的光，我们把WDM系统的光称为“彩光” (Colored)，而称普通光系统的光为“黑白光”或“灰光”（Grey）。</p>
+<h2 id="波长差异"><a href="#波长差异" class="headerlink" title="波长差异"></a>波长差异</h2><ul>
+<li><p>黑白光的波长是在某个范围内波动的，没有特定的标准波长。如波分设备的客户侧光口。</p>
+</li>
+<li><p>彩光指波分系统中OTN&#x2F;线路单板波分侧光信号，可直接上合波设备，具有标准波长。根据波长划分标准不同，分为CWDM和DWDM。</p>
+</li>
+</ul>
+<h2 id="遵循标准"><a href="#遵循标准" class="headerlink" title="遵循标准"></a>遵循标准</h2><ul>
+<li>彩光：ITU-T G.694.1（DWDM）和 ITU-T G694.2 （CWDM）</li>
+<li>黑白光：ITU-T G.957，ITU-T G.959.1，IEEE 802.3</li>
+</ul>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h2 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h2><p>客户侧光模块是黑白光接口；波分侧光模块是彩光接口。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6191kqjmmj30kx078t9m.jpg"></p>
+<h2 id="客户侧光模块为彩光模块"><a href="#客户侧光模块为彩光模块" class="headerlink" title="客户侧光模块为彩光模块"></a>客户侧光模块为彩光模块</h2><p>支路单板的客户侧彩光口，可直接接入合波单板。主要有如下两种场景：</p>
+<ul>
+<li>与WDM设备对接的客户侧设备是彩光接口。</li>
+<li>分组单板的10GE接口为彩光接口，可直接接入合波单板。这种情况下，就免去了统一线路单板处理的步骤。如下图所示。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g6196kaoe4j30f309qgml.jpg"></p>
+<h2 id="波分侧光模块为黑白光模块"><a href="#波分侧光模块为黑白光模块" class="headerlink" title="波分侧光模块为黑白光模块"></a>波分侧光模块为黑白光模块</h2><p>华为的WDM设备与第三方WDM设备对接。因第三方设备不支持支线路分离模式，业务若需进行调度，可由华为设备的线路板（波分侧灰光）进行业务接入，由华为WDM设备完成业务上下或调度。</p>
+<h1 id="如何判断彩光与黑白光模块？"><a href="#如何判断彩光与黑白光模块？" class="headerlink" title="如何判断彩光与黑白光模块？"></a>如何判断彩光与黑白光模块？</h1><p>可通过指标中是否有中心波长来判断：</p>
+<ul>
+<li>彩光模块指标中收发波长都会有标称中心频率&#x2F;中心波长。</li>
+<li>灰光模块的的收发波长是一个较宽的范围，无中心波长。</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html">http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/OTN%E4%B9%8B%E6%94%AF%E8%B7%AF%E6%9D%BF-%E7%BA%BF%E8%B7%AF%E6%9D%BF/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/15/OTN%E4%B9%8B%E6%94%AF%E8%B7%AF%E6%9D%BF-%E7%BA%BF%E8%B7%AF%E6%9D%BF/" class="post-title-link" itemprop="url">OTN之支路板&amp;线路板</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-15 16:12:55" itemprop="dateCreated datePublished" datetime="2019-08-15T16:12:55+08:00">2019-08-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OTN/" itemprop="url" rel="index"><span itemprop="name">OTN</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/15/OTN%E4%B9%8B%E6%94%AF%E8%B7%AF%E6%9D%BF-%E7%BA%BF%E8%B7%AF%E6%9D%BF/" class="leancloud_visitors" data-flag-title="OTN之支路板&线路板">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>华为OTN产品系列支持 支路板、线路板分离架构 。支路&#x2F;线路板和集中交叉单板配合使用，除了可以完成OTU单板功能外，还可通过集中交叉单板进行各级别ODUk颗粒业务调度， 实现更加灵活的电层信号调度及更高的带宽利用率。</p>
+<h1 id="支路板"><a href="#支路板" class="headerlink" title="支路板"></a>支路板</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>实现客户侧业务在本站上&#x2F;下波分侧。</p>
+<h2 id="在系统中的位置"><a href="#在系统中的位置" class="headerlink" title="在系统中的位置"></a>在系统中的位置</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60fyh0b5pj30mg0d8tas.jpg"></p>
+<h1 id="线路板"><a href="#线路板" class="headerlink" title="线路板"></a>线路板</h1><h2 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h2><ul>
+<li><p>配合支路板完成本站客户侧业务上&#x2F;下波分侧</p>
+<ul>
+<li>OTN支路板：接入本站的客户侧业务，完成O&#x2F;E转换后，将客户侧业务映射为ODUk信号，并将ODUk信号发送到交叉板进行调度。</li>
+<li>OTN线路板：将调度过来的ODUk信号进行复用和映射，完成E&#x2F;O转换后， 转换为符合WDM系统要求的标准波长的OTUk信号。同时实现上述过程的逆过程。</li>
+</ul>
+</li>
+<li><p>配合OTN线路板完成波分侧业务的本站穿通</p>
+<ul>
+<li>OTN支路板：接收西向的波分侧业务，完成光&#x2F;电转换后，将波分侧业务映射和 解复用为ODUk信号，并将ODUk信号发送到交叉板进行调度。 </li>
+<li>OTN线路板：将调度过来的ODUk信号进行复用和映射，完成电&#x2F;光转换后， 转换为符合WDM系统要求的标准波长的OTUk信号，传输到东向。 同时实现上述过程的逆过程。</li>
+</ul>
+</li>
+</ul>
+<h2 id="在系统中的位置-1"><a href="#在系统中的位置-1" class="headerlink" title="在系统中的位置"></a>在系统中的位置</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60gjt0gljj30lh0d8go0.jpg"></p>
+<h1 id="为什么需要采用支线路分离架构？"><a href="#为什么需要采用支线路分离架构？" class="headerlink" title="为什么需要采用支线路分离架构？"></a>为什么需要采用支线路分离架构？</h1><p>利用OTU单板即可以完成客户侧业务上波分侧，为什么还需要采用支线路分离的架构？</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g60gljxh8hj312d0bajtq.jpg"></p>
+<p>可以看到，支线路分离架构与OTU架构的主要区别在于引入了集中交叉板。客户侧业务不是直接通过一块单板封装为波分侧业务（OTUk)上线路侧，而是通过集中交叉板进行 各级别的ODUk颗粒的调度。即增加了电层调度的灵活性，提高了带宽的利用率。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/25_zhiluban.html">http://support.huawei.com/onlinetoolweb/ptmngsys/Web/WDMkg/zh/25_zhiluban.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%AE%9E%E8%B7%B5/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/13/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">波分系统之实践</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-13 09:59:32" itemprop="dateCreated datePublished" datetime="2019-08-13T09:59:32+08:00">2019-08-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">波分系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/13/%E6%B3%A2%E5%88%86%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%AE%9E%E8%B7%B5/" class="leancloud_visitors" data-flag-title="波分系统之实践">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+# 波分站点 OTM
+
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xtq33zmuj30fw0dpmy3.jpg"></p>
+<h2 id="OTU"><a href="#OTU" class="headerlink" title="OTU"></a>OTU</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xty5nr31j30m10cw128.jpg"></p>
+<h3 id="OTU功能之一：波长转换"><a href="#OTU功能之一：波长转换" class="headerlink" title="OTU功能之一：波长转换"></a>OTU功能之一：波长转换</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu0jqzzfj30nb0detkh.jpg"></p>
+<h3 id="OTU功能之二：3R"><a href="#OTU功能之二：3R" class="headerlink" title="OTU功能之二：3R"></a>OTU功能之二：3R</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu1cw838j30p30ddwpw.jpg"></p>
+<h3 id="OTU功能之三：故障定界"><a href="#OTU功能之三：故障定界" class="headerlink" title="OTU功能之三：故障定界"></a>OTU功能之三：故障定界</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu5hxvqbj30mw0drwrk.jpg"></p>
+<h3 id="OTU的分类"><a href="#OTU的分类" class="headerlink" title="OTU的分类"></a>OTU的分类</h3><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g5xu7zb6ljj30o00dw7g0.jpg"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/E1%E6%8E%A5%E5%8F%A3/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/02/E1%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">E1接口</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-02 14:42:17" itemprop="dateCreated datePublished" datetime="2019-08-02T14:42:17+08:00">2019-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/02/E1%E6%8E%A5%E5%8F%A3/" class="leancloud_visitors" data-flag-title="E1接口">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<p>欧洲的30路脉码调制PCM简称E1，速率是2.048Mbit&#x2F;s 。 我国采用的是欧洲的E1标准。 E1的一个时分复用帧（其长度T&#x3D;125us 即取样周期125微秒）共划分为32相等的时隙，时隙的编号为CH0<del>CH31。其中时隙CH0用作帧同步用，时隙CH16用来传送信令，剩下CH1</del>CH15和CH17~CH31 共30个时隙用作30个话路。每个时隙传送8bit，因此共用256bit。每秒传送8000个帧，因此PCM一次群E1的数据率就是 2.048Mbit&#x2F;s。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>一条E1是2.048Mbps的链路，用PCM编码。</li>
+<li>一个E1的帧长为256个bit，分为32个时隙，一个时隙为8个bit。</li>
+<li>每秒有8000个E1的帧通过接口，即8K*256&#x3D;2048kbps。</li>
+<li>每个时隙在E1帧中占8bit，8*8k&#x3D;64k，即一条E1中含有32个64K。</li>
+</ul>
+<h2 id="帧结构"><a href="#帧结构" class="headerlink" title="帧结构"></a>帧结构</h2><p>E1有成帧，成复帧与不成帧三种方式。</p>
+<ul>
+<li>成帧：在成帧的E1中第0时隙用于传输帧同步数据，其余31个时隙可以用于传输有效数据；</li>
+<li>成复帧：在成复帧的E1中，除了第0时隙外，第16时隙是用于传输信令的，只有第1到15，第17到第31共30个时隙可用于传输有效数据；</li>
+<li>不成帧：在不成帧的E1中，所有32个时隙都可用于传输有效数据。</li>
+</ul>
+<p>在E1信道中，8bit组成一个时隙（TS），由 32个时隙组成了一个帧（F），16个帧组成一个复帧（MF）。在一个帧中，TS0主要用于传送帧定位信号（FAS）、CRC-4（循环冗余校验）和对端告警指示，TS16主要传送随路信令（CAS）、复帧定 位信号和复帧对端告警指示，TS1至TS15和TS17至TS31共30个时隙传送话音或数据等信息。我们称TS1至TS15和TS17至TS31为“净荷”，TS0和TS16为“开销”。如果采用带外公共信道信令（CCS），TS16就失去了传送信令的用途，该时隙也可用来传送信息信号，这时帧结构的净荷为TS1至TS31，开销只有 TS0了。</p>
+<p>这个E1又叫PCM基群，也叫一次群。 四个一次群复用为一个二次群，当然一个二次群的速率比四个一次群的速率总和还要多一些，用于同步的码元。四个二次群复用为一个三次群，依次类推。 E1&#x3D;2.048、E2&#x3D;8.448、E3&#x3D;34.368Mbps ……</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/%E5%9B%9B%E7%A7%8D%E5%85%89%E7%BA%A4%E7%B1%BB%E5%9E%8B/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/02/%E5%9B%9B%E7%A7%8D%E5%85%89%E7%BA%A4%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">四种光纤类型</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-02 14:08:35" itemprop="dateCreated datePublished" datetime="2019-08-02T14:08:35+08:00">2019-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/08/02/%E5%9B%9B%E7%A7%8D%E5%85%89%E7%BA%A4%E7%B1%BB%E5%9E%8B/" class="leancloud_visitors" data-flag-title="四种光纤类型">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <meta name="referrer" content="no-referrer" />
+
+<h2 id="G-652光纤"><a href="#G-652光纤" class="headerlink" title="G.652光纤"></a>G.652光纤</h2><p>G.652光纤代表的是非色散位移单模光纤，是目前国内最广泛应用的一种单模光纤。于1983年开始商用，其零色散波长在1310nm处，在波长为1550nm处衰减最小，但有较大的正色散，大约为18ps（nm&#x2F;km），工作波长既可选用1310nm，也可选用1550nm。这种光纤是使用最为广泛的光纤，我国已敷设的光纤、光缆绝大多数是这类光纤。</p>
+<h2 id="G-653光纤"><a href="#G-653光纤" class="headerlink" title="G.653光纤"></a>G.653光纤</h2><p>G.653色散位移光纤是20世纪80年代中期，人们针对衰减和零色散不在同一工作波长上的特点，成功开发了一种把零色散波长从1.3μm移到1.55μm的色散位移光纤（DSF，Dispersion－ShiftedFiber）。ITU把这种光纤的规范编为G.653。</p>
+<p>色散位移光纤在1.55μm色散为零，不利于多信道的WDM传输，用的信道数较多时，信道间距较小，这时就会发生四波混频（FWM）导致信道间发生串扰。如果光纤线路的色散为零，FWM的干扰就会十分严重；如果有微量色散，FWM干扰反而还会减小。</p>
+<p>衰减：目前一般在 0.19~0.25dB&#x2F;km。</p>
+<p>由于在1550窗口，特别是在 C_band，色散位移光纤的色散系数太小或可能为零，对于密集波分复用（Dense Wavelength Division Multiplexing，DWDM）系统很容易引起四波混频效应，因此DWDM系统一般尽量不使用色散光纤。</p>
+<h2 id="G-654光纤"><a href="#G-654光纤" class="headerlink" title="G.654光纤"></a>G.654光纤</h2><p>为了满足海底光缆长距离通信的需求，人们开发了一种应用于1.55μm波长的纯石英芯单模光纤，它在该波长附近上的衰减最小，仅为0.185dB&#x2F;km。G.654光纤在1.3μm波长区域的色散为零，但在1.55μm波长区域色散较大，约为（17～20）ps&#x2F;（nm·km）</p>
+<h2 id="G-655光纤"><a href="#G-655光纤" class="headerlink" title="G.655光纤"></a>G.655光纤</h2><p>针对色散位移光纤在1.55μm色散为零，会产生四波混频，导致信道间发生串扰，不利于多信道的WDM系统的问题，如果有微量色散，FWM干扰反而还会减小。针对这一特点，人们研制了非零色散光纤（NZ－DSF）。非零色散光纤实质上是一种改进的色散位移光纤，其零色散波长不在1.55μm，而是在1.525μm或1.585μm处。非零色散光纤削减了色散效应和四波混频效应，而标准光纤和色散移位光纤都只能克服这两种缺陷中的一种，所以非零色散光纤综合了标准光纤和色散位移光纤最好的传输特性，既能用于新的陆上网络，又可对现有系统进行升级改造，它特别适合于高密度WDM系统的传输，所以非零色散光纤是新一代光纤通信系统的最佳传输介质。</p>
+<p>当光纤传输速率较低、距离较短时，采用G.655光纤进行传输的办法是可行的，但是G.655光纤并没有解决色散问题，高速长距离的传输中仍然需要色散补偿。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/6/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot; aria-label&#x3D;&quot;上一页&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot; aria-label&#x3D;&quot;下一页&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,23 +1,1204 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是SDH？SDH是Synchronous Digital Hierarchy 的简称，也就是同步数字体系。是一整套可进行同步数字传输、复用和交叉连接的标准化数字信号的等级结构。 SDH的工作方式 STM-1是SDH的第一个等级，又叫基本同步传送模块，比特率为155.520Mb&#x2F;s。STM-N是SDH第N个等级的同步传送模块，比特率是STM-1的N倍(N&#x3D;4n&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SDH">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/SDH/index.html">
+<meta property="og:site_name" content="lowkeysp&#39; Blog">
+<meta property="og:description" content="什么是SDH？SDH是Synchronous Digital Hierarchy 的简称，也就是同步数字体系。是一整套可进行同步数字传输、复用和交叉连接的标准化数字信号的等级结构。 SDH的工作方式 STM-1是SDH的第一个等级，又叫基本同步传送模块，比特率为155.520Mb&#x2F;s。STM-N是SDH第N个等级的同步传送模块，比特率是STM-1的N倍(N&#x3D;4n&#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyap7j37j30zn0gkjtv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyf20o6jj30wk0deac2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vygod61wj311q0ii44b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x0jy1lp1j30w00hetbz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x14ll91ej30s50gb0vy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x17bsdtxj30t60fwgmy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x1cus2p4j30t50k9783.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x1zj7lutj30rj099jt9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x205i2s2j30n70a0tac.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x31mfxvbj30pk08qwfx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x328jauaj30q008k401.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x3mviuwbj30qm07y0ul.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4x3nkjqlpj30oi07vq3u.jpg">
+<meta property="article:published_time" content="2019-07-11T07:48:22.000Z">
+<meta property="article:modified_time" content="2023-05-11T09:25:03.435Z">
+<meta property="article:author" content="lowkeysp">
+<meta property="article:tag" content="光纤">
+<meta property="article:tag" content="SDH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyap7j37j30zn0gkjtv.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/11/SDH/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SDH | lowkeysp' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lowkeysp' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
+      
+    
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/SDH/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lowkeysp"/>
+      <meta itemprop="description" content="lowkeysp"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lowkeysp' Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SDH
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-11 15:48:22" itemprop="dateCreated datePublished" datetime="2019-07-11T15:48:22+08:00">2019-07-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%85%89%E7%BA%A4/" itemprop="url" rel="index"><span itemprop="name">光纤</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/11/SDH/" class="leancloud_visitors" data-flag-title="SDH">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <meta name="referrer" content="no-referrer" />
+
+<h2 id="什么是SDH？"><a href="#什么是SDH？" class="headerlink" title="什么是SDH？"></a>什么是SDH？</h2><p>SDH是Synchronous Digital Hierarchy 的简称，也就是同步数字体系。是一整套可进行同步数字传输、复用和交叉连接的标准化数字信号的等级结构。</p>
+<h2 id="SDH的工作方式"><a href="#SDH的工作方式" class="headerlink" title="SDH的工作方式"></a>SDH的工作方式</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyap7j37j30zn0gkjtv.jpg"></p>
+<p>STM-1是SDH的第一个等级，又叫基本同步传送模块，比特率为155.520Mb&#x2F;s。STM-N是SDH第N个等级的同步传送模块，比特率是STM-1的N倍(N&#x3D;4n&#x3D;1，4，16，64，256)。</p>
+<p>低阶SDH  -&gt; 高阶SDH</p>
+<p>比如，STM-1-&gt;STM-4。采用字节间插复用方式，4个STM-1变成一个STM-4</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vyf20o6jj30wk0deac2.jpg"></p>
+<h2 id="帧结构"><a href="#帧结构" class="headerlink" title="帧结构"></a>帧结构</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4vygod61wj311q0ii44b.jpg"></p>
+<p>可以计算，当N&#x3D;1时，也就是STM-1，$8\times(9\times270\times1)\times8000&#x3D;155520000&#x3D;155.52Mbit&#x2F;s$</p>
+<h3 id="STM-N净负荷"><a href="#STM-N净负荷" class="headerlink" title="STM-N净负荷"></a>STM-N净负荷</h3><p>STM-N净负荷是一个9行$\times$ 261列 $\times$N。</p>
+<p>这是用来放置各种业务信息的地方。2M&#x2F;34M&#x2F;140M等PDH信号、ATM信号、IP信息包等打包成信息包后，放于其中。然后由STM-N信号承载，在SDH网上传输。若将STM-N信号帧比做一辆货车，其净负荷区即为该货车的车厢。</p>
+<p>在将低速信号打包装箱时，在每一个信息包中加入通道开销POH，以完成对每一个“货物包”在“运输”中的监视。</p>
+<p>下图是对上述描述的解释。低速信号打包后，再加上POH，然后就是一个信息包，放到这个净负荷区中。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x0jy1lp1j30w00hetbz.jpg"></p>
+<h3 id="段开销"><a href="#段开销" class="headerlink" title="段开销"></a>段开销</h3><p> 完成对STM-N整体信号流进行监控。即对STM-N“车厢”中所有“货物包”进行整体上的性能监控。其中，</p>
+<ul>
+<li>再生段开销(RSOH)—完成对STM-N整体信息结构进行监控</li>
+<li>复用段开销(MSOH)—完成对STM-N中的复用段层信息结构进行监控</li>
+<li>RSOH、MSOH、POH组成SDH层层细化的监控体制</li>
+<li>二者区别：宏观（RSOH）和微观（MSOH）</li>
+</ul>
+<h3 id="管理单元指针——AU-PTR"><a href="#管理单元指针——AU-PTR" class="headerlink" title="管理单元指针——AU-PTR"></a>管理单元指针——AU-PTR</h3><ul>
+<li>定位低速信号在STM-N帧中(净负荷)的位置，使低速信号在高速信号中的位置可预知。</li>
+<li>发端在将信号包装入STM-N净负荷时，加入AU-PTR，指示信号包在净负荷中的位置，即将装入“车厢”的“货物包”，赋予一个位置坐标值。</li>
+<li>收端根据AU指针值，从STM-N帧净负荷中直接拆分出所需的低速支路信号；即依据“货物包”位置坐标，从“车厢”中直接所需要的那一个“货包”。</li>
+<li>由于“车厢”中的“货物包”是以一定的规律摆放的——字节间插复用方式；所以对货物包的定位仅需定位“车厢”中第一个“货物包”即可。</li>
+</ul>
+<p> <img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x14ll91ej30s50gb0vy.jpg"></p>
+<p> 若复用的低速信号速率较低，即打包后信息包太小，例：2M、34M。需进行二级指针定位。先将小信息包打包成中信息包，通过支路单元指针TU-PTR定位其在中信息包中的位置。然后将若干中信息包打包成大信息包，通过AU-PTR指示相应中信息包的位置。</p>
+<p> <img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x17bsdtxj30t60fwgmy.jpg"></p>
+<h2 id="复用步骤（复用方式，复用结构）"><a href="#复用步骤（复用方式，复用结构）" class="headerlink" title="复用步骤（复用方式，复用结构）"></a>复用步骤（复用方式，复用结构）</h2><p>低阶SDH→高阶SDH：同步字节间插复用方式</p>
+<p>PDH信号→STM-N：同步复用和灵活的映射</p>
+<ul>
+<li>140M→STM-N</li>
+<li>34M→STM-N</li>
+<li>2M→STM-N</li>
+</ul>
+<p>复用是依复用路线图进行的，ITU-T规定的路线图有多种，但通常一个国家或地区仅使用一种。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x1cus2p4j30t50k9783.jpg"></p>
+<h3 id="140M复用步骤"><a href="#140M复用步骤" class="headerlink" title="140M复用步骤"></a>140M复用步骤</h3><p>使用的是C4</p>
+<p>C-4： 容器4；与140M相对应的标准信息结构，完成速率适配功能。</p>
+<p>VC-4：虚容器4；与C-4相对应的标准信息结构，完成对<br>装载的140M信号进行实时的性能监控。</p>
+<p>AU-4：管理单元4，与VC-4相对应的信息结构</p>
+<p>复用路线140M—C-4—VC-4—AU-4—STM-1，所以STM-1<br>仅能复用进一路140M信号</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x1zj7lutj30rj099jt9.jpg"><br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x205i2s2j30n70a0tac.jpg"></p>
+<p>从图中可以看到，在C-4容器中，是1-260，然后，加了一个POH，变成了1-261，这个就是之前介绍的净负荷区。<br>然后需要加一个指针定位AU-PTR，是一个1-9的，然后，加入段开销，就变成了一个完整的帧。</p>
+<h3 id="34M复用步骤"><a href="#34M复用步骤" class="headerlink" title="34M复用步骤"></a>34M复用步骤</h3><p>C-3： 容器3；与34M相对应的标准信息结构，完成速率适配功能。</p>
+<p>VC-3： 虚容器3；与C-3相对应的标准信息结构，完成对装载的34M信号进行实时的性能监控。</p>
+<p>TU-3： 支路单元3；与VC-3相对应的标准信息结构，完成一级指针<br>定位。</p>
+<p>TUG-3： 支路单元组3；与TU-3相对应的标准信息结构。</p>
+<p>复用路线34M—C-3—VC-3—TU-3—TUG-3；3TUG-3—VC-4—STM-<br>1；所以STM-1仅能复用进3路34M。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x31mfxvbj30pk08qwfx.jpg"><br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x328jauaj30q008k401.jpg"></p>
+<p> 从图中可以看到，速度适配后，C-3是从1-84的，再加上一个POH，变成了1-85，由于不符合1-261，因此，可以将三个叠加起来，所以，先进行一级指针定位，然后，补齐缺口后，变成了1-86，这时候，将三个合在一起，$86\times3&#x3D;258+3&#x3D;261$,其中R是填充。这样就变成了一个VC-4，也就是一个STM-1。</p>
+<h3 id="2M复用步骤"><a href="#2M复用步骤" class="headerlink" title="2M复用步骤"></a>2M复用步骤</h3><p>C-12： 容器12；与2M相对应的标准信息结构，完成2M信号速率适<br>配，4个基帧组成一复帧。</p>
+<p>VC-12：虚容器12；与2M相对应的标准信息结构，完成对某路2M<br>信号实时监控。</p>
+<p>TU-12：支路单元12；与VC-12相对应的标准信息结构，完成对VC-<br>12的一级指针定位。</p>
+<p>TUG-2：支路单元组2；TUG-3——支路单元组3。</p>
+<p>2M—C-12—VC-12—TU-12；3TU-12—TUG-2；7TUG-2—TUG-<br>3；3TUG-3—VC-4—STM-1。</p>
+<p>STM-1可装入3×7×3&#x3D;63个2M信号。2M复用结构是3-7-3结构。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x3mviuwbj30qm07y0ul.jpg"><br><img src="http://ww1.sinaimg.cn/large/006eDJDNly1g4x3nkjqlpj30oi07vq3u.jpg"></p>
+<p>从图中，2M速度适配后变成了1-4，然后进行加POH监控和一级指针定位。之后进行3倍的字节间插，就变成了1-12，然后再进行7倍的字节间插，添加两个填充，就变成了1-86，之后再进行3倍字节间插（和34M是一样的），因此STM-1可以装$3\times7\times3&#x3D;63$个2M信号。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%85%89%E7%BA%A4/" rel="tag"># 光纤</a>
+          
+            <a href="/tags/SDH/" rel="tag"># SDH</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/11/%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%95%88%E5%BA%94/" rel="next" title="非线性效应">
+                <i class="fa fa-chevron-left"></i> 非线性效应
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/15/WDM%E5%8E%9F%E7%90%86/" rel="prev" title="WDM原理">
+                WDM原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lowkeysp</p>
+              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/%20%7C%7C%20th">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSDH%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是SDH？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDH%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">SDH的工作方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%A7%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">帧结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STM-N%E5%87%80%E8%B4%9F%E8%8D%B7"><span class="nav-number">3.1.</span> <span class="nav-text">STM-N净负荷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AE%B5%E5%BC%80%E9%94%80"><span class="nav-number">3.2.</span> <span class="nav-text">段开销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%8D%95%E5%85%83%E6%8C%87%E9%92%88%E2%80%94%E2%80%94AU-PTR"><span class="nav-number">3.3.</span> <span class="nav-text">管理单元指针——AU-PTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%94%A8%E6%AD%A5%E9%AA%A4%EF%BC%88%E5%A4%8D%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%A4%8D%E7%94%A8%E7%BB%93%E6%9E%84%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">复用步骤（复用方式，复用结构）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#140M%E5%A4%8D%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.1.</span> <span class="nav-text">140M复用步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34M%E5%A4%8D%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.2.</span> <span class="nav-text">34M复用步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2M%E5%A4%8D%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.3.</span> <span class="nav-text">2M复用步骤</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
+                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
