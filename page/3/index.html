@@ -1,100 +1,24 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '7.1.1',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="lowkeysp">
 <meta property="og:type" content="website">
@@ -107,19 +31,16 @@
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
 
+<link rel="canonical" href="http://example.com/page/3/">
 
 
-
-
-  
-  
-  <link rel="canonical" href="http://example.com/page/3/"/>
-
-
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -131,15 +52,8 @@
 
 
 
-
-
-
-
-
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -148,9 +62,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -162,136 +75,56 @@
   </style>
 </noscript>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">lowkeysp' Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-      
-        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
-      
-    
-    
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">lowkeysp' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Foolish!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
+
 <nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-fa fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-archives">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-
-  
+  </ul>
 </nav>
 
-
-
-  
 
 
 
@@ -299,131 +132,61 @@
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
           
-            
 
-          
-          <div id="content" class="content">
+          <div class="content index posts-expand">
             
-  <section id="posts" class="posts-expand">
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">NameNode，SecondaryNameNode，DataNode工作机制</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">NameNode，SecondaryNameNode，DataNode工作机制</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-07-14 14:27:52" itemprop="dateCreated datePublished" datetime="2021-07-14T14:27:52+08:00">2021-07-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/07/14/NameNode%E5%92%8CSecondaryNameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="leancloud_visitors" data-flag-title="NameNode，SecondaryNameNode，DataNode工作机制">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -431,12 +194,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <h1 id="NameNode，SecondaryNameNode工作机制"><a href="#NameNode，SecondaryNameNode工作机制" class="headerlink" title="NameNode，SecondaryNameNode工作机制"></a>NameNode，SecondaryNameNode工作机制</h1><p>NameNode的数据文件如下，目录为<code>/opt/module/hadoop-3.3.1/data/dfs/name/current</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">lowkeysp-00@lowkeysp-01:/opt/module/hadoop-3.3.1/data/dfs/name/current$ ll</span><br><span class="line">总用量 4180</span><br><span class="line">drwx------ 2 lowkeysp-00 lowkeysp-00    4096 7月   4 23:18 ./</span><br><span class="line">drwxrwxr-x 3 lowkeysp-00 lowkeysp-00    4096 7月   4 23:37 ../</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   3 23:07 edits_0000000000000000001-0000000000000000002</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    7056 7月   4 00:07 edits_0000000000000000003-0000000000000000066</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 00:20 edits_0000000000000000067-0000000000000000117</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 20:12 edits_0000000000000000118-0000000000000000169</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00   23867 7月   4 21:26 edits_0000000000000000170-0000000000000000340</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   4 22:26 edits_0000000000000000341-0000000000000000342</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 22:53 edits_0000000000000000343-0000000000000000440</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      42 7月   4 23:18 edits_0000000000000000441-0000000000000000442</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00 1048576 7月   4 23:18 edits_inprogress_0000000000000000443</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    4771 7月   4 22:26 fsimage_0000000000000000342</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      62 7月   4 22:26 fsimage_0000000000000000342.md5</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00    5702 7月   4 23:18 fsimage_0000000000000000442</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00      62 7月   4 23:18 fsimage_0000000000000000442.md5</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00       4 7月   4 23:18 seen_txid</span><br><span class="line">-rw-rw-r-- 1 lowkeysp-00 lowkeysp-00     212 7月   4 19:48 VERSION</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -482,158 +240,62 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 </ul>
 <p> 超时10分钟的计算：<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TimeOut = 2 * dfs.namenode.heartbeat.recheck-interval + 10 * dfs.heartbeat.interval</span><br><span class="line"></span><br><span class="line">dfs.namenode.heartbeat.recheck-interval 默认是5分钟，dfs.heartbeat.interval默认是3秒</span><br></pre></td></tr></table></figure></p>
 
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/07/HDFS%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/07/HDFS%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/07/07/HDFS%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">HDFS读写数据</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/HDFS%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">HDFS读写数据</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-07-07 13:59:38" itemprop="dateCreated datePublished" datetime="2021-07-07T13:59:38+08:00">2021-07-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/07/07/HDFS%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/" class="leancloud_visitors" data-flag-title="HDFS读写数据">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -641,164 +303,63 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-            
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/HDFS%E7%9A%84shell%E5%91%BD%E4%BB%A4/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/HDFS%E7%9A%84shell%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/07/05/HDFS%E7%9A%84shell%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">HDFS的shell命令</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/05/HDFS%E7%9A%84shell%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">HDFS的shell命令</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-07-05 10:09:42" itemprop="dateCreated datePublished" datetime="2021-07-05T10:09:42+08:00">2021-07-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/07/05/HDFS%E7%9A%84shell%E5%91%BD%E4%BB%A4/" class="leancloud_visitors" data-flag-title="HDFS的shell命令">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -806,167 +367,66 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"># 创建目录</span><br><span class="line">hadoop fs -mkdir /d</span><br><span class="line"></span><br><span class="line"># 从本地剪切到HDFS上，注意是剪切，上传之后，本地就没有了</span><br><span class="line">hadoop fs -moveFromLocal 本地文件  HDFS目录</span><br><span class="line"></span><br><span class="line"># 从本地复制到HDFS上</span><br><span class="line">hadoop fs -copyFromLocal 本地文件  HDFS目录</span><br><span class="line"></span><br><span class="line"># 跟copyFromLocal作用一样</span><br><span class="line">hadoop fs -put 本地文件  HDFS目录</span><br><span class="line"></span><br><span class="line"># 追加一个文件到已经存在的文件末尾</span><br><span class="line">hadoop fs -appendToFile 本地文件  HDFS文件</span><br><span class="line"></span><br><span class="line"># 从HDFS下载到本地</span><br><span class="line">hadoop fs -copyToLocal HDFS文件  本地目录</span><br><span class="line"></span><br><span class="line"># 跟copyToLocal作用一样</span><br><span class="line">hadoop fs -get HDFS文件  本地目录</span><br><span class="line"></span><br><span class="line"># 显示目录信息</span><br><span class="line">hadoop fs -ls HDFS目录</span><br><span class="line"></span><br><span class="line"># 显示文件内容</span><br><span class="line">hadoop fs -cat HDFS文件</span><br><span class="line"></span><br><span class="line"># 修改权限</span><br><span class="line">hadoop fs -chgrp</span><br><span class="line">          -chmod</span><br><span class="line">          -chown</span><br><span class="line"></span><br><span class="line"># 创建目录</span><br><span class="line">hadoop fs -mkdir</span><br><span class="line"></span><br><span class="line"># 复制</span><br><span class="line">hadoop fs -cp </span><br><span class="line"></span><br><span class="line"># 移动</span><br><span class="line">hadoop fs -mv</span><br><span class="line"></span><br><span class="line"># 显示文件尾的内容</span><br><span class="line">hadoop fs -tail</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">hadoop fs -rm</span><br><span class="line"></span><br><span class="line">#递归删除</span><br><span class="line">hadoop fs -rm -r</span><br><span class="line"></span><br><span class="line">#统计文件夹的大小信息</span><br><span class="line">hadoop fs -du</span><br><span class="line"></span><br><span class="line"># 设置HDFS中文件的副本数量</span><br><span class="line">hadoop fs -setrep 副本数量 HDFS文件</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/02/hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/02/hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/07/02/hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">hadoop集群搭建</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/02/hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">hadoop集群搭建</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-07-02 22:10:24" itemprop="dateCreated datePublished" datetime="2021-07-02T22:10:24+08:00">2021-07-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/07/02/hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="leancloud_visitors" data-flag-title="hadoop集群搭建">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -974,12 +434,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <p>可以使用VMWARE PRO软件，创建若干个Linux虚拟机，进行Hadoop的集群搭建</p>
 <p>使用VMWARE创建虚拟机后，需要通过xshell远程登陆linux服务器，具体操作如下：</p>
@@ -1245,158 +700,62 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 </blockquote>
 <h2 id="服务器时间同步"><a href="#服务器时间同步" class="headerlink" title="服务器时间同步"></a>服务器时间同步</h2><p>如果服务器能与外网连接，则不需要时间同步，否则，需要时间同步</p>
 
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/27/ubuntu%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-xshell%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86ubuntu/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/27/ubuntu%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-xshell%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86ubuntu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/06/27/ubuntu%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-xshell%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86ubuntu/" class="post-title-link" itemprop="url">ubuntu设置静态ip-xshell远程登陆ubuntu</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/27/ubuntu%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-xshell%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86ubuntu/" class="post-title-link" itemprop="url">ubuntu设置静态ip-xshell远程登陆ubuntu</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-06-27 16:02:37" itemprop="dateCreated datePublished" datetime="2021-06-27T16:02:37+08:00">2021-06-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/06/27/ubuntu%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-xshell%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86ubuntu/" class="leancloud_visitors" data-flag-title="ubuntu设置静态ip-xshell远程登陆ubuntu">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1404,12 +763,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <h1 id="设置静态IP地址"><a href="#设置静态IP地址" class="headerlink" title="设置静态IP地址"></a>设置静态IP地址</h1><p>在<code>/etc/netplan/</code>目录下，有一个yaml文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lowkeysp-00@lowkeysp-00:/etc/netplan$ ls</span><br><span class="line">01-network-manager-all.yaml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -1431,176 +785,71 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 <h1 id="在ubuntu上装SSH服务器，用于SSH登陆"><a href="#在ubuntu上装SSH服务器，用于SSH登陆" class="headerlink" title="在ubuntu上装SSH服务器，用于SSH登陆"></a>在ubuntu上装SSH服务器，用于SSH登陆</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
 
 <h1 id="使用xshell，用ssh方式即可登陆"><a href="#使用xshell，用ssh方式即可登陆" class="headerlink" title="使用xshell，用ssh方式即可登陆"></a>使用xshell，用ssh方式即可登陆</h1>
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">hadoop基本框架学习</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">hadoop基本框架学习</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-06-08 17:13:11" itemprop="dateCreated datePublished" datetime="2021-06-08T17:13:11+08:00">2021-06-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+            </span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hadoop/" itemprop="url" rel="index"><span itemprop="name">hadoop</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/06/08/hadoop%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="hadoop基本框架学习">
-              <span class="post-meta-divider">|</span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hadoop/" itemprop="url" rel="index"><span itemprop="name">hadoop</span></a>
+                </span>
             </span>
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1608,12 +857,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <h1 id="Hadoop基本框架"><a href="#Hadoop基本框架" class="headerlink" title="Hadoop基本框架"></a>Hadoop基本框架</h1><h1 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h1><p>HDFS是Hadoop Distributed File System(分布式文件系统)</p>
 <p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gruj58bijpj60pw0h4q3e02.jpg" alt="捕获.PNG"></p>
@@ -1725,158 +969,62 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 </ol>
 <p>Client定时检查整个作业是否完成 作业完成后，会清空临时文件、目录等</p>
 <h1 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h1>
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/python%E5%B0%86word%E8%BD%AC%E6%8D%A2%E4%B8%BApdf/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/python%E5%B0%86word%E8%BD%AC%E6%8D%A2%E4%B8%BApdf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/01/08/python%E5%B0%86word%E8%BD%AC%E6%8D%A2%E4%B8%BApdf/" class="post-title-link" itemprop="url">python将word转换为pdf</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/08/python%E5%B0%86word%E8%BD%AC%E6%8D%A2%E4%B8%BApdf/" class="post-title-link" itemprop="url">python将word转换为pdf</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-01-08 09:34:27" itemprop="dateCreated datePublished" datetime="2021-01-08T09:34:27+08:00">2021-01-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/01/08/python%E5%B0%86word%E8%BD%AC%E6%8D%A2%E4%B8%BApdf/" class="leancloud_visitors" data-flag-title="python将word转换为pdf">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1884,12 +1032,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> win32com.client <span class="keyword">import</span> Dispatch</span><br><span class="line"> </span><br><span class="line">word = Dispatch(<span class="string">&#x27;Word.Application&#x27;</span>)</span><br><span class="line">doc = word.Documents.Open(<span class="string">&quot;J:\\新建文件夹 (3)\\调休报告书20200706.doc&quot;</span>)</span><br><span class="line">doc.SaveAs(<span class="string">&quot;J:\\新建文件夹 (3)\\调休报告书20200706.pdf&quot;</span>, FileFormat=<span class="number">17</span>)</span><br><span class="line">doc.Close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -1898,158 +1041,62 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 
 <p>封装后的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> win32com.client <span class="keyword">import</span> Dispatch</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> walk</span><br><span class="line"> </span><br><span class="line">wdFormatPDF = <span class="number">17</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">doc2pdf</span>(<span class="params">input_file</span>):</span><br><span class="line">    word = Dispatch(<span class="string">&#x27;Word.Application&#x27;</span>)</span><br><span class="line">    doc = word.Documents.Open(input_file)</span><br><span class="line">    doc.SaveAs(input_file.replace(<span class="string">&quot;.docx&quot;</span>, <span class="string">&quot;.pdf&quot;</span>), FileFormat=wdFormatPDF)</span><br><span class="line">    doc.Close()</span><br><span class="line">    word.Quit()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    doc_files = []</span><br><span class="line">    directory = <span class="string">&quot;C:\\Users\\xkw\\Desktop\\destData&quot;</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, filenames <span class="keyword">in</span> walk(directory):</span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> filenames:</span><br><span class="line">            <span class="keyword">if</span> file.endswith(<span class="string">&quot;.doc&quot;</span>) <span class="keyword">or</span> file.endswith(<span class="string">&quot;.docx&quot;</span>):</span><br><span class="line">                doc2pdf(<span class="built_in">str</span>(root + <span class="string">&quot;\\&quot;</span> + file))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%99%84%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%99%84%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/01/08/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%99%84%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">python发送邮件附件中文乱码问题</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/08/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%99%84%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">python发送邮件附件中文乱码问题</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-01-08 08:56:48" itemprop="dateCreated datePublished" datetime="2021-01-08T08:56:48+08:00">2021-01-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/01/08/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%99%84%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" class="leancloud_visitors" data-flag-title="python发送邮件附件中文乱码问题">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -2057,12 +1104,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <p>在用python发邮件时，使用的是如下代码：</p>
 <p>参考：<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-email.html">https://www.runoob.com/python/python-email.html</a></p>
@@ -2100,176 +1142,71 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 <h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/thl789/article/details/7815866">https://blog.csdn.net/thl789/article/details/7815866</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.douban.com/group/topic/40848076/">https://www.douban.com/group/topic/40848076/</a></p>
 
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/04/python-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/04/python-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/01/04/python-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/" class="post-title-link" itemprop="url">python-办公自动化</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/04/python-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/" class="post-title-link" itemprop="url">python-办公自动化</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2021-01-04 10:04:28" itemprop="dateCreated datePublished" datetime="2021-01-04T10:04:28+08:00">2021-01-04</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+            </span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2021/01/04/python-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/" class="leancloud_visitors" data-flag-title="python-办公自动化">
-              <span class="post-meta-divider">|</span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
             </span>
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -2277,12 +1214,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <h1 id="工作簿"><a href="#工作簿" class="headerlink" title="工作簿"></a>工作簿</h1><h2 id="创建工作簿"><a href="#创建工作簿" class="headerlink" title="创建工作簿"></a>创建工作簿</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建工作簿</span></span><br><span class="line">wb = Workbook()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作簿的属性</span></span><br><span class="line"><span class="comment"># properties</span></span><br><span class="line">wb.properties.title =<span class="string">&#x27;标题 动物世界&#x27;</span></span><br><span class="line">wb.properties.subject = <span class="string">&#x27;主题 保护动物&#x27;</span></span><br><span class="line">wb.properties.category = <span class="string">&#x27;类别&#x27;</span></span><br><span class="line">wb.properties.keywords =<span class="string">&#x27;濒危&#x27;</span></span><br><span class="line">wb.properties.creator = <span class="string">&#x27;LCF&#x27;</span></span><br><span class="line">wb.properties.description = <span class="string">&quot;备注信息&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存工作簿</span></span><br><span class="line">wb.save(<span class="string">&#x27;06workbook.xlsx&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1 id="工作簿"><a href="#工作簿" class="headerlink" title="工作簿"></a>工作簿</h1><h2 id="创建工作簿"><a href="#创建工作簿" class="headerlink" title="创建工作簿"></a>创建工作簿</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建工作簿</span></span><br><span class="line">wb = Workbook()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作簿的属性</span></span><br><span class="line"><span class="comment"># properties</span></span><br><span class="line">wb.properties.title =<span class="string">&#x27;标题 动物世界&#x27;</span></span><br><span class="line">wb.properties.subject = <span class="string">&#x27;主题 保护动物&#x27;</span></span><br><span class="line">wb.properties.category = <span class="string">&#x27;类别&#x27;</span></span><br><span class="line">wb.properties.keywords =<span class="string">&#x27;濒危&#x27;</span></span><br><span class="line">wb.properties.creator = <span class="string">&#x27;LCF&#x27;</span></span><br><span class="line">wb.properties.description = <span class="string">&quot;备注信息&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存工作簿</span></span><br><span class="line">wb.save(<span class="string">&#x27;06workbook.xlsx&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="创建工作表-worksheet"><a href="#创建工作表-worksheet" class="headerlink" title="创建工作表-worksheet"></a>创建工作表-worksheet</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook, load_workbook</span><br><span class="line"><span class="comment"># 2.实例化-创建工作簿</span></span><br><span class="line">wb = Workbook()</span><br><span class="line"><span class="comment">############################1.创建工作表########################</span></span><br><span class="line">sheet1 = wb.create_sheet(<span class="string">&#x27;学生表&#x27;</span>, index=<span class="number">0</span>)</span><br><span class="line">sheet2 = wb.create_sheet(<span class="string">&#x27;得分表&#x27;</span>)</span><br><span class="line"><span class="comment">############################2.获取工作表对象和名称########################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.获取所有表</span></span><br><span class="line">sheets = wb.get_sheet_names()</span><br><span class="line">sheets = wb.sheetnames</span><br><span class="line"><span class="comment"># 2.获取默认的表</span></span><br><span class="line">active_sheet = wb.active</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.根据表名字获取表</span></span><br><span class="line"> name_sheet = wb.get_sheet_by_name(<span class="string">&#x27;得分表&#x27;</span>)</span><br><span class="line">name_sheet = wb[<span class="string">&#x27;得分表&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">############################3.更改工作表的名称并设置背景颜色########################</span></span><br><span class="line"></span><br><span class="line">active_sheet.title = <span class="string">&quot;学科表&quot;</span> <span class="comment"># 修改名字</span></span><br><span class="line"><span class="comment"># 颜色 是需要写16进制</span></span><br><span class="line">active_sheet.sheet_properties.tabColor = <span class="string">&#x27;F00906&#x27;</span></span><br><span class="line"><span class="comment"># 颜色 三种表示  方式</span></span><br><span class="line"><span class="comment"># 三原色 红     绿   蓝</span></span><br><span class="line"><span class="comment">#       red green blue</span></span><br><span class="line"><span class="comment">#      0-255 0-255 0-255</span></span><br><span class="line"><span class="comment"># 1.单词 red  green pink blue</span></span><br><span class="line"><span class="comment"># 2.rgb  255 0 0</span></span><br><span class="line"><span class="comment"># 3.16 hex : &#x27;FF0000&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">############################4.获取工作表的行数和列数########################</span></span><br><span class="line">wb = load_workbook(<span class="string">&#x27;07sheet.xlsx&#x27;</span>) <span class="comment">#加载 存在的工作簿</span></span><br><span class="line">active_sheet = wb.active</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;行数:&#x27;</span>, active_sheet.max_row)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;列数:&#x27;</span>, active_sheet.max_column)</span><br><span class="line"><span class="comment"># 默认 空表 行数列数 都是 1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">############################5.复制工作表########################</span></span><br><span class="line">copy_sheet = wb.copy_worksheet(active_sheet)</span><br><span class="line">copy_sheet.title = <span class="string">&#x27;克隆表&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">############################6.删除工作表########################</span></span><br><span class="line"><span class="comment"># 删除工作表</span></span><br><span class="line">wb.remove(copy_sheet)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -2305,158 +1237,62 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 
 
 
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/27/hadoop%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/27/hadoop%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/11/27/hadoop%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">hadoop在linux下的安装</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/27/hadoop%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">hadoop在linux下的安装</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2020-11-27 09:16:40" itemprop="dateCreated datePublished" datetime="2020-11-27T09:16:40+08:00">2020-11-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/11/27/hadoop%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/" class="leancloud_visitors" data-flag-title="hadoop在linux下的安装">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -2464,12 +1300,7 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <meta name="referrer" content="no-referrer" />
+          <meta name="referrer" content="no-referrer" />
 
 <p>首先，需要确认Linux系统是否装有JDK，如果没有的话，得先安装JDK</p>
 <h1 id="Linux环境下安装JDK"><a href="#Linux环境下安装JDK" class="headerlink" title="Linux环境下安装JDK"></a>Linux环境下安装JDK</h1><ul>
@@ -2510,51 +1341,24 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
 <p>其中,_SUCCESS文件说明JOB运行成功，part-r-00000是输出结果文件</p>
 <p>查看part-r-00000</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#cat part-r-00000 </span><br><span class="line">hadoop	3</span><br><span class="line">hivehbase	1</span><br><span class="line">hivespark	1</span><br><span class="line">mapreduce	1</span><br><span class="line">spark	1</span><br><span class="line">stormsqoop	1</span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
 
     
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
-  </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot; aria-label&#x3D;&quot;上一页&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot; aria-label&#x3D;&quot;下一页&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2562,550 +1366,157 @@ DataNode再汇报前，会先自查自己本身的块信息，扫描自己节点
           </div>
           
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">lowkeysp</p>
-              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/%20%7C%7C%20archive">
-                
-                    <span class="site-state-item-count">85</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/%20%7C%7C%20th">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/%20%7C%7C%20tags">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-
-      
-
-    </div>
-  </aside>
-  
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
-
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/utils.js?v=7.1.1"></script>
-
-  <script src="/js/motion.js?v=7.1.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/affix.js?v=7.1.1"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
-
-
-
-
-  
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.1"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-  <script>
-    
-    function showTime(Counter) {
-      var entries = [];
-      var $visitors = $('.leancloud_visitors');
-
-      $visitors.each(function() {
-        entries.push( $(this).attr('id').trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
-        .done(function({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for (var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if (countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function ({ responseJSON }) {
-          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
-        });
-    }
-    
-
-    $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
-        .done(function({ api_server }) {
-          var Counter = function(method, url, data) {
-            return $.ajax({
-              method: method,
-              url: 'https://' + api_server + '/1.1' + url,
-              headers: {
-                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
-                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
-                'Content-Type': 'application/json',
-              },
-              data: data
-            });
-          };
+        </div>
           
-            if ($('.post-title-link').length >= 1) {
-              showTime(Counter);
-            }
-          
-        });
-    });
-  </script>
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lowkeysp</p>
+  <div class="site-description" itemprop="description">lowkeysp</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
 
 
 
   
 
-  
-  
-
-  
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-  
 
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
+
+
+
 
   
 

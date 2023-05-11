@@ -1,100 +1,24 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '7.1.1',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="BGP路由自动汇总 BGP支持路由自动汇总功能，该功能缺省关闭，可以在BGP配置视图中使用’summary automatic’命令开启 BGP路由自动汇总功能只对本地采用’import-route’命令注入的BGP路由有效 开启该功能后，’import-route’注入的BGP路由会按主类网络进行汇总（按照IP地址所属类别的缺省网络掩码进行计算），所产生的汇总路由会发布到BGP中，而明细路由">
 <meta property="og:type" content="article">
@@ -147,19 +71,16 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006eDJDNly1gcqy6c45jdj30ld0c4n15.jpg">
 
+<link rel="canonical" href="http://example.com/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/">
 
 
-
-
-  
-  
-  <link rel="canonical" href="http://example.com/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/"/>
-
-
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -171,15 +92,8 @@
 
 
 
-
-
-
-
-
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -188,9 +102,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -202,135 +115,56 @@
   </style>
 </noscript>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">lowkeysp' Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-      
-        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
-      
-    
-    
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">lowkeysp' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Foolish!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
+
 <nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-fa fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-archives">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-
-  
+  </ul>
 </nav>
 
-
-
-  
 
 
 
@@ -338,155 +172,75 @@
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
           
+
+          <div class="content post posts-expand">
             
 
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">BGP的路由策略
-
-              
-            
-          </h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          BGP的路由策略
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2020-03-12 10:28:48" itemprop="dateCreated datePublished" datetime="2020-03-12T10:28:48+08:00">2020-03-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+            </span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2020/03/12/BGP%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" class="leancloud_visitors" data-flag-title="BGP的路由策略">
-              <span class="post-meta-divider">|</span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">数据</span></a>
+                </span>
             </span>
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <meta name="referrer" content="no-referrer" />
@@ -599,634 +353,197 @@
 <h2 id="Peer命令关联route-policy"><a href="#Peer命令关联route-policy" class="headerlink" title="Peer命令关联route-policy"></a>Peer命令关联route-policy</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctozfo2bsj30mc0avn17.jpg" alt="捕获.PNG"></p>
 <h2 id="使用route-policy过滤路由"><a href="#使用route-policy过滤路由" class="headerlink" title="使用route-policy过滤路由"></a>使用route-policy过滤路由</h2><p><img src="http://ww1.sinaimg.cn/large/006eDJDNly1gctp0aqtx3j30mq0af771.jpg" alt="捕获.PNG"></p>
 
-      
     </div>
 
     
-
-    
-    
-    
-
-    
-
-    
-      
     
     
 
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/BGP/" rel="tag"># BGP</a>
-          
-            <a href="/tags/%E6%95%B0%E6%8D%AE/" rel="tag"># 数据</a>
-          
-            <a href="/tags/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" rel="tag"># 路由策略</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/" rel="next" title="BGP的路径属性">
-                <i class="fa fa-chevron-left"></i> BGP的路径属性
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BGP/" rel="tag"># BGP</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE/" rel="tag"># 数据</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5/" rel="tag"># 路由策略</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/14/BGP%E7%9A%84%E9%80%89%E8%B7%AF%E8%A7%84%E5%88%99/" rel="prev" title="BGP的选路规则">
-                BGP的选路规则 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/11/BGP%E7%9A%84%E8%B7%AF%E5%BE%84%E5%B1%9E%E6%80%A7/" rel="prev" title="BGP的路径属性">
+      <i class="fa fa-chevron-left"></i> BGP的路径属性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/14/BGP%E7%9A%84%E9%80%89%E8%B7%AF%E8%A7%84%E5%88%99/" rel="next" title="BGP的选路规则">
+      BGP的选路规则 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-  </div>
 
 
           </div>
           
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">lowkeysp</p>
-              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/%20%7C%7C%20archive">
-                
-                    <span class="site-state-item-count">85</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/%20%7C%7C%20th">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/%20%7C%7C%20tags">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BGP%E8%B7%AF%E7%94%B1%E8%87%AA%E5%8A%A8%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">BGP路由自动汇总</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BGP%E6%89%8B%E5%B7%A5%E8%B7%AF%E7%94%B1%E6%B1%87%E6%80%BB"><span class="nav-number">2.</span> <span class="nav-text">BGP手工路由汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate"><span class="nav-number">2.1.</span> <span class="nav-text">aggregate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-detail-suppressed"><span class="nav-number">2.2.</span> <span class="nav-text">aggregate detail-suppressed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-detail-suppressed-as-set"><span class="nav-number">2.3.</span> <span class="nav-text">aggregate detail-suppressed as-set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-suppress-policy"><span class="nav-number">2.4.</span> <span class="nav-text">aggregate suppress-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-attribute-policy"><span class="nav-number">2.5.</span> <span class="nav-text">aggregate attribute-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-origin-policy"><span class="nav-number">2.6.</span> <span class="nav-text">aggregate origin-policy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#as-path-filter"><span class="nav-number">4.</span> <span class="nav-text">as-path-filter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">配置命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#as-path-filter%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%9F%A5%E7%9C%8B"><span class="nav-number">4.2.</span> <span class="nav-text">as-path-filter验证及查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8as-path-filter%E5%8C%B9%E9%85%8D%E8%B7%AF%E7%94%B1"><span class="nav-number">4.3.</span> <span class="nav-text">使用as-path-filter匹配路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B1"><span class="nav-number">4.4.</span> <span class="nav-text">配置实例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B2"><span class="nav-number">4.5.</span> <span class="nav-text">配置实例2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Community"><span class="nav-number">5.</span> <span class="nav-text">Community</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BABGP%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AECommunity"><span class="nav-number">5.1.</span> <span class="nav-text">为BGP路由设置Community</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BABGP%E8%B7%AF%E7%94%B1%E8%BF%BD%E5%8A%A0Community"><span class="nav-number">5.2.</span> <span class="nav-text">为BGP路由追加Community</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ip-community-filter%E5%8C%B9%E9%85%8Dcommunity%E5%B1%9E%E6%80%A7"><span class="nav-number">5.3.</span> <span class="nav-text">使用ip community-filter匹配community属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ip-community-filter%E5%8C%B9%E9%85%8D%E5%9B%A2%E4%BD%93%E5%B1%9E%E6%80%A7%EF%BC%88%E4%B8%A5%E6%A0%BC%E5%8C%B9%E9%85%8D%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">使用ip community-filter匹配团体属性（严格匹配）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AAcommunity%E5%80%BC"><span class="nav-number">5.5.</span> <span class="nav-text">删除一个community值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%9A%E4%B8%AAcommunity%E5%80%BC"><span class="nav-number">5.6.</span> <span class="nav-text">删除多个community值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ip-prefix"><span class="nav-number">6.</span> <span class="nav-text">ip-prefix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8BGP%E4%B8%AD%E4%BD%BF%E7%94%A8IP-Prefix%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4-%E7%A4%BA%E4%BE%8B1"><span class="nav-number">6.1.</span> <span class="nav-text">在BGP中使用IP-Prefix进行路由过滤 示例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8BGP%E4%B8%AD%E4%BD%BF%E7%94%A8IP-Prefix%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4-%E7%A4%BA%E4%BE%8B2"><span class="nav-number">6.2.</span> <span class="nav-text">在BGP中使用IP-Prefix进行路由过滤 示例2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter-Policy"><span class="nav-number">7.</span> <span class="nav-text">Filter-Policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter-Policy%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B1"><span class="nav-number">7.1.</span> <span class="nav-text">Filter-Policy配置示例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter-Policy%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B2"><span class="nav-number">7.2.</span> <span class="nav-text">Filter-Policy配置示例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter-Policy%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B2-%E5%85%B3%E8%81%94%E5%8D%8F%E8%AE%AE%E6%9D%A5%E6%BA%90"><span class="nav-number">7.3.</span> <span class="nav-text">Filter-Policy配置示例2 关联协议来源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#route-policy"><span class="nav-number">8.</span> <span class="nav-text">route-policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Network%E5%91%BD%E4%BB%A4%E5%85%B3%E8%81%94route-policy"><span class="nav-number">8.1.</span> <span class="nav-text">Network命令关联route-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Peer%E5%91%BD%E4%BB%A4%E5%85%B3%E8%81%94route-policy"><span class="nav-number">8.2.</span> <span class="nav-text">Peer命令关联route-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8route-policy%E8%BF%87%E6%BB%A4%E8%B7%AF%E7%94%B1"><span class="nav-number">8.3.</span> <span class="nav-text">使用route-policy过滤路由</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
 
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/utils.js?v=7.1.1"></script>
-
-  <script src="/js/motion.js?v=7.1.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/affix.js?v=7.1.1"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
-
-
-
-
-  
-  <script src="/js/scrollspy.js?v=7.1.1"></script>
-<script src="/js/post-details.js?v=7.1.1"></script>
-
-
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.1"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-  
-  <script>
-    
-    function addCount(Counter) {
-      var $visitors = $('.leancloud_visitors');
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
-        .done(function({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
-            
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
-            
-              .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-              })
-          } else {
-            
-              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
-                .done(function() {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(1);
-                })
-                .fail(function() {
-                  console.log('Failed to create');
-                });
-            
-          }
-        })
-        .fail(function ({ responseJSON }) {
-          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
-        });
-    }
-    
-
-    $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
-        .done(function({ api_server }) {
-          var Counter = function(method, url, data) {
-            return $.ajax({
-              method: method,
-              url: 'https://' + api_server + '/1.1' + url,
-              headers: {
-                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
-                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
-                'Content-Type': 'application/json',
-              },
-              data: data
-            });
-          };
+        </div>
           
-            addCount(Counter);
-          
-        });
-    });
-  </script>
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BGP%E8%B7%AF%E7%94%B1%E8%87%AA%E5%8A%A8%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">BGP路由自动汇总</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BGP%E6%89%8B%E5%B7%A5%E8%B7%AF%E7%94%B1%E6%B1%87%E6%80%BB"><span class="nav-number">2.</span> <span class="nav-text">BGP手工路由汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate"><span class="nav-number">2.1.</span> <span class="nav-text">aggregate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-detail-suppressed"><span class="nav-number">2.2.</span> <span class="nav-text">aggregate detail-suppressed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-detail-suppressed-as-set"><span class="nav-number">2.3.</span> <span class="nav-text">aggregate detail-suppressed as-set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-suppress-policy"><span class="nav-number">2.4.</span> <span class="nav-text">aggregate suppress-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-attribute-policy"><span class="nav-number">2.5.</span> <span class="nav-text">aggregate attribute-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aggregate-origin-policy"><span class="nav-number">2.6.</span> <span class="nav-text">aggregate origin-policy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#as-path-filter"><span class="nav-number">4.</span> <span class="nav-text">as-path-filter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">配置命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#as-path-filter%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%9F%A5%E7%9C%8B"><span class="nav-number">4.2.</span> <span class="nav-text">as-path-filter验证及查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8as-path-filter%E5%8C%B9%E9%85%8D%E8%B7%AF%E7%94%B1"><span class="nav-number">4.3.</span> <span class="nav-text">使用as-path-filter匹配路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B1"><span class="nav-number">4.4.</span> <span class="nav-text">配置实例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B2"><span class="nav-number">4.5.</span> <span class="nav-text">配置实例2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Community"><span class="nav-number">5.</span> <span class="nav-text">Community</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BABGP%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AECommunity"><span class="nav-number">5.1.</span> <span class="nav-text">为BGP路由设置Community</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BABGP%E8%B7%AF%E7%94%B1%E8%BF%BD%E5%8A%A0Community"><span class="nav-number">5.2.</span> <span class="nav-text">为BGP路由追加Community</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ip-community-filter%E5%8C%B9%E9%85%8Dcommunity%E5%B1%9E%E6%80%A7"><span class="nav-number">5.3.</span> <span class="nav-text">使用ip community-filter匹配community属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ip-community-filter%E5%8C%B9%E9%85%8D%E5%9B%A2%E4%BD%93%E5%B1%9E%E6%80%A7%EF%BC%88%E4%B8%A5%E6%A0%BC%E5%8C%B9%E9%85%8D%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">使用ip community-filter匹配团体属性（严格匹配）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AAcommunity%E5%80%BC"><span class="nav-number">5.5.</span> <span class="nav-text">删除一个community值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%9A%E4%B8%AAcommunity%E5%80%BC"><span class="nav-number">5.6.</span> <span class="nav-text">删除多个community值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ip-prefix"><span class="nav-number">6.</span> <span class="nav-text">ip-prefix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8BGP%E4%B8%AD%E4%BD%BF%E7%94%A8IP-Prefix%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4-%E7%A4%BA%E4%BE%8B1"><span class="nav-number">6.1.</span> <span class="nav-text">在BGP中使用IP-Prefix进行路由过滤 示例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8BGP%E4%B8%AD%E4%BD%BF%E7%94%A8IP-Prefix%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4-%E7%A4%BA%E4%BE%8B2"><span class="nav-number">6.2.</span> <span class="nav-text">在BGP中使用IP-Prefix进行路由过滤 示例2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter-Policy"><span class="nav-number">7.</span> <span class="nav-text">Filter-Policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter-Policy%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B1"><span class="nav-number">7.1.</span> <span class="nav-text">Filter-Policy配置示例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter-Policy%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B2"><span class="nav-number">7.2.</span> <span class="nav-text">Filter-Policy配置示例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter-Policy%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B2-%E5%85%B3%E8%81%94%E5%8D%8F%E8%AE%AE%E6%9D%A5%E6%BA%90"><span class="nav-number">7.3.</span> <span class="nav-text">Filter-Policy配置示例2 关联协议来源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#route-policy"><span class="nav-number">8.</span> <span class="nav-text">route-policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Network%E5%91%BD%E4%BB%A4%E5%85%B3%E8%81%94route-policy"><span class="nav-number">8.1.</span> <span class="nav-text">Network命令关联route-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Peer%E5%91%BD%E4%BB%A4%E5%85%B3%E8%81%94route-policy"><span class="nav-number">8.2.</span> <span class="nav-text">Peer命令关联route-policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8route-policy%E8%BF%87%E6%BB%A4%E8%B7%AF%E7%94%B1"><span class="nav-number">8.3.</span> <span class="nav-text">使用route-policy过滤路由</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lowkeysp</p>
+  <div class="site-description" itemprop="description">lowkeysp</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
 
 
 
   
 
-  
-  
-
-  
-  
-
-  
 
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
+
+
+
 
   
 

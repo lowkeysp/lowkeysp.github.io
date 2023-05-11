@@ -1,100 +1,24 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.1"/>
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '7.1.1',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="FastAPI安装安装Fast API，通常需要Starlette和Pydantic  Python3.6+ Starlette：web部分 Pydantic：数据部分  其中，Starlette需要的依赖项为：  requests - TestClient需要 aiofiles - FileResponse或者StaticFiles需要 jinja2 - 缺省模板配置需要 python-mult">
 <meta property="og:type" content="article">
@@ -109,19 +33,16 @@
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
 
+<link rel="canonical" href="http://example.com/2022/04/12/FastAPI%E5%AD%A6%E4%B9%A0/">
 
 
-
-
-  
-  
-  <link rel="canonical" href="http://example.com/2022/04/12/FastAPI%E5%AD%A6%E4%B9%A0/"/>
-
-
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -133,15 +54,8 @@
 
 
 
-
-
-
-
-
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -150,9 +64,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -164,135 +77,56 @@
   </style>
 </noscript>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">lowkeysp' Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    
-      
-        <p class="site-subtitle">Stay Hungry, Stay Foolish!</p>
-      
-    
-    
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">lowkeysp' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Foolish!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
+
 <nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-fa fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-archives">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-th&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;分类</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-
-  
+  </ul>
 </nav>
 
-
-
-  
 
 
 
@@ -300,137 +134,66 @@
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
           
+
+          <div class="content post posts-expand">
             
 
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/12/FastAPI%E5%AD%A6%E4%B9%A0/"/>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/12/FastAPI%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lowkeysp"/>
-      <meta itemprop="description" content="lowkeysp"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lowkeysp">
+      <meta itemprop="description" content="lowkeysp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lowkeysp' Blog"/>
+      <meta itemprop="name" content="lowkeysp' Blog">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">FastAPI学习
-
-              
-            
-          </h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          FastAPI学习
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2022-04-12 10:59:48" itemprop="dateCreated datePublished" datetime="2022-04-12T10:59:48+08:00">2022-04-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2022/04/12/FastAPI%E5%AD%A6%E4%B9%A0/" class="leancloud_visitors" data-flag-title="FastAPI学习">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
             </span>
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 17:25:03" itemprop="dateModified" datetime="2023-05-11T17:25:03+08:00">2023-05-11</time>
+              </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h1 id="FastAPI安装"><a href="#FastAPI安装" class="headerlink" title="FastAPI安装"></a>FastAPI安装</h1><p>安装Fast API，通常需要Starlette和Pydantic</p>
@@ -983,624 +746,192 @@
 <p>3）oauth2：所有的 OAuth2 处理安全性的方式（称为「流程」）</p>
 <p>4）openIdConnect：提供了一种定义如何自动发现 OAuth2 身份认证数据的方法。此自动发现机制是 OpenID Connect 规范中定义的内容。</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
-      
     </div>
 
     
-
-    
-    
-    
-
-    
-
-    
-      
     
     
 
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/28/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E7%A4%BE%E4%BC%9A%E9%98%B6%E7%BA%A7%E5%88%86%E6%9E%90/" rel="prev" title="当代中国社会阶级分析">
+      <i class="fa fa-chevron-left"></i> 当代中国社会阶级分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/11/%E5%8D%8E%E4%B8%BA%E6%94%BF%E4%BC%81OTN%E5%AD%A6%E4%B9%A0/" rel="next" title="华为政企OTN学习">
+      华为政企OTN学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
     
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2022/03/28/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E7%A4%BE%E4%BC%9A%E9%98%B6%E7%BA%A7%E5%88%86%E6%9E%90/" rel="next" title="当代中国社会阶级分析">
-                <i class="fa fa-chevron-left"></i> 当代中国社会阶级分析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/05/11/%E5%8D%8E%E4%B8%BA%E6%94%BF%E4%BC%81OTN%E5%AD%A6%E4%B9%A0/" rel="prev" title="华为政企OTN学习">
-                华为政企OTN学习 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-
-  </div>
 
 
           </div>
           
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">lowkeysp</p>
-              <div class="site-description motion-element" itemprop="description">lowkeysp</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/%20%7C%7C%20archive">
-                
-                    <span class="site-state-item-count">85</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/%20%7C%7C%20th">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/%20%7C%7C%20tags">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FastAPI%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">FastAPI安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">路径参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E6%98%8EURL%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">声明URL路径参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E7%9A%84%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">路径参数的变量类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E7%9A%84%E9%A2%84%E5%AE%9A%E4%B9%89%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text">路径参数的预定义值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E4%B8%AD%E5%90%AB%E6%9C%89%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="nav-number">2.4.</span> <span class="nav-text">路径参数中含有文件路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">请求参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%BC%BA%E7%9C%81%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">请求参数缺省值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%8F%AF%E9%80%89"><span class="nav-number">3.2.</span> <span class="nav-text">请求参数可选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%EF%BC%8C%E5%A4%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">多路径参数，多请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%BF%85%E9%80%89"><span class="nav-number">3.4.</span> <span class="nav-text">请求参数必选</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Request-Body"><span class="nav-number">4.</span> <span class="nav-text">Request Body</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%B8%AARequest-Body"><span class="nav-number">4.1.</span> <span class="nav-text">单个Request Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8Request-Body%E5%8F%82%E6%95%B0%E3%80%81%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E3%80%81%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">同时使用Request Body参数、路径参数、请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AARequest-Body"><span class="nav-number">4.3.</span> <span class="nav-text">多个Request Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B5%8C%E5%85%A5%E5%8D%95%E4%B8%AARequest-Body"><span class="nav-number">4.4.</span> <span class="nav-text">嵌入单个Request Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E6%95%B0%E5%80%BC"><span class="nav-number">4.5.</span> <span class="nav-text">单个数值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">参数附加信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.1.</span> <span class="nav-text">请求参数附加信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8"><span class="nav-number">5.2.</span> <span class="nav-text">请求参数列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.3.</span> <span class="nav-text">路径参数附加信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E3%80%81%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%A1%BA%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="nav-number">5.4.</span> <span class="nav-text">路径参数、请求参数顺序问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%B8%A6%E7%BC%BA%E7%9C%81%E5%80%BC%E7%9A%84%E5%8F%82%E6%95%B0%E5%BA%94%E6%94%BE%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">5.4.1.</span> <span class="nav-text">不带缺省值的参数应放在前面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0%E7%9A%84%E6%A0%A1%E9%AA%8C"><span class="nav-number">5.5.</span> <span class="nav-text">数字类型参数的校验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pydantic%E5%A4%8D%E6%9D%82%E6%A8%A1%E5%9E%8B"><span class="nav-number">6.</span> <span class="nav-text">Pydantic复杂模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pydantic%E5%B5%8C%E5%A5%97%E6%A8%A1%E5%9E%8B"><span class="nav-number">6.1.</span> <span class="nav-text">Pydantic嵌套模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">复杂数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie%E5%8F%82%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">Cookie参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Header%E5%8F%82%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">Header参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E6%98%8EHeader%E5%8F%82%E6%95%B0"><span class="nav-number">9.1.</span> <span class="nav-text">声明Header参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.2.</span> <span class="nav-text">自动转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E7%9A%84-headers"><span class="nav-number">9.3.</span> <span class="nav-text">重复的 headers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Response%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.</span> <span class="nav-text">Response模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9E%8B%E7%A4%BA%E4%BE%8B"><span class="nav-number">10.1.</span> <span class="nav-text">输入输出模型示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="nav-number">10.2.</span> <span class="nav-text">Response模型参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#response-model-exclude-unset-%E5%8F%82%E6%95%B0"><span class="nav-number">10.2.1.</span> <span class="nav-text">response_model_exclude_unset 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response-model-include-%E5%92%8C-response-model-exclude-%E5%8F%82%E6%95%B0"><span class="nav-number">10.2.2.</span> <span class="nav-text">response_model_include 和 response_model_exclude 参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.3.</span> <span class="nav-text">多个模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-user-in-dict"><span class="nav-number">10.3.1.</span> <span class="nav-text">关于**user_in.dict()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E8%81%94%E5%90%88%EF%BC%88Union%EF%BC%89%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.4.</span> <span class="nav-text">Response联合（Union）模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E5%88%97%E8%A1%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.5.</span> <span class="nav-text">Response列表模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E5%AD%97%E5%85%B8%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.6.</span> <span class="nav-text">Response字典模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Response%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.</span> <span class="nav-text">Response状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%82%E6%95%B0status-code%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.1.</span> <span class="nav-text">通过参数status_code自定义状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Response%E5%8F%82%E6%95%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.2.</span> <span class="nav-text">通过Response参数自定义状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%9B%B4%E6%8E%A5%E8%BF%94%E5%9B%9EResponse%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.3.</span> <span class="nav-text">通过直接返回Response自定义状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE"><span class="nav-number">12.</span> <span class="nav-text">表单数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%87%E4%BB%B6"><span class="nav-number">13.</span> <span class="nav-text">请求文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6"><span class="nav-number">13.1.</span> <span class="nav-text">导入文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">13.2.</span> <span class="nav-text">多文件上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%A1%A8%E5%8D%95%E4%B8%8E%E6%96%87%E4%BB%B6"><span class="nav-number">14.</span> <span class="nav-text">请求表单与文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">15.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPException"><span class="nav-number">15.1.</span> <span class="nav-text">HTTPException</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">15.2.</span> <span class="nav-text">添加自定义响应头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">15.3.</span> <span class="nav-text">自定义异常处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%BC%BA%E7%9C%81%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">15.4.</span> <span class="nav-text">覆盖缺省异常处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96-HTTPException-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">15.5.</span> <span class="nav-text">覆盖 HTTPException 错误处理器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E7%94%A8-FastAPI-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">16.</span> <span class="nav-text">复用 FastAPI 异常处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">17.</span> <span class="nav-text">路径操作配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">17.1.</span> <span class="nav-text">响应状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE"><span class="nav-number">17.2.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E5%92%8C%E6%8F%8F%E8%BF%B0-summary%E5%92%8Cdescription"><span class="nav-number">17.3.</span> <span class="nav-text">总结和描述(summary和description)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">17.4.</span> <span class="nav-text">文档字符串的描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%AF%B4%E6%98%8E-response-description"><span class="nav-number">17.5.</span> <span class="nav-text">响应说明(response_description)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%83%E7%94%A8%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-deprecated"><span class="nav-number">17.6.</span> <span class="nav-text">弃用路径操作(deprecated)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON%E5%85%BC%E5%AE%B9%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">18.</span> <span class="nav-text">JSON兼容编码器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">19.</span> <span class="nav-text">更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8PUT%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">19.1.</span> <span class="nav-text">用PUT更新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8PATCH%E8%BF%9B%E8%A1%8C%E9%83%A8%E5%88%86%E6%9B%B4%E6%96%B0"><span class="nav-number">19.2.</span> <span class="nav-text">用PATCH进行部分更新</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.</span> <span class="nav-text">依赖项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E4%BD%9C%E4%B8%BA%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.1.</span> <span class="nav-text">类作为依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.2.</span> <span class="nav-text">子依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C%E8%A3%85%E9%A5%B0%E5%99%A8%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.3.</span> <span class="nav-text">路径操作装饰器依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.4.</span> <span class="nav-text">全局依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8Eyield%E7%9A%84%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">20.5.</span> <span class="nav-text">与yield的依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">21.</span> <span class="nav-text">安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">21.1.</span> <span class="nav-text">安全简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">21.2.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v6.3.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
 
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/utils.js?v=7.1.1"></script>
-
-  <script src="/js/motion.js?v=7.1.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/affix.js?v=7.1.1"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
-
-
-
-
-  
-  <script src="/js/scrollspy.js?v=7.1.1"></script>
-<script src="/js/post-details.js?v=7.1.1"></script>
-
-
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.1"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-  
-  <script>
-    
-    function addCount(Counter) {
-      var $visitors = $('.leancloud_visitors');
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
-        .done(function({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
-            
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
-            
-              .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-              })
-          } else {
-            
-              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
-                .done(function() {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(1);
-                })
-                .fail(function() {
-                  console.log('Failed to create');
-                });
-            
-          }
-        })
-        .fail(function ({ responseJSON }) {
-          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
-        });
-    }
-    
-
-    $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz')
-        .done(function({ api_server }) {
-          var Counter = function(method, url, data) {
-            return $.ajax({
-              method: method,
-              url: 'https://' + api_server + '/1.1' + url,
-              headers: {
-                'X-LC-Id': '0CSPT60hPj5BKhQ7aSqzw2dl-gzGzoHsz',
-                'X-LC-Key': 'cjQvenU0JlLBfHwEm9f86BEQ',
-                'Content-Type': 'application/json',
-              },
-              data: data
-            });
-          };
+        </div>
           
-            addCount(Counter);
-          
-        });
-    });
-  </script>
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FastAPI%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">FastAPI安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">路径参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E6%98%8EURL%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">声明URL路径参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E7%9A%84%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">路径参数的变量类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E7%9A%84%E9%A2%84%E5%AE%9A%E4%B9%89%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text">路径参数的预定义值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E4%B8%AD%E5%90%AB%E6%9C%89%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="nav-number">2.4.</span> <span class="nav-text">路径参数中含有文件路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">请求参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%BC%BA%E7%9C%81%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">请求参数缺省值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%8F%AF%E9%80%89"><span class="nav-number">3.2.</span> <span class="nav-text">请求参数可选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%EF%BC%8C%E5%A4%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">多路径参数，多请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%BF%85%E9%80%89"><span class="nav-number">3.4.</span> <span class="nav-text">请求参数必选</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Request-Body"><span class="nav-number">4.</span> <span class="nav-text">Request Body</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%B8%AARequest-Body"><span class="nav-number">4.1.</span> <span class="nav-text">单个Request Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8Request-Body%E5%8F%82%E6%95%B0%E3%80%81%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E3%80%81%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">同时使用Request Body参数、路径参数、请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AARequest-Body"><span class="nav-number">4.3.</span> <span class="nav-text">多个Request Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B5%8C%E5%85%A5%E5%8D%95%E4%B8%AARequest-Body"><span class="nav-number">4.4.</span> <span class="nav-text">嵌入单个Request Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E6%95%B0%E5%80%BC"><span class="nav-number">4.5.</span> <span class="nav-text">单个数值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">参数附加信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.1.</span> <span class="nav-text">请求参数附加信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8"><span class="nav-number">5.2.</span> <span class="nav-text">请求参数列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.3.</span> <span class="nav-text">路径参数附加信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0%E3%80%81%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%A1%BA%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="nav-number">5.4.</span> <span class="nav-text">路径参数、请求参数顺序问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%B8%A6%E7%BC%BA%E7%9C%81%E5%80%BC%E7%9A%84%E5%8F%82%E6%95%B0%E5%BA%94%E6%94%BE%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">5.4.1.</span> <span class="nav-text">不带缺省值的参数应放在前面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0%E7%9A%84%E6%A0%A1%E9%AA%8C"><span class="nav-number">5.5.</span> <span class="nav-text">数字类型参数的校验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pydantic%E5%A4%8D%E6%9D%82%E6%A8%A1%E5%9E%8B"><span class="nav-number">6.</span> <span class="nav-text">Pydantic复杂模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pydantic%E5%B5%8C%E5%A5%97%E6%A8%A1%E5%9E%8B"><span class="nav-number">6.1.</span> <span class="nav-text">Pydantic嵌套模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">复杂数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie%E5%8F%82%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">Cookie参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Header%E5%8F%82%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">Header参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E6%98%8EHeader%E5%8F%82%E6%95%B0"><span class="nav-number">9.1.</span> <span class="nav-text">声明Header参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.2.</span> <span class="nav-text">自动转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E7%9A%84-headers"><span class="nav-number">9.3.</span> <span class="nav-text">重复的 headers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Response%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.</span> <span class="nav-text">Response模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9E%8B%E7%A4%BA%E4%BE%8B"><span class="nav-number">10.1.</span> <span class="nav-text">输入输出模型示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="nav-number">10.2.</span> <span class="nav-text">Response模型参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#response-model-exclude-unset-%E5%8F%82%E6%95%B0"><span class="nav-number">10.2.1.</span> <span class="nav-text">response_model_exclude_unset 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response-model-include-%E5%92%8C-response-model-exclude-%E5%8F%82%E6%95%B0"><span class="nav-number">10.2.2.</span> <span class="nav-text">response_model_include 和 response_model_exclude 参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.3.</span> <span class="nav-text">多个模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-user-in-dict"><span class="nav-number">10.3.1.</span> <span class="nav-text">关于**user_in.dict()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E8%81%94%E5%90%88%EF%BC%88Union%EF%BC%89%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.4.</span> <span class="nav-text">Response联合（Union）模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E5%88%97%E8%A1%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.5.</span> <span class="nav-text">Response列表模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response%E5%AD%97%E5%85%B8%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.6.</span> <span class="nav-text">Response字典模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Response%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.</span> <span class="nav-text">Response状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%8F%82%E6%95%B0status-code%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.1.</span> <span class="nav-text">通过参数status_code自定义状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Response%E5%8F%82%E6%95%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.2.</span> <span class="nav-text">通过Response参数自定义状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%9B%B4%E6%8E%A5%E8%BF%94%E5%9B%9EResponse%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">11.3.</span> <span class="nav-text">通过直接返回Response自定义状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE"><span class="nav-number">12.</span> <span class="nav-text">表单数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%87%E4%BB%B6"><span class="nav-number">13.</span> <span class="nav-text">请求文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6"><span class="nav-number">13.1.</span> <span class="nav-text">导入文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">13.2.</span> <span class="nav-text">多文件上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%A1%A8%E5%8D%95%E4%B8%8E%E6%96%87%E4%BB%B6"><span class="nav-number">14.</span> <span class="nav-text">请求表单与文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">15.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPException"><span class="nav-number">15.1.</span> <span class="nav-text">HTTPException</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">15.2.</span> <span class="nav-text">添加自定义响应头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">15.3.</span> <span class="nav-text">自定义异常处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%BC%BA%E7%9C%81%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">15.4.</span> <span class="nav-text">覆盖缺省异常处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96-HTTPException-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">15.5.</span> <span class="nav-text">覆盖 HTTPException 错误处理器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E7%94%A8-FastAPI-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">16.</span> <span class="nav-text">复用 FastAPI 异常处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">17.</span> <span class="nav-text">路径操作配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">17.1.</span> <span class="nav-text">响应状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE"><span class="nav-number">17.2.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E5%92%8C%E6%8F%8F%E8%BF%B0-summary%E5%92%8Cdescription"><span class="nav-number">17.3.</span> <span class="nav-text">总结和描述(summary和description)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">17.4.</span> <span class="nav-text">文档字符串的描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%AF%B4%E6%98%8E-response-description"><span class="nav-number">17.5.</span> <span class="nav-text">响应说明(response_description)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%83%E7%94%A8%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-deprecated"><span class="nav-number">17.6.</span> <span class="nav-text">弃用路径操作(deprecated)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON%E5%85%BC%E5%AE%B9%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">18.</span> <span class="nav-text">JSON兼容编码器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">19.</span> <span class="nav-text">更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8PUT%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">19.1.</span> <span class="nav-text">用PUT更新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8PATCH%E8%BF%9B%E8%A1%8C%E9%83%A8%E5%88%86%E6%9B%B4%E6%96%B0"><span class="nav-number">19.2.</span> <span class="nav-text">用PATCH进行部分更新</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.</span> <span class="nav-text">依赖项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E4%BD%9C%E4%B8%BA%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.1.</span> <span class="nav-text">类作为依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.2.</span> <span class="nav-text">子依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C%E8%A3%85%E9%A5%B0%E5%99%A8%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.3.</span> <span class="nav-text">路径操作装饰器依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">20.4.</span> <span class="nav-text">全局依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8Eyield%E7%9A%84%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">20.5.</span> <span class="nav-text">与yield的依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">21.</span> <span class="nav-text">安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">21.1.</span> <span class="nav-text">安全简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">21.2.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lowkeysp</p>
+  <div class="site-description" itemprop="description">lowkeysp</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lowkeysp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
 
 
 
   
 
-  
-  
-
-  
-  
-
-  
 
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
+
+
+
 
   
 
