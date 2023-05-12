@@ -182,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-05-11 17:33:55 / 修改时间：17:33:56" itemprop="dateCreated datePublished" datetime="2023-05-11T17:33:55+08:00">2023-05-11</time>
+              <time title="创建时间：2023-05-11 17:33:55" itemprop="dateCreated datePublished" datetime="2023-05-11T17:33:55+08:00">2023-05-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-12 10:36:30" itemprop="dateModified" datetime="2023-05-12T10:36:30+08:00">2023-05-12</time>
+              </span>
 
           
 
@@ -198,7 +204,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="精品专线端到端网络拓扑"><a href="#精品专线端到端网络拓扑" class="headerlink" title="精品专线端到端网络拓扑"></a>精品专线端到端网络拓扑</h1><p><strong>客户设备</strong>——<strong>客户机房CPE设备</strong>——(接入段)——<strong>局端机房传输设备</strong>——(城域网)——<strong>枢纽楼省内对接传输设备</strong>——<strong>枢纽楼骨干传输设备</strong>——(骨干网)——<strong>枢纽楼骨干传输设备</strong>——<strong>枢纽楼省内对接传输设备</strong>——(城域网)——<strong>局端机房传输设备</strong>——(接入段)——<strong>客户机房CPE设备</strong>——<strong>客户设备</strong></p>
+<h1 id="精品专线电路可用率等级"><a href="#精品专线电路可用率等级" class="headerlink" title="精品专线电路可用率等级"></a>精品专线电路可用率等级</h1><h2 id="A级"><a href="#A级" class="headerlink" title="A级"></a>A级</h2><p>可用率指标为99.9%，客户单接入单设备，电路从局端开始全程端到端1+1主备保护，50ms保护倒换</p>
+<ul>
+<li>接入段不保护</li>
+<li>城域网，骨干网1+1主备保护</li>
+</ul>
+<h2 id="AA级"><a href="#AA级" class="headerlink" title="AA级"></a>AA级</h2><p>可用率指标为99.95%，客户单接入单设备，电路从CPE开始全程端到端1+1主备保护，50ms保护倒换</p>
+<ul>
+<li>接入段，城域网，骨干网1+1主备保护</li>
+</ul>
+<h2 id="AAA级"><a href="#AAA级" class="headerlink" title="AAA级"></a>AAA级</h2><p>可用率指标为99.99%，客户双接入双设备，形成两条端到端电路，每条电路从局端开始全程端到端1+1主备保护，5ms保护倒换</p>
+<ul>
+<li>客户设备双上联到客户机房CPE设备</li>
+<li>从CPE-CPE每条电路全程接入段，城域网，骨干网全程1+1主备保护</li>
+</ul>
+<h1 id="承载方案-amp-amp-保护方案"><a href="#承载方案-amp-amp-保护方案" class="headerlink" title="承载方案&amp;&amp;保护方案"></a>承载方案&amp;&amp;保护方案</h1><h2 id="500M以上业务承载方案-amp-amp-保护方案"><a href="#500M以上业务承载方案-amp-amp-保护方案" class="headerlink" title="500M以上业务承载方案&amp;&amp;保护方案"></a>500M以上业务承载方案&amp;&amp;保护方案</h2><h3 id="500M以上业务承载方案"><a href="#500M以上业务承载方案" class="headerlink" title="500M以上业务承载方案"></a>500M以上业务承载方案</h3><ul>
+<li>500M到1G的以太网业务直接采用ODU0通道进行承载</li>
+<li>1G及以上以太网业务直接采用相应速率的ODUK通道进行承载，10GE业务建议采用ODU2e承载，非标准速率采用ODUflex承载</li>
+</ul>
+<h3 id="500M以上业务保护方案"><a href="#500M以上业务保护方案" class="headerlink" title="500M以上业务保护方案"></a>500M以上业务保护方案</h3><ul>
+<li>接入段保护：1+1 单端保护即可</li>
+<li>城域网保护：ODUk SNCP S</li>
+<li>枢纽楼省内对接传输设备与枢纽楼骨干传输设备之间保护：ODUk SNCP S</li>
+<li>骨干网保护： ODUk SNCP 双端保护，骨干端1000KM左右分一段</li>
+</ul>
+<p>CPE与客户设备之间的保护方案：</p>
+<ul>
+<li>以太网接口采用LAG保护，非负载均衡，单端保护</li>
+<li>SDH接口采用端口1+1保护，单端保护</li>
+</ul>
+<h2 id="100M-500M业务承载方案-amp-amp-保护方案"><a href="#100M-500M业务承载方案-amp-amp-保护方案" class="headerlink" title="100M-500M业务承载方案&amp;&amp;保护方案"></a>100M-500M业务承载方案&amp;&amp;保护方案</h2><h3 id="100M-500M业务承载方案-VC方式（EoS）"><a href="#100M-500M业务承载方案-VC方式（EoS）" class="headerlink" title="100M-500M业务承载方案:VC方式（EoS）"></a>100M-500M业务承载方案:VC方式（EoS）</h3>
       
     </div>
 
