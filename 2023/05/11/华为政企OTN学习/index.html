@@ -28,7 +28,7 @@
 <meta property="og:description" content="精品专线端到端网络拓扑客户设备——客户机房CPE设备——(接入段)——局端机房传输设备——(城域网)——枢纽楼省内对接传输设备——枢纽楼骨干传输设备——(骨干网)——枢纽楼骨干传输设备——枢纽楼省内对接传输设备——(城域网)——局端机房传输设备——(接入段)——客户机房CPE设备——客户设备 精品专线电路可用率等级A级可用率指标为99.9%，客户单接入单设备，电路从局端开始全程端到端1+1主备保护">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-11T09:33:55.000Z">
-<meta property="article:modified_time" content="2023-05-12T08:25:49.638Z">
+<meta property="article:modified_time" content="2023-05-15T09:30:54.041Z">
 <meta property="article:author" content="lowkeysp">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-12 16:25:49" itemprop="dateModified" datetime="2023-05-12T16:25:49+08:00">2023-05-12</time>
+                <time title="修改时间：2023-05-15 17:30:54" itemprop="dateModified" datetime="2023-05-15T17:30:54+08:00">2023-05-15</time>
               </span>
 
           
@@ -317,7 +317,7 @@
 <li>线路速率：2.5 Gbit&#x2F;s，10 Gbit&#x2F;s，40 Gbit&#x2F;s，100 Gbit&#x2F;s</li>
 </ul>
 <h1 id="OSN-9600-U64-x2F-U32-x2F-U16单板"><a href="#OSN-9600-U64-x2F-U32-x2F-U16单板" class="headerlink" title="OSN 9600 U64&#x2F;U32&#x2F;U16单板"></a>OSN 9600 U64&#x2F;U32&#x2F;U16单板</h1><h2 id="OTN支路类单板"><a href="#OTN支路类单板" class="headerlink" title="OTN支路类单板"></a>OTN支路类单板</h2><p>支路板的主要功能是实现客户侧业务在本站上&#x2F;下波。具体过程为：将接入的客户侧业务完成光&#x2F;电转换后封装为ODUk信号，并将ODUk信号发送到交叉板进行调度。信号调度到线路板后经过复用和映射转换为符合标准波长的OTUk信号，同时可实现上述过程的逆过程。</p>
-<h3 id="OTN支路类单板——C404"><a href="#OTN支路类单板——C404" class="headerlink" title="OTN支路类单板——C404"></a>OTN支路类单板——C404</h3><ul>
+<h3 id="C404——OTN支路类单板"><a href="#C404——OTN支路类单板" class="headerlink" title="C404——OTN支路类单板"></a>C404——OTN支路类单板</h3><ul>
 <li>4路客户侧，客户侧支持100GE(速率为103.125 Gbit&#x2F;s) 和 OTU4 (速率为111.81 Gbit&#x2F;s) 业务</li>
 <li>4 × 100GE（Bit透明映射&#x2F;MAC透明映射）&lt;–&gt; 4 × ODU4</li>
 <li>4 × 100GE（MAC透明映射）&lt;–&gt; 4 × ODUflex</li>
@@ -337,7 +337,7 @@
 <li>信号处理模块接收背板调度过来的4路ODU4&#x2F;ODUflex电信号，在本模块内部完成ODU4&#x2F;ODUflex定帧，解映射和解封装处理等操作，输出4路100GE&#x2F;OTU4电信号</li>
 <li>4路100GE&#x2F;OTU4电信号通过客户侧光模块完成E&#x2F;O转换，由”TX1~TX4”光口输出</li>
 </ul>
-<h3 id="OTN支路类单板——C220"><a href="#OTN支路类单板——C220" class="headerlink" title="OTN支路类单板——C220"></a>OTN支路类单板——C220</h3><ul>
+<h3 id="C220——OTN支路类单板"><a href="#C220——OTN支路类单板" class="headerlink" title="C220——OTN支路类单板"></a>C220——OTN支路类单板</h3><ul>
 <li>20路客户侧，客户侧支持STM-64，10GE LAN，10GE WAN，OTU2，OTU2e</li>
 <li>20 × 10GE LAN&#x2F;10GE WAN&#x2F;STM-64 &lt;–&gt; 20 × ODU2</li>
 <li>20 × 10GE LAN&#x2F;OTU2e &lt;–&gt; 20 × ODU2e</li>
@@ -355,7 +355,7 @@
 <li>20路STM-64，10GE LAN，10GE WAN，OTU2，OTU2e电信号通过客户侧光模块完成E&#x2F;O转换，由”TX1~TX20”光口输出</li>
 </ul>
 <p>类似的还有C210，C230</p>
-<h3 id="OTN支路类单板——C130"><a href="#OTN支路类单板——C130" class="headerlink" title="OTN支路类单板——C130"></a>OTN支路类单板——C130</h3><ul>
+<h3 id="C130——OTN支路类单板"><a href="#C130——OTN支路类单板" class="headerlink" title="C130——OTN支路类单板"></a>C130——OTN支路类单板</h3><ul>
 <li>30路2.5G客户侧</li>
 <li>30 × （125M~1.25G信号） &lt;–&gt; 30 × ODU0</li>
 <li>30 × （1.49G~2.67G信号） &lt;–&gt; 30 × ODU1</li>
@@ -373,17 +373,17 @@
 <li>信号处理模块接收背板调度过来的ODU0&#x2F;ODU1&#x2F;ODUflex电信号，在本模块内部完成ODU0&#x2F;ODU1&#x2F;ODUflex定帧，解映射和解封装处理等操作，输出30路Any电信号</li>
 <li>30路Any电信号通过客户侧光模块完成E&#x2F;O转换，由”TX1~TX30”光口输出</li>
 </ul>
-<h3 id="OTN支路类单板——T402"><a href="#OTN支路类单板——T402" class="headerlink" title="OTN支路类单板——T402"></a>OTN支路类单板——T402</h3><ul>
+<h3 id="T402——OTN支路类单板"><a href="#T402——OTN支路类单板" class="headerlink" title="T402——OTN支路类单板"></a>T402——OTN支路类单板</h3><ul>
 <li>2路客户侧，支持100GE和OTU4业务</li>
 <li>2 × 100GE &lt;–&gt; 2 × ODU4&#x2F;ODUflex</li>
 <li>2 × OTU4 &lt;–&gt; 2 × ODU4</li>
 </ul>
-<h3 id="OTN支路类单板——T404"><a href="#OTN支路类单板——T404" class="headerlink" title="OTN支路类单板——T404"></a>OTN支路类单板——T404</h3><ul>
+<h3 id="T404——OTN支路类单板"><a href="#T404——OTN支路类单板" class="headerlink" title="T404——OTN支路类单板"></a>T404——OTN支路类单板</h3><ul>
 <li>4路客户侧，支持100GE和OTU4业务</li>
 <li>4 × 100GE &lt;–&gt; 4 × ODU4&#x2F;ODUflex</li>
 <li>4 × OTU4 &lt;–&gt; 4 × ODU4</li>
 </ul>
-<h3 id="OTN支路类单板——T220E"><a href="#OTN支路类单板——T220E" class="headerlink" title="OTN支路类单板——T220E"></a>OTN支路类单板——T220E</h3><ul>
+<h3 id="T220E——OTN支路类单板"><a href="#T220E——OTN支路类单板" class="headerlink" title="T220E——OTN支路类单板"></a>T220E——OTN支路类单板</h3><ul>
 <li>20路客户侧，支持10GE，GE，FE业务</li>
 <li>12 × 10GE&#x2F;20 × GE &#x2F;20 × FE &lt;–&gt; 80 × ODU0&#x2F; 40 × ODU1 &#x2F; 10 × ODU2(e)&#x2F; 2 × ODU3 &#x2F;1 × ODU4 &#x2F;80 × ODUflex</li>
 <li>20 × GE &lt;–&gt; 20 × ODU0</li>
@@ -393,7 +393,7 @@
 </ul>
 <h2 id="OTN线路类单板"><a href="#OTN线路类单板" class="headerlink" title="OTN线路类单板"></a>OTN线路类单板</h2><p>线路板将调度过来的ODUk信号进行复用和映射，完成电&#x2F;光转换后，转换为标准波长的OTUk信号，同时实现逆过程</p>
 <p>线路板还有中继模式，即接入波分侧OTN信号，完成光&#x2F;电转换并经过3R处理后，进行电&#x2F;光转换，输出中继后的OTN信号</p>
-<h3 id="OTN线路类单板——L210"><a href="#OTN线路类单板——L210" class="headerlink" title="OTN线路类单板——L210"></a>OTN线路类单板——L210</h3><ul>
+<h3 id="L210——OTN线路类单板"><a href="#L210——OTN线路类单板" class="headerlink" title="L210——OTN线路类单板"></a>L210——OTN线路类单板</h3><ul>
 <li>10路线路侧，支持OTU2，OTU2e</li>
 <li>80 × ODU0&#x2F;40 × ODU1&#x2F; 80 × ODUflex &#x2F; 10 × ODU2 &lt;–&gt; 10 × OTU2</li>
 <li>10 × ODU2e &lt;–&gt; 10 × OTU2e</li>
@@ -410,7 +410,161 @@
 <li>经过O&#x2F;E转换的电信号进入信号处理模块，在本模块内部完成OTU2&#x2F;OTU2e定帧和FEC&#x2F;AFEC解码等操作，输出80路ODU0，或40路ODU1，或80路ODUflex，或10路ODU2&#x2F;ODU2e电信号送至背板进行调度</li>
 </ul>
 <p>中继模式的信号流：光接收模块由“IN1 ~ IN10 ”光口接收信号，完成O&#x2F;E转换，经过解码，开销处理，编码，电信号的整形，再生等，再将编码后的信号送至发送模块，经过E&#x2F;O转换，由“OUT1 ~ OUT10”光口输出</p>
-<h3 id="OTN线路类单板——L402"><a href="#OTN线路类单板——L402" class="headerlink" title="OTN线路类单板——L402"></a>OTN线路类单板——L402</h3>
+<p>类似的还有L220</p>
+<h3 id="L402——OTN线路类单板"><a href="#L402——OTN线路类单板" class="headerlink" title="L402——OTN线路类单板"></a>L402——OTN线路类单板</h3><ul>
+<li>2路线路侧，支持OTU4</li>
+<li>160 × ODU0 &#x2F; 80 × ODU1 &#x2F; 20 × ODU2 &#x2F; 20 × ODU2e &#x2F; 4 × ODU3 &#x2F; 2 × ODU4 &#x2F; 160 × ODUflex &lt;–&gt; 2 × OTU4</li>
+</ul>
+<p>线路模式的信号流：通过背板可以调度的信号为ODU0，ODU1，ODU2，ODU2e，ODUflex,ODU3,ODU4 电信号。从背板到波分侧为发送方向，反之为接收方向</p>
+<p>发送方向：</p>
+<ul>
+<li>OTN处理模块经背板接收交叉板调度过来的160路ODU0，或80路ODU1，或160路ODUflex，或20路ODU2&#x2F;ODU2e电信号，或4路ODU3，或2路ODU4，在本模块完成OTN成帧和FEC&#x2F;AFEC编码处理等操作，输出2路OTU4信号。</li>
+<li>OTU4信号送至波分侧光模块，经过E&#x2F;O转换，发送符合标准波长的OTU4光信号，由“OUT1 ~ OUT2”光口输出</li>
+</ul>
+<p>接收方向：</p>
+<ul>
+<li>波分侧光模块接收“IN1 ~ IN2 ”光口接收的OTU4光信号，完成O&#x2F;E转换。</li>
+<li>经过O&#x2F;E转换的电信号进入信号处理模块，在本模块内部完成OTU4定帧和FEC&#x2F;AFEC解码等操作，输出160路ODU0，或80路ODU1，或160路ODUflex，或20路ODU2&#x2F;ODU2e电信号，或4路ODU3，或2路ODU4电信号送至背板进行调度</li>
+</ul>
+<p>中继模式的信号流：光接收模块由“IN1 ~ IN2 ”光口接收信号，完成O&#x2F;E转换，经过解码，开销处理，编码，电信号的整形，再生等，再将编码后的信号送至发送模块，经过E&#x2F;O转换，由“OUT1 ~ OUT2”光口输出 </p>
+<h3 id="L404——OTN线路类单板"><a href="#L404——OTN线路类单板" class="headerlink" title="L404——OTN线路类单板"></a>L404——OTN线路类单板</h3><ul>
+<li>4路线路侧，支持OTU4</li>
+<li>320 × ODU0 &#x2F; 160 × ODU1 &#x2F; 40 × ODU2 &#x2F; 40 × ODU2e &#x2F; 8 × ODU3 &#x2F; 4 × ODU4 &#x2F; 320 × ODUflex &lt;–&gt; 2 × OTU4</li>
+</ul>
+<p>线路模式的信号流：通过背板可以调度的信号为ODU0，ODU1，ODU2，ODU2e，ODUflex,ODU3,ODU4 电信号。从背板到波分侧为发送方向，反之为接收方向</p>
+<p>发送方向：</p>
+<ul>
+<li>OTN处理模块经背板接收交叉板调度过来的320路ODU0，或160路ODU1，或320路ODUflex，或40路ODU2&#x2F;ODU2e电信号，或8路ODU3，或4路ODU4，在本模块完成OTN成帧和FEC&#x2F;AFEC编码处理等操作，输出4路OTU4信号。</li>
+<li>OTU4信号送至波分侧光模块，经过E&#x2F;O转换，发送符合标准波长的OTU4光信号，由“OUT1 ~ OUT4”光口输出</li>
+</ul>
+<p>接收方向：</p>
+<ul>
+<li>波分侧光模块接收“IN1 ~ IN4 ”光口接收的OTU4光信号，完成O&#x2F;E转换。</li>
+<li>经过O&#x2F;E转换的电信号进入信号处理模块，在本模块内部完成OTU4定帧和FEC&#x2F;AFEC解码等操作，输出320路ODU0，或160路ODU1，或320路ODUflex，或40路ODU2&#x2F;ODU2e电信号，或8路ODU3，或4路ODU4电信号送至背板进行调度</li>
+</ul>
+<p>中继模式的信号流：光接收模块由“IN1 ~ IN4 ”光口接收信号，完成O&#x2F;E转换，经过解码，开销处理，编码，电信号的整形，再生等，再将编码后的信号送至发送模块，经过E&#x2F;O转换，由“OUT1 ~ OUT4”光口输出 </p>
+<h3 id="L501——OTN线路类单板"><a href="#L501——OTN线路类单板" class="headerlink" title="L501——OTN线路类单板"></a>L501——OTN线路类单板</h3><ul>
+<li>1路线路侧，支持OTUC2</li>
+<li>160 × ODU0 &#x2F; 80 × ODU1 &#x2F; 20 × ODU2 &#x2F; 20 × ODU2e &#x2F; 4 × ODU3 &#x2F; 2 × ODU4 &#x2F; 160 × ODUflex &lt;–&gt; 1 × OTUC2</li>
+</ul>
+<p>线路模式的信号流：通过背板可以调度的信号为ODU0，ODU1，ODU2，ODU2e，ODUflex,ODU3,ODU4 电信号。从背板到波分侧为发送方向，反之为接收方向</p>
+<p>发送方向：</p>
+<ul>
+<li>OTN处理模块经背板接收交叉板调度过来的160路ODU0，或80路ODU1，或160路ODUflex，或20路ODU2&#x2F;ODU2e电信号，或4路ODU3，或2路ODU4，在本模块完成OTN成帧和FEC&#x2F;AFEC编码处理等操作，输出1路OTUC2信号。</li>
+<li>OTUC2信号送至波分侧光模块，经过E&#x2F;O转换，发送符合标准波长的OTUC2光信号，由“OUT1”光口输出</li>
+</ul>
+<p>接收方向：</p>
+<ul>
+<li>波分侧光模块接收“IN1 ”光口接收的OTUC2光信号，完成O&#x2F;E转换。</li>
+<li>经过O&#x2F;E转换的电信号进入信号处理模块，在本模块内部完成OTUC2定帧和FEC&#x2F;AFEC解码等操作，输出160路ODU0，或80路ODU1，或160路ODUflex，或20路ODU2&#x2F;ODU2e电信号，或4路ODU3，或2路ODU4电信号送至背板进行调度</li>
+</ul>
+<p>中继模式的信号流：光接收模块由“IN1 ”光口接收信号，完成O&#x2F;E转换，经过解码，开销处理，编码，电信号的整形，再生等，再将编码后的信号送至发送模块，经过E&#x2F;O转换，由“OUT1”光口输出 </p>
+<h2 id="统一线路单板"><a href="#统一线路单板" class="headerlink" title="统一线路单板"></a>统一线路单板</h2><p>统一线路单板支持OTN，SDH和分组业务的混合传送，与OTN线路类单板相比，增加了对分组业务和SDH业务的处理能力，实现更加丰富的电层信号调度和更高的带宽利用率</p>
+<h3 id="U401S——统一线路单板"><a href="#U401S——统一线路单板" class="headerlink" title="U401S——统一线路单板"></a>U401S——统一线路单板</h3><ul>
+<li>1路线路侧，支持OTU4</li>
+<li>80 × ODU0 &#x2F; 40 × ODU1&#x2F; 80 × ODUflex &#x2F; 10 × ODU2 &#x2F; 10 × ODU2e &#x2F; 2 × ODU3 &#x2F; 1 × ODU4 &lt;–&gt; 1 × OTU4</li>
+<li>Packets &lt;–&gt; 1 × OTU4</li>
+<li>2 × STM-64 &lt;–&gt; 2 × ODU2 &lt;–&gt; 1 × ODU4 &lt;–&gt; 1 × OTU4</li>
+<li>8 × STM-16 &lt;–&gt; 8 × ODU1 &lt;–&gt; 1 × ODU4 &lt;–&gt; 1 × OTU4</li>
+<li>32 × STM-16 &lt;–&gt; 32 × ODU1 &lt;–&gt; 1 × ODU4 &lt;–&gt; 1 × OTU4</li>
+<li>仅TNX3U401S和TNX4U401S支持SDH业务的处理</li>
+</ul>
+<h3 id="U210S——统一线路单板"><a href="#U210S——统一线路单板" class="headerlink" title="U210S——统一线路单板"></a>U210S——统一线路单板</h3><ul>
+<li>10路线路侧，支持OTU2&#x2F;OTU2e</li>
+<li>80 × ODU0 &#x2F; 40 × ODU1&#x2F; 80 × ODUflex &#x2F; 10 × ODU2 &lt;–&gt; 10 × OTU2</li>
+<li>10 × ODU2e &lt;–&gt; 10 × OTU2e</li>
+<li>2 × STM-64 &lt;–&gt; 2 × ODU2 &lt;–&gt; 2 × OTU2</li>
+<li>8 × STM-16 &lt;–&gt; 8 × ODU1 &lt;–&gt; 2 × ODU2 &lt;–&gt; 2 × OTU2</li>
+<li>Packets &lt;–&gt; 10 × OTU2e</li>
+<li>仅TNY2U210S支持SDH业务的处理</li>
+</ul>
+<h3 id="U402——统一线路单板"><a href="#U402——统一线路单板" class="headerlink" title="U402——统一线路单板"></a>U402——统一线路单板</h3><ul>
+<li>2路线路侧，支持OTU4</li>
+<li>160 × ODU0 &#x2F; 80 × ODU1 &#x2F; 20 × ODU2 &#x2F; 20 × ODU2e &#x2F; 4 × ODU3 &#x2F; 2 × ODU4 &#x2F; 160 × ODUflex &lt;–&gt; 2 × OTU4</li>
+<li>8 × STM-64 &#x2F; 32 × STM-16 &lt;–&gt; 2 × OTU4</li>
+<li>TNU5U402在M24子架上的SDH容量为40Gbit&#x2F;s，在U系列子架上的SDH容量为80Gbit&#x2F;s。TNU5U402在U系列子架上配套TNU2CTU主控时，不支持SDH业务</li>
+</ul>
+<h3 id="S216-TDM类单板"><a href="#S216-TDM类单板" class="headerlink" title="S216-TDM类单板"></a>S216-TDM类单板</h3><p>S216单板实现STM-n（n &#x3D;1，4，16，64）光信号的接收和发送。 通过本单板，S216将接收到的光信号经O&#x2F;E转换为VC4，VC-4-Xc(X&#x3D;4&#x2F;16&#x2F;64)信号送往交叉侧。</p>
+<ul>
+<li>16路支路侧，16 × STM-n(n&#x3D;1,4,16) 或 8 × STM-64，总容量 ≤ 80G</li>
+</ul>
+<h1 id="OSN-9600-M24单板"><a href="#OSN-9600-M24单板" class="headerlink" title="OSN 9600 M24单板"></a>OSN 9600 M24单板</h1><h2 id="OTN支路类单板-1"><a href="#OTN支路类单板-1" class="headerlink" title="OTN支路类单板"></a>OTN支路类单板</h2><h3 id="T206——OTN支路类单板"><a href="#T206——OTN支路类单板" class="headerlink" title="T206——OTN支路类单板"></a>T206——OTN支路类单板</h3><ul>
+<li>6路支路侧</li>
+<li>6 × (125Mbit&#x2F;s ~ 1.25Gbit&#x2F;s信号) &lt;–&gt; 6 × ODU0</li>
+<li>6 × (1.49Gbit&#x2F;s ~ 2.67Gbit&#x2F;s信号) &lt;–&gt; 6 × ODU1</li>
+<li>6 × 10GE LAN &#x2F; 6 × 10GE WAN &#x2F; 6 × STM-64 &#x2F; 6 × OTU2 &lt;–&gt; 6 × ODU2</li>
+<li>6 × 10GE LAN &#x2F;  6 × OTU2e &lt;–&gt; 6 × ODU2e</li>
+<li>6 × 10GE LAN &lt;–&gt; 6 × ODUflex</li>
+<li>6 × OTU1 &lt;–&gt; 12 × ODU0</li>
+<li>6 × (125Mbit&#x2F;s ~ 2.5Gbit&#x2F;s信号) &lt;–&gt; 6 × ODU1</li>
+<li>单板最大接入能力为60G</li>
+</ul>
+<h3 id="T212——OTN支路类单板"><a href="#T212——OTN支路类单板" class="headerlink" title="T212——OTN支路类单板"></a>T212——OTN支路类单板</h3><ul>
+<li>12路支路侧</li>
+<li>12 × (125Mbit&#x2F;s ~ 1.25Gbit&#x2F;s信号) &lt;–&gt; 12 × ODU0</li>
+<li>12 × (1.49Gbit&#x2F;s ~ 2.67Gbit&#x2F;s信号) &lt;–&gt; 12 × ODU1</li>
+<li>10 × 10GE LAN &#x2F; 10 × 10GE WAN &#x2F; 10 × STM-64 &#x2F; 10 × OTU2 &lt;–&gt; 6 × ODU2</li>
+<li>10 × 10GE LAN &#x2F;  10 × OTU2e &lt;–&gt; 10 × ODU2e</li>
+<li>12 × 10GE LAN &lt;–&gt; 12 × ODUflex</li>
+<li>12 × OTU1 &lt;–&gt; 24 × ODU0</li>
+<li>12 × (125Mbit&#x2F;s ~ 2.5Gbit&#x2F;s信号) &lt;–&gt; 12 × ODU1</li>
+<li>单板最大接入能力为100G</li>
+</ul>
+<h3 id="G1T401——OTN支路类单板"><a href="#G1T401——OTN支路类单板" class="headerlink" title="G1T401——OTN支路类单板"></a>G1T401——OTN支路类单板</h3><ul>
+<li>1路支路口</li>
+<li>1 × 100GE &lt;–&gt; 1 × ODU4</li>
+<li>1 × 100GE &lt;–&gt; 1 × ODUflex</li>
+<li>1 × OTU4 &lt;–&gt; 1 × ODU4</li>
+</ul>
+<h3 id="C402——OTN支路类单板"><a href="#C402——OTN支路类单板" class="headerlink" title="C402——OTN支路类单板"></a>C402——OTN支路类单板</h3><ul>
+<li>2路支路口</li>
+<li>2 × 100GE （Bit透明映射&#x2F;MAC透明映射）&lt;–&gt; 2 × ODU4</li>
+<li>2 × 100GE（MAC透明映射）&lt;–&gt; 2 × ODUflex</li>
+<li>2 × OTU4 &lt;–&gt; 2 × ODU4</li>
+</ul>
+<h3 id="T402——OTN支路类单板-1"><a href="#T402——OTN支路类单板-1" class="headerlink" title="T402——OTN支路类单板"></a>T402——OTN支路类单板</h3><ul>
+<li>2路客户侧，支持100GE和OTU4业务</li>
+<li>2 × 100GE &lt;–&gt; 2 × ODU4&#x2F;ODUflex</li>
+<li>2 × OTU4 &lt;–&gt; 2 × ODU4</li>
+</ul>
+<h2 id="OTN线路类单板-1"><a href="#OTN线路类单板-1" class="headerlink" title="OTN线路类单板"></a>OTN线路类单板</h2><h3 id="N206——OTN线路类单板"><a href="#N206——OTN线路类单板" class="headerlink" title="N206——OTN线路类单板"></a>N206——OTN线路类单板</h3><ul>
+<li>6路线路侧</li>
+<li>48 × ODU0&#x2F;ODUflex &lt;–&gt; 6 × OTU2</li>
+<li>24 × ODU1 &lt;–&gt; 6 × OTU2</li>
+<li>6 × ODU2 &lt;–&gt; 6 × OTU2</li>
+<li>6 × ODU2e &lt;–&gt; 6 × OTU2e</li>
+</ul>
+<h3 id="G1N210——OTN线路类单板"><a href="#G1N210——OTN线路类单板" class="headerlink" title="G1N210——OTN线路类单板"></a>G1N210——OTN线路类单板</h3><ul>
+<li>10路线路侧</li>
+<li>80 × ODU0&#x2F;ODUflex &lt;–&gt; 10 × OTU2</li>
+<li>40 × ODU1 &lt;–&gt; 10 × OTU2</li>
+<li>10 × ODU2 &lt;–&gt; 10 × OTU2</li>
+<li>10 × ODU2e &lt;–&gt; 10 × OTU2e</li>
+</ul>
+<h3 id="L402——OTN线路类单板-1"><a href="#L402——OTN线路类单板-1" class="headerlink" title="L402——OTN线路类单板"></a>L402——OTN线路类单板</h3><ul>
+<li>2路线路侧，支持OTU4</li>
+<li>160 × ODU0 &#x2F; 80 × ODU1 &#x2F; 20 × ODU2 &#x2F; 20 × ODU2e &#x2F; 4 × ODU3 &#x2F; 2 × ODU4 &#x2F; 160 × ODUflex &lt;–&gt; 2 × OTU4</li>
+</ul>
+<p>线路模式的信号流：通过背板可以调度的信号为ODU0，ODU1，ODU2，ODU2e，ODUflex,ODU3,ODU4 电信号。从背板到波分侧为发送方向，反之为接收方向</p>
+<p>发送方向：</p>
+<ul>
+<li>OTN处理模块经背板接收交叉板调度过来的160路ODU0，或80路ODU1，或160路ODUflex，或20路ODU2&#x2F;ODU2e电信号，或4路ODU3，或2路ODU4，在本模块完成OTN成帧和FEC&#x2F;AFEC编码处理等操作，输出2路OTU4信号。</li>
+<li>OTU4信号送至波分侧光模块，经过E&#x2F;O转换，发送符合标准波长的OTU4光信号，由“OUT1 ~ OUT2”光口输出</li>
+</ul>
+<p>接收方向：</p>
+<ul>
+<li>波分侧光模块接收“IN1 ~ IN2 ”光口接收的OTU4光信号，完成O&#x2F;E转换。</li>
+<li>经过O&#x2F;E转换的电信号进入信号处理模块，在本模块内部完成OTU4定帧和FEC&#x2F;AFEC解码等操作，输出160路ODU0，或80路ODU1，或160路ODUflex，或20路ODU2&#x2F;ODU2e电信号，或4路ODU3，或2路ODU4电信号送至背板进行调度</li>
+</ul>
+<p>中继模式的信号流：光接收模块由“IN1 ~ IN2 ”光口接收信号，完成O&#x2F;E转换，经过解码，开销处理，编码，电信号的整形，再生等，再将编码后的信号送至发送模块，经过E&#x2F;O转换，由“OUT1 ~ OUT2”光口输出 </p>
+<h3 id="U402——统一线路单板-1"><a href="#U402——统一线路单板-1" class="headerlink" title="U402——统一线路单板"></a>U402——统一线路单板</h3><ul>
+<li>2路线路侧，支持OTU4</li>
+<li>160 × ODU0 &#x2F; 80 × ODU1 &#x2F; 20 × ODU2 &#x2F; 20 × ODU2e &#x2F; 4 × ODU3 &#x2F; 2 × ODU4 &#x2F; 160 × ODUflex &lt;–&gt; 2 × OTU4</li>
+<li>8 × STM-64 &#x2F; 32 × STM-16 &lt;–&gt; 2 × OTU4</li>
+<li>TNU5U402在M24子架上的SDH容量为40Gbit&#x2F;s，在U系列子架上的SDH容量为80Gbit&#x2F;s。TNU5U402在U系列子架上配套TNU2CTU主控时，不支持SDH业务</li>
+</ul>
+<h1 id="OSN-1800-CPE"><a href="#OSN-1800-CPE" class="headerlink" title="OSN 1800 CPE"></a>OSN 1800 CPE</h1><p>末端完美拼图，满足客户接入各种场景需求，分为 1800I，1800II，1800V</p>
+
     </div>
 
     
@@ -487,7 +641,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B2%BE%E5%93%81%E4%B8%93%E7%BA%BF%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91"><span class="nav-number">1.</span> <span class="nav-text">精品专线端到端网络拓扑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B2%BE%E5%93%81%E4%B8%93%E7%BA%BF%E7%94%B5%E8%B7%AF%E5%8F%AF%E7%94%A8%E7%8E%87%E7%AD%89%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">精品专线电路可用率等级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A%E7%BA%A7"><span class="nav-number">2.1.</span> <span class="nav-text">A级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AA%E7%BA%A7"><span class="nav-number">2.2.</span> <span class="nav-text">AA级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AAA%E7%BA%A7"><span class="nav-number">2.3.</span> <span class="nav-text">AAA级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#500M%E4%BB%A5%E4%B8%8A%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.</span> <span class="nav-text">500M以上以太业务承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#500M%E4%BB%A5%E4%B8%8A%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.1.</span> <span class="nav-text">500M以上以太业务承载方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#500M%E4%BB%A5%E4%B8%8A%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.2.</span> <span class="nav-text">500M以上以太业务保护方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#100M-500M%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">100M-500M以太业务承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#100M-500M%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-VC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">100M-500M以太业务承载方案:VC方式（EoS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#100M-500M%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88%EF%BC%9AVC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.2.2.</span> <span class="nav-text">100M-500M以太业务保护方案：VC方式（EoS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#100M%E4%BB%A5%E4%B8%8B%E4%BB%A5%E5%A4%AA%E4%B8%9A%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.3.</span> <span class="nav-text">100M以下以太业承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#100M%E4%BB%A5%E4%B8%8B%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-VC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">100M以下以太业务承载方案:VC方式（EoS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#100M%E4%BB%A5%E4%B8%8B%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88%EF%BC%9AVC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.3.2.</span> <span class="nav-text">100M以下以太业务保护方案：VC方式（EoS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDH%E6%8E%A5%E5%8F%A3%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88"><span class="nav-number">3.4.</span> <span class="nav-text">SDH接口业务的承载方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">子架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U64%E5%AD%90%E6%9E%B6"><span class="nav-number">4.1.</span> <span class="nav-text">OSN 9600 U64子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U32%E6%A0%87%E5%87%86%E5%AD%90%E6%9E%B6"><span class="nav-number">4.2.</span> <span class="nav-text">OSN 9600 U32标准子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U32%E5%A2%9E%E5%BC%BA%E5%AD%90%E6%9E%B6"><span class="nav-number">4.3.</span> <span class="nav-text">OSN 9600 U32增强子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U16%E5%AD%90%E6%9E%B6"><span class="nav-number">4.4.</span> <span class="nav-text">OSN 9600 U16子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-M24%E5%AD%90%E6%9E%B6"><span class="nav-number">4.5.</span> <span class="nav-text">OSN 9600 M24子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-%E9%80%9A%E7%94%A8%E5%9E%8B%E5%B9%B3%E5%8F%B0%E5%AD%90%E6%9E%B6"><span class="nav-number">4.6.</span> <span class="nav-text">OSN 9600 通用型平台子架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSN-9600-U64-x2F-U32-x2F-U16%E5%8D%95%E6%9D%BF"><span class="nav-number">5.</span> <span class="nav-text">OSN 9600 U64&#x2F;U32&#x2F;U16单板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.</span> <span class="nav-text">OTN支路类单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94C404"><span class="nav-number">5.1.1.</span> <span class="nav-text">OTN支路类单板——C404</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94C220"><span class="nav-number">5.1.2.</span> <span class="nav-text">OTN支路类单板——C220</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94C130"><span class="nav-number">5.1.3.</span> <span class="nav-text">OTN支路类单板——C130</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94T402"><span class="nav-number">5.1.4.</span> <span class="nav-text">OTN支路类单板——T402</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94T404"><span class="nav-number">5.1.5.</span> <span class="nav-text">OTN支路类单板——T404</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94T220E"><span class="nav-number">5.1.6.</span> <span class="nav-text">OTN支路类单板——T220E</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.2.</span> <span class="nav-text">OTN线路类单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94L210"><span class="nav-number">5.2.1.</span> <span class="nav-text">OTN线路类单板——L210</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF%E2%80%94%E2%80%94L402"><span class="nav-number">5.2.2.</span> <span class="nav-text">OTN线路类单板——L402</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B2%BE%E5%93%81%E4%B8%93%E7%BA%BF%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91"><span class="nav-number">1.</span> <span class="nav-text">精品专线端到端网络拓扑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B2%BE%E5%93%81%E4%B8%93%E7%BA%BF%E7%94%B5%E8%B7%AF%E5%8F%AF%E7%94%A8%E7%8E%87%E7%AD%89%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">精品专线电路可用率等级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A%E7%BA%A7"><span class="nav-number">2.1.</span> <span class="nav-text">A级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AA%E7%BA%A7"><span class="nav-number">2.2.</span> <span class="nav-text">AA级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AAA%E7%BA%A7"><span class="nav-number">2.3.</span> <span class="nav-text">AAA级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#500M%E4%BB%A5%E4%B8%8A%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.</span> <span class="nav-text">500M以上以太业务承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#500M%E4%BB%A5%E4%B8%8A%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.1.</span> <span class="nav-text">500M以上以太业务承载方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#500M%E4%BB%A5%E4%B8%8A%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.2.</span> <span class="nav-text">500M以上以太业务保护方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#100M-500M%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">100M-500M以太业务承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#100M-500M%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-VC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">100M-500M以太业务承载方案:VC方式（EoS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#100M-500M%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88%EF%BC%9AVC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.2.2.</span> <span class="nav-text">100M-500M以太业务保护方案：VC方式（EoS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#100M%E4%BB%A5%E4%B8%8B%E4%BB%A5%E5%A4%AA%E4%B8%9A%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-amp-amp-%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.3.</span> <span class="nav-text">100M以下以太业承载方案&amp;&amp;保护方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#100M%E4%BB%A5%E4%B8%8B%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88-VC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">100M以下以太业务承载方案:VC方式（EoS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#100M%E4%BB%A5%E4%B8%8B%E4%BB%A5%E5%A4%AA%E4%B8%9A%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88%EF%BC%9AVC%E6%96%B9%E5%BC%8F%EF%BC%88EoS%EF%BC%89"><span class="nav-number">3.3.2.</span> <span class="nav-text">100M以下以太业务保护方案：VC方式（EoS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDH%E6%8E%A5%E5%8F%A3%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%89%BF%E8%BD%BD%E6%96%B9%E6%A1%88"><span class="nav-number">3.4.</span> <span class="nav-text">SDH接口业务的承载方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">子架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U64%E5%AD%90%E6%9E%B6"><span class="nav-number">4.1.</span> <span class="nav-text">OSN 9600 U64子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U32%E6%A0%87%E5%87%86%E5%AD%90%E6%9E%B6"><span class="nav-number">4.2.</span> <span class="nav-text">OSN 9600 U32标准子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U32%E5%A2%9E%E5%BC%BA%E5%AD%90%E6%9E%B6"><span class="nav-number">4.3.</span> <span class="nav-text">OSN 9600 U32增强子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-U16%E5%AD%90%E6%9E%B6"><span class="nav-number">4.4.</span> <span class="nav-text">OSN 9600 U16子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-M24%E5%AD%90%E6%9E%B6"><span class="nav-number">4.5.</span> <span class="nav-text">OSN 9600 M24子架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSN-9600-%E9%80%9A%E7%94%A8%E5%9E%8B%E5%B9%B3%E5%8F%B0%E5%AD%90%E6%9E%B6"><span class="nav-number">4.6.</span> <span class="nav-text">OSN 9600 通用型平台子架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSN-9600-U64-x2F-U32-x2F-U16%E5%8D%95%E6%9D%BF"><span class="nav-number">5.</span> <span class="nav-text">OSN 9600 U64&#x2F;U32&#x2F;U16单板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.</span> <span class="nav-text">OTN支路类单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C404%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.1.</span> <span class="nav-text">C404——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C220%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.2.</span> <span class="nav-text">C220——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C130%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.3.</span> <span class="nav-text">C130——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T402%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.4.</span> <span class="nav-text">T402——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T404%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.5.</span> <span class="nav-text">T404——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T220E%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.1.6.</span> <span class="nav-text">T220E——OTN支路类单板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.2.</span> <span class="nav-text">OTN线路类单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#L210%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.2.1.</span> <span class="nav-text">L210——OTN线路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L402%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.2.2.</span> <span class="nav-text">L402——OTN线路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L404%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.2.3.</span> <span class="nav-text">L404——OTN线路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L501%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.2.4.</span> <span class="nav-text">L501——OTN线路类单板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E7%BA%BF%E8%B7%AF%E5%8D%95%E6%9D%BF"><span class="nav-number">5.3.</span> <span class="nav-text">统一线路单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#U401S%E2%80%94%E2%80%94%E7%BB%9F%E4%B8%80%E7%BA%BF%E8%B7%AF%E5%8D%95%E6%9D%BF"><span class="nav-number">5.3.1.</span> <span class="nav-text">U401S——统一线路单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U210S%E2%80%94%E2%80%94%E7%BB%9F%E4%B8%80%E7%BA%BF%E8%B7%AF%E5%8D%95%E6%9D%BF"><span class="nav-number">5.3.2.</span> <span class="nav-text">U210S——统一线路单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U402%E2%80%94%E2%80%94%E7%BB%9F%E4%B8%80%E7%BA%BF%E8%B7%AF%E5%8D%95%E6%9D%BF"><span class="nav-number">5.3.3.</span> <span class="nav-text">U402——统一线路单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S216-TDM%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">5.3.4.</span> <span class="nav-text">S216-TDM类单板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSN-9600-M24%E5%8D%95%E6%9D%BF"><span class="nav-number">6.</span> <span class="nav-text">OSN 9600 M24单板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF-1"><span class="nav-number">6.1.</span> <span class="nav-text">OTN支路类单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#T206%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">6.1.1.</span> <span class="nav-text">T206——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T212%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">6.1.2.</span> <span class="nav-text">T212——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1T401%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">6.1.3.</span> <span class="nav-text">G1T401——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C402%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">6.1.4.</span> <span class="nav-text">C402——OTN支路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T402%E2%80%94%E2%80%94OTN%E6%94%AF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF-1"><span class="nav-number">6.1.5.</span> <span class="nav-text">T402——OTN支路类单板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF-1"><span class="nav-number">6.2.</span> <span class="nav-text">OTN线路类单板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#N206%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">6.2.1.</span> <span class="nav-text">N206——OTN线路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1N210%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF"><span class="nav-number">6.2.2.</span> <span class="nav-text">G1N210——OTN线路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L402%E2%80%94%E2%80%94OTN%E7%BA%BF%E8%B7%AF%E7%B1%BB%E5%8D%95%E6%9D%BF-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">L402——OTN线路类单板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U402%E2%80%94%E2%80%94%E7%BB%9F%E4%B8%80%E7%BA%BF%E8%B7%AF%E5%8D%95%E6%9D%BF-1"><span class="nav-number">6.2.4.</span> <span class="nav-text">U402——统一线路单板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSN-1800-CPE"><span class="nav-number">7.</span> <span class="nav-text">OSN 1800 CPE</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
